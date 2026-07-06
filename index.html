@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Catálogo — OA QUANT / PromptEstudio</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+
+/* ══ TEMAS CC-PRO ══ */
+:root, [data-theme="dark"]{
+  --bg:#0F1520; --surface:#1A2235; --text:#E8EEF8; --text2:#8BA0C4;
+  --blue:#4A9EE8; --green:#3DB87A; --orange:#E08A2E; --border:rgba(74,158,232,.14);
+}
+[data-theme="light"]{
+  --bg:#F7F9FC; --surface:#FFFFFF; --text:#1A2035; --text2:#5A6787;
+  --blue:#1B4F8A; --green:#1A7A4A; --orange:#C96A0E; --border:rgba(27,79,138,.14);
+}
+[data-theme="sepia"]{
+  --bg:#FAF5EB; --surface:#FFF8EE; --text:#2C1F0E; --text2:#6B5A3E;
+  --blue:#5C3D1E; --green:#1A7A4A; --orange:#C96A0E; --border:rgba(92,61,30,.16);
+}
+[data-theme="hc"]{
+  --bg:#FFFFFF; --surface:#FFFFFF; --text:#000000; --text2:#111111;
+  --blue:#0000CC; --green:#006600; --orange:#B34700; --border:#000000;
+}
+
+body{font-family:'Playfair Display',Georgia,serif;background:var(--bg);color:var(--text);overflow-x:hidden;transition:background .25s,color .25s}
+
+body::before{content:'';position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.025;
+background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+[data-theme="light"] body::before,[data-theme="sepia"] body::before,[data-theme="hc"] body::before{opacity:.012}
+
+/* NAV */
+nav{position:sticky;top:0;z-index:100;background:var(--bg);border-bottom:1px solid var(--border);padding:0 5vw;height:60px;display:flex;align-items:center;justify-content:space-between}
+.logo{font-family:'Bebas Neue',sans-serif;font-size:1.3rem;letter-spacing:3px;line-height:1}
+.logo .s1{color:var(--blue)} .logo .s2{color:var(--green)}
+.logo small{display:block;font-family:'Space Mono',monospace;font-size:.55rem;letter-spacing:3px;color:var(--text2);margin-top:2px}
+.theme-sel{display:flex;gap:6px}
+.theme-btn{width:26px;height:26px;border-radius:50%;border:2px solid var(--border);cursor:pointer;background:none;padding:0}
+.theme-btn[data-t="dark"]{background:#0F1520}
+.theme-btn[data-t="light"]{background:#F7F9FC}
+.theme-btn[data-t="sepia"]{background:#FAF5EB}
+.theme-btn[data-t="hc"]{background:#FFFFFF;border-color:#000}
+.theme-btn.active{border-color:var(--blue)}
+
+/* HERO */
+.hero{max-width:900px;margin:0 auto;padding:70px 5vw 40px;text-align:center;position:relative;z-index:1}
+.eyebrow{font-family:'Space Mono',monospace;font-size:.6rem;letter-spacing:4px;color:var(--green);border:1px solid var(--border);padding:5px 16px;border-radius:50px;display:inline-block;margin-bottom:22px}
+.hero h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.4rem,7vw,4.6rem);line-height:1;letter-spacing:1px}
+.hero h1 span{color:var(--blue)}
+.hero p{font-size:1rem;color:var(--text2);max-width:620px;margin:20px auto 0;line-height:1.85;font-style:italic}
+
+/* MENSAJE APORTE — va una sola vez aquí */
+.aporte-box{max-width:720px;margin:36px auto 0;background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:22px 26px;text-align:left}
+.aporte-box h3{font-family:'Bebas Neue',sans-serif;font-size:1.05rem;letter-spacing:1px;color:var(--green);margin-bottom:8px}
+.aporte-box p{font-family:'Space Mono',monospace;font-size:.72rem;color:var(--text2);line-height:1.8;font-style:normal}
+
+/* GRID */
+.sec{max-width:1200px;margin:0 auto;padding:50px 5vw 80px;position:relative;z-index:1}
+.sec-label{font-family:'Space Mono',monospace;font-size:.6rem;letter-spacing:3px;color:var(--orange);margin-bottom:10px;text-transform:uppercase}
+.sec-h2{font-family:'Bebas Neue',sans-serif;font-size:clamp(1.8rem,4vw,2.8rem);letter-spacing:1px;margin-bottom:36px}
+
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:14px;overflow:hidden;display:flex;flex-direction:column;transition:transform .25s,border-color .25s}
+.card:hover{transform:translateY(-4px);border-color:var(--blue)}
+.card-top{padding:20px 20px 14px;border-bottom:1px solid var(--border)}
+.card-tag{font-family:'Space Mono',monospace;font-size:.55rem;letter-spacing:1.5px;padding:3px 9px;border-radius:20px;background:rgba(74,158,232,.12);color:var(--blue);border:1px solid var(--border);display:inline-block;margin-bottom:10px}
+.card-ico{font-size:1.8rem;display:block;margin-bottom:8px}
+.card-nombre{font-family:'Bebas Neue',sans-serif;font-size:1.15rem;letter-spacing:1px;line-height:1.1;margin-bottom:6px}
+.card-desc{font-family:'Space Mono',monospace;font-size:.68rem;color:var(--text2);line-height:1.6}
+.card-body{padding:14px 20px 18px;flex:1}
+.card-body ul{list-style:none;display:flex;flex-direction:column;gap:5px}
+.card-body li{font-family:'Space Mono',monospace;font-size:.62rem;color:var(--text2);display:flex;gap:6px}
+.card-body li .ico{color:var(--green)}
+.card-footer{padding:14px 20px;border-top:1px solid var(--border)}
+.btn-open{display:block;text-align:center;font-family:'Bebas Neue',sans-serif;font-size:.9rem;letter-spacing:2px;background:var(--green);color:#04150c;padding:10px;border-radius:8px;text-decoration:none;transition:opacity .2s}
+[data-theme="light"] .btn-open,[data-theme="sepia"] .btn-open,[data-theme="hc"] .btn-open{color:#fff}
+.btn-open:hover{opacity:.85}
+.badge-pronto .btn-open{background:transparent;color:var(--text2);border:1px solid var(--border);cursor:default}
+
+footer{text-align:center;padding:30px 5vw 40px;font-family:'Space Mono',monospace;font-size:.6rem;color:var(--text2);border-top:1px solid var(--border)}
+
+.reveal{opacity:0;transform:translateY(14px);transition:opacity .5s,transform .5s}
+.reveal.visible{opacity:1;transform:none}
+</style>
+</head>
+<body data-theme="dark">
+
+<nav>
+  <div class="logo"><span class="s1">OA</span> <span class="s2">QUANT</span><small>CATÁLOGO DE APPS</small></div>
+  <div class="theme-sel">
+    <button class="theme-btn active" data-t="dark" title="Oscuro"></button>
+    <button class="theme-btn" data-t="light" title="Claro"></button>
+    <button class="theme-btn" data-t="sepia" title="Sepia"></button>
+    <button class="theme-btn" data-t="hc" title="Alto contraste"></button>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="eyebrow reveal visible">▸ ACCESO LIBRE — SIN LOGIN</div>
+  <h1 class="reveal visible">HERRAMIENTAS <span>QUE TRABAJAN</span><br>PARA TI</h1>
+  <p class="reveal visible">Cada app es un archivo único, funciona sin internet y guarda todo en tu propio dispositivo. Elige la que necesites y empieza a usarla ahora mismo.</p>
+
+  <div class="aporte-box reveal visible">
+    <h3>¿Cómo funciona esto?</h3>
+    <p>Todas las apps de este catálogo son de uso libre e ilimitado — no hay tarifa fija ni muro de pago. Si una herramienta te resultó útil, puedes aportar lo que consideres justo para sostener el desarrollo y seguir recibiendo actualizaciones; el aporte es voluntario y no condiciona el acceso. Quien prefiere apoyar de forma continua puede suscribirse para recibir siempre el índice y las nuevas versiones al día — es un aporte por seguir el proyecto, no por unidad.</p>
+  </div>
+</div>
+
+<section class="sec">
+  <div class="sec-label reveal">▸ Disponibles ahora</div>
+  <h2 class="sec-h2 reveal">TUS APPS</h2>
+
+  <div class="grid">
+
+    <div class="card reveal">
+      <div class="card-top">
+        <div class="card-tag">LECTURA / ESPIRITUAL</div>
+        <span class="card-ico">🌙</span>
+        <div class="card-nombre">LAE — Lectura<br>Armónica Espiritual</div>
+        <div class="card-desc">Sistema de lectura personal con módulos de números y fechas.</div>
+      </div>
+      <div class="card-body"><ul>
+        <li><span class="ico">·</span> Módulo de números de suerte</li>
+        <li><span class="ico">·</span> Módulo de fechas de negocio</li>
+        <li><span class="ico">·</span> Horóscopo de 12 meses</li>
+      </ul></div>
+      <div class="card-footer"><a href="LAE1.html" class="btn-open">Abrir LAE 1</a></div>
+    </div>
+
+    <div class="card reveal">
+      <div class="card-top">
+        <div class="card-tag">LECTURA / ESPIRITUAL</div>
+        <span class="card-ico">✨</span>
+        <div class="card-nombre">LAE 2 — Segunda<br>edición</div>
+        <div class="card-desc">Versión ampliada del sistema LAE con nuevos módulos.</div>
+      </div>
+      <div class="card-body"><ul>
+        <li><span class="ico">·</span> Interfaz ampliada</li>
+        <li><span class="ico">·</span> Nuevos temas visuales</li>
+      </ul></div>
+      <div class="card-footer"><a href="LAE2.html" class="btn-open">Abrir LAE 2</a></div>
+    </div>
+
+    <div class="card reveal">
+      <div class="card-top">
+        <div class="card-tag">GESTIÓN INDUSTRIAL</div>
+        <span class="card-ico">⚙️</span>
+        <div class="card-nombre">MANTIS 2.0</div>
+        <div class="card-desc">Gestión de mantenimiento industrial, local y sin nube.</div>
+      </div>
+      <div class="card-body"><ul>
+        <li><span class="ico">·</span> Órdenes de trabajo</li>
+        <li><span class="ico">·</span> Historial por equipo</li>
+        <li><span class="ico">·</span> Exportación JSON</li>
+      </ul></div>
+      <div class="card-footer"><a href="MANTIS.html" class="btn-open">Abrir MANTIS</a></div>
+    </div>
+
+    <div class="card reveal">
+      <div class="card-top">
+        <div class="card-tag">PRODUCTIVIDAD</div>
+        <span class="card-ico">📝</span>
+        <div class="card-nombre">NOTAS OA</div>
+        <div class="card-desc">Notas locales rápidas, sin cuenta ni sincronización externa.</div>
+      </div>
+      <div class="card-body"><ul>
+        <li><span class="ico">·</span> Guardado automático local</li>
+        <li><span class="ico">·</span> Búsqueda instantánea</li>
+      </ul></div>
+      <div class="card-footer"><a href="NOTAS-OA.html" class="btn-open">Abrir Notas OA</a></div>
+    </div>
+
+    <div class="card reveal">
+      <div class="card-top">
+        <div class="card-tag">INMOBILIARIO</div>
+        <span class="card-ico">🏠</span>
+        <div class="card-nombre">CRM Inmobiliario</div>
+        <div class="card-desc">Gestión de propiedades, clientes y seguimiento comercial.</div>
+      </div>
+      <div class="card-body"><ul>
+        <li><span class="ico">·</span> Ficha de propiedades</li>
+        <li><span class="ico">·</span> Seguimiento de clientes</li>
+      </ul></div>
+      <div class="card-footer"><a href="CRM-Inmobiliario.html" class="btn-open">Abrir CRM Inmobiliario</a></div>
+    </div>
+
+    <div class="card reveal">
+      <div class="card-top">
+        <div class="card-tag">NEGOCIOS</div>
+        <span class="card-ico">📊</span>
+        <div class="card-nombre">CRM OA QUANT</div>
+        <div class="card-desc">CRM general monousuario para gestión comercial ligera.</div>
+      </div>
+      <div class="card-body"><ul>
+        <li><span class="ico">·</span> Contactos y oportunidades</li>
+        <li><span class="ico">·</span> Exportación / respaldo JSON</li>
+      </ul></div>
+      <div class="card-footer"><a href="CRM-OAQUANT.html" class="btn-open">Abrir CRM OA QUANT</a></div>
+    </div>
+
+    <div class="card reveal">
+      <div class="card-top">
+        <div class="card-tag">COMERCIO</div>
+        <span class="card-ico">🛒</span>
+        <div class="card-nombre">TIENDASMULTI</div>
+        <div class="card-desc">Gestión multi-tienda local para pequeños negocios.</div>
+      </div>
+      <div class="card-body"><ul>
+        <li><span class="ico">·</span> Inventario por tienda</li>
+        <li><span class="ico">·</span> Ventas y reportes locales</li>
+      </ul></div>
+      <div class="card-footer"><a href="TIENDASMULTI.html" class="btn-open">Abrir TIENDASMULTI</a></div>
+    </div>
+
+    <div class="card reveal">
+      <div class="card-top">
+        <div class="card-tag">SEGURIDAD</div>
+        <span class="card-ico">🛡️</span>
+        <div class="card-nombre">Portería PRO</div>
+        <div class="card-desc">Control de acceso y correspondencia para conjuntos residenciales.</div>
+      </div>
+      <div class="card-body"><ul>
+        <li><span class="ico">·</span> Registro de visitantes</li>
+        <li><span class="ico">·</span> Bitácora de correspondencia</li>
+      </ul></div>
+      <div class="card-footer"><a href="Porteria-PRO.html" class="btn-open">Abrir Portería PRO</a></div>
+    </div>
+
+    <div class="card reveal">
+      <div class="card-top">
+        <div class="card-tag">AUTOMATIZACIÓN</div>
+        <span class="card-ico">🤖</span>
+        <div class="card-nombre">AUTO GESTOR</div>
+        <div class="card-desc">Gestión de tareas y procesos recurrentes de negocio.</div>
+      </div>
+      <div class="card-body"><ul>
+        <li><span class="ico">·</span> Tareas recurrentes</li>
+        <li><span class="ico">·</span> Recordatorios locales</li>
+      </ul></div>
+      <div class="card-footer"><a href="AUTO-GESTOR.html" class="btn-open">Abrir AUTO GESTOR</a></div>
+    </div>
+
+    <div class="card reveal">
+      <div class="card-top">
+        <div class="card-tag">GESTIÓN DE TIEMPO</div>
+        <span class="card-ico">⏱️</span>
+        <div class="card-nombre">KRONOS</div>
+        <div class="card-desc">Control de horarios y jornadas para equipos pequeños.</div>
+      </div>
+      <div class="card-body"><ul>
+        <li><span class="ico">·</span> Registro de jornada</li>
+        <li><span class="ico">·</span> Reporte de horas</li>
+      </ul></div>
+      <div class="card-footer"><a href="KRONOS.html" class="btn-open">Abrir KRONOS</a></div>
+    </div>
+
+    <div class="card reveal">
+      <div class="card-top">
+        <div class="card-tag">RECURSOS HUMANOS</div>
+        <span class="card-ico">✅</span>
+        <div class="card-nombre">VIL — Verificación<br>de Integridad Laboral</div>
+        <div class="card-desc">Verificación y seguimiento de integridad en procesos laborales.</div>
+      </div>
+      <div class="card-body"><ul>
+        <li><span class="ico">·</span> Checklist de verificación</li>
+        <li><span class="ico">·</span> Historial por caso</li>
+      </ul></div>
+      <div class="card-footer"><a href="VIL.html" class="btn-open">Abrir VIL</a></div>
+    </div>
+
+    <div class="card badge-pronto reveal">
+      <div class="card-top">
+        <div class="card-tag">EN DESARROLLO</div>
+        <span class="card-ico">🏗️</span>
+        <div class="card-nombre">Próxima app</div>
+        <div class="card-desc">Nuevo desarrollo en camino.</div>
+      </div>
+      <div class="card-body"><ul><li><span class="ico">·</span> Próximamente</li></ul></div>
+      <div class="card-footer"><a href="#" class="btn-open">Próximamente</a></div>
+    </div>
+
+  </div>
+</section>
+
+<footer>
+  ¿Disfrutando alguna app? Recuerda que hay más contenido como este en el catálogo.
+  <br>© 2026 OA QUANT — PromptEstudio.com — Cali, Colombia
+</footer>
+
+<script>
+document.querySelectorAll('.theme-btn').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.body.setAttribute('data-theme', btn.dataset.t);
+    document.querySelectorAll('.theme-btn').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+  });
+});
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('visible'); });
+},{threshold:0.08});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>
