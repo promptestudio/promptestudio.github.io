@@ -54,9 +54,10 @@ nav{position:sticky;top:0;z-index:100;background:var(--bg);border-bottom:1px sol
 .hero p{font-size:1rem;color:var(--text2);max-width:620px;margin:20px auto 0;line-height:1.85;font-style:italic}
 
 /* MENSAJE APORTE — va una sola vez aquí */
-.aporte-box{max-width:720px;margin:36px auto 0;background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:22px 26px;text-align:left}
-.aporte-box h3{font-family:'Bebas Neue',sans-serif;font-size:1.05rem;letter-spacing:1px;color:var(--green);margin-bottom:8px}
+.aporte-box{max-width:720px;margin:36px auto 0;background:var(--surface);border:2px solid var(--green);border-radius:14px;padding:26px 28px;text-align:left;box-shadow:0 0 0 4px rgba(61,184,122,.08),0 12px 32px rgba(0,0,0,.25);position:relative}
+.aporte-box h3{font-family:'Bebas Neue',sans-serif;font-size:1.05rem;letter-spacing:1px;color:var(--green);margin-bottom:10px}
 .aporte-box p{font-family:'Space Mono',monospace;font-size:.72rem;color:var(--text2);line-height:1.8;font-style:normal}
+.aporte-destacado{display:block;font-family:'Bebas Neue',sans-serif;font-size:clamp(1.6rem,4vw,2.2rem);letter-spacing:2px;color:var(--green);margin:14px 0 12px;line-height:1}
 
 /* GRID */
 .sec{max-width:1200px;margin:0 auto;padding:50px 5vw 80px;position:relative;z-index:1}
@@ -106,7 +107,9 @@ footer{text-align:center;padding:30px 5vw 40px;font-family:'Space Mono',monospac
 
   <div class="aporte-box reveal visible">
     <h3>¿Cómo funciona esto?</h3>
-    <p>Todas las apps de este catálogo son de uso libre e ilimitado — no hay tarifa fija ni muro de pago. Si una herramienta te resultó útil, puedes aportar lo que consideres justo para sostener el desarrollo y seguir recibiendo actualizaciones; el aporte es voluntario y no condiciona el acceso. Quien prefiere apoyar de forma continua puede suscribirse para recibir siempre el índice y las nuevas versiones al día — es un aporte por seguir el proyecto, no por unidad.</p>
+    <p>Todas las apps de este catálogo son de uso libre e ilimitado — no hay tarifa fija ni muro de pago que decida quién puede acceder.</p>
+    <span class="aporte-destacado">APORTE VOLUNTARIO</span>
+    <p>Si una herramienta te resultó útil, aporta lo que consideres justo para sostener el desarrollo y seguir recibiendo actualizaciones. Quien prefiere apoyar de forma continua puede suscribirse para recibir siempre el índice y las nuevas versiones al día — es un aporte por seguir el proyecto, no por unidad.</p>
   </div>
 </div>
 
