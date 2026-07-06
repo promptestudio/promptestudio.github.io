@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Compatibilidad Armónica — PromptEstudio.com</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Cinzel:wght@400;600;700&family=Raleway:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#080512;--bg2:#0d0820;--bg3:#130c28;--card:#1c1438;--card2:#241a48;
+  --a:#e0b0ff;--a2:#c980ff;--b:#70e8cc;--gold:#f0d060;--gold2:#ffe090;
+  --teal:#70e8cc;--red:#e87878;--text:#f4eeff;--text2:#c0a8e0;--text3:#7060a0;
+  --border:rgba(200,128,255,0.12);--border2:rgba(200,128,255,0.28);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'Raleway',sans-serif;overflow-x:hidden}
+
+/* Stars */
+.stars{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+.star{position:absolute;border-radius:50%;animation:tw var(--d,3s) ease-in-out infinite;opacity:var(--o,.3)}
+@keyframes tw{0%,100%{opacity:var(--o)}50%{opacity:.04}}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;
+  background:rgba(8,5,18,0.88);backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--border);padding:14px 40px;
+  display:flex;align-items:center;justify-content:space-between}
+.nav-brand{font-family:'Cinzel',serif;font-size:.82rem;letter-spacing:.18em;
+  background:linear-gradient(90deg,var(--a2),var(--teal));-webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;background-clip:text}
+.nav-links{display:flex;gap:26px;align-items:center}
+.nav-links a{font-size:.78rem;letter-spacing:.08em;color:var(--text2);text-decoration:none;
+  transition:color .2s;text-transform:uppercase}
+.nav-links a:hover{color:var(--a)}
+.nav-cta{background:linear-gradient(135deg,var(--a2),#5020a0);color:#fff;
+  border:none;border-radius:50px;padding:9px 22px;font-family:'Cinzel',serif;
+  font-size:.75rem;font-weight:600;letter-spacing:.1em;cursor:pointer;
+  text-decoration:none;transition:all .2s}
+.nav-cta:hover{filter:brightness(1.1);transform:translateY(-1px)}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;align-items:center;justify-content:center;
+  text-align:center;padding:120px 24px 80px;position:relative;overflow:hidden}
+.hero-bg{position:absolute;inset:0;
+  background:radial-gradient(ellipse at 30% 40%,rgba(140,60,255,0.14),transparent 55%),
+             radial-gradient(ellipse at 70% 60%,rgba(60,200,160,0.1),transparent 55%);
+  pointer-events:none}
+.hero-content{position:relative;max-width:760px}
+.hero-yin{font-size:4rem;margin-bottom:24px;display:block;
+  animation:float 7s ease-in-out infinite;
+  filter:drop-shadow(0 0 30px rgba(200,128,255,0.4))}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+.hero-eyebrow{font-family:'Cinzel',serif;font-size:10px;letter-spacing:.6em;
+  color:var(--gold);text-transform:uppercase;margin-bottom:20px}
+.hero-h1{font-family:'Cinzel',serif;font-size:clamp(2rem,6vw,3.6rem);
+  font-weight:700;line-height:1.15;margin-bottom:20px}
+.pa{color:var(--a2)}.pb{color:var(--teal)}
+.hero-sub{font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-style:italic;
+  color:var(--text2);line-height:1.7;margin-bottom:40px;max-width:580px;
+  margin-left:auto;margin-right:auto}
+.hero-pills{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:48px}
+.pill{padding:5px 14px;border-radius:50px;font-size:.73rem;letter-spacing:.08em;
+  background:rgba(200,128,255,0.07);border:1px solid var(--border2);color:var(--a)}
+.hero-btns{display:flex;gap:14px;flex-wrap:wrap;justify-content:center}
+.btn-primary{background:linear-gradient(135deg,var(--a2),#5020a0);color:#fff;
+  border:none;border-radius:50px;padding:16px 36px;font-family:'Cinzel',serif;
+  font-size:.88rem;font-weight:600;letter-spacing:.12em;cursor:pointer;
+  text-decoration:none;display:inline-block;transition:all .3s}
+.btn-primary:hover{transform:translateY(-2px);filter:brightness(1.1)}
+.btn-secondary{background:transparent;color:var(--text);
+  border:1px solid var(--border2);border-radius:50px;padding:16px 36px;
+  font-family:'Cinzel',serif;font-size:.88rem;letter-spacing:.12em;
+  cursor:pointer;text-decoration:none;display:inline-block;transition:all .2s}
+.btn-secondary:hover{border-color:var(--a);color:var(--a)}
+.hero-scroll{position:absolute;bottom:32px;left:50%;transform:translateX(-50%);
+  color:var(--text3);font-size:.7rem;letter-spacing:.2em;
+  animation:bounce 2s ease-in-out infinite}
+@keyframes bounce{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(6px)}}
+
+/* SECTIONS */
+section{padding:96px 24px;position:relative;z-index:1}
+.container{max-width:940px;margin:0 auto}
+.section-eyebrow{font-family:'Cinzel',serif;font-size:10px;letter-spacing:.5em;
+  color:var(--gold);text-transform:uppercase;margin-bottom:14px;text-align:center}
+.section-h2{font-family:'Cinzel',serif;font-size:clamp(1.6rem,4vw,2.4rem);
+  font-weight:700;text-align:center;margin-bottom:14px;line-height:1.3}
+.section-sub{font-family:'Cormorant Garamond',serif;font-size:1.05rem;font-style:italic;
+  color:var(--text2);text-align:center;max-width:560px;margin:0 auto 52px;line-height:1.7}
+.divider{width:60px;height:1px;background:linear-gradient(90deg,transparent,var(--border2),transparent);
+  margin:0 auto 22px}
+
+/* USO CARDS */
+.uso-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px}
+.uso-card{background:var(--card);border:1px solid var(--border);border-radius:16px;
+  padding:26px;text-align:center;transition:border-color .3s,transform .3s}
+.uso-card:hover{border-color:var(--border2);transform:translateY(-3px)}
+.uso-icon{font-size:2.2rem;margin-bottom:14px;display:block}
+.uso-titulo{font-family:'Cinzel',serif;font-size:.88rem;color:var(--a);
+  letter-spacing:.08em;margin-bottom:10px}
+.uso-desc{font-family:'Cormorant Garamond',serif;font-size:.95rem;color:var(--text2);line-height:1.6}
+
+/* CÓMO FUNCIONA */
+.pasos-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px}
+.paso-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:24px;
+  display:flex;align-items:flex-start;gap:16px}
+.paso-num{font-family:'Cinzel',serif;font-size:2rem;font-weight:700;
+  color:var(--a2);line-height:1;flex-shrink:0}
+.paso-body{}
+.paso-titulo{font-family:'Cinzel',serif;font-size:.85rem;color:var(--text);margin-bottom:6px;letter-spacing:.05em}
+.paso-desc{font-family:'Cormorant Garamond',serif;font-size:.9rem;color:var(--text2);line-height:1.6}
+
+/* MOCKUP REPORTE */
+.mockup-wrap{background:var(--card);border:1px solid var(--border2);
+  border-radius:18px;padding:32px;max-width:700px;margin:0 auto}
+.mock-header{text-align:center;margin-bottom:24px;padding-bottom:20px;
+  border-bottom:1px solid var(--border)}
+.mock-yin{font-size:2rem;display:block;margin-bottom:12px}
+.mock-nombres{font-family:'Cinzel',serif;font-size:1.1rem}
+.mock-score-row{display:flex;justify-content:center;gap:16px;flex-wrap:wrap;margin-bottom:16px}
+.mock-score-box{text-align:center;background:var(--bg3);border:1px solid var(--border2);
+  border-radius:10px;padding:14px 20px}
+.msb-num{font-family:'Cinzel',serif;font-size:2rem;font-weight:700}
+.msb-label{font-size:.62rem;letter-spacing:.15em;color:var(--text3);text-transform:uppercase;margin-top:2px}
+.mock-cal{margin-top:16px}
+.mock-cal-title{font-family:'Cinzel',serif;font-size:.68rem;letter-spacing:.2em;color:var(--gold);
+  text-transform:uppercase;margin-bottom:10px}
+.cal-row-mock{display:flex;justify-content:space-between;align-items:center;
+  padding:7px 0;border-bottom:1px solid var(--border);font-size:.8rem}
+.cal-fecha-mock{color:var(--text2)}
+.cal-chip{padding:2px 10px;border-radius:20px;font-family:'Cinzel',serif;font-size:.72rem;font-weight:600}
+.chip-alta{background:rgba(112,232,204,0.12);color:var(--teal);border:1px solid rgba(112,232,204,0.25)}
+.chip-media{background:rgba(240,208,96,0.12);color:var(--gold);border:1px solid rgba(240,208,96,0.2)}
+.chip-baja{background:rgba(232,120,120,0.1);color:var(--red);border:1px solid rgba(232,120,120,0.2)}
+.opt-badge{background:var(--a2);color:#080512;font-family:'Cinzel',serif;
+  font-size:.58rem;font-weight:700;padding:2px 8px;border-radius:20px;letter-spacing:.08em}
+
+/* QUÉ INCLUYE */
+.incluye-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
+.incluye-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:22px;
+  transition:border-color .3s}
+.incluye-card:hover{border-color:var(--border2)}
+.ic-icon{font-size:1.8rem;margin-bottom:12px;display:block}
+.ic-titulo{font-family:'Cinzel',serif;font-size:.85rem;color:var(--a);margin-bottom:8px;letter-spacing:.06em}
+.ic-desc{font-family:'Cormorant Garamond',serif;font-size:.92rem;color:var(--text2);line-height:1.6}
+.ic-tags{display:flex;flex-wrap:wrap;gap:5px;margin-top:10px}
+.ic-tag{font-size:.68rem;padding:2px 9px;border-radius:20px;
+  background:rgba(200,128,255,0.06);border:1px solid var(--border);color:var(--text3)}
+
+/* PRECIOS */
+.precios-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;max-width:720px;margin:0 auto}
+.precio-card{background:var(--card);border:1px solid var(--border);
+  border-radius:20px;padding:36px;text-align:center;position:relative;overflow:hidden}
+.precio-card.dest{border-color:var(--a2);background:var(--card2)}
+.precio-badge{position:absolute;top:0;left:50%;transform:translateX(-50%);
+  background:linear-gradient(90deg,var(--a2),var(--teal));color:#080512;
+  font-family:'Cinzel',serif;font-size:.68rem;font-weight:700;letter-spacing:.1em;
+  padding:4px 20px;border-radius:0 0 10px 10px}
+.precio-titulo{font-family:'Cinzel',serif;font-size:.95rem;color:var(--text);
+  letter-spacing:.1em;margin-bottom:8px;margin-top:18px}
+.precio-valor{font-family:'Cinzel',serif;font-size:2.8rem;color:var(--gold);font-weight:700;margin-bottom:4px}
+.precio-periodo{font-size:.78rem;color:var(--text3);margin-bottom:22px}
+.precio-items{text-align:left;margin-bottom:24px}
+.precio-item{display:flex;align-items:flex-start;gap:8px;margin-bottom:9px;
+  font-size:.83rem;color:var(--text2)}
+.precio-item::before{content:'✦';color:var(--gold);flex-shrink:0;margin-top:1px;font-size:.72rem}
+.btn-compra{display:block;background:var(--gold);color:#080512;border:none;
+  border-radius:50px;padding:13px 28px;font-family:'Cinzel',serif;font-size:.82rem;
+  font-weight:700;letter-spacing:.1em;cursor:pointer;text-decoration:none;
+  transition:all .2s;width:100%;text-align:center}
+.btn-compra:hover{filter:brightness(1.08);transform:translateY(-1px)}
+.btn-compra-sec{display:block;background:transparent;color:var(--a);
+  border:1px solid var(--a);border-radius:50px;padding:13px 28px;
+  font-family:'Cinzel',serif;font-size:.82rem;letter-spacing:.1em;cursor:pointer;
+  text-decoration:none;transition:all .2s;width:100%;text-align:center}
+.btn-compra-sec:hover{background:rgba(200,128,255,0.08)}
+
+/* FAQ */
+.faq-list{max-width:680px;margin:0 auto}
+.faq-item{border-bottom:1px solid var(--border);padding:18px 0}
+.faq-q{font-family:'Cinzel',serif;font-size:.85rem;color:var(--text);
+  cursor:pointer;display:flex;justify-content:space-between;align-items:center;
+  gap:14px;letter-spacing:.04em}
+.faq-q:hover{color:var(--a)}
+.faq-arrow{color:var(--text3);transition:transform .3s;flex-shrink:0}
+.faq-a{font-family:'Cormorant Garamond',serif;font-size:.95rem;color:var(--text2);
+  line-height:1.7;max-height:0;overflow:hidden;transition:max-height .4s ease,padding .3s}
+.faq-item.open .faq-a{max-height:260px;padding-top:11px}
+.faq-item.open .faq-arrow{transform:rotate(180deg)}
+
+/* CTA FINAL */
+.cta-final{text-align:center;padding:100px 24px;position:relative;overflow:hidden}
+.cta-final::before{content:'';position:absolute;top:50%;left:50%;
+  transform:translate(-50%,-50%);width:600px;height:600px;border-radius:50%;
+  background:radial-gradient(circle,rgba(100,40,180,0.12),transparent 70%);pointer-events:none}
+.cta-final-content{position:relative;max-width:600px;margin:0 auto}
+.cta-sigil{font-size:3.5rem;margin-bottom:22px;display:block;
+  filter:drop-shadow(0 0 20px rgba(200,128,255,0.4))}
+.cta-h2{font-family:'Cinzel',serif;font-size:clamp(1.8rem,4vw,2.6rem);
+  font-weight:700;margin-bottom:14px;line-height:1.25}
+.cta-sub{font-family:'Cormorant Garamond',serif;font-size:1.05rem;
+  color:var(--text2);font-style:italic;margin-bottom:34px;line-height:1.7}
+
+/* FOOTER */
+footer{border-top:1px solid var(--border);padding:40px 24px;text-align:center;position:relative;z-index:1}
+.footer-brand{font-family:'Cinzel',serif;font-size:.68rem;letter-spacing:.4em;
+  color:var(--text3);margin-bottom:10px}
+.footer-links{display:flex;gap:22px;justify-content:center;flex-wrap:wrap}
+.footer-links a{font-size:.76rem;color:var(--text3);text-decoration:none;transition:color .2s}
+.footer-links a:hover{color:var(--a)}
+
+@media(max-width:680px){
+  nav{padding:12px 20px}
+  .nav-links{display:none}
+  .precios-grid{grid-template-columns:1fr}
+  .mock-score-row{gap:10px}
+}
+</style>
+</head>
+<body>
+
+<div class="stars" id="starsL"></div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-brand">☯ Compatibilidad Armónica</div>
+  <div class="nav-links">
+    <a href="#como">Cómo funciona</a>
+    <a href="#incluye">Qué incluye</a>
+    <a href="#precios">Precios</a>
+    <a href="#faq">FAQ</a>
+    <a class="nav-cta" href="compatibilidad_armonica_app.html">Acceder →</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <span class="hero-yin">☯</span>
+    <div class="hero-eyebrow">Numerología · Astrología · Biorritmo · Calendario</div>
+    <h1 class="hero-h1">
+      <span class="pa">Tú</span> + <span class="pb">Otra Persona</span><br>
+      Lectura de Compatibilidad<br>Armónica
+    </h1>
+    <p class="hero-sub">Descubre el porcentaje de compatibilidad entre dos personas y los mejores días para encontrarse — para pareja, negocios o decisiones importantes.</p>
+    <div class="hero-pills">
+      <span class="pill">💑 Pareja</span>
+      <span class="pill">🤝 Negocios</span>
+      <span class="pill">📅 Calendario 15 días</span>
+      <span class="pill">⭐ Día óptimo automático</span>
+      <span class="pill">📊 Score de alineación diaria</span>
+      <span class="pill">🔢 45 perfiles de compatibilidad CDV</span>
+    </div>
+    <div class="hero-btns">
+      <a href="#precios" class="btn-primary">✦ Obtener Acceso</a>
+      <a href="compatibilidad_armonica_app.html" class="btn-secondary">Ver Demo →</a>
+    </div>
+  </div>
+  <div class="hero-scroll">Descubrir ↓</div>
+</section>
+
+<!-- USOS -->
+<section style="background:var(--bg2)">
+  <div class="container">
+    <div class="section-eyebrow">Para qué sirve</div>
+    <h2 class="section-h2">Cuatro aplicaciones <span style="color:var(--a)">concretas</span></h2>
+    <div class="divider"></div>
+    <p class="section-sub">No es solo para parejas. La lectura de compatibilidad armónica tiene aplicaciones directas en cualquier relación donde el timing y la energía compartida importan.</p>
+    <div class="uso-grid">
+      <div class="uso-card">
+        <span class="uso-icon">💑</span>
+        <div class="uso-titulo">Pareja</div>
+        <p class="uso-desc">¿Son compatibles en profundidad? ¿En qué áreas se complementan y en cuáles hay tensión? ¿Cuáles son los mejores días para conversaciones importantes, decisiones o simplemente para estar juntos?</p>
+      </div>
+      <div class="uso-card">
+        <span class="uso-icon">🤝</span>
+        <div class="uso-titulo">Socios de Negocio</div>
+        <p class="uso-desc">¿Tienen los perfiles numerológicos y astrológicos que se complementan para construir una empresa? ¿Cuándo es el mejor momento para firmar, negociar o tomar decisiones de alto impacto?</p>
+      </div>
+      <div class="uso-card">
+        <span class="uso-icon">📅</span>
+        <div class="uso-titulo">Reunión Puntual</div>
+        <p class="uso-desc">Tienes una reunión, presentación o entrevista importante. ¿En qué fecha de los próximos 15 días están ambas personas en su mayor nivel de energía y receptividad simultánea?</p>
+      </div>
+      <div class="uso-card">
+        <span class="uso-icon">⚖</span>
+        <div class="uso-titulo">Decisión Importante</div>
+        <p class="uso-desc">Firmar un contrato, hacer una propuesta, cerrar un trato. El sistema identifica los días en que los ciclos intelectuales e intuitivos de ambas personas coinciden en su punto más alto.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CÓMO FUNCIONA -->
+<section id="como">
+  <div class="container">
+    <div class="section-eyebrow">El sistema</div>
+    <h2 class="section-h2">Cómo se <span style="color:var(--a)">calcula</span> la compatibilidad</h2>
+    <div class="divider"></div>
+    <p class="section-sub">Cuatro sistemas integrados. Cada uno aporta una perspectiva diferente sobre la misma relación.</p>
+    <div class="pasos-grid">
+      <div class="paso-card">
+        <div class="paso-num" style="color:var(--a2)">35%</div>
+        <div class="paso-body">
+          <div class="paso-titulo">Numerología — CDV × CDV</div>
+          <p class="paso-desc">Los Caminos de Vida de ambas personas se cruzan en uno de 45 perfiles únicos de compatibilidad, con análisis diferenciado para pareja y para negocios.</p>
+        </div>
+      </div>
+      <div class="paso-card">
+        <div class="paso-num" style="color:var(--teal)">20%</div>
+        <div class="paso-body">
+          <div class="paso-titulo">Astrología — Elementos</div>
+          <p class="paso-desc">La combinación de elementos astrológicos (Fuego, Tierra, Aire, Agua) define la química base de la relación — la compatibilidad de temperamentos.</p>
+        </div>
+      </div>
+      <div class="paso-card">
+        <div class="paso-num" style="color:var(--gold)">15%</div>
+        <div class="paso-body">
+          <div class="paso-titulo">Ciclos Anuales</div>
+          <p class="paso-desc">¿Están en el mismo momento del ciclo de 9 años? Dos personas en el mismo año personal se entienden mejor — sus ritmos vitales están sincronizados.</p>
+        </div>
+      </div>
+      <div class="paso-card">
+        <div class="paso-num" style="color:var(--red)">30%</div>
+        <div class="paso-body">
+          <div class="paso-titulo">Biorritmo — Los 5 Ciclos</div>
+          <p class="paso-desc">La coincidencia real de los cinco ciclos vitales hoy y en los próximos 15 días. El factor más dinámico — cambia cada día y determina el calendario óptimo.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PREVIEW REPORTE -->
+<section style="background:var(--bg2)" id="preview">
+  <div class="container">
+    <div class="section-eyebrow">El reporte</div>
+    <h2 class="section-h2">Esto es lo que <span style="color:var(--a)">recibes</span></h2>
+    <div class="divider"></div>
+    <p class="section-sub">Un reporte visual completo que puedes descargar como archivo HTML hermoso — sin conexión a internet, sin registros, tuyo para siempre.</p>
+    <div class="mockup-wrap">
+      <div class="mock-header">
+        <span class="mock-yin">☯</span>
+        <div class="mock-nombres">
+          <span style="color:var(--a2)">María Fernanda González</span>
+          <span style="color:var(--text3)"> × </span>
+          <span style="color:var(--teal)">Carlos Eduardo Ruiz</span>
+        </div>
+        <div style="font-size:.72rem;color:var(--text3);margin-top:6px;font-style:italic;font-family:'Cormorant Garamond',serif">
+          Compatibilidad de Pareja · Mayo 2026
+        </div>
+      </div>
+      <div class="mock-score-row">
+        <div class="mock-score-box">
+          <div class="msb-num" style="color:var(--teal)">84%</div>
+          <div class="msb-label">Score Global</div>
+        </div>
+        <div class="mock-score-box">
+          <div class="msb-num" style="color:var(--a2)">7 × 3</div>
+          <div class="msb-label">CDV</div>
+        </div>
+        <div class="mock-score-box">
+          <div class="msb-num" style="color:var(--gold)">79%</div>
+          <div class="msb-label">Numerología</div>
+        </div>
+        <div class="mock-score-box">
+          <div class="msb-num" style="color:var(--teal)">88%</div>
+          <div class="msb-label">Biorritmo</div>
+        </div>
+      </div>
+      <div style="background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:14px 16px;margin-bottom:14px">
+        <div style="font-family:'Cinzel',serif;font-size:.7rem;letter-spacing:.15em;color:var(--a);margin-bottom:6px">El Buscador y el Creador — Profundidad Total</div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:.88rem;color:var(--text2);line-height:1.6">Dos almas que operan en frecuencias que se reconocen mutuamente. El 7 aporta profundidad y análisis; el 3 aporta alegría y expresión. Juntos tienen el rango completo de la experiencia…</div>
+      </div>
+      <div class="mock-cal">
+        <div class="mock-cal-title">📅 Calendario de Alineación — Próximos 15 Días</div>
+        <div class="cal-row-mock">
+          <span class="cal-fecha-mock">Lun 2 Jun</span>
+          <span class="cal-chip chip-alta">87%</span>
+          <span style="font-size:.72rem;color:var(--text2)">Negociación · Intelectual ↑↑</span>
+        </div>
+        <div class="cal-row-mock" style="background:rgba(200,128,255,0.05)">
+          <span class="cal-fecha-mock">Jue 5 Jun ⭐</span>
+          <span class="cal-chip chip-alta">93%</span>
+          <span><span class="opt-badge">ÓPTIMO</span></span>
+        </div>
+        <div class="cal-row-mock">
+          <span class="cal-fecha-mock">Vie 6 Jun</span>
+          <span class="cal-chip chip-media">61%</span>
+          <span style="font-size:.72rem;color:var(--text2)">Conversación · Emocional ↑</span>
+        </div>
+        <div class="cal-row-mock">
+          <span class="cal-fecha-mock">Lun 9 Jun</span>
+          <span class="cal-chip chip-baja">38%</span>
+          <span style="font-size:.72rem;color:var(--text3)">⚠ Cautela</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- QUÉ INCLUYE -->
+<section id="incluye">
+  <div class="container">
+    <div class="section-eyebrow">Contenido del reporte</div>
+    <h2 class="section-h2">Todo lo que <span style="color:var(--a)">analiza</span></h2>
+    <div class="divider"></div>
+    <p class="section-sub">Solo necesitas el nombre completo y la fecha de nacimiento de ambas personas. El sistema hace el resto en segundos.</p>
+    <div class="incluye-grid">
+      <div class="incluye-card">
+        <span class="ic-icon">📊</span>
+        <div class="ic-titulo">Score de Compatibilidad Global</div>
+        <p class="ic-desc">Porcentaje del 0 al 100% calculado con cuatro sistemas ponderados. Etiqueta cualitativa: Excepcional, Alta, Moderada, Compleja o Desafiante.</p>
+        <div class="ic-tags"><span class="ic-tag">Numerología 35%</span><span class="ic-tag">Astrología 20%</span><span class="ic-tag">Ciclos 15%</span><span class="ic-tag">Biorritmo 30%</span></div>
+      </div>
+      <div class="incluye-card">
+        <span class="ic-icon">🔢</span>
+        <div class="ic-titulo">45 Perfiles CDV × CDV</div>
+        <p class="ic-desc">Análisis específico de la combinación de Caminos de Vida. Cada perfil tiene descripción diferenciada para pareja y para negocios, más dinámica y consejo concreto.</p>
+        <div class="ic-tags"><span class="ic-tag">Descripción pareja</span><span class="ic-tag">Descripción negocios</span><span class="ic-tag">Consejo directo</span></div>
+      </div>
+      <div class="incluye-card">
+        <span class="ic-icon">🪐</span>
+        <div class="ic-titulo">Compatibilidad Astrológica</div>
+        <p class="ic-desc">Análisis de la combinación de elementos solares de ambas personas. Las 10 combinaciones posibles de Fuego, Tierra, Aire y Agua con su descripción e impacto.</p>
+        <div class="ic-tags"><span class="ic-tag">Elemento A × B</span><span class="ic-tag">Química de temperamentos</span></div>
+      </div>
+      <div class="incluye-card">
+        <span class="ic-icon">📅</span>
+        <div class="ic-titulo">Calendario de Alineación</div>
+        <p class="ic-desc">Los próximos 15 días con score diario de coincidencia de biorritmos, etiqueta de calidad, "mejor para" de cada día y ciclos coincidentes marcados.</p>
+        <div class="ic-tags"><span class="ic-tag">15 días</span><span class="ic-tag">Día óptimo automático</span><span class="ic-tag">Por propósito</span></div>
+      </div>
+      <div class="incluye-card">
+        <span class="ic-icon">📊</span>
+        <div class="ic-titulo">Biorritmo Comparado Hoy</div>
+        <p class="ic-desc">Los 5 ciclos vitales (físico, emocional, intelectual, intuitivo, espiritual) de ambas personas mostrados en paralelo para el día actual.</p>
+        <div class="ic-tags"><span class="ic-tag">5 ciclos</span><span class="ic-tag">Comparación A vs B</span></div>
+      </div>
+      <div class="incluye-card">
+        <span class="ic-icon">⬇</span>
+        <div class="ic-titulo">Archivo Visual Descargable</div>
+        <p class="ic-desc">El reporte completo se descarga como archivo HTML con diseño oscuro de alta calidad. Se abre sin internet en cualquier dispositivo. Ideal para compartir.</p>
+        <div class="ic-tags"><span class="ic-tag">Sin internet</span><span class="ic-tag">Diseño premium</span><span class="ic-tag">Compartible</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRECIOS -->
+<section style="background:var(--bg2)" id="precios">
+  <div class="container">
+    <div class="section-eyebrow">Inversión</div>
+    <h2 class="section-h2">Elige tu <span style="color:var(--a)">acceso</span></h2>
+    <div class="divider"></div>
+    <p class="section-sub">Disponible como producto independiente o como complemento a la Lectura Armónica Individual.</p>
+    <div class="precios-grid">
+      <div class="precio-card">
+        <div class="precio-titulo">Libro + App 30 Días</div>
+        <div class="precio-valor"><span style="font-size:1.2rem">$</span>34.900</div>
+        <div class="precio-periodo">COP · Pago único</div>
+        <div class="precio-items">
+          <div class="precio-item">Libro completo de Compatibilidad en PDF</div>
+          <div class="precio-item">Código de activación 30 días — lecturas ilimitadas</div>
+          <div class="precio-item">Reportes descargables sin límite</div>
+          <div class="precio-item">Los 45 perfiles CDV×CDV explicados en detalle</div>
+          <div class="precio-item">Guía de interpretación del calendario</div>
+        </div>
+        <a href="#" class="btn-compra-sec" onclick="alert('Conectar con Hotmart o Mercado Pago')">Comprar Ahora →</a>
+      </div>
+      <div class="precio-card dest">
+        <div class="precio-badge">RECOMENDADO</div>
+        <div class="precio-titulo">Suite Completa — Individual + Compatibilidad</div>
+        <div class="precio-valor"><span style="font-size:1.2rem">$</span>54.900</div>
+        <div class="precio-periodo">COP · Pago único — 30 días ambas apps</div>
+        <div class="precio-items">
+          <div class="precio-item">Ambos libros en PDF (Individual + Compatibilidad)</div>
+          <div class="precio-item">Acceso a ambas apps por 30 días</div>
+          <div class="precio-item">Lecturas individuales ilimitadas</div>
+          <div class="precio-item">Lecturas de compatibilidad ilimitadas</div>
+          <div class="precio-item">Ideal para coaches, terapeutas y consultores</div>
+        </div>
+        <a href="#" class="btn-compra" onclick="alert('Conectar con Hotmart o Mercado Pago')">Obtener Suite →</a>
+      </div>
+    </div>
+    <p style="text-align:center;margin-top:22px;font-size:.78rem;color:var(--text3);font-style:italic">
+      Pagos seguros · Hotmart · Mercado Pago · PSE · Tarjeta crédito/débito
+    </p>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="container">
+    <div class="section-eyebrow">Preguntas frecuentes</div>
+    <h2 class="section-h2">Todo lo que necesitas saber</h2>
+    <div class="divider"></div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">¿Qué datos necesito de la otra persona? <span class="faq-arrow">▼</span></div>
+        <div class="faq-a">Solo su nombre completo y fecha de nacimiento (día, mes y año). No necesitas hora de nacimiento ni lugar. La app funciona completamente offline — los datos no se envían a ningún servidor.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">¿El género afecta el cálculo? <span class="faq-arrow">▼</span></div>
+        <div class="faq-a">No. Los sistemas de numerología, astrología y biorritmo que usa la app son universales — no hacen distinción de género. El análisis es igualmente válido para cualquier tipo de relación o combinación de personas.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">¿Puedo analizar más de una pareja o socio? <span class="faq-arrow">▼</span></div>
+        <div class="faq-a">Sí. Con la app activada puedes generar lecturas de compatibilidad ilimitadas para cualquier combinación de personas. Cada lectura es independiente y descargable como archivo visual.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">¿Cómo funciona el calendario de 15 días? <span class="faq-arrow">▼</span></div>
+        <div class="faq-a">Para cada uno de los próximos 15 días se calculan los 5 ciclos de biorritmo de ambas personas y se determina qué tan coincidentes son sus energías. El sistema pondera los ciclos según el propósito elegido (pareja, negocios, reunión o decisión) e identifica automáticamente el día de mayor alineación.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">¿Necesita internet para funcionar? <span class="faq-arrow">▼</span></div>
+        <div class="faq-a">No. Una vez descargado el archivo HTML, funciona completamente offline. Todos los cálculos se hacen en tu navegador. Los datos de ambas personas nunca salen de tu dispositivo.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">¿Es compatible con la Lectura Armónica Individual? <span class="faq-arrow">▼</span></div>
+        <div class="faq-a">Sí. Son dos productos complementarios — la lectura individual revela el perfil completo de una persona; la de compatibilidad cruza dos perfiles. Muchos usuarios hacen primero la lectura individual de cada persona y luego la de compatibilidad para tener el cuadro completo.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA FINAL -->
+<section class="cta-final">
+  <div class="cta-final-content">
+    <span class="cta-sigil">☯</span>
+    <h2 class="cta-h2">¿Son compatibles?<br><span style="color:var(--a)">Descúbrelo en 60 segundos</span></h2>
+    <p class="cta-sub">Solo nombre y fecha de nacimiento. El sistema calcula el score, analiza los perfiles y genera el calendario de los mejores días para estar juntos.</p>
+    <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap">
+      <a href="#precios" class="btn-primary">✦ Obtener Acceso</a>
+      <a href="compatibilidad_armonica_app.html" class="btn-secondary">Probar Demo →</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">COMPATIBILIDAD ARMÓNICA · PROMPTESTUDIO.COM</div>
+  <div style="height:12px"></div>
+  <div class="footer-links">
+    <a href="landing_lectura_armonica.html">Lectura Individual</a>
+    <a href="lectura_armonica_app.html">App Individual</a>
+    <a href="compatibilidad_armonica_app.html">App Compatibilidad</a>
+    <a href="#precios">Precios</a>
+  </div>
+  <p style="margin-top:18px;font-size:.7rem;color:var(--text3)">© 2026 PromptEstudio.com · Oswaldo Arredondo Cobo · Colombia</p>
+</footer>
+
+<script>
+// Stars bicolor
+(function(){
+  const c = document.getElementById('starsL');
+  for(let i=0;i<70;i++){
+    const s=document.createElement('div');
+    s.className='star';
+    const sz=1+Math.random()*2;
+    s.style.cssText=`left:${Math.random()*100}%;top:${Math.random()*100}%;
+      width:${sz}px;height:${sz}px;
+      background:${Math.random()>0.5?'#c980ff':'#70e8cc'};
+      --d:${2+Math.random()*6}s;--o:${.06+Math.random()*.3};
+      animation-delay:${Math.random()*6}s`;
+    c.appendChild(s);
+  }
+})();
+
+function toggleFaq(el) {
+  const item = el.parentElement;
+  const wasOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));
+  if(!wasOpen) item.classList.add('open');
+}
+
+window.addEventListener('scroll',()=>{
+  document.querySelector('nav').style.background =
+    window.scrollY > 60 ? 'rgba(8,5,18,0.96)' : 'rgba(8,5,18,0.88)';
+});
+</script>
+</body>
+</html>

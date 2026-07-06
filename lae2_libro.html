@@ -1,0 +1,2103 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Compatibilidad Armonica &mdash; El Libro</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Cinzel:wght@400;600;700&family=Raleway:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#080512;--bg2:#0d0820;--bg3:#130c28;--card:#1c1438;--card2:#241a48;
+  --a:#e0b0ff;--a2:#c980ff;--teal:#70e8cc;--gold:#f0d060;--gold2:#ffe090;
+  --red:#e87878;--text:#f4eeff;--text2:#c0a8e0;--text3:#7060a0;
+  --border:rgba(200,128,255,0.12);--border2:rgba(200,128,255,0.28);--nav-w:272px}
+[data-theme=light]{--bg:#faf6ff;--bg2:#f4eeff;--bg3:#ede0ff;--card:#fff;--card2:#f8f2ff;
+  --a:#7030b0;--a2:#5020a0;--teal:#0a7060;--gold:#8b6000;--gold2:#5a3e00;
+  --text:#1a0f2e;--text2:#4a3570;--text3:#8070a0;
+  --border:rgba(100,40,180,0.12);--border2:rgba(100,40,180,0.28)}
+[data-theme=sepia]{--bg:#160e04;--bg2:#1e1408;--bg3:#28180c;--card:#221808;
+  --a:#f0c860;--a2:#e0a040;--teal:#a0d8c0;--gold:#f0c860;
+  --text:#f5e8c0;--text2:#c8a870;--text3:#806840;
+  --border:rgba(240,200,80,0.15);--border2:rgba(240,200,80,0.35)}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:Raleway,sans-serif;display:flex;min-height:100vh}
+.sidebar{width:var(--nav-w);flex-shrink:0;background:var(--bg2);border-right:1px solid var(--border);
+  height:100vh;position:sticky;top:0;overflow-y:auto;display:flex;flex-direction:column}
+.sb-brand{padding:20px 16px 12px;border-bottom:1px solid var(--border)}
+.sb-brand h1{font-family:Cinzel,serif;font-size:.76rem;letter-spacing:.16em;line-height:1.5;color:var(--a)}
+.sb-brand p{font-size:.65rem;color:var(--text3);margin-top:3px}
+.sb-search{padding:9px 13px;border-bottom:1px solid var(--border)}
+.sb-search input{width:100%;background:var(--bg3);border:1px solid var(--border2);border-radius:6px;
+  padding:7px 10px;color:var(--text);font-family:Raleway,sans-serif;font-size:.76rem;outline:none}
+.sb-search input::placeholder{color:var(--text3)}
+.sb-nav{flex:1;padding:9px 0}
+.nav-sec{padding:6px 13px 3px;font-size:.54rem;letter-spacing:.25em;color:var(--text3);text-transform:uppercase}
+.sb-nav ul{list-style:none}
+.sb-nav li a{display:block;padding:6px 16px;font-size:.74rem;color:var(--text2);text-decoration:none;
+  border-left:2px solid transparent;transition:all .15s}
+.sb-nav li a:hover{color:var(--a);background:rgba(201,160,255,0.05)}
+.sb-nav li a.active{color:var(--a);border-left-color:var(--a);background:rgba(201,160,255,0.07)}
+.theme-row{padding:9px 13px;border-top:1px solid var(--border);display:flex;gap:5px;align-items:center}
+.theme-row span{font-size:.58rem;color:var(--text3);letter-spacing:.1em;margin-right:2px}
+.t-btn{width:17px;height:17px;border-radius:50%;border:2px solid var(--border2);cursor:pointer}
+.t-btn[data-t=dark]{background:#080512}.t-btn[data-t=light]{background:linear-gradient(135deg,#faf6ff,#c980ff)}
+.t-btn[data-t=sepia]{background:linear-gradient(135deg,#160e04,#f0c860)}
+.main{flex:1;overflow-y:auto;height:100vh}
+.content{max-width:760px;margin:0 auto;padding:32px 24px 90px}
+.portada{text-align:center;padding:60px 0 48px;border-bottom:1px solid var(--border);margin-bottom:48px}
+.portada-sigil{font-size:3.2rem;display:block;margin-bottom:18px;filter:drop-shadow(0 0 20px rgba(200,128,255,0.4))}
+.portada-eyebrow{font-family:Cinzel,serif;font-size:.6rem;letter-spacing:.5em;color:var(--gold);text-transform:uppercase;margin-bottom:16px}
+.portada-h1{font-family:Cinzel,serif;font-size:clamp(1.7rem,4vw,2.6rem);font-weight:700;line-height:1.2;margin-bottom:8px}
+.portada-sub{font-family:Cormorant Garamond,serif;font-size:.98rem;font-style:italic;color:var(--text2);margin-bottom:24px}
+.portada-author{font-size:.76rem;color:var(--text3)}
+.chapter{margin-bottom:56px}
+.ch-eyebrow{font-family:Cinzel,serif;font-size:.58rem;letter-spacing:.5em;color:var(--gold);text-transform:uppercase;margin-bottom:10px}
+.ch-h2{font-family:Cinzel,serif;font-size:clamp(1.4rem,3vw,1.9rem);font-weight:700;color:var(--text);margin-bottom:8px;line-height:1.3}
+.ch-sub{font-family:Cormorant Garamond,serif;font-size:.98rem;font-style:italic;color:var(--text2);margin-bottom:20px}
+.intro-box{background:rgba(200,128,255,0.04);border-left:3px solid var(--gold);
+  border-radius:0 8px 8px 0;padding:14px 18px;margin-bottom:24px}
+.intro-box p{font-family:Cormorant Garamond,serif;font-size:.96rem;color:var(--text2);line-height:1.75;margin-bottom:9px}
+.intro-box p:last-child{margin-bottom:0}
+.sistema-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:18px;margin-bottom:10px}
+.sc-nombre{font-family:Cinzel,serif;font-size:.84rem;color:var(--a);letter-spacing:.07em;margin-bottom:9px}
+.sc-desc p{font-family:Cormorant Garamond,serif;font-size:.93rem;color:var(--text2);line-height:1.7;margin-bottom:9px}
+.sc-desc p:last-child{margin-bottom:0}
+.indice-rapido{display:flex;flex-wrap:wrap;gap:5px;padding:13px;
+  background:var(--bg2);border:1px solid var(--border);border-radius:9px;margin-bottom:24px}
+.indice-label{width:100%;font-size:.58rem;letter-spacing:.2em;color:var(--text3);text-transform:uppercase;margin-bottom:6px;font-family:Cinzel,serif}
+.idx-item{font-size:.72rem;padding:3px 9px;border-radius:20px;text-decoration:none;
+  background:var(--bg3);border:1px solid var(--border);color:var(--text2);font-family:Cinzel,serif;transition:all .15s}
+.idx-item:hover{border-color:var(--a);color:var(--a)}
+.entrada{background:var(--card);border:1px solid var(--border);border-radius:10px;margin-bottom:8px;overflow:hidden;scroll-margin-top:18px}
+.entrada:hover{border-color:var(--border2)}
+.entrada-header{padding:14px 18px;display:flex;align-items:center;gap:12px;cursor:pointer;border-bottom:1px solid transparent}
+.entrada-header:hover{background:rgba(200,128,255,0.04)}
+.par-num{font-family:Cinzel,serif;font-size:1.3rem;font-weight:700;color:var(--a);min-width:48px;text-align:center}
+.par-info{flex:1}
+.entrada-titulo{font-family:Cinzel,serif;font-size:.86rem;color:var(--text);margin-bottom:4px}
+.par-scores{display:flex;gap:12px}
+.score-mini{font-size:.72rem;letter-spacing:.04em}
+.toggle-arrow{color:var(--text3);transition:transform .3s;flex-shrink:0;font-size:.8rem}
+.entrada-body{display:none;padding:18px}
+.entrada-body.open{display:block}
+.score-bars{display:flex;flex-direction:column;gap:7px;margin-bottom:14px}
+.score-bar-row{display:flex;align-items:center;gap:9px}
+.sb-label{font-size:.72rem;color:var(--text3);min-width:72px}
+.sb-track{flex:1;height:4px;background:var(--border);border-radius:2px}
+.sb-fill{height:100%;border-radius:2px}
+.sb-val{font-family:Cinzel,serif;font-size:.84rem;min-width:38px;text-align:right}
+.desc-tabs{margin-bottom:12px}
+.desc-tab-bar{display:flex;border-bottom:1px solid var(--border);margin-bottom:12px}
+.dtab{background:none;border:none;border-bottom:2px solid transparent;
+  padding:7px 14px;font-family:Cinzel,serif;font-size:.68rem;letter-spacing:.1em;
+  cursor:pointer;color:var(--text3);transition:all .2s;margin-bottom:-1px}
+.dtab.active{color:var(--a);border-bottom-color:var(--a)}
+.dtab:hover{color:var(--a)}
+.desc-content.hidden{display:none}
+.desc-text{font-family:Cormorant Garamond,serif;font-size:.92rem;color:var(--text2);line-height:1.7}
+.dinamica-box{background:var(--bg3);border:1px solid var(--border);border-radius:7px;
+  padding:10px 13px;margin-bottom:9px;font-size:.8rem;color:var(--text2);line-height:1.55}
+.din-label{font-family:Cinzel,serif;font-size:.64rem;color:var(--text3);letter-spacing:.1em;text-transform:uppercase;margin-right:4px}
+.consejo-box{background:rgba(240,208,96,0.06);border:1px solid rgba(240,208,96,0.2);
+  border-radius:7px;padding:10px 13px;font-size:.8rem;color:var(--gold2);line-height:1.55}
+.con-label{font-family:Cinzel,serif;font-size:.64rem;color:var(--gold);letter-spacing:.1em;text-transform:uppercase;margin-right:4px}
+.seccion-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:18px;margin-bottom:10px}
+.sec-titulo{font-family:Cinzel,serif;font-size:.84rem;color:var(--a);letter-spacing:.07em;margin-bottom:10px}
+.sec-texto p{font-family:Cormorant Garamond,serif;font-size:.93rem;color:var(--text2);line-height:1.7;margin-bottom:9px}
+.sec-texto p:last-child{margin-bottom:0}
+.mob-btn{display:none;position:fixed;bottom:20px;right:20px;z-index:200;
+  width:46px;height:46px;border-radius:50%;background:var(--a2);color:#080512;
+  border:none;font-size:1.2rem;cursor:pointer}
+@media(max-width:700px){
+  .sidebar{position:fixed;left:-100%;z-index:100;transition:left .3s}
+  .sidebar.open{left:0}
+  .mob-btn{display:flex;align-items:center;justify-content:center}
+  .content{padding:18px 12px 80px}
+}
+</style>
+</head>
+<body data-theme="dark">
+<aside class="sidebar" id="sidebar">
+  <div class="sb-brand"><h1>&#9775; Compatibilidad Armonica</h1><p>El Libro &middot; PromptEstudio.com</p></div>
+  <div class="sb-search"><input placeholder="Buscar perfil, numero..." oninput="buscar(this.value)"></div>
+  <nav class="sb-nav">
+    <div class="nav-sec">Contenido</div>
+    <ul>
+      <li><a href="#intro"  onclick="setActive(this)">Introduccion</a></li>
+      <li><a href="#cap1"   onclick="setActive(this)">1. Los Sistemas</a></li>
+      <li><a href="#cap2"   onclick="setActive(this)">2. Los 45 Perfiles</a></li>
+      <li><a href="#cap3"   onclick="setActive(this)">3. Calendario</a></li>
+      <li><a href="#cap4"   onclick="setActive(this)">4. Como Leer</a></li>
+    </ul>
+  </nav>
+  <div class="theme-row">
+    <span>Tema:</span>
+    <div class="t-btn" data-t="dark"  onclick="setTheme('dark')"></div>
+    <div class="t-btn" data-t="light" onclick="setTheme('light')"></div>
+    <div class="t-btn" data-t="sepia" onclick="setTheme('sepia')"></div>
+  </div>
+</aside>
+<main class="main">
+<div class="content">
+
+<div class="portada" id="intro">
+  <span class="portada-sigil">&#9775;</span>
+  <div class="portada-eyebrow">Oswaldo Arredondo Cobo &middot; PromptEstudio.com</div>
+  <h1 class="portada-h1">Compatibilidad Armonica</h1>
+  <p class="portada-sub">Los 45 perfiles &middot; El calendario de alineacion<br>Numerologia &middot; Astrologia &middot; Bioritmo</p>
+  <p class="portada-author">&copy; 2026 PromptEstudio.com</p>
+</div>
+
+<div class="chapter">
+  <div class="ch-eyebrow">Introduccion</div>
+  <h2 class="ch-h2">Dos mundos que se encuentran</h2>
+  <div class="intro-box"><p>Toda relación humana es un encuentro de energías. Cuando dos personas entran en contacto — ya sea en el amor, en los negocios o en una decisión compartida — sus frecuencias vibracionales interactúan de maneras predecibles que los sistemas de conocimiento milenarios han aprendido a leer.</p><p>La Lectura de Compatibilidad Armónica no pretende decirte si debes estar con alguien o no. Esa decisión es tuya y solo tuya. Lo que sí puede hacer es darte un mapa del territorio: qué áreas de la relación fluyen con naturalidad, cuáles requieren esfuerzo consciente, y cuándo los momentos de mayor alineación energética se presentan en el calendario.</p><p>Este libro contiene tres herramientas:</p><p>Primera — la teoría de cada sistema utilizado: por qué la numerología predice dinámicas relacionales, cómo los elementos astrológicos definen la química de temperamentos, qué son los ciclos de biorritmo y cómo su coincidencia afecta la calidad de cada día compartido.</p><p>Segunda — los 45 perfiles de compatibilidad numerológica: el análisis completo de cada combinación posible de Caminos de Vida, con su descripción para pareja y para negocios, su dinámica específica y el consejo que cada par necesita escuchar.</p><p>Tercera — la guía de interpretación: cómo leer el calendario de alineación, qué significa cada score, cuándo confiar en los números y cuándo escuchar al corazón por encima de cualquier cálculo.</p><p>El conocimiento es una herramienta. Úsalo con sabiduría.</p></div>
+</div>
+
+<div id="cap1" class="chapter">
+  <div class="ch-eyebrow">Capitulo 1</div>
+  <h2 class="ch-h2">Los Sistemas de Compatibilidad</h2>
+  <p class="ch-sub">Por qué dos personas se entienden o no</p>
+  <div class="intro-box"><p>La compatibilidad entre dos personas no es una cualidad fija — es un campo dinámico que tiene dimensiones distintas. Dos personas pueden ser extraordinariamente compatibles en el nivel del carácter y radicalmente distintas en sus ciclos de energía. Pueden tener una química astrológica difícil y una complementariedad numerológica excepcional.</p><p>La Lectura de Compatibilidad Armónica integra cuatro sistemas para dar una imagen completa de esa complejidad:</p></div>
+  <div class="sistema-card">
+    <div class="sc-nombre">Numerología — El peso del 35%</div>
+    <div class="sc-desc"><p>La numerología pitagórica asigna a cada persona un Camino de Vida — el número más importante de su perfil — calculado a partir de su fecha de nacimiento. Este número describe la misión central de la persona, su carácter fundamental y la energía con la que se relaciona con el mundo.</p><p>Cuando dos Caminos de Vida se encuentran, crean una dinámica específica que puede ser analizada con precisión. No hay combinaciones absolutamente buenas o malas — hay combinaciones que fluyen con naturalidad y otras que requieren más trabajo consciente. El sistema contiene 45 perfiles únicos (las 81 combinaciones posibles de 1 a 9 reducidas a pares sin duplicar), cada uno con una dinámica particular para la pareja y otra para los negocios.</p><p>El peso del 35% en el score total refleja la importancia capital de este sistema: el carácter es el factor más determinante en la calidad de una relación a largo plazo. Los biorritmos cambian cada día; el carácter permanece.</p></div>
+  </div><div class="sistema-card">
+    <div class="sc-nombre">Astrología — El peso del 20%</div>
+    <div class="sc-desc"><p>En la compatibilidad armónica usamos la combinación de elementos astrológicos como indicador de la química de temperamentos. Cada signo solar pertenece a uno de los cuatro elementos — Fuego, Tierra, Aire, Agua — y la combinación de los elementos de dos personas describe la naturaleza de su interacción básica.</p><p>Fuego + Fuego: gran energía compartida, riesgo de consumirse mutuamente. Fuego + Aire: el aire aviva el fuego, expansión y estimulación mutua. Fuego + Tierra: el fuego da calor a la tierra, la tierra da estructura al fuego — complemento con tensión. Fuego + Agua: tensión fundamental, transformadora pero difícil. Tierra + Tierra: estabilidad y valores compartidos, riesgo de rigidez. Tierra + Agua: el agua nutre a la tierra, gran complementariedad práctica y emocional. Tierra + Aire: mundos distintos, el aire puede frustrar a la tierra. Aire + Aire: estimulación intelectual sin anclaje. Aire + Agua: mente y corazón, el agua profundiza al aire. Agua + Agua: profundidad emocional compartida, riesgo de codependencia.</p><p>El peso del 20% refleja que la astrología de signos es indicativa pero no determinante. El carácter numerológico pesa más que el elemento solar.</p></div>
+  </div><div class="sistema-card">
+    <div class="sc-nombre">Ciclos Anuales — El peso del 15%</div>
+    <div class="sc-desc"><p>Cada persona atraviesa un ciclo de 9 años que determina el tipo de energía y experiencias que está procesando en un período determinado. El Año Personal se calcula sumando la fecha de nacimiento con el año actual.</p><p>Cuando dos personas están en el mismo Año Personal o en años cercanos, sus ritmos vitales están sincronizados — están procesando energías similares, lo que facilita la comprensión mutua. Cuando están en años muy distintos, pueden sentir que están en momentos de vida completamente diferentes.</p><p>Un Año 1 es inicio, acción, proyectos nuevos. Un Año 9 es cierre, soltar, completar. Una persona en Año 1 y otra en Año 9 pueden tener dificultad para sintonizarse — una quiere comenzar mientras la otra necesita terminar.</p><p>El peso del 15% refleja que este factor es real pero menos determinante que el carácter base.</p></div>
+  </div><div class="sistema-card">
+    <div class="sc-nombre">Biorritmo — El peso del 30%</div>
+    <div class="sc-desc"><p>El biorritmo es el único sistema completamente matemático del conjunto. Calcula los cinco ciclos vitales de cada persona desde su fecha de nacimiento hasta hoy, y determina qué tan coincidentes son esos ciclos entre dos personas en cualquier día específico.</p><p>El peso del 30% es el segundo más alto del sistema — y esto es intencional. El biorritmo es el factor más dinámico y práctico: mientras el carácter numerológico describe quiénes son las personas de manera permanente, el biorritmo describe cómo están hoy y cómo estarán los próximos 15 días.</p><p>Dos personas pueden tener una compatibilidad numerológica de 90% y un biorritmo de coincidencia de 30% hoy — lo que significa que aunque son fundamentalmente compatibles, hoy no es el mejor día para una conversación importante. Esta información práctica es lo que convierte la compatibilidad armónica en una herramienta de uso cotidiano.</p><p>Los cinco ciclos y su peso por propósito: Ciclo Físico (23 días) — prioridad en reuniones presenciales y actividades compartidas. Ciclo Emocional (28 días) — prioridad en conversaciones de pareja y decisiones afectivas. Ciclo Intelectual (33 días) — prioridad en negocios, negociaciones y decisiones estratégicas. Ciclo Intuitivo (38 días) — prioridad en decisiones importantes y brainstorming. Ciclo Espiritual (53 días) — prioridad en alineación de visión y propósito compartido.</p></div>
+  </div>
+</div>
+
+<div id="cap2" class="chapter">
+  <div class="ch-eyebrow">Capitulo 2</div>
+  <h2 class="ch-h2">Los 45 Perfiles de Compatibilidad CDV &times; CDV</h2>
+  <div class="intro-box"><p>Los nueve números del Camino de Vida producen 45 pares únicos cuando se eliminan los duplicados (1-2 es lo mismo que 2-1 en términos de dinámica relacional). Cada par tiene características propias que describen tanto la dinámica romántica como la profesional.</p><p>Una aclaración importante: los Números Maestros (11, 22, 33) se mapean a sus equivalentes base (2, 4, 6) para el análisis de compatibilidad, pero su presencia añade una capa de intensidad y responsabilidad espiritual a la dinámica descrita.</p><p>En cada perfil encontrarás: el título que describe la dinámica central, la descripción para pareja, la descripción para negocios, la dinámica específica de la combinación y el consejo más importante que ese par necesita escuchar.</p></div>
+  <div class="indice-rapido">
+    <div class="indice-label">Ir a perfil &rarr;</div>
+    <a class="idx-item" href="#par-1-1">1&times;1</a><a class="idx-item" href="#par-1-2">1&times;2</a><a class="idx-item" href="#par-1-3">1&times;3</a><a class="idx-item" href="#par-1-4">1&times;4</a><a class="idx-item" href="#par-1-5">1&times;5</a><a class="idx-item" href="#par-1-6">1&times;6</a><a class="idx-item" href="#par-1-7">1&times;7</a><a class="idx-item" href="#par-1-8">1&times;8</a><a class="idx-item" href="#par-1-9">1&times;9</a><a class="idx-item" href="#par-2-2">2&times;2</a><a class="idx-item" href="#par-2-3">2&times;3</a><a class="idx-item" href="#par-2-4">2&times;4</a><a class="idx-item" href="#par-2-5">2&times;5</a><a class="idx-item" href="#par-2-6">2&times;6</a><a class="idx-item" href="#par-2-7">2&times;7</a><a class="idx-item" href="#par-2-8">2&times;8</a><a class="idx-item" href="#par-2-9">2&times;9</a><a class="idx-item" href="#par-3-3">3&times;3</a><a class="idx-item" href="#par-3-4">3&times;4</a><a class="idx-item" href="#par-3-5">3&times;5</a><a class="idx-item" href="#par-3-6">3&times;6</a><a class="idx-item" href="#par-3-7">3&times;7</a><a class="idx-item" href="#par-3-8">3&times;8</a><a class="idx-item" href="#par-3-9">3&times;9</a><a class="idx-item" href="#par-4-4">4&times;4</a><a class="idx-item" href="#par-4-5">4&times;5</a><a class="idx-item" href="#par-4-6">4&times;6</a><a class="idx-item" href="#par-4-7">4&times;7</a><a class="idx-item" href="#par-4-8">4&times;8</a><a class="idx-item" href="#par-4-9">4&times;9</a><a class="idx-item" href="#par-5-5">5&times;5</a><a class="idx-item" href="#par-5-6">5&times;6</a><a class="idx-item" href="#par-5-7">5&times;7</a><a class="idx-item" href="#par-5-8">5&times;8</a><a class="idx-item" href="#par-5-9">5&times;9</a><a class="idx-item" href="#par-6-6">6&times;6</a><a class="idx-item" href="#par-6-7">6&times;7</a><a class="idx-item" href="#par-6-8">6&times;8</a><a class="idx-item" href="#par-6-9">6&times;9</a><a class="idx-item" href="#par-7-7">7&times;7</a><a class="idx-item" href="#par-7-8">7&times;8</a><a class="idx-item" href="#par-7-9">7&times;9</a><a class="idx-item" href="#par-8-8">8&times;8</a><a class="idx-item" href="#par-8-9">8&times;9</a><a class="idx-item" href="#par-9-9">9&times;9</a>
+  </div>
+  <article class="entrada" id="par-1-1">
+  <div class="entrada-header" onclick="toggleEntry(this)">
+    <span class="par-num">1&times;1</span>
+    <div class="par-info">
+      <h3 class="entrada-titulo">Dos Líderes — Tensión Creativa</h3>
+      <div class="par-scores">
+        <span class="score-mini" style="color:#E9A84B">&#x1F491; 62%</span>
+        <span class="score-mini" style="color:#E9A84B">&#x1F91D; 58%</span>
+      </div>
+    </div>
+    <span class="toggle-arrow">&#x25BC;</span>
+  </div>
+  <div class="entrada-body">
+    <div class="score-bars">
+      <div class="score-bar-row">
+        <span class="sb-label">Pareja</span>
+        <div class="sb-track"><div class="sb-fill" style="width:62%;background:#E9A84B"></div></div>
+        <span class="sb-val" style="color:#E9A84B">62%</span>
+      </div>
+      <div class="score-bar-row">
+        <span class="sb-label">Negocios</span>
+        <div class="sb-track"><div class="sb-fill" style="width:58%;background:#E9A84B"></div></div>
+        <span class="sb-val" style="color:#E9A84B">58%</span>
+      </div>
+    </div>
+    <div class="desc-tabs">
+      <div class="desc-tab-bar">
+        <button class="dtab active" onclick="showTab(this,'pareja','1-1')">Pareja</button>
+        <button class="dtab" onclick="showTab(this,'negocios','1-1')">Negocios</button>
+      </div>
+      <div class="desc-content" id="tab-pareja-1-1">
+        <p class="desc-text">Dos número 1 juntos crean una relación de alta intensidad y gran pasión, pero también de frecuentes choques de ego. Ambos quieren liderar, ambos tienen visión propia y ambos tienen dificultad para ceder. Cuando aprenden a turnarse — uno lidera este proyecto, el otro el siguiente — la relación se vuelve una sociedad de pioneros imparable.</p>
+      </div>
+      <div class="desc-content hidden" id="tab-negocios-1-1">
+        <p class="desc-text">Como socios de negocios, dos 1 pueden construir algo extraordinario si definen territorios claros desde el inicio. El problema surge cuando ambos quieren la última palabra en todo. La solución es la especialización: cada uno manda en su área sin interferencia del otro.</p>
+      </div>
+    </div>
+    <div class="dinamica-box"><span class="din-label">Dinamica:</span> Competitiva y estimulante. El riesgo es la lucha de poder constante.</div>
+    <div class="consejo-box"><span class="con-label">Consejo:</span> Definan reglas claras sobre quién decide qué. La admiración mutua es el pegamento — cultívenla conscientemente.</div>
+  </div>
+</article>
+<article class="entrada" id="par-1-2">
+  <div class="entrada-header" onclick="toggleEntry(this)">
+    <span class="par-num">1&times;2</span>
+    <div class="par-info">
+      <h3 class="entrada-titulo">El Líder y el Mediador — Complemento Natural</h3>
+      <div class="par-scores">
+        <span class="score-mini" style="color:#b0e870">&#x1F491; 78%</span>
+        <span class="score-mini" style="color:#4BE9B9">&#x1F91D; 82%</span>
+      </div>
+    </div>
+    <span class="toggle-arrow">&#x25BC;</span>
+  </div>
+  <div class="entrada-body">
+    <div class="score-bars">
+      <div class="score-bar-row">
+        <span class="sb-label">Pareja</span>
+        <div class="sb-track"><div class="sb-fill" style="width:78%;background:#b0e870"></div></div>
+        <span class="sb-val" style="color:#b0e870">78%</span>
+      </div>
+      <div class="score-bar-row">
+        <span class="sb-label">Negocios</span>
+        <div class="sb-track"><div class="sb-fill" style="width:82%;background:#4BE9B9"></div></div>
+        <span class="sb-val" style="color:#4BE9B9">82%</span>
+      </div>
+    </div>
+    <div class="desc-tabs">
+      <div class="desc-tab-bar">
+        <button class="dtab active" onclick="showTab(this,'pareja','1-2')">Pareja</button>
+        <button class="dtab" onclick="showTab(this,'negocios','1-2')">Negocios</button>
+      </div>
+      <div class="desc-content" id="tab-pareja-1-2">
+        <p class="desc-text">Una de las combinaciones más equilibradas del sistema. El 1 aporta dirección y coraje; el 2 aporta sensibilidad y la capacidad de suavizar los bordes duros del 1. El 2 necesita sentirse escuchado y el 1 necesita ser admirado — cuando ambos se dan lo que el otro necesita, la relación florece con naturalidad.</p>
+      </div>
+      <div class="desc-content hidden" id="tab-negocios-1-2">
+        <p class="desc-text">Combinación clásica de emprendedor y socio estratégico. El 1 abre puertas, inicia y vende; el 2 cuida las relaciones, negocia con fineza y mantiene la cohesión del equipo. Los negocios construidos por este dúo suelen ser sólidos porque tienen tanto impulso como diplomacia.</p>
+      </div>
+    </div>
+    <div class="dinamica-box"><span class="din-label">Dinamica:</span> El 1 lidera, el 2 apoya — pero el 2 necesita reconocimiento real, no solo un rol secundario.</div>
+    <div class="consejo-box"><span class="con-label">Consejo:</span> 1: escucha más de lo que hablas con tu 2. 2: expresa tus necesidades directamente, sin esperar que adivinen.</div>
+  </div>
+</article>
+<article class="entrada" id="par-1-3">
+  <div class="entrada-header" onclick="toggleEntry(this)">
+    <span class="par-num">1&times;3</span>
+    <div class="par-info">
+      <h3 class="entrada-titulo">El Iniciador y el Creador — Energía Expansiva</h3>
+      <div class="par-scores">
+        <span class="score-mini" style="color:#4BE9B9">&#x1F491; 85%</span>
+        <span class="score-mini" style="color:#4BE9B9">&#x1F91D; 88%</span>
+      </div>
+    </div>
+    <span class="toggle-arrow">&#x25BC;</span>
+  </div>
+  <div class="entrada-body">
+    <div class="score-bars">
+      <div class="score-bar-row">
+        <span class="sb-label">Pareja</span>
+        <div class="sb-track"><div class="sb-fill" style="width:85%;background:#4BE9B9"></div></div>
+        <span class="sb-val" style="color:#4BE9B9">85%</span>
+      </div>
+      <div class="score-bar-row">
+        <span class="sb-label">Negocios</span>
+        <div class="sb-track"><div class="sb-fill" style="width:88%;background:#4BE9B9"></div></div>
+        <span class="sb-val" style="color:#4BE9B9">88%</span>
+      </div>
+    </div>
+    <div class="desc-tabs">
+      <div class="desc-tab-bar">
+        <button class="dtab active" onclick="showTab(this,'pareja','1-3')">Pareja</button>
+        <button class="dtab" onclick="showTab(this,'negocios','1-3')">Negocios</button>
+      </div>
+      <div class="desc-content" id="tab-pareja-1-3">
+        <p class="desc-text">Combinación de alta vibración y mucha alegría. Ambos son enérgicos, optimistas y aman la vida. El 1 da dirección y el 3 da color, creatividad y humor. Juntos pueden construir una vida llena de aventuras, proyectos compartidos y una química que otros envidian.</p>
+      </div>
+      <div class="desc-content hidden" id="tab-negocios-1-3">
+        <p class="desc-text">Excelentes socios para negocios creativos, comunicación, marketing y entretenimiento. El 1 abre el camino y el 3 lo hace brillante. El riesgo es que ambos son mejores comenzando que terminando — necesitan a alguien (o un sistema) que los mantenga en los detalles.</p>
+      </div>
+    </div>
+    <div class="dinamica-box"><span class="din-label">Dinamica:</span> Expansiva, divertida y llena de proyectos. El riesgo es la dispersión.</div>
+    <div class="consejo-box"><span class="con-label">Consejo:</span> Creen sistemas de seguimiento. Su mayor riesgo no es la falta de ideas sino la falta de terminación.</div>
+  </div>
+</article>
+<article class="entrada" id="par-1-4">
+  <div class="entrada-header" onclick="toggleEntry(this)">
+    <span class="par-num">1&times;4</span>
+    <div class="par-info">
+      <h3 class="entrada-titulo">El Visionario y el Constructor — Sociedad Ideal</h3>
+      <div class="par-scores">
+        <span class="score-mini" style="color:#b0e870">&#x1F491; 65%</span>
+        <span class="score-mini" style="color:#4BE9B9">&#x1F91D; 88%</span>
+      </div>
+    </div>
+    <span class="toggle-arrow">&#x25BC;</span>
+  </div>
+  <div class="entrada-body">
+    <div class="score-bars">
+      <div class="score-bar-row">
+        <span class="sb-label">Pareja</span>
+        <div class="sb-track"><div class="sb-fill" style="width:65%;background:#b0e870"></div></div>
+        <span class="sb-val" style="color:#b0e870">65%</span>
+      </div>
+      <div class="score-bar-row">
+        <span class="sb-label">Negocios</span>
+        <div class="sb-track"><div class="sb-fill" style="width:88%;background:#4BE9B9"></div></div>
+        <span class="sb-val" style="color:#4BE9B9">88%</span>
+      </div>
+    </div>
+    <div class="desc-tabs">
+      <div class="desc-tab-bar">
+        <button class="dtab active" onclick="showTab(this,'pareja','1-4')">Pareja</button>
+        <button class="dtab" onclick="showTab(this,'negocios','1-4')">Negocios</button>
+      </div>
+      <div class="desc-content" id="tab-pareja-1-4">
+        <p class="desc-text">En pareja, la tensión es real: el 1 quiere velocidad y novedad; el 4 quiere estabilidad y método. Pueden ser muy complementarios si el 1 respeta el ritmo del 4 y el 4 aprende a moverse un poco más rápido. La admiración mutua es posible — el 1 admira la solidez del 4, el 4 admira el coraje del 1.</p>
+      </div>
+      <div class="desc-content hidden" id="tab-negocios-1-4">
+        <p class="desc-text">Una de las mejores combinaciones de negocios del sistema. El 1 tiene la visión y la audacia para abrir mercados; el 4 tiene la disciplina y el método para construir la estructura que sostiene esa visión. Juntos crean empresas que duran.</p>
+      </div>
+    </div>
+    <div class="dinamica-box"><span class="din-label">Dinamica:</span> Tensión productiva. Mundos distintos que se necesitan mutuamente.</div>
+    <div class="consejo-box"><span class="con-label">Consejo:</span> 1: respeta los plazos y la metodología del 4. 4: confía en el instinto del 1 aunque no tenga toda la evidencia.</div>
+  </div>
+</article>
+<article class="entrada" id="par-1-5">
+  <div class="entrada-header" onclick="toggleEntry(this)">
+    <span class="par-num">1&times;5</span>
+    <div class="par-info">
+      <h3 class="entrada-titulo">Dos Energías Libres — Aventura y Caos</h3>
+      <div class="par-scores">
+        <span class="score-mini" style="color:#b0e870">&#x1F491; 72%</span>
+        <span class="score-mini" style="color:#b0e870">&#x1F91D; 75%</span>
+      </div>
+    </div>
+    <span class="toggle-arrow">&#x25BC;</span>
+  </div>
+  <div class="entrada-body">
+    <div class="score-bars">
+      <div class="score-bar-row">
+        <span class="sb-label">Pareja</span>
+        <div class="sb-track"><div class="sb-fill" style="width:72%;background:#b0e870"></div></div>
+        <span class="sb-val" style="color:#b0e870">72%</span>
+      </div>
+      <div class="score-bar-row">
+        <span class="sb-label">Negocios</span>
+        <div class="sb-track"><div class="sb-fill" style="width:75%;background:#b0e870"></div></div>
+        <span class="sb-val" style="color:#b0e870">75%</span>
+      </div>
+    </div>
+    <div class="desc-tabs">
+      <div class="desc-tab-bar">
+        <button class="dtab active" onclick="showTab(this,'pareja','1-5')">Pareja</button>
+        <button class="dtab" onclick="showTab(this,'negocios','1-5')">Negocios</button>
+      </div>
+      <div class="desc-content" id="tab-pareja-1-5">
+        <p class="desc-text">Relación emocionante, impredecible y llena de vida. Ambos aman la libertad y detestan la rutina. Pueden tener una relación brillante si ambos han madurado lo suficiente para comprometerse sin sentirse encadenados. El riesgo: nadie ancla el barco.</p>
+      </div>
+      <div class="desc-content hidden" id="tab-negocios-1-5">
+        <p class="desc-text">Buenos para negocios de rápido movimiento, ventas, exploración de mercados nuevos. El problema: ninguno de los dos quiere los detalles. Necesitan un tercer elemento — una persona o un sistema — que lleve la administración.</p>
+      </div>
+    </div>
+    <div class="dinamica-box"><span class="din-label">Dinamica:</span> Libertad y movimiento constante. Estimulante pero inestable si no hay anclaje.</div>
+    <div class="consejo-box"><span class="con-label">Consejo:</span> Contraten a alguien metódico para lo que ninguno de los dos quiere hacer. Esa persona es el pegamento de su sociedad.</div>
+  </div>
+</article>
+<article class="entrada" id="par-1-6">
+  <div class="entrada-header" onclick="toggleEntry(this)">
+    <span class="par-num">1&times;6</span>
+    <div class="par-info">
+      <h3 class="entrada-titulo">El Líder y el Cuidador — Calor y Dirección</h3>
+      <div class="par-scores">
+        <span class="score-mini" style="color:#4BE9B9">&#x1F491; 80%</span>
+        <span class="score-mini" style="color:#b0e870">&#x1F91D; 72%</span>
+      </div>
+    </div>
+    <span class="toggle-arrow">&#x25BC;</span>
+  </div>
+  <div class="entrada-body">
+    <div class="score-bars">
+      <div class="score-bar-row">
+        <span class="sb-label">Pareja</span>
+        <div class="sb-track"><div class="sb-fill" style="width:80%;background:#4BE9B9"></div></div>
+        <span class="sb-val" style="color:#4BE9B9">80%</span>
+      </div>
+      <div class="score-bar-row">
+        <span class="sb-label">Negocios</span>
+        <div class="sb-track"><div class="sb-fill" style="width:72%;background:#b0e870"></div></div>
+        <span class="sb-val" style="color:#b0e870">72%</span>
+      </div>
+    </div>
+    <div class="desc-tabs">
+      <div class="desc-tab-bar">
+        <button class="dtab active" onclick="showTab(this,'pareja','1-6')">Pareja</button>
+        <button class="dtab" onclick="showTab(this,'negocios','1-6')">Negocios</button>
+      </div>
+      <div class="desc-content" id="tab-pareja-1-6">
+        <p class="desc-text">El 6 da al 1 lo que más necesita: un hogar cálido, apoyo genuino y alguien que cuide los detalles relacionales. El 1 da al 6 dirección, protección y la seguridad de que alguien tiene el timón. Funciona muy bien cuando el 1 aprende a cuidar también.</p>
+      </div>
+      <div class="desc-content hidden" id="tab-negocios-1-6">
+        <p class="desc-text">El 1 lidera externamente; el 6 cuida el equipo y las relaciones. Buenos para negocios de servicios, salud, educación o cualquier empresa donde la cultura organizacional sea clave. El 6 es el que hace que la gente quiera quedarse.</p>
+      </div>
+    </div>
+    <div class="dinamica-box"><span class="din-label">Dinamica:</span> El 1 lleva la visión, el 6 cuida a las personas. Complemento real.</div>
+    <div class="consejo-box"><span class="con-label">Consejo:</span> 1: muestra gratitud concreta, no solo en palabras. 6: expresa tus necesidades antes de agotarte.</div>
+  </div>
+</article>
+<article class="entrada" id="par-1-7">
+  <div class="entrada-header" onclick="toggleEntry(this)">
+    <span class="par-num">1&times;7</span>
+    <div class="par-info">
+      <h3 class="entrada-titulo">El Extrovertido y el Filósofo — Mundos Distintos</h3>
+      <div class="par-scores">
+        <span class="score-mini" style="color:#E9A84B">&#x1F491; 60%</span>
+        <span class="score-mini" style="color:#b0e870">&#x1F91D; 70%</span>
+      </div>
+    </div>
+    <span class="toggle-arrow">&#x25BC;</span>
+  </div>
+  <div class="entrada-body">
+    <div class="score-bars">
+      <div class="score-bar-row">
+        <span class="sb-label">Pareja</span>
+        <div class="sb-track"><div class="sb-fill" style="width:60%;background:#E9A84B"></div></div>
+        <span class="sb-val" style="color:#E9A84B">60%</span>
+      </div>
+      <div class="score-bar-row">
+        <span class="sb-label">Negocios</span>
+        <div class="sb-track"><div class="sb-fill" style="width:70%;background:#b0e870"></div></div>
+        <span class="sb-val" style="color:#b0e870">70%</span>
+      </div>
+    </div>
+    <div class="desc-tabs">
+      <div class="desc-tab-bar">
+        <button class="dtab active" onclick="showTab(this,'pareja','1-7')">Pareja</button>
+        <button class="dtab" onclick="showTab(this,'negocios','1-7')">Negocios</button>
+      </div>
+      <div class="desc-content" id="tab-pareja-1-7">
+        <p class="desc-text">Combinación desafiante pero profundamente enriquecedora para los que la atraviesan. El 1 quiere acción y reconocimiento; el 7 quiere profundidad y silencio. Cuando el 1 aprende a valorar la sabiduría del 7 y el 7 aprende a salir de su cueva para el 1, crean algo inusualmente rico.</p>
+      </div>
+      <div class="desc-content hidden" id="tab-negocios-1-7">
+        <p class="desc-text">El 1 es la cara del negocio; el 7 es el cerebro que diseña la estrategia desde atrás. Buenos para consultoría, investigación, tecnología o cualquier campo donde la profundidad de análisis y la capacidad de venta coexistan.</p>
+      </div>
+    </div>
+    <div class="dinamica-box"><span class="din-label">Dinamica:</span> Polos opuestos que se atraen. La tensión es intelectual y enriquecedora.</div>
+    <div class="consejo-box"><span class="con-label">Consejo:</span> 1: dale espacio al 7 — no lo interpretes como rechazo. 7: comunica lo que piensas antes de que el 1 actúe sin tu input.</div>
+  </div>
+</article>
+<article class="entrada" id="par-1-8">
+  <div class="entrada-header" onclick="toggleEntry(this)">
+    <span class="par-num">1&times;8</span>
+    <div class="par-info">
+      <h3 class="entrada-titulo">Poder al Cuadrado — Sociedad de Alto Impacto</h3>
+      <div class="par-scores">
+        <span class="score-mini" style="color:#b0e870">&#x1F491; 70%</span>
+        <span class="score-mini" style="color:#4BE9B9">&#x1F91D; 92%</span>
+      </div>
+    </div>
+    <span class="toggle-arrow">&#x25BC;</span>
+  </div>
+  <div class="entrada-body">
+    <div class="score-bars">
+      <div class="score-bar-row">
+        <span class="sb-label">Pareja</span>
+        <div class="sb-track"><div class="sb-fill" style="width:70%;background:#b0e870"></div></div>
+        <span class="sb-val" style="color:#b0e870">70%</span>
+      </div>
+      <div class="score-bar-row">
+        <span class="sb-label">Negocios</span>
+        <div class="sb-track"><div class="sb-fill" style="width:92%;background:#4BE9B9"></div></div>
+        <span class="sb-val" style="color:#4BE9B9">92%</span>
+      </div>
+    </div>
+    <div class="desc-tabs">
+      <div class="desc-tab-bar">
+        <button class="dtab active" onclick="showTab(this,'pareja','1-8')">Pareja</button>
+        <button class="dtab" onclick="showTab(this,'negocios','1-8')">Negocios</button>
+      </div>
+      <div class="desc-content" id="tab-pareja-1-8">
+        <p class="desc-text">Dos personas de gran fuerza que pueden construir una vida extraordinaria o destruirse mutuamente. El 1 quiere ser primero; el 8 quiere ser el más poderoso — la tensión de egos es real. Cuando canalizan esa energía hacia objetivos compartidos, son imparables.</p>
+      </div>
+      <div class="desc-content hidden" id="tab-negocios-1-8">
+        <p class="desc-text">Una de las mejores combinaciones de negocios del sistema. El 1 abre y lidera; el 8 estructura y multiplica los recursos. Juntos pueden construir imperios. El riesgo: conflictos de autoridad que hay que resolver con reglas claras desde el inicio.</p>
+      </div>
+    </div>
+    <div class="dinamica-box"><span class="din-label">Dinamica:</span> Alta energía, alto impacto, alta tensión potencial. Se necesita madurez de ambos.</div>
+    <div class="consejo-box"><span class="con-label">Consejo:</span> En negocios: define quién es CEO y quién es CFO desde el día 1. En pareja: el respeto mutuo no es opcional — es la base.</div>
+  </div>
+</article>
+<article class="entrada" id="par-1-9">
+  <div class="entrada-header" onclick="toggleEntry(this)">
+    <span class="par-num">1&times;9</span>
+    <div class="par-info">
+      <h3 class="entrada-titulo">El Pionero y el Humanista — Misión Compartida</h3>
+      <div class="par-scores">
+        <span class="score-mini" style="color:#b0e870">&#x1F491; 75%</span>
+        <span class="score-mini" style="color:#b0e870">&#x1F91D; 78%</span>
+      </div>
+    </div>
+    <span class="toggle-arrow">&#x25BC;</span>
+  </div>
+  <div class="entrada-body">
+    <div class="score-bars">
+      <div class="score-bar-row">
+        <span class="sb-label">Pareja</span>
+        <div class="sb-track"><div class="sb-fill" style="width:75%;background:#b0e870"></div></div>
+        <span class="sb-val" style="color:#b0e870">75%</span>
+      </div>
+      <div class="score-bar-row">
+        <span class="sb-label">Negocios</span>
+        <div class="sb-track"><div class="sb-fill" style="width:78%;background:#b0e870"></div></div>
+        <span class="sb-val" style="color:#b0e870">78%</span>
+      </div>
+    </div>
+    <div class="desc-tabs">
+      <div class="desc-tab-bar">
+        <button class="dtab active" onclick="showTab(this,'pareja','1-9')">Pareja</button>
+        <button class="dtab" onclick="showTab(this,'negocios','1-9')">Negocios</button>
+      </div>
+      <div class="desc-content" id="tab-pareja-1-9">
+        <p class="desc-text">Relación con potencial de gran profundidad. El 1 aporta dirección y el 9 aporta sabiduría y compasión. El 9 puede volverse el maestro silencioso del 1, enseñándole que la fuerza sin amor es solo poder. El 1 puede enseñarle al 9 a actuar en lugar de solo contemplar.</p>
+      </div>
+      <div class="desc-content hidden" id="tab-negocios-1-9">
+        <p class="desc-text">Excelentes para negocios con propósito social, educación, salud o cualquier empresa orientada a un bien mayor. El 1 ejecuta y el 9 aporta la visión de impacto. La combinación de acción y sabiduría es muy poderosa.</p>
+      </div>
+    </div>
+    <div class="dinamica-box"><span class="din-label">Dinamica:</span> El iniciador y el completador. Se complementan en el ciclo completo de la acción.</div>
+    <div class="consejo-box"><span class="con-label">Consejo:</span> Construyan algo que importe más allá de ustedes. Su mejor versión aparece cuando tienen una misión compartida.</div>
+  </div>
+</article>
+<article class="entrada" id="par-2-2">
+  <div class="entrada-header" onclick="toggleEntry(this)">
+    <span class="par-num">2&times;2</span>
+    <div class="par-info">
+      <h3 class="entrada-titulo">Dos Corazones — Profundidad Emocional</h3>
+      <div class="par-scores">
+        <span class="score-mini" style="color:#4BE9B9">&#x1F491; 80%</span>
+        <span class="score-mini" style="color:#E9A84B">&#x1F91D; 55%</span>
+      </div>
+    </div>
+    <span class="toggle-arrow">&#x25BC;</span>
+  </div>
+  <div class="entrada-body">
+    <div class="score-bars">
+      <div class="score-bar-row">
+        <span class="sb-label">Pareja</span>
+        <div class="sb-track"><div class="sb-fill" style="width:80%;background:#4BE9B9"></div></div>
+        <span class="sb-val" style="color:#4BE9B9">80%</span>
+      </div>
+      <div class="score-bar-row">
+        <span class="sb-label">Negocios</span>
+        <div class="sb-track"><div class="sb-fill" style="width:55%;background:#E9A84B"></div></div>
+        <span class="sb-val" style="color:#E9A84B">55%</span>
+      </div>
+    </div>
+    <div class="desc-tabs">
+      <div class="desc-tab-bar">
+        <button class="dtab active" onclick="showTab(this,'pareja','2-2')">Pareja</button>
+        <button class="dtab" onclick="showTab(this,'negocios','2-2')">Negocios</button>
+      </div>
+      <div class="desc-content" id="tab-pareja-2-2">
+        <p class="desc-text">Una relación de gran ternura, empatía mutua y comprensión profunda. Dos 2 se entienden sin necesitar explicar demasiado. El riesgo: ambos son tan sensibles que los conflictos pueden paralizarlos a los dos. Nadie quiere herir al otro y nadie quiere decir verdades difíciles.</p>
+      </div>
+      <div class="desc-content hidden" id="tab-negocios-2-2">
+        <p class="desc-text">Funcionan bien en entornos colaborativos y de servicio. El problema: ninguno quiere tomar decisiones duras. En un negocio necesitan alguien (interno o externo) que funcione como figura de autoridad cuando hay que elegir.</p>
+      </div>
+    </div>
+    <div class="dinamica-box"><span class="din-label">Dinamica:</span> Armoniosa y empática. El exceso de sensibilidad puede paralizar la toma de decisiones.</div>
+    <div class="consejo-box"><span class="con-label">Consejo:</span> Practiquen la honestidad radical con amabilidad. Las verdades no dichas se convierten en resentimientos acumulados.</div>
+  </div>
+</article>
+<article class="entrada" id="par-2-3">
+  <div class="entrada-header" onclick="toggleEntry(this)">
+    <span class="par-num">2&times;3</span>
+    <div class="par-info">
+      <h3 class="entrada-titulo">El Corazón y el Artista — Alegría Nutrida</h3>
+      <div class="par-scores">
+        <span class="score-mini" style="color:#4BE9B9">&#x1F491; 82%</span>
+        <span class="score-mini" style="color:#b0e870">&#x1F91D; 78%</span>
+      </div>
+    </div>
+    <span class="toggle-arrow">&#x25BC;</span>
+  </div>
+  <div class="entrada-body">
+    <div class="score-bars">
+      <div class="score-bar-row">
+        <span class="sb-label">Pareja</span>
+        <div class="sb-track"><div class="sb-fill" style="width:82%;background:#4BE9B9"></div></div>
+        <span class="sb-val" style="color:#4BE9B9">82%</span>
+      </div>
+      <div class="score-bar-row">
+        <span class="sb-label">Negocios</span>
+        <div class="sb-track"><div class="sb-fill" style="width:78%;background:#b0e870"></div></div>
+        <span class="sb-val" style="color:#b0e870">78%</span>
+      </div>
+    </div>
+    <div class="desc-tabs">
+      <div class="desc-tab-bar">
+        <button class="dtab active" onclick="showTab(this,'pareja','2-3')">Pareja</button>
+        <button class="dtab" onclick="showTab(this,'negocios','2-3')">Negocios</button>
+      </div>
+      <div class="desc-content" id="tab-pareja-2-3">
+        <p class="desc-text">El 3 ilumina la vida del 2 y el 2 nutre el mundo emocional del 3. El 3 da alegría, creatividad y entusiasmo; el 2 da profundidad, cuidado y el espacio para que el 3 se exprese completamente. Una de las combinaciones más felices para la vida cotidiana.</p>
+      </div>
+      <div class="desc-content hidden" id="tab-negocios-2-3">
+        <p class="desc-text">Perfectos para negocios creativos, comunicación, entretenimiento o cualquier industria donde la expresión y las relaciones sean centrales. El 2 cuida a los clientes; el 3 los encanta.</p>
+      </div>
+    </div>
+    <div class="dinamica-box"><span class="din-label">Dinamica:</span> Cálida, creativa y mutuamente nutritiva.</div>
+    <div class="consejo-box"><span class="con-label">Consejo:</span> 3: muestra gratitud explícita al 2 — necesita saber que lo que da importa. 2: dale libertad creativa al 3 sin controlarlo.</div>
+  </div>
+</article>
+<article class="entrada" id="par-2-4">
+  <div class="entrada-header" onclick="toggleEntry(this)">
+    <span class="par-num">2&times;4</span>
+    <div class="par-info">
+      <h3 class="entrada-titulo">El Cuidador y el Constructor — Hogar Sólido</h3>
+      <div class="par-scores">
+        <span class="score-mini" style="color:#4BE9B9">&#x1F491; 85%</span>
+        <span class="score-mini" style="color:#4BE9B9">&#x1F91D; 80%</span>
+      </div>
+    </div>
+    <span class="toggle-arrow">&#x25BC;</span>
+  </div>
+  <div class="entrada-body">
+    <div class="score-bars">
+      <div class="score-bar-row">
+        <span class="sb-label">Pareja</span>
+        <div class="sb-track"><div class="sb-fill" style="width:85%;background:#4BE9B9"></div></div>
+        <span class="sb-val" style="color:#4BE9B9">85%</span>
+      </div>
+      <div class="score-bar-row">
+        <span class="sb-label">Negocios</span>
+        <div class="sb-track"><div class="sb-fill" style="width:80%;background:#4BE9B9"></div></div>
+        <span class="sb-val" style="color:#4BE9B9">80%</span>
+      </div>
+    </div>
+    <div class="desc-tabs">
+      <div class="desc-tab-bar">
+        <button class="dtab active" onclick="showTab(this,'pareja','2-4')">Pareja</button>
+        <button class="dtab" onclick="showTab(this,'negocios','2-4')">Negocios</button>
+      </div>
+      <div class="desc-content" id="tab-pareja-2-4">
+        <p class="desc-text">Una de las combinaciones más estables y nutritivas. El 4 da la estructura y la seguridad que el 2 necesita; el 2 da el calor emocional que el 4 raramente se permite buscar. Juntos construyen hogares donde todos quieren estar.</p>
+      </div>
+      <div class="desc-content hidden" id="tab-negocios-2-4">
+        <p class="desc-text">El 2 cuida las relaciones y el 4 cuida los sistemas. Excelentes para negocios que requieren tanto solidez estructural como atención al cliente. Construyen despacio pero lo que construyen dura.</p>
+      </div>
+    </div>
+    <div class="dinamica-box"><span class="din-label">Dinamica:</span> Sólida, cálida y duradera. Uno de los dúos más confiables del sistema.</div>
+    <div class="consejo-box"><span class="con-label">Consejo:</span> 4: expresa afecto en el lenguaje del 2, no solo con hechos. 2: respeta el ritmo metódico del 4 sin interpretarlo como frialdad.</div>
+  </div>
+</article>
+<article class="entrada" id="par-2-5">
+  <div class="entrada-header" onclick="toggleEntry(this)">
+    <span class="par-num">2&times;5</span>
+    <div class="par-info">
+      <h3 class="entrada-titulo">La Sensibilidad y la Libertad — Tensión de Ritmos</h3>
+      <div class="par-scores">
+        <span class="score-mini" style="color:#E9A84B">&#x1F491; 60%</span>
+        <span class="score-mini" style="color:#b0e870">&#x1F91D; 65%</span>
+      </div>
+    </div>
+    <span class="toggle-arrow">&#x25BC;</span>
+  </div>
+  <div class="entrada-body">
+    <div class="score-bars">
+      <div class="score-bar-row">
+        <span class="sb-label">Pareja</span>
+        <div class="sb-track"><div class="sb-fill" style="width:60%;background:#E9A84B"></div></div>
+        <span class="sb-val" style="color:#E9A84B">60%</span>
+      </div>
+      <div class="score-bar-row">
+        <span class="sb-label">Negocios</span>
+        <div class="sb-track"><div class="sb-fill" style="width:65%;background:#b0e870"></div></div>
+        <span class="sb-val" style="color:#b0e870">65%</span>
+      </div>
+    </div>
+    <div class="desc-tabs">
+      <div class="desc-tab-bar">
+        <button class="dtab active" onclick="showTab(this,'pareja','2-5')">Pareja</button>
+        <button class="dtab" onclick="showTab(this,'negocios','2-5')">Negocios</button>
+      </div>
+      <div class="desc-content" id="tab-pareja-2-5">
+        <p class="desc-text">El 2 necesita estabilidad y cercanía; el 5 necesita libertad y movimiento. Esta tensión puede ser insalvable o el punto de mayor crecimiento de ambos. El 5 aprende a comprometerse; el 2 aprende a soltar el control sobre el otro.</p>
+      </div>
+      <div class="desc-content hidden" id="tab-negocios-2-5">
+        <p class="desc-text">El 5 trae los clientes y las oportunidades; el 2 mantiene las relaciones vivas. Si ambos respetan sus roles sin invadir el del otro, funcionan bien para negocios de ventas y servicio.</p>
+      </div>
+    </div>
+    <div class="dinamica-box"><span class="din-label">Dinamica:</span> Tensión entre necesidad de cercanía y necesidad de libertad.</div>
+    <div class="consejo-box"><span class="con-label">Consejo:</span> 5: la libertad dentro del compromiso es más rica que la libertad sin él. 2: el otro no puede ser tu única fuente de seguridad.</div>
+  </div>
+</article>
+<article class="entrada" id="par-2-6">
+  <div class="entrada-header" onclick="toggleEntry(this)">
+    <span class="par-num">2&times;6</span>
+    <div class="par-info">
+      <h3 class="entrada-titulo">Dos Corazones Abiertos — El Amor como Base</h3>
+      <div class="par-scores">
+        <span class="score-mini" style="color:#4BE9B9">&#x1F491; 88%</span>
+        <span class="score-mini" style="color:#b0e870">&#x1F91D; 75%</span>
+      </div>
+    </div>
+    <span class="toggle-arrow">&#x25BC;</span>
+  </div>
+  <div class="entrada-body">
+    <div class="score-bars">
+      <div class="score-bar-row">
+        <span class="sb-label">Pareja</span>
+        <div class="sb-track"><div class="sb-fill" style="width:88%;background:#4BE9B9"></div></div>
+        <span class="sb-val" style="color:#4BE9B9">88%</span>
+      </div>
+      <div class="score-bar-row">
+        <span class="sb-label">Negocios</span>
+        <div class="sb-track"><div class="sb-fill" style="width:75%;background:#b0e870"></div></div>
+        <span class="sb-val" style="color:#b0e870">75%</span>
+      </div>
+    </div>
+    <div class="desc-tabs">
+      <div class="desc-tab-bar">
+        <button class="dtab active" onclick="showTab(this,'pareja','2-6')">Pareja</button>
+        <button class="dtab" onclick="showTab(this,'negocios','2-6')">Negocios</button>
+      </div>
+      <div class="desc-content" id="tab-pareja-2-6">
+        <p class="desc-text">Una de las combinaciones más amorosas del sistema. Ambos valoran las relaciones, el hogar y el cuidado. El riesgo es que ambos puedan caer en dinámicas de codependencia o en el autosacrificio mutuo. Cuando están sanos, crean el hogar más cálido que existe.</p>
+      </div>
+      <div class="desc-content hidden" id="tab-negocios-2-6">
+        <p class="desc-text">Excelentes para el sector servicios, salud, educación o cualquier negocio orientado al bienestar. Ambos cuidan a los clientes con genuinidad. El riesgo: ninguno quiere tener las conversaciones difíciles de negocios.</p>
+      </div>
+    </div>
+    <div class="dinamica-box"><span class="din-label">Dinamica:</span> Profundamente cariñosa y nutritiva. El riesgo es la codependencia.</div>
+    <div class="consejo-box"><span class="con-label">Consejo:</span> Asegúrense de que cada uno tiene vida propia además de la compartida. El amor que no incluye la autonomía puede asfixiar.</div>
+  </div>
+</article>
+<article class="entrada" id="par-2-7">
+  <div class="entrada-header" onclick="toggleEntry(this)">
+    <span class="par-num">2&times;7</span>
+    <div class="par-info">
+      <h3 class="entrada-titulo">El Corazón y el Filósofo — Profundidades Distintas</h3>
+      <div class="par-scores">
+        <span class="score-mini" style="color:#b0e870">&#x1F491; 72%</span>
+        <span class="score-mini" style="color:#b0e870">&#x1F91D; 68%</span>
+      </div>
+    </div>
+    <span class="toggle-arrow">&#x25BC;</span>
+  </div>
+  <div class="entrada-body">
+    <div class="score-bars">
+      <div class="score-bar-row">
+        <span class="sb-label">Pareja</span>
+        <div class="sb-track"><div class="sb-fill" style="width:72%;background:#b0e870"></div></div>
+        <span class="sb-val" style="color:#b0e870">72%</span>
+      </div>
+      <div class="score-bar-row">
+        <span class="sb-label">Negocios</span>
+        <div class="sb-track"><div class="sb-fill" style="width:68%;background:#b0e870"></div></div>
+        <span class="sb-val" style="color:#b0e870">68%</span>
+      </div>
+    </div>
+    <div class="desc-tabs">
+      <div class="desc-tab-bar">
+        <button class="dtab active" onclick="showTab(this,'pareja','2-7')">Pareja</button>
+        <button class="dtab" onclick="showTab(this,'negocios','2-7')">Negocios</button>
+      </div>
+      <div class="desc-content" id="tab-pareja-2-7">
+        <p class="desc-text">El 7 fascina al 2 con su profundidad; el 2 nutre al 7 con su cuidado. Pero el 7 necesita soledad y el 2 necesita cercanía — la negociación de este equilibrio es permanente. Cuando lo logran, tienen una de las relaciones más intelectualmente y emocionalmente ricas.</p>
+      </div>
+      <div class="desc-content hidden" id="tab-negocios-2-7">
+        <p class="desc-text">El 7 diseña la estrategia desde la profundidad del análisis; el 2 la ejecuta cuidando las relaciones. Buenos para consultoría, investigación y servicios especializados.</p>
+      </div>
+    </div>
+    <div class="dinamica-box"><span class="din-label">Dinamica:</span> Profunda y un poco solitaria para el 2. El 7 necesita espacio que el 2 puede malinterpretar.</div>
+    <div class="consejo-box"><span class="con-label">Consejo:</span> 7: explica tu necesidad de soledad — no la des por obvia. 2: la distancia del 7 no es rechazo, es su forma de cargar energía.</div>
+  </div>
+</article>
+<article class="entrada" id="par-2-8">
+  <div class="entrada-header" onclick="toggleEntry(this)">
+    <span class="par-num">2&times;8</span>
+    <div class="par-info">
+      <h3 class="entrada-titulo">El Corazón y el Poder — Aprendizaje Mutuo</h3>
+      <div class="par-scores">
+        <span class="score-mini" style="color:#b0e870">&#x1F491; 68%</span>
+        <span class="score-mini" style="color:#4BE9B9">&#x1F91D; 80%</span>
+      </div>
+    </div>
+    <span class="toggle-arrow">&#x25BC;</span>
+  </div>
+  <div class="entrada-body">
+    <div class="score-bars">
+      <div class="score-bar-row">
+        <span class="sb-label">Pareja</span>
+        <div class="sb-track"><div class="sb-fill" style="width:68%;background:#b0e870"></div></div>
+        <span class="sb-val" style="color:#b0e870">68%</span>
+      </div>
+      <div class="score-bar-row">
+        <span class="sb-label">Negocios</span>
+        <div class="sb-track"><div class="sb-fill" style="width:80%;background:#4BE9B9"></div></div>
+        <span class="sb-val" style="color:#4BE9B9">80%</span>
+      </div>
+    </div>
+    <div class="desc-tabs">
+      <div class="desc-tab-bar">
+        <button class="dtab active" onclick="showTab(this,'pareja','2-8')">Pareja</button>
+        <button class="dtab" onclick="showTab(this,'negocios','2-8')">Negocios</button>
+      </div>
+      <div class="desc-content" id="tab-pareja-2-8">
+        <p class="desc-text">El 8 puede darle al 2 la seguridad material y la protección que necesita. El 2 puede enseñarle al 8 que el poder sin amor es solo dominación. Funcionan cuando el 8 aprende a suavizarse y el 2 aprende a reclamar su lugar sin ceder siempre.</p>
+      </div>
+      <div class="desc-content hidden" id="tab-negocios-2-8">
+        <p class="desc-text">El 8 pone el poder de manifestación; el 2 pone la inteligencia relacional. Combinación efectiva para negocios que necesitan tanto fortaleza financiera como habilidad diplomática.</p>
+      </div>
+    </div>
+    <div class="dinamica-box"><span class="din-label">Dinamica:</span> El poderoso y el sensible. Se complementan cuando hay respeto mutuo.</div>
+    <div class="consejo-box"><span class="con-label">Consejo:</span> 8: el 2 no es débil por ser sensible — esa es su fuerza. 2: aprende a negociar desde tu valor, no desde el miedo a perder.</div>
+  </div>
+</article>
+<article class="entrada" id="par-2-9">
+  <div class="entrada-header" onclick="toggleEntry(this)">
+    <span class="par-num">2&times;9</span>
+    <div class="par-info">
+      <h3 class="entrada-titulo">El Mediador y el Humanista — Amor Universal</h3>
+      <div class="par-scores">
+        <span class="score-mini" style="color:#4BE9B9">&#x1F491; 86%</span>
+        <span class="score-mini" style="color:#b0e870">&#x1F91D; 76%</span>
+      </div>
+    </div>
+    <span class="toggle-arrow">&#x25BC;</span>
+  </div>
+  <div class="entrada-body">
+    <div class="score-bars">
+      <div class="score-bar-row">
+        <span class="sb-label">Pareja</span>
+        <div class="sb-track"><div class="sb-fill" style="width:86%;background:#4BE9B9"></div></div>
+        <span class="sb-val" style="color:#4BE9B9">86%</span>
+      </div>
+      <div class="score-bar-row">
+        <span class="sb-label">Negocios</span>
+        <div class="sb-track"><div class="sb-fill" style="width:76%;background:#b0e870"></div></div>
+        <span class="sb-val" style="color:#b0e870">76%</span>
+      </div>
+    </div>
+    <div class="desc-tabs">
+      <div class="desc-tab-bar">
+        <button class="dtab active" onclick="showTab(this,'pareja','2-9')">Pareja</button>
+        <button class="dtab" onclick="showTab(this,'negocios','2-9')">Negocios</button>
+      </div>
+      <div class="desc-content" id="tab-pareja-2-9">
+        <p class="desc-text">Combinación de gran compasión y entendimiento mutuo. Ambos ponen a los demás primero — el reto es aprender a ponerse también a sí mismos. Tienen una profundidad emocional compartida que les permite entenderse en silencio.</p>
+      </div>
+      <div class="desc-content hidden" id="tab-negocios-2-9">
+        <p class="desc-text">Extraordinarios para negocios con propósito social, ONG, salud, educación o consultoría de desarrollo humano. La combinación de empatía del 2 y sabiduría del 9 produce organizaciones que la gente quiere apoyar.</p>
+      </div>
+    </div>
+    <div class="dinamica-box"><span class="din-label">Dinamica:</span> Profundamente empática y orientada al servicio. El riesgo es olvidarse de sí mismos.</div>
+    <div class="consejo-box"><span class="con-label">Consejo:</span> Pongan sus propias necesidades en la lista de prioridades — no al final sino al menos a la mitad.</div>
+  </div>
+</article>
+<article class="entrada" id="par-3-3">
+  <div class="entrada-header" onclick="toggleEntry(this)">
+    <span class="par-num">3&times;3</span>
+    <div class="par-info">
+      <h3 class="entrada-titulo">Doble Creatividad — Fiesta y Caos</h3>
+      <div class="par-scores">
+        <span class="score-mini" style="color:#b0e870">&#x1F491; 78%</span>
+        <span class="score-mini" style="color:#b0e870">&#x1F91D; 65%</span>
+      </div>
+    </div>
+    <span class="toggle-arrow">&#x25BC;</span>
+  </div>
+  <div class="entrada-body">
+    <div class="score-bars">
+      <div class="score-bar-row">
+        <span class="sb-label">Pareja</span>
+        <div class="sb-track"><div class="sb-fill" style="width:78%;background:#b0e870"></div></div>
+        <span class="sb-val" style="color:#b0e870">78%</span>
+      </div>
+      <div class="score-bar-row">
+        <span class="sb-label">Negocios</span>
+        <div class="sb-track"><div class="sb-fill" style="width:65%;background:#b0e870"></div></div>
+        <span class="sb-val" style="color:#b0e870">65%</span>
+      </div>
+    </div>
+    <div class="desc-tabs">
+      <div class="desc-tab-bar">
+        <button class="dtab active" onclick="showTab(this,'pareja','3-3')">Pareja</button>
+        <button class="dtab" onclick="showTab(this,'negocios','3-3')">Negocios</button>
+      </div>
+      <div class="desc-content" id="tab-pareja-3-3">
+        <p class="desc-text">Una relación brillante, llena de alegría, creatividad y aventura. El riesgo es que ninguno ancla la realidad práctica. Si ambos están en modo fiesta, nadie paga las facturas. Cuando uno de los dos activa su lado más serio, el equilibrio es posible.</p>
+      </div>
+      <div class="desc-content hidden" id="tab-negocios-3-3">
+        <p class="desc-text">Extraordinarios para la creatividad, el marketing y la comunicación. El problema: ninguno quiere los detalles operativos. Necesitan apoyo administrativo externo o un sistema muy robusto.</p>
+      </div>
+    </div>
+    <div class="dinamica-box"><span class="din-label">Dinamica:</span> Explosiva y festiva. El mundo los quiere cerca — pero alguien tiene que ocuparse de lo práctico.</div>
+    <div class="consejo-box"><span class="con-label">Consejo:</span> Contraten un contador y un gerente operativo desde el día 1. Su genialidad creativa necesita una estructura que la sostenga.</div>
+  </div>
+</article>
+<article class="entrada" id="par-3-4">
+  <div class="entrada-header" onclick="toggleEntry(this)">
+    <span class="par-num">3&times;4</span>
+    <div class="par-info">
+      <h3 class="entrada-titulo">La Chispa y la Roca — Creatividad con Estructura</h3>
+      <div class="par-scores">
+        <span class="score-mini" style="color:#b0e870">&#x1F491; 70%</span>
+        <span class="score-mini" style="color:#4BE9B9">&#x1F91D; 85%</span>
+      </div>
+    </div>
+    <span class="toggle-arrow">&#x25BC;</span>
+  </div>
+  <div class="entrada-body">
+    <div class="score-bars">
+      <div class="score-bar-row">
+        <span class="sb-label">Pareja</span>
+        <div class="sb-track"><div class="sb-fill" style="width:70%;background:#b0e870"></div></div>
+        <span class="sb-val" style="color:#b0e870">70%</span>
+      </div>
+      <div class="score-bar-row">
+        <span class="sb-label">Negocios</span>
+        <div class="sb-track"><div class="sb-fill" style="width:85%;background:#4BE9B9"></div></div>
+        <span class="sb-val" style="color:#4BE9B9">85%</span>
+      </div>
+    </div>
+    <div class="desc-tabs">
+      <div class="desc-tab-bar">
+        <button class="dtab active" onclick="showTab(this,'pareja','3-4')">Pareja</button>
+        <button class="dtab" onclick="showTab(this,'negocios','3-4')">Negocios</button>
+      </div>
+      <div class="desc-content" id="tab-pareja-3-4">
+        <p class="desc-text">Tensión productiva: el 3 quiere aventura y espontaneidad; el 4 quiere estructura y predictibilidad. Cuando el 3 aprecia la solidez del 4 y el 4 se deja llevar un poco por el entusiasmo del 3, crean una vida que tiene tanto estabilidad como color.</p>
+      </div>
+      <div class="desc-content hidden" id="tab-negocios-3-4">
+        <p class="desc-text">Combinación poderosa para negocios creativos que necesitan estructura. El 3 genera las ideas y encanta a los clientes; el 4 construye los sistemas y entrega con consistencia. Juntos pueden escalar lo que solos no podrían.</p>
+      </div>
+    </div>
+    <div class="dinamica-box"><span class="din-label">Dinamica:</span> El creativo y el metódico. La tensión es productiva si ambos la respetan.</div>
+    <div class="consejo-box"><span class="con-label">Consejo:</span> 3: respeta los sistemas que el 4 construye — no los ignores por aburridos. 4: deja que el 3 te sorprenda de vez en cuando.</div>
+  </div>
+</article>
+<article class="entrada" id="par-3-5">
+  <div class="entrada-header" onclick="toggleEntry(this)">
+    <span class="par-num">3&times;5</span>
+    <div class="par-info">
+      <h3 class="entrada-titulo">Dos Espíritus Libres — Vibración Alta</h3>
+      <div class="par-scores">
+        <span class="score-mini" style="color:#4BE9B9">&#x1F491; 82%</span>
+        <span class="score-mini" style="color:#b0e870">&#x1F91D; 78%</span>
+      </div>
+    </div>
+    <span class="toggle-arrow">&#x25BC;</span>
+  </div>
+  <div class="entrada-body">
+    <div class="score-bars">
+      <div class="score-bar-row">
+        <span class="sb-label">Pareja</span>
+        <div class="sb-track"><div class="sb-fill" style="width:82%;background:#4BE9B9"></div></div>
+        <span class="sb-val" style="color:#4BE9B9">82%</span>
+      </div>
+      <div class="score-bar-row">
+        <span class="sb-label">Negocios</span>
+        <div class="sb-track"><div class="sb-fill" style="width:78%;background:#b0e870"></div></div>
+        <span class="sb-val" style="color:#b0e870">78%</span>
+      </div>
+    </div>
+    <div class="desc-tabs">
+      <div class="desc-tab-bar">
+        <button class="dtab active" onclick="showTab(this,'pareja','3-5')">Pareja</button>
+        <button class="dtab" onclick="showTab(this,'negocios','3-5')">Negocios</button>
+      </div>
+      <div class="desc-content" id="tab-pareja-3-5">
+        <p class="desc-text">Relación de alta energía, mucha diversión y expansión constante. Ambos aman la libertad, las ideas nuevas y la vida social activa. El riesgo es que la relación se quede en la superficie — se necesita esfuerzo consciente para bajar a las profundidades.</p>
+      </div>
+      <div class="desc-content hidden" id="tab-negocios-3-5">
+        <p class="desc-text">Perfectos para industrias creativas, comunicación, ventas y emprendimientos de rápido movimiento. Ambos tienen el carisma para abrir puertas. El reto es la consistencia en la entrega.</p>
+      </div>
+    </div>
+    <div class="dinamica-box"><span class="din-label">Dinamica:</span> Expansiva, creativa y social. Necesita anclaje para no quedarse solo en ideas.</div>
+    <div class="consejo-box"><span class="con-label">Consejo:</span> Creen rituales de seguimiento para sus proyectos. La energía sin sistematización es solo entusiasmo.</div>
+  </div>
+</article>
+<article class="entrada" id="par-3-6">
+  <div class="entrada-header" onclick="toggleEntry(this)">
+    <span class="par-num">3&times;6</span>
+    <div class="par-info">
+      <h3 class="entrada-titulo">La Alegría y el Amor — Hogar Feliz</h3>
+      <div class="par-scores">
+        <span class="score-mini" style="color:#4BE9B9">&#x1F491; 86%</span>
+        <span class="score-mini" style="color:#4BE9B9">&#x1F91D; 80%</span>
+      </div>
+    </div>
+    <span class="toggle-arrow">&#x25BC;</span>
+  </div>
+  <div class="entrada-body">
+    <div class="score-bars">
+      <div class="score-bar-row">
+        <span class="sb-label">Pareja</span>
+        <div class="sb-track"><div class="sb-fill" style="width:86%;background:#4BE9B9"></div></div>
+        <span class="sb-val" style="color:#4BE9B9">86%</span>
+      </div>
+      <div class="score-bar-row">
+        <span class="sb-label">Negocios</span>
+        <div class="sb-track"><div class="sb-fill" style="width:80%;background:#4BE9B9"></div></div>
+        <span class="sb-val" style="color:#4BE9B9">80%</span>
+      </div>
+    </div>
+    <div class="desc-tabs">
+      <div class="desc-tab-bar">
+        <button class="dtab active" onclick="showTab(this,'pareja','3-6')">Pareja</button>
+        <button class="dtab" onclick="showTab(this,'negocios','3-6')">Negocios</button>
+      </div>
+      <div class="desc-content" id="tab-pareja-3-6">
+        <p class="desc-text">Una de las combinaciones más armoniosas para la vida cotidiana. El 3 trae alegría y color; el 6 trae calidez y cuidado. El hogar que construyen juntos es el lugar donde todos quieren estar. El 3 se siente nutrido; el 6 se siente apreciado.</p>
+      </div>
+      <div class="desc-content hidden" id="tab-negocios-3-6">
+        <p class="desc-text">Excelentes para negocios orientados al bienestar, la creatividad y el servicio. El 3 comunica y encanta; el 6 cuida y retiene. Una combinación que construye comunidades de clientes fieles.</p>
+      </div>
+    </div>
+    <div class="dinamica-box"><span class="din-label">Dinamica:</span> Cálida, colorida y generosa. Pocas combinaciones más agradables de habitar.</div>
+    <div class="consejo-box"><span class="con-label">Consejo:</span> 6: también merece alegría, no solo dar. 3: muestra tu gratitud con constancia, no solo cuando te acuerdas.</div>
+  </div>
+</article>
+<article class="entrada" id="par-3-7">
+  <div class="entrada-header" onclick="toggleEntry(this)">
+    <span class="par-num">3&times;7</span>
+    <div class="par-info">
+      <h3 class="entrada-titulo">El Comunicador y el Filósofo — Mundos Distintos</h3>
+      <div class="par-scores">
+        <span class="score-mini" style="color:#b0e870">&#x1F491; 65%</span>
+        <span class="score-mini" style="color:#b0e870">&#x1F91D; 72%</span>
+      </div>
+    </div>
+    <span class="toggle-arrow">&#x25BC;</span>
+  </div>
+  <div class="entrada-body">
+    <div class="score-bars">
+      <div class="score-bar-row">
+        <span class="sb-label">Pareja</span>
+        <div class="sb-track"><div class="sb-fill" style="width:65%;background:#b0e870"></div></div>
+        <span class="sb-val" style="color:#b0e870">65%</span>
+      </div>
+      <div class="score-bar-row">
+        <span class="sb-label">Negocios</span>
+        <div class="sb-track"><div class="sb-fill" style="width:72%;background:#b0e870"></div></div>
+        <span class="sb-val" style="color:#b0e870">72%</span>
+      </div>
+    </div>
+    <div class="desc-tabs">
+      <div class="desc-tab-bar">
+        <button class="dtab active" onclick="showTab(this,'pareja','3-7')">Pareja</button>
+        <button class="dtab" onclick="showTab(this,'negocios','3-7')">Negocios</button>
+      </div>
+      <div class="desc-content" id="tab-pareja-3-7">
+        <p class="desc-text">El 3 vive en la superficie brillante del mundo; el 7 vive en las profundidades. El 3 puede sacar al 7 de su cueva; el 7 puede enseñarle al 3 que hay más allá del brillo superficial. Requiere esfuerzo mutuo y curiosidad genuina por el mundo del otro.</p>
+      </div>
+      <div class="desc-content hidden" id="tab-negocios-3-7">
+        <p class="desc-text">El 3 es la cara visible y el comunicador; el 7 es el estratega profundo. Buenos para consultoría, educación o cualquier negocio donde el contenido profundo necesita ser comunicado de manera atractiva.</p>
+      </div>
+    </div>
+    <div class="dinamica-box"><span class="din-label">Dinamica:</span> Polos opuestos con potencial de síntesis extraordinaria.</div>
+    <div class="consejo-box"><span class="con-label">Consejo:</span> 3: pregunta más, habla menos con el 7. 7: comparte tu mundo interior — el 3 genuinamente quiere entender.</div>
+  </div>
+</article>
+<article class="entrada" id="par-3-8">
+  <div class="entrada-header" onclick="toggleEntry(this)">
+    <span class="par-num">3&times;8</span>
+    <div class="par-info">
+      <h3 class="entrada-titulo">El Creador y el Ejecutor — Impacto Visible</h3>
+      <div class="par-scores">
+        <span class="score-mini" style="color:#b0e870">&#x1F491; 72%</span>
+        <span class="score-mini" style="color:#4BE9B9">&#x1F91D; 88%</span>
+      </div>
+    </div>
+    <span class="toggle-arrow">&#x25BC;</span>
+  </div>
+  <div class="entrada-body">
+    <div class="score-bars">
+      <div class="score-bar-row">
+        <span class="sb-label">Pareja</span>
+        <div class="sb-track"><div class="sb-fill" style="width:72%;background:#b0e870"></div></div>
+        <span class="sb-val" style="color:#b0e870">72%</span>
+      </div>
+      <div class="score-bar-row">
+        <span class="sb-label">Negocios</span>
+        <div class="sb-track"><div class="sb-fill" style="width:88%;background:#4BE9B9"></div></div>
+        <span class="sb-val" style="color:#4BE9B9">88%</span>
+      </div>
+    </div>
+    <div class="desc-tabs">
+      <div class="desc-tab-bar">
+        <button class="dtab active" onclick="showTab(this,'pareja','3-8')">Pareja</button>
+        <button class="dtab" onclick="showTab(this,'negocios','3-8')">Negocios</button>
+      </div>
+      <div class="desc-content" id="tab-pareja-3-8">
+        <p class="desc-text">El 8 puede sentir que el 3 no es suficientemente serio; el 3 puede sentir que el 8 es demasiado rígido. Cuando aprenden a respetar los lenguajes del otro, el 3 da color a la vida del 8 y el 8 da estructura y seguridad al 3.</p>
+      </div>
+      <div class="desc-content hidden" id="tab-negocios-3-8">
+        <p class="desc-text">Potencia comercial alta. El 3 crea y comunica; el 8 monetiza y escala. Una de las mejores combinaciones para negocios creativos que quieren llegar a audiencias masivas y ser rentables al mismo tiempo.</p>
+      </div>
+    </div>
+    <div class="dinamica-box"><span class="din-label">Dinamica:</span> El creativo y el empresario. Tensión productiva con gran potencial.</div>
+    <div class="consejo-box"><span class="con-label">Consejo:</span> En negocios: el 3 crea, el 8 decide sobre recursos. En pareja: aprecien lo que el otro aporta que ustedes no tienen.</div>
+  </div>
+</article>
+<article class="entrada" id="par-3-9">
+  <div class="entrada-header" onclick="toggleEntry(this)">
+    <span class="par-num">3&times;9</span>
+    <div class="par-info">
+      <h3 class="entrada-titulo">El Artista y el Sabio — Creatividad con Propósito</h3>
+      <div class="par-scores">
+        <span class="score-mini" style="color:#4BE9B9">&#x1F491; 84%</span>
+        <span class="score-mini" style="color:#4BE9B9">&#x1F91D; 82%</span>
+      </div>
+    </div>
+    <span class="toggle-arrow">&#x25BC;</span>
+  </div>
+  <div class="entrada-body">
+    <div class="score-bars">
+      <div class="score-bar-row">
+        <span class="sb-label">Pareja</span>
+        <div class="sb-track"><div class="sb-fill" style="width:84%;background:#4BE9B9"></div></div>
+        <span class="sb-val" style="color:#4BE9B9">84%</span>
+      </div>
+      <div class="score-bar-row">
+        <span class="sb-label">Negocios</span>
+        <div class="sb-track"><div class="sb-fill" style="width:82%;background:#4BE9B9"></div></div>
+        <span class="sb-val" style="color:#4BE9B9">82%</span>
+      </div>
+    </div>
+    <div class="desc-tabs">
+      <div class="desc-tab-bar">
+        <button class="dtab active" onclick="showTab(this,'pareja','3-9')">Pareja</button>
+        <button class="dtab" onclick="showTab(this,'negocios','3-9')">Negocios</button>
+      </div>
+      <div class="desc-content" id="tab-pareja-3-9">
+        <p class="desc-text">El 3 trae alegría y el 9 trae profundidad. Juntos tienen el rango completo — de la fiesta a la meditación, del humor a la compasión. Se enriquecen mutuamente sin amenazarse.</p>
+      </div>
+      <div class="desc-content hidden" id="tab-negocios-3-9">
+        <p class="desc-text">Perfectos para negocios de impacto social con cara creativa. El 3 comunica la misión con alegría; el 9 la encarna con sabiduría. Combinación que construye marcas con alma.</p>
+      </div>
+    </div>
+    <div class="dinamica-box"><span class="din-label">Dinamica:</span> Rica, equilibrada y con propósito. Una de las combinaciones más completas.</div>
+    <div class="consejo-box"><span class="con-label">Consejo:</span> Construyan algo que el mundo necesite y que ustedes amen. Su mejor versión aparece cuando hay una causa compartida.</div>
+  </div>
+</article>
+<article class="entrada" id="par-4-4">
+  <div class="entrada-header" onclick="toggleEntry(this)">
+    <span class="par-num">4&times;4</span>
+    <div class="par-info">
+      <h3 class="entrada-titulo">Dos Constructores — Solidez Extrema</h3>
+      <div class="par-scores">
+        <span class="score-mini" style="color:#b0e870">&#x1F491; 72%</span>
+        <span class="score-mini" style="color:#4BE9B9">&#x1F91D; 80%</span>
+      </div>
+    </div>
+    <span class="toggle-arrow">&#x25BC;</span>
+  </div>
+  <div class="entrada-body">
+    <div class="score-bars">
+      <div class="score-bar-row">
+        <span class="sb-label">Pareja</span>
+        <div class="sb-track"><div class="sb-fill" style="width:72%;background:#b0e870"></div></div>
+        <span class="sb-val" style="color:#b0e870">72%</span>
+      </div>
+      <div class="score-bar-row">
+        <span class="sb-label">Negocios</span>
+        <div class="sb-track"><div class="sb-fill" style="width:80%;background:#4BE9B9"></div></div>
+        <span class="sb-val" style="color:#4BE9B9">80%</span>
+      </div>
+    </div>
+    <div class="desc-tabs">
+      <div class="desc-tab-bar">
+        <button class="dtab active" onclick="showTab(this,'pareja','4-4')">Pareja</button>
+        <button class="dtab" onclick="showTab(this,'negocios','4-4')">Negocios</button>
+      </div>
+      <div class="desc-content" id="tab-pareja-4-4">
+        <p class="desc-text">Una relación de gran estabilidad y confianza mutua. Dos 4 se entienden en el valor del trabajo, la responsabilidad y el compromiso. El riesgo: pueden construir una vida tan estructurada que se vuelve rígida y sin espontaneidad. Necesitan inyectarse alegría conscientemente.</p>
+      </div>
+      <div class="desc-content hidden" id="tab-negocios-4-4">
+        <p class="desc-text">Sociedad muy sólida y confiable. Todo lo que construyen juntos dura. El riesgo es la excesiva cautela — pueden perder oportunidades por querer tener todo perfectamente analizado antes de actuar.</p>
+      </div>
+    </div>
+    <div class="dinamica-box"><span class="din-label">Dinamica:</span> Estable, confiable y metódica. Necesita dosis de espontaneidad.</div>
+    <div class="consejo-box"><span class="con-label">Consejo:</span> Una vez al mes, hagan algo completamente impulsivo. Su mayor riesgo no es el caos — es la parálisis por análisis.</div>
+  </div>
+</article>
+<article class="entrada" id="par-4-5">
+  <div class="entrada-header" onclick="toggleEntry(this)">
+    <span class="par-num">4&times;5</span>
+    <div class="par-info">
+      <h3 class="entrada-titulo">La Roca y el Viento — Tensión de Ritmos</h3>
+      <div class="par-scores">
+        <span class="score-mini" style="color:#E9A84B">&#x1F491; 58%</span>
+        <span class="score-mini" style="color:#b0e870">&#x1F91D; 68%</span>
+      </div>
+    </div>
+    <span class="toggle-arrow">&#x25BC;</span>
+  </div>
+  <div class="entrada-body">
+    <div class="score-bars">
+      <div class="score-bar-row">
+        <span class="sb-label">Pareja</span>
+        <div class="sb-track"><div class="sb-fill" style="width:58%;background:#E9A84B"></div></div>
+        <span class="sb-val" style="color:#E9A84B">58%</span>
+      </div>
+      <div class="score-bar-row">
+        <span class="sb-label">Negocios</span>
+        <div class="sb-track"><div class="sb-fill" style="width:68%;background:#b0e870"></div></div>
+        <span class="sb-val" style="color:#b0e870">68%</span>
+      </div>
+    </div>
+    <div class="desc-tabs">
+      <div class="desc-tab-bar">
+        <button class="dtab active" onclick="showTab(this,'pareja','4-5')">Pareja</button>
+        <button class="dtab" onclick="showTab(this,'negocios','4-5')">Negocios</button>
+      </div>
+      <div class="desc-content" id="tab-pareja-4-5">
+        <p class="desc-text">El 4 necesita estructura y predictibilidad; el 5 necesita libertad y cambio. Esta es una de las tensiones más difíciles del sistema pero también una de las más transformadoras. El 4 aprende a soltar; el 5 aprende a comprometerse. Requiere mucha madurez de ambos.</p>
+      </div>
+      <div class="desc-content hidden" id="tab-negocios-4-5">
+        <p class="desc-text">El 4 construye los sistemas; el 5 explora nuevos mercados. Si respetan sus territorios, pueden ser complementarios. Si invaden el espacio del otro, el conflicto es inevitable.</p>
+      </div>
+    </div>
+    <div class="dinamica-box"><span class="din-label">Dinamica:</span> Tensión fundamental entre necesidad de estabilidad y necesidad de libertad.</div>
+    <div class="consejo-box"><span class="con-label">Consejo:</span> 4: no puedes controlar al 5 — solo puedes crear un contexto tan valioso que él elija quedarse. 5: el compromiso no mata la libertad, la amplía.</div>
+  </div>
+</article>
+<article class="entrada" id="par-4-6">
+  <div class="entrada-header" onclick="toggleEntry(this)">
+    <span class="par-num">4&times;6</span>
+    <div class="par-info">
+      <h3 class="entrada-titulo">El Constructor y el Cuidador — Hogar Perfecto</h3>
+      <div class="par-scores">
+        <span class="score-mini" style="color:#4BE9B9">&#x1F491; 88%</span>
+        <span class="score-mini" style="color:#4BE9B9">&#x1F91D; 82%</span>
+      </div>
+    </div>
+    <span class="toggle-arrow">&#x25BC;</span>
+  </div>
+  <div class="entrada-body">
+    <div class="score-bars">
+      <div class="score-bar-row">
+        <span class="sb-label">Pareja</span>
+        <div class="sb-track"><div class="sb-fill" style="width:88%;background:#4BE9B9"></div></div>
+        <span class="sb-val" style="color:#4BE9B9">88%</span>
+      </div>
+      <div class="score-bar-row">
+        <span class="sb-label">Negocios</span>
+        <div class="sb-track"><div class="sb-fill" style="width:82%;background:#4BE9B9"></div></div>
+        <span class="sb-val" style="color:#4BE9B9">82%</span>
+      </div>
+    </div>
+    <div class="desc-tabs">
+      <div class="desc-tab-bar">
+        <button class="dtab active" onclick="showTab(this,'pareja','4-6')">Pareja</button>
+        <button class="dtab" onclick="showTab(this,'negocios','4-6')">Negocios</button>
+      </div>
+      <div class="desc-content" id="tab-pareja-4-6">
+        <p class="desc-text">Una de las combinaciones más armoniosas para construir familia y hogar. El 4 aporta la estructura y la seguridad material; el 6 aporta el calor, la belleza y el cuidado de las relaciones. Se complementan de manera natural y profunda.</p>
+      </div>
+      <div class="desc-content hidden" id="tab-negocios-4-6">
+        <p class="desc-text">El 4 construye los sistemas; el 6 cuida a los clientes y al equipo. Excelentes para negocios de servicios, salud, educación o cualquier empresa que requiera tanto operaciones sólidas como cultura organizacional excepcional.</p>
+      </div>
+    </div>
+    <div class="dinamica-box"><span class="din-label">Dinamica:</span> Complemento natural. Uno construye el contenedor; el otro lo llena de vida.</div>
+    <div class="consejo-box"><span class="con-label">Consejo:</span> Su mayor riesgo no es la incompatibilidad sino el aburrimiento. Inyecten aventura conscientemente.</div>
+  </div>
+</article>
+<article class="entrada" id="par-4-7">
+  <div class="entrada-header" onclick="toggleEntry(this)">
+    <span class="par-num">4&times;7</span>
+    <div class="par-info">
+      <h3 class="entrada-titulo">El Constructor y el Filósofo — Profundidad Práctica</h3>
+      <div class="par-scores">
+        <span class="score-mini" style="color:#b0e870">&#x1F491; 78%</span>
+        <span class="score-mini" style="color:#4BE9B9">&#x1F91D; 82%</span>
+      </div>
+    </div>
+    <span class="toggle-arrow">&#x25BC;</span>
+  </div>
+  <div class="entrada-body">
+    <div class="score-bars">
+      <div class="score-bar-row">
+        <span class="sb-label">Pareja</span>
+        <div class="sb-track"><div class="sb-fill" style="width:78%;background:#b0e870"></div></div>
+        <span class="sb-val" style="color:#b0e870">78%</span>
+      </div>
+      <div class="score-bar-row">
+        <span class="sb-label">Negocios</span>
+        <div class="sb-track"><div class="sb-fill" style="width:82%;background:#4BE9B9"></div></div>
+        <span class="sb-val" style="color:#4BE9B9">82%</span>
+      </div>
+    </div>
+    <div class="desc-tabs">
+      <div class="desc-tab-bar">
+        <button class="dtab active" onclick="showTab(this,'pareja','4-7')">Pareja</button>
+        <button class="dtab" onclick="showTab(this,'negocios','4-7')">Negocios</button>
+      </div>
+      <div class="desc-content" id="tab-pareja-4-7">
+        <p class="desc-text">Ambos valoran la profundidad, la calidad sobre la cantidad y el trabajo bien hecho. El 4 lo hace en el plano material; el 7 en el plano intelectual. Se respetan mutuamente aunque no siempre se entienden. Una relación de gran dignidad y poco ruido.</p>
+      </div>
+      <div class="desc-content hidden" id="tab-negocios-4-7">
+        <p class="desc-text">El 7 diseña la estrategia profunda; el 4 la ejecuta con disciplina. Una de las mejores combinaciones para negocios que requieren tanto análisis como implementación meticulosa: consultoría, tecnología, investigación aplicada.</p>
+      </div>
+    </div>
+    <div class="dinamica-box"><span class="din-label">Dinamica:</span> Seria, profunda y respetuosa. Poca efusividad, mucha sustancia.</div>
+    <div class="consejo-box"><span class="con-label">Consejo:</span> 4: el 7 no necesita que hagas más — necesita que escuches mejor. 7: el 4 necesita ver el plan en papel, no solo en tu cabeza.</div>
+  </div>
+</article>
+<article class="entrada" id="par-4-8">
+  <div class="entrada-header" onclick="toggleEntry(this)">
+    <span class="par-num">4&times;8</span>
+    <div class="par-info">
+      <h3 class="entrada-titulo">El Maestro Artesano y el CEO — Empresa Imparable</h3>
+      <div class="par-scores">
+        <span class="score-mini" style="color:#b0e870">&#x1F491; 74%</span>
+        <span class="score-mini" style="color:#4BE9B9">&#x1F91D; 90%</span>
+      </div>
+    </div>
+    <span class="toggle-arrow">&#x25BC;</span>
+  </div>
+  <div class="entrada-body">
+    <div class="score-bars">
+      <div class="score-bar-row">
+        <span class="sb-label">Pareja</span>
+        <div class="sb-track"><div class="sb-fill" style="width:74%;background:#b0e870"></div></div>
+        <span class="sb-val" style="color:#b0e870">74%</span>
+      </div>
+      <div class="score-bar-row">
+        <span class="sb-label">Negocios</span>
+        <div class="sb-track"><div class="sb-fill" style="width:90%;background:#4BE9B9"></div></div>
+        <span class="sb-val" style="color:#4BE9B9">90%</span>
+      </div>
+    </div>
+    <div class="desc-tabs">
+      <div class="desc-tab-bar">
+        <button class="dtab active" onclick="showTab(this,'pareja','4-8')">Pareja</button>
+        <button class="dtab" onclick="showTab(this,'negocios','4-8')">Negocios</button>
+      </div>
+      <div class="desc-content" id="tab-pareja-4-8">
+        <p class="desc-text">Dos personas de gran determinación que pueden chocar por el control o complementarse en la construcción de una vida extraordinaria. El 8 quiere poder; el 4 quiere perfección. Cuando uno cede el territorio del otro, la relación funciona con solidez.</p>
+      </div>
+      <div class="desc-content hidden" id="tab-negocios-4-8">
+        <p class="desc-text">La mejor combinación pura de negocios del sistema. El 4 construye los sistemas y procesos impecables; el 8 los monetiza y escala con agresividad estratégica. Juntos construyen empresas que compiten en ligas mayores.</p>
+      </div>
+    </div>
+    <div class="dinamica-box"><span class="din-label">Dinamica:</span> Potente, disciplinada y orientada a resultados. El mejor dúo empresarial del sistema.</div>
+    <div class="consejo-box"><span class="con-label">Consejo:</span> En negocios: dejen los egos afuera y se vuelven invencibles. En pareja: recuerden que están del mismo lado.</div>
+  </div>
+</article>
+<article class="entrada" id="par-4-9">
+  <div class="entrada-header" onclick="toggleEntry(this)">
+    <span class="par-num">4&times;9</span>
+    <div class="par-info">
+      <h3 class="entrada-titulo">El Constructor y el Humanista — Obra con Sentido</h3>
+      <div class="par-scores">
+        <span class="score-mini" style="color:#b0e870">&#x1F491; 76%</span>
+        <span class="score-mini" style="color:#b0e870">&#x1F91D; 78%</span>
+      </div>
+    </div>
+    <span class="toggle-arrow">&#x25BC;</span>
+  </div>
+  <div class="entrada-body">
+    <div class="score-bars">
+      <div class="score-bar-row">
+        <span class="sb-label">Pareja</span>
+        <div class="sb-track"><div class="sb-fill" style="width:76%;background:#b0e870"></div></div>
+        <span class="sb-val" style="color:#b0e870">76%</span>
+      </div>
+      <div class="score-bar-row">
+        <span class="sb-label">Negocios</span>
+        <div class="sb-track"><div class="sb-fill" style="width:78%;background:#b0e870"></div></div>
+        <span class="sb-val" style="color:#b0e870">78%</span>
+      </div>
+    </div>
+    <div class="desc-tabs">
+      <div class="desc-tab-bar">
+        <button class="dtab active" onclick="showTab(this,'pareja','4-9')">Pareja</button>
+        <button class="dtab" onclick="showTab(this,'negocios','4-9')">Negocios</button>
+      </div>
+      <div class="desc-content" id="tab-pareja-4-9">
+        <p class="desc-text">El 4 da estructura y seguridad; el 9 da sabiduría y compasión. El 4 puede volverse demasiado rígido y el 9 puede volverse demasiado idealista — juntos se balancean. El 4 aprende que construir también tiene un propósito mayor; el 9 aprende que las buenas intenciones necesitan estructura para materializarse.</p>
+      </div>
+      <div class="desc-content hidden" id="tab-negocios-4-9">
+        <p class="desc-text">El 4 construye la empresa con método; el 9 le da propósito y misión. Excelentes para empresas sociales, educación o negocios con impacto comunitario que también necesitan ser sostenibles.</p>
+      </div>
+    </div>
+    <div class="dinamica-box"><span class="din-label">Dinamica:</span> Complemento de método y propósito. Lo que construyen tiene tanto solidez como sentido.</div>
+    <div class="consejo-box"><span class="con-label">Consejo:</span> Construyan algo que dure y que importe. Su combinación es rara — personas que pueden hacer las dos cosas a la vez.</div>
+  </div>
+</article>
+<article class="entrada" id="par-5-5">
+  <div class="entrada-header" onclick="toggleEntry(this)">
+    <span class="par-num">5&times;5</span>
+    <div class="par-info">
+      <h3 class="entrada-titulo">Doble Libertad — Brillante e Inestable</h3>
+      <div class="par-scores">
+        <span class="score-mini" style="color:#b0e870">&#x1F491; 68%</span>
+        <span class="score-mini" style="color:#E9A84B">&#x1F91D; 62%</span>
+      </div>
+    </div>
+    <span class="toggle-arrow">&#x25BC;</span>
+  </div>
+  <div class="entrada-body">
+    <div class="score-bars">
+      <div class="score-bar-row">
+        <span class="sb-label">Pareja</span>
+        <div class="sb-track"><div class="sb-fill" style="width:68%;background:#b0e870"></div></div>
+        <span class="sb-val" style="color:#b0e870">68%</span>
+      </div>
+      <div class="score-bar-row">
+        <span class="sb-label">Negocios</span>
+        <div class="sb-track"><div class="sb-fill" style="width:62%;background:#E9A84B"></div></div>
+        <span class="sb-val" style="color:#E9A84B">62%</span>
+      </div>
+    </div>
+    <div class="desc-tabs">
+      <div class="desc-tab-bar">
+        <button class="dtab active" onclick="showTab(this,'pareja','5-5')">Pareja</button>
+        <button class="dtab" onclick="showTab(this,'negocios','5-5')">Negocios</button>
+      </div>
+      <div class="desc-content" id="tab-pareja-5-5">
+        <p class="desc-text">Dos 5 juntos son una explosión de vida, aventura y experiencias. El riesgo es que nadie ancla nada — ni el hogar, ni la relación, ni los proyectos. Si ambos han madurado y uno de los dos activa su lado más estable, pueden tener una vida extraordinariamente rica.</p>
+      </div>
+      <div class="desc-content hidden" id="tab-negocios-5-5">
+        <p class="desc-text">Capaces de generar negocios de manera espontánea y brillante. El problema es la consistencia — ambos se aburren de lo mismo al mismo tiempo. Necesitan estructura externa o socios más metódicos.</p>
+      </div>
+    </div>
+    <div class="dinamica-box"><span class="din-label">Dinamica:</span> Aventurera y estimulante. Peligro de inestabilidad crónica.</div>
+    <div class="consejo-box"><span class="con-label">Consejo:</span> Elijan un ancla — una misión, un lugar, un proyecto — y comprométanse con ella aunque sea difícil. Sin ancla, su energía se dispersa.</div>
+  </div>
+</article>
+<article class="entrada" id="par-5-6">
+  <div class="entrada-header" onclick="toggleEntry(this)">
+    <span class="par-num">5&times;6</span>
+    <div class="par-info">
+      <h3 class="entrada-titulo">La Libertad y el Hogar — Tensión Fundamental</h3>
+      <div class="par-scores">
+        <span class="score-mini" style="color:#b0e870">&#x1F491; 65%</span>
+        <span class="score-mini" style="color:#b0e870">&#x1F91D; 70%</span>
+      </div>
+    </div>
+    <span class="toggle-arrow">&#x25BC;</span>
+  </div>
+  <div class="entrada-body">
+    <div class="score-bars">
+      <div class="score-bar-row">
+        <span class="sb-label">Pareja</span>
+        <div class="sb-track"><div class="sb-fill" style="width:65%;background:#b0e870"></div></div>
+        <span class="sb-val" style="color:#b0e870">65%</span>
+      </div>
+      <div class="score-bar-row">
+        <span class="sb-label">Negocios</span>
+        <div class="sb-track"><div class="sb-fill" style="width:70%;background:#b0e870"></div></div>
+        <span class="sb-val" style="color:#b0e870">70%</span>
+      </div>
+    </div>
+    <div class="desc-tabs">
+      <div class="desc-tab-bar">
+        <button class="dtab active" onclick="showTab(this,'pareja','5-6')">Pareja</button>
+        <button class="dtab" onclick="showTab(this,'negocios','5-6')">Negocios</button>
+      </div>
+      <div class="desc-content" id="tab-pareja-5-6">
+        <p class="desc-text">El 6 quiere hogar, estabilidad y cuidado mutuo; el 5 quiere libertad, movimiento y aventura. Esta tensión puede ser insalvable o el punto de mayor crecimiento. El 5 aprende que el amor es también el mejor tipo de libertad; el 6 aprende que el amor no puede ser una jaula.</p>
+      </div>
+      <div class="desc-content hidden" id="tab-negocios-5-6">
+        <p class="desc-text">El 5 encuentra las oportunidades y los clientes; el 6 los cuida y retiene. Buenos para negocios de servicios si ambos respetan sus roles.</p>
+      </div>
+    </div>
+    <div class="dinamica-box"><span class="din-label">Dinamica:</span> Tensión entre libertad y apego. Requiere mucha madurez y comunicación.</div>
+    <div class="consejo-box"><span class="con-label">Consejo:</span> 6: el amor que retiene no es amor. 5: el compromiso que no mata la libertad es el más poderoso que existe.</div>
+  </div>
+</article>
+<article class="entrada" id="par-5-7">
+  <div class="entrada-header" onclick="toggleEntry(this)">
+    <span class="par-num">5&times;7</span>
+    <div class="par-info">
+      <h3 class="entrada-titulo">El Explorador y el Buscador — Curiosidad Compartida</h3>
+      <div class="par-scores">
+        <span class="score-mini" style="color:#b0e870">&#x1F491; 70%</span>
+        <span class="score-mini" style="color:#b0e870">&#x1F91D; 72%</span>
+      </div>
+    </div>
+    <span class="toggle-arrow">&#x25BC;</span>
+  </div>
+  <div class="entrada-body">
+    <div class="score-bars">
+      <div class="score-bar-row">
+        <span class="sb-label">Pareja</span>
+        <div class="sb-track"><div class="sb-fill" style="width:70%;background:#b0e870"></div></div>
+        <span class="sb-val" style="color:#b0e870">70%</span>
+      </div>
+      <div class="score-bar-row">
+        <span class="sb-label">Negocios</span>
+        <div class="sb-track"><div class="sb-fill" style="width:72%;background:#b0e870"></div></div>
+        <span class="sb-val" style="color:#b0e870">72%</span>
+      </div>
+    </div>
+    <div class="desc-tabs">
+      <div class="desc-tab-bar">
+        <button class="dtab active" onclick="showTab(this,'pareja','5-7')">Pareja</button>
+        <button class="dtab" onclick="showTab(this,'negocios','5-7')">Negocios</button>
+      </div>
+      <div class="desc-content" id="tab-pareja-5-7">
+        <p class="desc-text">Ambos tienen una mente inquieta y una necesidad de ir más allá de lo superficial. El 5 explora en el mundo exterior; el 7 explora en el mundo interior. Pueden ser compañeros de viaje extraordinarios si aprenden a moverse juntos sin que el ritmo del uno agobie al otro.</p>
+      </div>
+      <div class="desc-content hidden" id="tab-negocios-5-7">
+        <p class="desc-text">Buenos para negocios de investigación, consultoría o innovación. El 5 explora el mercado y las tendencias; el 7 analiza en profundidad y desarrolla la estrategia.</p>
+      </div>
+    </div>
+    <div class="dinamica-box"><span class="din-label">Dinamica:</span> Intelectualmente estimulante. Dos buscadores que se reconocen mutuamente.</div>
+    <div class="consejo-box"><span class="con-label">Consejo:</span> Construyan algo juntos que explore territorio nuevo. Su mayor activo compartido es la curiosidad.</div>
+  </div>
+</article>
+<article class="entrada" id="par-5-8">
+  <div class="entrada-header" onclick="toggleEntry(this)">
+    <span class="par-num">5&times;8</span>
+    <div class="par-info">
+      <h3 class="entrada-titulo">El Aventurero y el Ejecutivo — Expansión y Resultados</h3>
+      <div class="par-scores">
+        <span class="score-mini" style="color:#b0e870">&#x1F491; 68%</span>
+        <span class="score-mini" style="color:#4BE9B9">&#x1F91D; 82%</span>
+      </div>
+    </div>
+    <span class="toggle-arrow">&#x25BC;</span>
+  </div>
+  <div class="entrada-body">
+    <div class="score-bars">
+      <div class="score-bar-row">
+        <span class="sb-label">Pareja</span>
+        <div class="sb-track"><div class="sb-fill" style="width:68%;background:#b0e870"></div></div>
+        <span class="sb-val" style="color:#b0e870">68%</span>
+      </div>
+      <div class="score-bar-row">
+        <span class="sb-label">Negocios</span>
+        <div class="sb-track"><div class="sb-fill" style="width:82%;background:#4BE9B9"></div></div>
+        <span class="sb-val" style="color:#4BE9B9">82%</span>
+      </div>
+    </div>
+    <div class="desc-tabs">
+      <div class="desc-tab-bar">
+        <button class="dtab active" onclick="showTab(this,'pareja','5-8')">Pareja</button>
+        <button class="dtab" onclick="showTab(this,'negocios','5-8')">Negocios</button>
+      </div>
+      <div class="desc-content" id="tab-pareja-5-8">
+        <p class="desc-text">El 8 puede sentir que el 5 es demasiado inconstante; el 5 puede sentir que el 8 es demasiado controlador. Cuando el 8 aprende a dar libertad y el 5 aprende a comprometerse, crean una relación de gran dinamismo.</p>
+      </div>
+      <div class="desc-content hidden" id="tab-negocios-5-8">
+        <p class="desc-text">El 5 explora nuevos mercados y el 8 los monetiza. Excelentes para negocios de expansión, ventas y desarrollo de nuevos territorios. El 8 da la estructura financiera que el 5 necesita para que sus ideas despeguen.</p>
+      </div>
+    </div>
+    <div class="dinamica-box"><span class="din-label">Dinamica:</span> Energía de expansión y manifestación. Potente en negocios cuando hay reglas claras.</div>
+    <div class="consejo-box"><span class="con-label">Consejo:</span> 8: suelta el control sobre el proceso del 5 — solo exige resultados. 5: entrega resultados y tendrás toda la libertad que necesitas.</div>
+  </div>
+</article>
+<article class="entrada" id="par-5-9">
+  <div class="entrada-header" onclick="toggleEntry(this)">
+    <span class="par-num">5&times;9</span>
+    <div class="par-info">
+      <h3 class="entrada-titulo">El Libertador y el Humanista — Expansión con Propósito</h3>
+      <div class="par-scores">
+        <span class="score-mini" style="color:#b0e870">&#x1F491; 76%</span>
+        <span class="score-mini" style="color:#b0e870">&#x1F91D; 74%</span>
+      </div>
+    </div>
+    <span class="toggle-arrow">&#x25BC;</span>
+  </div>
+  <div class="entrada-body">
+    <div class="score-bars">
+      <div class="score-bar-row">
+        <span class="sb-label">Pareja</span>
+        <div class="sb-track"><div class="sb-fill" style="width:76%;background:#b0e870"></div></div>
+        <span class="sb-val" style="color:#b0e870">76%</span>
+      </div>
+      <div class="score-bar-row">
+        <span class="sb-label">Negocios</span>
+        <div class="sb-track"><div class="sb-fill" style="width:74%;background:#b0e870"></div></div>
+        <span class="sb-val" style="color:#b0e870">74%</span>
+      </div>
+    </div>
+    <div class="desc-tabs">
+      <div class="desc-tab-bar">
+        <button class="dtab active" onclick="showTab(this,'pareja','5-9')">Pareja</button>
+        <button class="dtab" onclick="showTab(this,'negocios','5-9')">Negocios</button>
+      </div>
+      <div class="desc-content" id="tab-pareja-5-9">
+        <p class="desc-text">El 5 da movimiento y aventura; el 9 da profundidad y propósito. El 9 puede anclar al 5 en algo que valga la pena; el 5 puede enseñarle al 9 que el servicio también puede ser divertido y expansivo.</p>
+      </div>
+      <div class="desc-content hidden" id="tab-negocios-5-9">
+        <p class="desc-text">Buenos para organizaciones con misión social que necesitan tanto adaptabilidad como profundidad. El 5 abre nuevos caminos; el 9 mantiene la coherencia con el propósito original.</p>
+      </div>
+    </div>
+    <div class="dinamica-box"><span class="din-label">Dinamica:</span> Expansiva y con propósito. El movimiento del 5 encuentra sentido en la sabiduría del 9.</div>
+    <div class="consejo-box"><span class="con-label">Consejo:</span> Encuentren una misión que los mueva a ambos. El 5 necesita moverse y el 9 necesita que ese movimiento importe.</div>
+  </div>
+</article>
+<article class="entrada" id="par-6-6">
+  <div class="entrada-header" onclick="toggleEntry(this)">
+    <span class="par-num">6&times;6</span>
+    <div class="par-info">
+      <h3 class="entrada-titulo">Doble Amor — Cuidado Mutuo Total</h3>
+      <div class="par-scores">
+        <span class="score-mini" style="color:#4BE9B9">&#x1F491; 82%</span>
+        <span class="score-mini" style="color:#b0e870">&#x1F91D; 70%</span>
+      </div>
+    </div>
+    <span class="toggle-arrow">&#x25BC;</span>
+  </div>
+  <div class="entrada-body">
+    <div class="score-bars">
+      <div class="score-bar-row">
+        <span class="sb-label">Pareja</span>
+        <div class="sb-track"><div class="sb-fill" style="width:82%;background:#4BE9B9"></div></div>
+        <span class="sb-val" style="color:#4BE9B9">82%</span>
+      </div>
+      <div class="score-bar-row">
+        <span class="sb-label">Negocios</span>
+        <div class="sb-track"><div class="sb-fill" style="width:70%;background:#b0e870"></div></div>
+        <span class="sb-val" style="color:#b0e870">70%</span>
+      </div>
+    </div>
+    <div class="desc-tabs">
+      <div class="desc-tab-bar">
+        <button class="dtab active" onclick="showTab(this,'pareja','6-6')">Pareja</button>
+        <button class="dtab" onclick="showTab(this,'negocios','6-6')">Negocios</button>
+      </div>
+      <div class="desc-content" id="tab-pareja-6-6">
+        <p class="desc-text">Una relación de gran calidez, cuidado y armonía. Dos 6 crean el hogar más acogedor del sistema. El riesgo es la codependencia y el autosacrificio mutuo — ambos dan tanto que ninguno sabe recibir. También pueden caer en el perfeccionismo relacional.</p>
+      </div>
+      <div class="desc-content hidden" id="tab-negocios-6-6">
+        <p class="desc-text">Extraordinarios para negocios de bienestar, salud, educación y servicio. El riesgo es que ninguno quiere tener las conversaciones difíciles de negocios. Necesitan alguien con números duros que les ayude a tomar decisiones basadas en datos.</p>
+      </div>
+    </div>
+    <div class="dinamica-box"><span class="din-label">Dinamica:</span> Profundamente amorosa y cuidadora. El riesgo es perderse en el otro.</div>
+    <div class="consejo-box"><span class="con-label">Consejo:</span> Mantengan individualidad dentro de la unión. El amor que no incluye el yo propio puede convertirse en dependencia.</div>
+  </div>
+</article>
+<article class="entrada" id="par-6-7">
+  <div class="entrada-header" onclick="toggleEntry(this)">
+    <span class="par-num">6&times;7</span>
+    <div class="par-info">
+      <h3 class="entrada-titulo">El Cuidador y el Filósofo — Amor Profundo</h3>
+      <div class="par-scores">
+        <span class="score-mini" style="color:#b0e870">&#x1F491; 72%</span>
+        <span class="score-mini" style="color:#b0e870">&#x1F91D; 70%</span>
+      </div>
+    </div>
+    <span class="toggle-arrow">&#x25BC;</span>
+  </div>
+  <div class="entrada-body">
+    <div class="score-bars">
+      <div class="score-bar-row">
+        <span class="sb-label">Pareja</span>
+        <div class="sb-track"><div class="sb-fill" style="width:72%;background:#b0e870"></div></div>
+        <span class="sb-val" style="color:#b0e870">72%</span>
+      </div>
+      <div class="score-bar-row">
+        <span class="sb-label">Negocios</span>
+        <div class="sb-track"><div class="sb-fill" style="width:70%;background:#b0e870"></div></div>
+        <span class="sb-val" style="color:#b0e870">70%</span>
+      </div>
+    </div>
+    <div class="desc-tabs">
+      <div class="desc-tab-bar">
+        <button class="dtab active" onclick="showTab(this,'pareja','6-7')">Pareja</button>
+        <button class="dtab" onclick="showTab(this,'negocios','6-7')">Negocios</button>
+      </div>
+      <div class="desc-content" id="tab-pareja-6-7">
+        <p class="desc-text">El 6 necesita cercanía; el 7 necesita soledad. Esta tensión es real pero manejable. El 6 puede ser el hogar seguro desde el que el 7 se atreve a explorar; el 7 puede enseñarle al 6 que la profundidad de la relación importa más que su frecuencia.</p>
+      </div>
+      <div class="desc-content hidden" id="tab-negocios-6-7">
+        <p class="desc-text">El 6 cuida las relaciones y el equipo; el 7 diseña la estrategia en profundidad. Buenos para organizaciones de alto contenido que también necesitan cultura organizacional cálida.</p>
+      </div>
+    </div>
+    <div class="dinamica-box"><span class="din-label">Dinamica:</span> El cuidado del 6 crea el espacio de seguridad desde el que el 7 puede pensar en profundidad.</div>
+    <div class="consejo-box"><span class="con-label">Consejo:</span> 6: dale al 7 el espacio que necesita sin interpretarlo como abandono. 7: el 6 necesita saber que importa — díselo explícitamente.</div>
+  </div>
+</article>
+<article class="entrada" id="par-6-8">
+  <div class="entrada-header" onclick="toggleEntry(this)">
+    <span class="par-num">6&times;8</span>
+    <div class="par-info">
+      <h3 class="entrada-titulo">El Cuidador y el Poder — Abundancia con Corazón</h3>
+      <div class="par-scores">
+        <span class="score-mini" style="color:#b0e870">&#x1F491; 75%</span>
+        <span class="score-mini" style="color:#4BE9B9">&#x1F91D; 84%</span>
+      </div>
+    </div>
+    <span class="toggle-arrow">&#x25BC;</span>
+  </div>
+  <div class="entrada-body">
+    <div class="score-bars">
+      <div class="score-bar-row">
+        <span class="sb-label">Pareja</span>
+        <div class="sb-track"><div class="sb-fill" style="width:75%;background:#b0e870"></div></div>
+        <span class="sb-val" style="color:#b0e870">75%</span>
+      </div>
+      <div class="score-bar-row">
+        <span class="sb-label">Negocios</span>
+        <div class="sb-track"><div class="sb-fill" style="width:84%;background:#4BE9B9"></div></div>
+        <span class="sb-val" style="color:#4BE9B9">84%</span>
+      </div>
+    </div>
+    <div class="desc-tabs">
+      <div class="desc-tab-bar">
+        <button class="dtab active" onclick="showTab(this,'pareja','6-8')">Pareja</button>
+        <button class="dtab" onclick="showTab(this,'negocios','6-8')">Negocios</button>
+      </div>
+      <div class="desc-content" id="tab-pareja-6-8">
+        <p class="desc-text">El 8 puede darle al 6 la seguridad material que valora; el 6 puede enseñarle al 8 que el poder sin amor es vacío. Cuando el 8 aprende a cuidar y el 6 aprende a recibir poder, crean una relación de gran riqueza en todos los sentidos.</p>
+      </div>
+      <div class="desc-content hidden" id="tab-negocios-6-8">
+        <p class="desc-text">El 8 pone el poder de manifestación; el 6 asegura que la empresa tenga alma. Buenos para empresas que quieren ser tanto rentables como admiradas por su cultura y valores.</p>
+      </div>
+    </div>
+    <div class="dinamica-box"><span class="din-label">Dinamica:</span> El poder del 8 con el corazón del 6. Abundancia y cuidado simultáneos.</div>
+    <div class="consejo-box"><span class="con-label">Consejo:</span> 8: tu empresa más rentable a largo plazo es la que la gente quiere apoyar. El 6 te enseña cómo lograrlo. 6: no tienes que elegir entre amor y éxito.</div>
+  </div>
+</article>
+<article class="entrada" id="par-6-9">
+  <div class="entrada-header" onclick="toggleEntry(this)">
+    <span class="par-num">6&times;9</span>
+    <div class="par-info">
+      <h3 class="entrada-titulo">Amor Universal — La Pareja del Servicio</h3>
+      <div class="par-scores">
+        <span class="score-mini" style="color:#4BE9B9">&#x1F491; 90%</span>
+        <span class="score-mini" style="color:#b0e870">&#x1F91D; 78%</span>
+      </div>
+    </div>
+    <span class="toggle-arrow">&#x25BC;</span>
+  </div>
+  <div class="entrada-body">
+    <div class="score-bars">
+      <div class="score-bar-row">
+        <span class="sb-label">Pareja</span>
+        <div class="sb-track"><div class="sb-fill" style="width:90%;background:#4BE9B9"></div></div>
+        <span class="sb-val" style="color:#4BE9B9">90%</span>
+      </div>
+      <div class="score-bar-row">
+        <span class="sb-label">Negocios</span>
+        <div class="sb-track"><div class="sb-fill" style="width:78%;background:#b0e870"></div></div>
+        <span class="sb-val" style="color:#b0e870">78%</span>
+      </div>
+    </div>
+    <div class="desc-tabs">
+      <div class="desc-tab-bar">
+        <button class="dtab active" onclick="showTab(this,'pareja','6-9')">Pareja</button>
+        <button class="dtab" onclick="showTab(this,'negocios','6-9')">Negocios</button>
+      </div>
+      <div class="desc-content" id="tab-pareja-6-9">
+        <p class="desc-text">Una de las combinaciones más hermosas del sistema. Ambos tienen el corazón abierto, aman servir y encuentran sentido en el cuidado de otros. El 6 cuida el hogar y las personas cercanas; el 9 cuida la humanidad. Juntos crean un amor que trasciende.</p>
+      </div>
+      <div class="desc-content hidden" id="tab-negocios-6-9">
+        <p class="desc-text">Extraordinarios para empresas con propósito social, ONG, salud o educación. La combinación del cuidado del 6 y la sabiduría del 9 produce organizaciones que la gente quiere apoyar porque se siente que vienen del corazón.</p>
+      </div>
+    </div>
+    <div class="dinamica-box"><span class="din-label">Dinamica:</span> Profundamente amorosa, compasiva y orientada al servicio. Una de las más bellas.</div>
+    <div class="consejo-box"><span class="con-label">Consejo:</span> Su mayor riesgo es dar tanto que se agotan. Pongan límites no como defensa sino como condición para poder seguir dando.</div>
+  </div>
+</article>
+<article class="entrada" id="par-7-7">
+  <div class="entrada-header" onclick="toggleEntry(this)">
+    <span class="par-num">7&times;7</span>
+    <div class="par-info">
+      <h3 class="entrada-titulo">Dos Filósofos — Profundidad Abismal</h3>
+      <div class="par-scores">
+        <span class="score-mini" style="color:#b0e870">&#x1F491; 75%</span>
+        <span class="score-mini" style="color:#b0e870">&#x1F91D; 72%</span>
+      </div>
+    </div>
+    <span class="toggle-arrow">&#x25BC;</span>
+  </div>
+  <div class="entrada-body">
+    <div class="score-bars">
+      <div class="score-bar-row">
+        <span class="sb-label">Pareja</span>
+        <div class="sb-track"><div class="sb-fill" style="width:75%;background:#b0e870"></div></div>
+        <span class="sb-val" style="color:#b0e870">75%</span>
+      </div>
+      <div class="score-bar-row">
+        <span class="sb-label">Negocios</span>
+        <div class="sb-track"><div class="sb-fill" style="width:72%;background:#b0e870"></div></div>
+        <span class="sb-val" style="color:#b0e870">72%</span>
+      </div>
+    </div>
+    <div class="desc-tabs">
+      <div class="desc-tab-bar">
+        <button class="dtab active" onclick="showTab(this,'pareja','7-7')">Pareja</button>
+        <button class="dtab" onclick="showTab(this,'negocios','7-7')">Negocios</button>
+      </div>
+      <div class="desc-content" id="tab-pareja-7-7">
+        <p class="desc-text">Una relación de gran profundidad intelectual y espiritual. Dos 7 se entienden sin necesitar explicar demasiado. El riesgo: ambos necesitan soledad y pueden terminar en una relación de gran respeto mutuo pero poca intimidad emocional.</p>
+      </div>
+      <div class="desc-content hidden" id="tab-negocios-7-7">
+        <p class="desc-text">Extraordinarios para investigación, consultoría estratégica y análisis. El problema: ninguno quiere vender ni relacionarse con clientes. Necesitan alguien que sea la cara del negocio.</p>
+      </div>
+    </div>
+    <div class="dinamica-box"><span class="din-label">Dinamica:</span> Profunda, silenciosa y respetuosa. Necesitan recordar que la intimidad también requiere presencia.</div>
+    <div class="consejo-box"><span class="con-label">Consejo:</span> Salgan de sus cabezas de vez en cuando. El cuerpo, el corazón y la presencia también son parte de una relación.</div>
+  </div>
+</article>
+<article class="entrada" id="par-7-8">
+  <div class="entrada-header" onclick="toggleEntry(this)">
+    <span class="par-num">7&times;8</span>
+    <div class="par-info">
+      <h3 class="entrada-titulo">El Estratega y el CEO — Inteligencia Ejecutiva</h3>
+      <div class="par-scores">
+        <span class="score-mini" style="color:#b0e870">&#x1F491; 68%</span>
+        <span class="score-mini" style="color:#4BE9B9">&#x1F91D; 85%</span>
+      </div>
+    </div>
+    <span class="toggle-arrow">&#x25BC;</span>
+  </div>
+  <div class="entrada-body">
+    <div class="score-bars">
+      <div class="score-bar-row">
+        <span class="sb-label">Pareja</span>
+        <div class="sb-track"><div class="sb-fill" style="width:68%;background:#b0e870"></div></div>
+        <span class="sb-val" style="color:#b0e870">68%</span>
+      </div>
+      <div class="score-bar-row">
+        <span class="sb-label">Negocios</span>
+        <div class="sb-track"><div class="sb-fill" style="width:85%;background:#4BE9B9"></div></div>
+        <span class="sb-val" style="color:#4BE9B9">85%</span>
+      </div>
+    </div>
+    <div class="desc-tabs">
+      <div class="desc-tab-bar">
+        <button class="dtab active" onclick="showTab(this,'pareja','7-8')">Pareja</button>
+        <button class="dtab" onclick="showTab(this,'negocios','7-8')">Negocios</button>
+      </div>
+      <div class="desc-content" id="tab-pareja-7-8">
+        <p class="desc-text">El 8 puede sentir que el 7 es demasiado lento o teórico; el 7 puede sentir que el 8 actúa sin suficiente reflexión. Cuando se respetan, el 7 da la profundidad que el 8 necesita para tomar decisiones correctas y el 8 da la acción que el 7 necesita para que su sabiduría se materialice.</p>
+      </div>
+      <div class="desc-content hidden" id="tab-negocios-7-8">
+        <p class="desc-text">Una de las mejores combinaciones para consultoría, tecnología o cualquier negocio que requiera tanto análisis profundo como capacidad de ejecución en grandes ligas. El 7 piensa; el 8 actúa — y los resultados son poderosos.</p>
+      </div>
+    </div>
+    <div class="dinamica-box"><span class="din-label">Dinamica:</span> El cerebro y el músculo. Potente en negocios cuando hay respeto mutuo.</div>
+    <div class="consejo-box"><span class="con-label">Consejo:</span> 7: confía en el instinto del 8 aunque no tenga toda la evidencia. 8: escucha el análisis del 7 antes de actuar — te evitará errores costosos.</div>
+  </div>
+</article>
+<article class="entrada" id="par-7-9">
+  <div class="entrada-header" onclick="toggleEntry(this)">
+    <span class="par-num">7&times;9</span>
+    <div class="par-info">
+      <h3 class="entrada-titulo">La Sabiduría y la Compasión — Profundidad Total</h3>
+      <div class="par-scores">
+        <span class="score-mini" style="color:#4BE9B9">&#x1F491; 80%</span>
+        <span class="score-mini" style="color:#b0e870">&#x1F91D; 76%</span>
+      </div>
+    </div>
+    <span class="toggle-arrow">&#x25BC;</span>
+  </div>
+  <div class="entrada-body">
+    <div class="score-bars">
+      <div class="score-bar-row">
+        <span class="sb-label">Pareja</span>
+        <div class="sb-track"><div class="sb-fill" style="width:80%;background:#4BE9B9"></div></div>
+        <span class="sb-val" style="color:#4BE9B9">80%</span>
+      </div>
+      <div class="score-bar-row">
+        <span class="sb-label">Negocios</span>
+        <div class="sb-track"><div class="sb-fill" style="width:76%;background:#b0e870"></div></div>
+        <span class="sb-val" style="color:#b0e870">76%</span>
+      </div>
+    </div>
+    <div class="desc-tabs">
+      <div class="desc-tab-bar">
+        <button class="dtab active" onclick="showTab(this,'pareja','7-9')">Pareja</button>
+        <button class="dtab" onclick="showTab(this,'negocios','7-9')">Negocios</button>
+      </div>
+      <div class="desc-content" id="tab-pareja-7-9">
+        <p class="desc-text">Dos almas viejas que se reconocen. El 7 busca la verdad; el 9 sirve a la humanidad — ambos operan en las capas más profundas de la experiencia humana. Se respetan, se comprenden y comparten un lenguaje de profundidad que pocos pueden alcanzar.</p>
+      </div>
+      <div class="desc-content hidden" id="tab-negocios-7-9">
+        <p class="desc-text">Excelentes para organizaciones de conocimiento, filosofía aplicada, educación profunda o consultoría estratégica con propósito. La combinación de análisis y sabiduría es difícilmente igualable.</p>
+      </div>
+    </div>
+    <div class="dinamica-box"><span class="din-label">Dinamica:</span> Profunda, sabia y compasiva. Dos almas que operan en la misma frecuencia.</div>
+    <div class="consejo-box"><span class="con-label">Consejo:</span> No se olviden de bajar al mundo práctico de vez en cuando. Su mayor riesgo es la desconexión de lo cotidiano.</div>
+  </div>
+</article>
+<article class="entrada" id="par-8-8">
+  <div class="entrada-header" onclick="toggleEntry(this)">
+    <span class="par-num">8&times;8</span>
+    <div class="par-info">
+      <h3 class="entrada-titulo">Doble Poder — Choque o Imperio</h3>
+      <div class="par-scores">
+        <span class="score-mini" style="color:#b0e870">&#x1F491; 65%</span>
+        <span class="score-mini" style="color:#b0e870">&#x1F91D; 78%</span>
+      </div>
+    </div>
+    <span class="toggle-arrow">&#x25BC;</span>
+  </div>
+  <div class="entrada-body">
+    <div class="score-bars">
+      <div class="score-bar-row">
+        <span class="sb-label">Pareja</span>
+        <div class="sb-track"><div class="sb-fill" style="width:65%;background:#b0e870"></div></div>
+        <span class="sb-val" style="color:#b0e870">65%</span>
+      </div>
+      <div class="score-bar-row">
+        <span class="sb-label">Negocios</span>
+        <div class="sb-track"><div class="sb-fill" style="width:78%;background:#b0e870"></div></div>
+        <span class="sb-val" style="color:#b0e870">78%</span>
+      </div>
+    </div>
+    <div class="desc-tabs">
+      <div class="desc-tab-bar">
+        <button class="dtab active" onclick="showTab(this,'pareja','8-8')">Pareja</button>
+        <button class="dtab" onclick="showTab(this,'negocios','8-8')">Negocios</button>
+      </div>
+      <div class="desc-content" id="tab-pareja-8-8">
+        <p class="desc-text">Dos de los seres más poderosos del sistema juntos. O construyen un imperio o se destruyen mutuamente. La batalla de egos entre dos 8 puede ser legendaria. Cuando ambos maduran y deciden cooperar, son literalmente imparables.</p>
+      </div>
+      <div class="desc-content hidden" id="tab-negocios-8-8">
+        <p class="desc-text">Alto potencial y alto riesgo. Pueden construir empresas extraordinarias si definen territorios claros. El problema es el conflicto de autoridad — dos 8 no pueden ser CEOs del mismo negocio sin reglas muy claras.</p>
+      </div>
+    </div>
+    <div class="dinamica-box"><span class="din-label">Dinamica:</span> Explosiva. O el dúo más poderoso del sistema o el más destructivo. No hay término medio.</div>
+    <div class="consejo-box"><span class="con-label">Consejo:</span> Definan territorios claros y no los invadan. El respeto mutuo no se asume — se construye conscientemente cada día.</div>
+  </div>
+</article>
+<article class="entrada" id="par-8-9">
+  <div class="entrada-header" onclick="toggleEntry(this)">
+    <span class="par-num">8&times;9</span>
+    <div class="par-info">
+      <h3 class="entrada-titulo">El Poder y la Sabiduría — Legado</h3>
+      <div class="par-scores">
+        <span class="score-mini" style="color:#b0e870">&#x1F491; 72%</span>
+        <span class="score-mini" style="color:#4BE9B9">&#x1F91D; 80%</span>
+      </div>
+    </div>
+    <span class="toggle-arrow">&#x25BC;</span>
+  </div>
+  <div class="entrada-body">
+    <div class="score-bars">
+      <div class="score-bar-row">
+        <span class="sb-label">Pareja</span>
+        <div class="sb-track"><div class="sb-fill" style="width:72%;background:#b0e870"></div></div>
+        <span class="sb-val" style="color:#b0e870">72%</span>
+      </div>
+      <div class="score-bar-row">
+        <span class="sb-label">Negocios</span>
+        <div class="sb-track"><div class="sb-fill" style="width:80%;background:#4BE9B9"></div></div>
+        <span class="sb-val" style="color:#4BE9B9">80%</span>
+      </div>
+    </div>
+    <div class="desc-tabs">
+      <div class="desc-tab-bar">
+        <button class="dtab active" onclick="showTab(this,'pareja','8-9')">Pareja</button>
+        <button class="dtab" onclick="showTab(this,'negocios','8-9')">Negocios</button>
+      </div>
+      <div class="desc-content" id="tab-pareja-8-9">
+        <p class="desc-text">El 8 aporta poder de manifestación; el 9 aporta sabiduría y propósito. El 9 puede enseñarle al 8 que el poder al servicio de algo mayor es más satisfactorio que el poder por el poder. El 8 puede enseñarle al 9 que las buenas intenciones necesitan poder real para materializarse.</p>
+      </div>
+      <div class="desc-content hidden" id="tab-negocios-8-9">
+        <p class="desc-text">Combinación poderosa para empresas con propósito. El 8 asegura que la empresa sea financieramente sólida; el 9 asegura que la empresa tenga misión y legado. Construyen organizaciones que trascienden a sus fundadores.</p>
+      </div>
+    </div>
+    <div class="dinamica-box"><span class="din-label">Dinamica:</span> El poder al servicio de la sabiduría. Una de las combinaciones más maduras.</div>
+    <div class="consejo-box"><span class="con-label">Consejo:</span> Construyan algo que trascienda a los dos. Su legado compartido es más valioso que cualquier logro individual.</div>
+  </div>
+</article>
+<article class="entrada" id="par-9-9">
+  <div class="entrada-header" onclick="toggleEntry(this)">
+    <span class="par-num">9&times;9</span>
+    <div class="par-info">
+      <h3 class="entrada-titulo">Dos Humanistas — Amor Universal</h3>
+      <div class="par-scores">
+        <span class="score-mini" style="color:#4BE9B9">&#x1F491; 82%</span>
+        <span class="score-mini" style="color:#b0e870">&#x1F91D; 68%</span>
+      </div>
+    </div>
+    <span class="toggle-arrow">&#x25BC;</span>
+  </div>
+  <div class="entrada-body">
+    <div class="score-bars">
+      <div class="score-bar-row">
+        <span class="sb-label">Pareja</span>
+        <div class="sb-track"><div class="sb-fill" style="width:82%;background:#4BE9B9"></div></div>
+        <span class="sb-val" style="color:#4BE9B9">82%</span>
+      </div>
+      <div class="score-bar-row">
+        <span class="sb-label">Negocios</span>
+        <div class="sb-track"><div class="sb-fill" style="width:68%;background:#b0e870"></div></div>
+        <span class="sb-val" style="color:#b0e870">68%</span>
+      </div>
+    </div>
+    <div class="desc-tabs">
+      <div class="desc-tab-bar">
+        <button class="dtab active" onclick="showTab(this,'pareja','9-9')">Pareja</button>
+        <button class="dtab" onclick="showTab(this,'negocios','9-9')">Negocios</button>
+      </div>
+      <div class="desc-content" id="tab-pareja-9-9">
+        <p class="desc-text">Una relación de gran compasión, sabiduría compartida y servicio mutuo. Dos 9 se entienden en los niveles más profundos de la experiencia humana. El riesgo: ambos pueden ser tan desapegados que la relación se vuelve más filosófica que íntima.</p>
+      </div>
+      <div class="desc-content hidden" id="tab-negocios-9-9">
+        <p class="desc-text">Extraordinarios para organizaciones sociales y educativas. El problema en negocios convencionales: ambos son mejores dando que recibiendo, lo que puede hacer difícil la rentabilidad. Necesitan apoyo en la parte financiera y comercial.</p>
+      </div>
+    </div>
+    <div class="dinamica-box"><span class="din-label">Dinamica:</span> Profunda, sabia y orientada al servicio. Necesita recordar que también merecen recibir.</div>
+    <div class="consejo-box"><span class="con-label">Consejo:</span> El mundo necesita vuestra sabiduría — pero necesitan que sean sostenibles para poder darlela. Aprendan a recibir con la misma gracia con que dan.</div>
+  </div>
+</article>
+</div>
+
+<div id="cap3" class="chapter">
+  <div class="ch-eyebrow">Capitulo 3</div>
+  <h2 class="ch-h2">El Calendario de Alineacion</h2>
+  <div class="intro-box"><p>El calendario de alineación es la herramienta más práctica de la Lectura de Compatibilidad Armónica. Toma los cinco ciclos de biorritmo de ambas personas para los próximos 15 días y calcula, para cada día, qué tan coincidentes son sus energías — ajustando los pesos según el propósito de la interacción.</p><p>El resultado es un score del 0 al 100% por día, con etiquetas de calidad y la identificación automática del día óptimo del período.</p></div>
+  <div class="seccion-card">
+    <div class="sec-titulo">Cómo interpretar el score diario</div>
+    <div class="sec-texto"><p>El score diario no mide si algo bueno o malo va a pasar ese día. Mide la coincidencia de los recursos energéticos disponibles para ambas personas simultáneamente.</p><p>Un score de 90% significa que ambas personas tienen sus ciclos en fases similares y positivas — es el momento en que los dos están, por así decirlo, "en el mismo canal". Las conversaciones fluyen, las decisiones se toman con mayor claridad, la energía de encuentro es favorable.</p><p>Un score de 30% no significa que ese día será malo — significa que los ciclos de las dos personas están en fases distintas o bajas simultáneamente. Puede ser un día perfectamente funcional para actividades rutinarias pero no es el ideal para conversaciones importantes, firmas de contratos o encuentros con alta carga emocional.</p><p>Los días críticos (cuando algún ciclo cruza el cero) requieren atención especial — son momentos de transición donde las respuestas pueden ser menos predecibles de lo habitual.</p></div>
+  </div><div class="seccion-card">
+    <div class="sec-titulo">Las etiquetas de calidad</div>
+    <div class="sec-texto"><p>Excepcional (85-100%): Alineación máxima. Ambas personas tienen sus principales ciclos en fase positiva simultáneamente. El mejor tipo de día para encuentros significativos, decisiones importantes, negociaciones o conversaciones de fondo.</p><p>Alta (72-84%): Por encima del promedio. Buen día para la mayoría de interacciones importantes. La energía compartida es favorable y las condiciones son propicias.</p><p>Moderada (58-71%): Zona neutra. Interacciones normales funcionan bien. No es el día ideal para los asuntos más delicados pero es perfectamente funcional.</p><p>Compleja (44-57%): Algunos ciclos en fases distintas. Requiere mayor consciencia y comunicación. Las diferencias de ritmo pueden generar pequeñas fricciones.</p><p>Desafiante (0-43%): Ciclos significativamente distintos o en fases bajas simultáneas. No es el mejor momento para interacciones de alta intensidad. Preferible posponer decisiones importantes.</p></div>
+  </div><div class="seccion-card">
+    <div class="sec-titulo">Cómo usar el calendario según el propósito</div>
+    <div class="sec-texto"><p>Pareja — El ciclo emocional (28 días) tiene el mayor peso. Los mejores días para conversaciones profundas, decisiones de relación y momentos de intimidad son aquellos en que ambos tienen el ciclo emocional en fase positiva simultáneamente. Los días de ciclo emocional bajo de alguno de los dos son días para la comprensión y la paciencia, no para las conversaciones difíciles.</p><p>Negocios — El ciclo intelectual (33 días) lidera, seguido del físico. Los mejores días para negociaciones, presentaciones, firmas y decisiones estratégicas son aquellos en que ambos tienen el ciclo intelectual en fase positiva. Estos son los días en que ambas mentes están más agudas y la comunicación es más efectiva.</p><p>Reunión puntual — Peso equilibrado entre físico, emocional e intelectual. Se busca un día en que ambas personas tengan buen nivel de energía general, no necesariamente picos en un ciclo específico.</p><p>Decisión importante — El ciclo intelectual e intuitivo son los más relevantes. Cuando ambos tienen alta intuición e inteligencia simultáneamente, las decisiones tomadas tienen mayor tasa de acierto a largo plazo.</p></div>
+  </div><div class="seccion-card">
+    <div class="sec-titulo">El día óptimo — cómo encontrarlo</div>
+    <div class="sec-texto"><p>El sistema identifica automáticamente el día de mayor score en los próximos 15 días y lo marca como "Día Óptimo". Este es el momento de mayor alineación energética del período analizado.</p><p>Cuando necesites planear algo importante — una conversación que cambiaría el curso de una relación, una firma de contrato, una propuesta de negocio, un encuentro que tiene peso — el día óptimo es la fecha que el sistema te recomienda.</p><p>Una práctica: cuando el día óptimo corresponde a una fecha posible en tu agenda, priorízala. Cuando no es posible, elige el siguiente día de score más alto. Incluso elegir entre un día de 85% y uno de 55% puede marcar la diferencia en cómo se desarrolla el encuentro.</p><p>Nota importante: el día óptimo no garantiza el resultado. Es el mejor terreno disponible. Lo que siembras en ese terreno sigue dependiendo de ti.</p></div>
+  </div>
+</div>
+
+<div id="cap4" class="chapter">
+  <div class="ch-eyebrow">Capitulo 4</div>
+  <h2 class="ch-h2">Como Leer tu Lectura</h2>
+  <div class="intro-box"><p>Tener los números es el comienzo. Saber leerlos sin perderse en ellos — eso es la madurez espiritual e intelectual que este libro intenta cultivar.</p></div>
+  <div class="seccion-card">
+    <div class="sec-titulo">Cuando los sistemas se contradicen</div>
+    <div class="sec-texto"><p>Ocurrirá. Un par puede tener una compatibilidad numerológica de 85% (muy alta) y una combinación de elementos astrológicos de 62% (moderada). ¿Cuál prevalece?</p><p>La respuesta depende de lo que estás evaluando. Si quieres saber si la relación tiene futuro a largo plazo, el factor numerológico pesa más — el carácter es más permanente que los ciclos. Si quieres saber si hoy es buen día para una conversación específica, el biorritmo importa más que el carácter base.</p><p>El score ponderado que genera la app integra todos los factores con los pesos definidos. Úsalo como guía, no como veredicto. Dos personas con 65% de compatibilidad global pueden tener una relación extraordinaria si ambas están comprometidas con el crecimiento mutuo. Dos personas con 90% pueden arruinar la relación por falta de comunicación.</p></div>
+  </div><div class="seccion-card">
+    <div class="sec-titulo">Lo que los números no pueden decir</div>
+    <div class="sec-texto"><p>Los sistemas de compatibilidad armónica no pueden medir la voluntad. Y la voluntad es, a largo plazo, el factor más determinante en cualquier relación.</p><p>No pueden medir si ambas personas están comprometidas con crecer juntas. No pueden medir el nivel de consciencia con que cada uno aborda sus propios patrones de sombra. No pueden medir la calidad de la comunicación que ambos han desarrollado — o están dispuestos a desarrollar.</p><p>Una combinación numerológica "difícil" entre dos personas que trabajan conscientemente su relación puede producir algo más rico y duradero que una combinación "perfecta" entre personas que no hacen ese trabajo.</p><p>Usa los números como mapas, no como territorios. El mapa es útil para navegar. El territorio eres tú.</p></div>
+  </div><div class="seccion-card">
+    <div class="sec-titulo">Compatibilidad y libre albedrío</div>
+    <div class="sec-texto"><p>Hay una tensión filosófica en el uso de cualquier sistema de predicción: si el universo ya sabe qué va a pasar, ¿para qué elegir?</p><p>La respuesta que proponemos es pragmática: estos sistemas no predicen el futuro — describen tendencias. Una tendencia es una probabilidad, no un destino. Conocer las tendencias te permite trabajar con ellas en lugar de contra ellas.</p><p>Si sabes que tu pareja y tú tienen ciclos emocionales que suelen estar desfasados en ciertas fechas, puedes elegir no tener las conversaciones más difíciles en esas fechas — no porque el universo lo prohíba, sino porque tienes información que te permite elegir mejor el momento.</p><p>Eso es exactamente lo que hace un buen navegante: no controla el viento, pero aprende a leerlo para usarlo a su favor.</p></div>
+  </div>
+</div>
+
+<div style="text-align:center;padding:36px 0 18px;border-top:1px solid var(--border);margin-top:20px">
+  <p style="font-family:Cinzel,serif;font-size:.58rem;letter-spacing:.4em;color:var(--text3)">COMPATIBILIDAD ARMONICA &middot; PROMPTESTUDIO.COM</p>
+  <div style="margin-top:10px;display:flex;gap:14px;justify-content:center;flex-wrap:wrap">
+    <a href="libro_lectura_armonica.html" style="color:var(--a);text-decoration:none;font-size:.72rem">&larr; Libro Individual</a>
+    <a href="compatibilidad_armonica_app.html" style="color:var(--a);text-decoration:none;font-size:.72rem">&rarr; Ir a la App</a>
+  </div>
+</div>
+
+</div></main>
+<button class="mob-btn" onclick="toggleSidebar()">&#9776;</button>
+<script>
+function setTheme(t){document.body.setAttribute('data-theme',t);localStorage.setItem('cb_theme',t);}
+(function(){document.body.setAttribute('data-theme',localStorage.getItem('cb_theme')||'dark');})();
+function setActive(el){document.querySelectorAll('.sb-nav a').forEach(a=>a.classList.remove('active'));el.classList.add('active');if(window.innerWidth<=700)document.getElementById('sidebar').classList.remove('open');}
+function toggleEntry(h){const b=h.nextElementSibling,a=h.querySelector('.toggle-arrow'),open=b.classList.contains('open');b.classList.toggle('open',!open);if(a)a.style.transform=open?'':'rotate(180deg)';}
+function showTab(btn,tipo,key){const c=btn.closest('.desc-tabs');c.querySelectorAll('.dtab').forEach(b=>b.classList.remove('active'));c.querySelectorAll('.desc-content').forEach(x=>x.classList.add('hidden'));btn.classList.add('active');const t=document.getElementById('tab-'+tipo+'-'+key);if(t)t.classList.remove('hidden');}
+function buscar(q){const t=q.toLowerCase().trim();if(!t){document.querySelectorAll('.entrada,.sistema-card,.seccion-card').forEach(e=>e.style.display='');return;}document.querySelectorAll('.entrada,.sistema-card,.seccion-card').forEach(e=>{e.style.display=e.textContent.toLowerCase().includes(t)?'':'none';});}
+function toggleSidebar(){document.getElementById('sidebar').classList.toggle('open');}
+const main=document.querySelector('.main');
+main.addEventListener('scroll',()=>{let c='';document.querySelectorAll('[id]').forEach(s=>{if(s.offsetTop-80<=main.scrollTop)c=s.id;});if(c)document.querySelectorAll('.sb-nav a').forEach(a=>{a.classList.toggle('active',a.getAttribute('href')==='#'+c);});});
+document.querySelectorAll('.entrada')[0]?.querySelector('.entrada-header')?.click();
+</script>
+
+<style>
+.oaq-footer{position:fixed;left:0;right:0;bottom:0;z-index:9999;background:var(--card2);border-top:1px solid var(--border);padding:10px 16px;display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap;text-align:center;box-shadow:0 -4px 16px rgba(0,0,0,0.25);font-family:'Raleway',sans-serif;}
+.oaq-footer p{margin:0;font-size:.82rem;color:var(--text);}
+.oaq-footer .oaq-brand{font-weight:700;color:var(--a);}
+.oaq-footer a{color:var(--a);text-decoration:none;font-weight:600;white-space:nowrap;}
+.oaq-footer a:hover{text-decoration:underline;}
+@media(max-width:600px){.oaq-footer{font-size:.76rem;padding:8px 10px;}}
+</style>
+<footer class="oaq-footer">
+  <p><span class="oaq-brand">OA QUANT</span> — ¿Disfrutando la lectura? Recuerda que hay más contenido como este en el catálogo.</p>
+  <a href="#" onclick="alert('Aquí iría el link al catálogo OA QUANT.');return false;">Ver catálogo →</a>
+</footer>
+
+</body></html>

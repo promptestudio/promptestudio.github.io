@@ -1,0 +1,1647 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Lectura Armónica Espiritual — El Libro</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Cinzel:wght@400;600;700&family=Raleway:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0a0614;--bg2:#0f0a1e;--bg3:#150f28;
+  --card:#1a1330;--card2:#221940;
+  --accent:#c9a0ff;--gold:#e8c86d;--gold2:#f5e0a0;
+  --teal:#7be8cc;--red:#e87070;--orange:#e8a870;
+  --text:#f0eaf8;--text2:#b8a0d0;--text3:#6a5880;
+  --border:rgba(180,140,255,0.12);--border2:rgba(180,140,255,0.28);
+  --nav-w:280px;
+}
+[data-theme=light]{
+  --bg:#faf7ff;--bg2:#f3eeff;--bg3:#ede5ff;
+  --card:#fff;--card2:#f8f3ff;
+  --accent:#7040c0;--gold:#8b6000;--gold2:#5a3e00;
+  --teal:#0a7060;--red:#c03030;--orange:#8b4500;
+  --text:#1a0f2e;--text2:#4a3570;--text3:#8070a0;
+  --border:rgba(100,60,180,0.12);--border2:rgba(100,60,180,0.28);
+}
+[data-theme=sepia]{
+  --bg:#1a1408;--bg2:#201a0c;--bg3:#2a2210;
+  --card:#261e0c;--card2:#2e2610;
+  --accent:#e8c87a;--gold:#e8c87a;--text:#f5e8c0;
+  --text2:#c8a870;--text3:#806840;
+  --border:rgba(200,160,80,0.15);--border2:rgba(200,160,80,0.35);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'Raleway',sans-serif;display:flex;min-height:100vh}
+
+/* ── SIDEBAR ── */
+.sidebar{width:var(--nav-w);flex-shrink:0;background:var(--bg2);border-right:1px solid var(--border);
+  height:100vh;position:sticky;top:0;overflow-y:auto;display:flex;flex-direction:column}
+.sidebar-brand{padding:24px 20px 16px;border-bottom:1px solid var(--border)}
+.sidebar-brand h1{font-family:'Cinzel',serif;font-size:.8rem;letter-spacing:.2em;color:var(--accent);line-height:1.4}
+.sidebar-brand p{font-size:.7rem;color:var(--text3);margin-top:4px}
+
+/* Search */
+.sidebar-search{padding:12px 16px;border-bottom:1px solid var(--border)}
+.search-input{width:100%;background:var(--bg3);border:1px solid var(--border2);border-radius:6px;
+  padding:8px 12px;color:var(--text);font-family:'Raleway',sans-serif;font-size:.8rem;outline:none}
+.search-input::placeholder{color:var(--text3)}
+
+/* Nav */
+.sidebar-nav{flex:1;padding:12px 0}
+.nav-section{padding:8px 16px 4px;font-size:.58rem;letter-spacing:.25em;color:var(--text3);text-transform:uppercase}
+.sidebar-nav ul{list-style:none}
+.sidebar-nav li a{display:block;padding:7px 20px;font-size:.78rem;color:var(--text2);
+  text-decoration:none;transition:all .15s;border-left:2px solid transparent}
+.sidebar-nav li a:hover{color:var(--accent);background:rgba(201,160,255,0.05)}
+.sidebar-nav li a.active{color:var(--accent);border-left-color:var(--accent);background:rgba(201,160,255,0.08)}
+
+/* Theme switcher */
+.theme-bar{padding:12px 16px;border-top:1px solid var(--border);display:flex;gap:6px;align-items:center}
+.theme-bar span{font-size:.65rem;color:var(--text3);letter-spacing:.1em;margin-right:4px}
+.t-btn{width:20px;height:20px;border-radius:50%;border:2px solid var(--border2);cursor:pointer;transition:transform .2s}
+.t-btn:hover{transform:scale(1.2)}
+.t-btn[data-t=dark]{background:#0a0614}
+.t-btn[data-t=light]{background:linear-gradient(135deg,#faf7ff,#c9a0ff)}
+.t-btn[data-t=sepia]{background:linear-gradient(135deg,#1a1408,#e8c87a)}
+
+/* ── MAIN ── */
+.main{flex:1;overflow-y:auto;height:100vh}
+.content{max-width:780px;margin:0 auto;padding:40px 32px 100px}
+
+/* Chapter headers */
+.chapter{margin-bottom:64px}
+.chapter-eyebrow{font-family:'Cinzel',serif;font-size:.65rem;letter-spacing:.5em;
+  color:var(--gold);text-transform:uppercase;margin-bottom:12px}
+.chapter h2{font-family:'Cinzel',serif;font-size:clamp(1.6rem,3vw,2.2rem);
+  font-weight:700;color:var(--text);margin-bottom:20px;line-height:1.25}
+.chapter-intro{font-family:'Cormorant Garamond',serif;font-size:1.05rem;
+  color:var(--text2);line-height:1.8;margin-bottom:36px;
+  padding:20px 24px;background:rgba(201,160,255,0.04);
+  border-left:3px solid var(--gold);border-radius:0 8px 8px 0}
+
+/* Indice rápido */
+.indice-rapido{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:32px;
+  padding:16px;background:var(--bg2);border:1px solid var(--border);border-radius:10px}
+.indice-label{width:100%;font-size:.65rem;letter-spacing:.2em;color:var(--text3);
+  text-transform:uppercase;margin-bottom:8px;font-family:'Cinzel',serif}
+.idx-item{font-size:.75rem;padding:4px 10px;border-radius:20px;text-decoration:none;
+  background:var(--bg3);border:1px solid var(--border);color:var(--text2);
+  transition:all .15s}
+.idx-item:hover{border-color:var(--accent);color:var(--accent)}
+.idx-item.maestro{border-color:rgba(232,200,109,0.4);color:var(--gold)}
+
+/* Entries */
+.entrada{background:var(--card);border:1px solid var(--border);border-radius:14px;
+  margin-bottom:16px;overflow:hidden;scroll-margin-top:24px;
+  transition:border-color .2s}
+.entrada:hover{border-color:var(--border2)}
+.entrada.maestro{border-color:rgba(232,200,109,0.3)}
+.entrada-header{padding:18px 22px;display:flex;align-items:center;gap:16px;
+  border-bottom:1px solid var(--border);cursor:pointer;
+  background:rgba(201,160,255,0.02)}
+.entrada-header:hover{background:rgba(201,160,255,0.05)}
+.entrada-emoji{font-size:2rem;line-height:1}
+.entrada-titulo{font-family:'Cinzel',serif;font-size:1rem;color:var(--text);margin-bottom:4px}
+.entrada-meta{font-size:.72rem;color:var(--text3);letter-spacing:.05em}
+.entrada-body{padding:22px;display:none}
+.entrada-body.open{display:block;animation:fadeIn .25s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+
+.num-grande{font-family:'Cinzel',serif;font-size:3rem;font-weight:700;
+  color:var(--accent);line-height:1;min-width:52px;text-align:center}
+.num-grande.maestro{color:var(--gold)}
+.maestro-tag{display:inline-block;background:var(--gold);color:#0a0614;
+  font-size:.6rem;font-weight:700;letter-spacing:.1em;padding:2px 8px;border-radius:20px;vertical-align:middle}
+
+.arcano-romano{font-family:'Cinzel',serif;font-size:1.8rem;color:var(--text3);
+  min-width:52px;text-align:center}
+
+.chakra-color-dot{width:40px;height:40px;border-radius:50%;flex-shrink:0;
+  border:2px solid rgba(255,255,255,0.1)}
+
+.ficha-rapida{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px}
+.ficha-item{font-size:.75rem;padding:4px 12px;border-radius:20px;
+  background:var(--bg3);border:1px solid var(--border);color:var(--text2)}
+
+.texto-principal{font-family:'Cormorant Garamond',serif;font-size:1rem;
+  color:var(--text2);line-height:1.78;margin-bottom:16px}
+.texto-principal p{margin-bottom:12px}
+
+.don-sombra{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}
+.don,.sombra{font-size:.82rem;padding:10px 14px;border-radius:8px;line-height:1.5}
+.don{background:rgba(123,232,204,0.06);border:1px solid rgba(123,232,204,0.15);color:var(--teal)}
+.sombra{background:rgba(232,112,112,0.06);border:1px solid rgba(232,112,112,0.15);color:var(--red)}
+.don strong,.sombra strong{display:block;margin-bottom:4px;font-size:.7rem;letter-spacing:.1em}
+
+.consejo-box{background:rgba(232,200,109,0.06);border:1px solid rgba(232,200,109,0.2);
+  border-radius:8px;padding:12px 16px;font-size:.85rem;color:var(--gold2);
+  line-height:1.6;margin-bottom:14px}
+
+.afirmacion{border-left:3px solid var(--accent);padding:10px 16px;
+  font-family:'Cormorant Garamond',serif;font-size:1rem;font-style:italic;
+  color:var(--text2);line-height:1.6;margin:0}
+
+/* Fases biorritmo */
+.fases-grid{display:grid;grid-template-columns:1fr;gap:8px;margin-top:16px}
+.fase-card{background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:12px 14px}
+.fase-nombre{font-family:'Cinzel',serif;font-size:.72rem;color:var(--accent);
+  letter-spacing:.08em;margin-bottom:5px}
+.fase-texto{font-size:.82rem;color:var(--text2);line-height:1.55}
+
+/* Intro page */
+.intro-page{text-align:center;padding:60px 0 48px;border-bottom:1px solid var(--border);margin-bottom:48px}
+.intro-sigil{font-size:3.5rem;margin-bottom:20px;display:block}
+.intro-eyebrow{font-family:'Cinzel',serif;font-size:.65rem;letter-spacing:.5em;
+  color:var(--gold);text-transform:uppercase;margin-bottom:16px}
+.intro-h1{font-family:'Cinzel',serif;font-size:clamp(1.8rem,4vw,2.8rem);
+  font-weight:700;margin-bottom:12px;line-height:1.2}
+.intro-autor{font-family:'Cormorant Garamond',serif;font-size:1rem;
+  color:var(--text2);font-style:italic;margin-bottom:32px}
+.intro-texto{font-family:'Cormorant Garamond',serif;font-size:1.05rem;
+  color:var(--text2);line-height:1.8;text-align:left;
+  max-width:640px;margin:0 auto}
+.intro-texto p{margin-bottom:16px}
+
+/* Mobile */
+.mob-menu-btn{display:none;position:fixed;bottom:20px;right:20px;z-index:200;
+  width:50px;height:50px;border-radius:50%;background:var(--accent);
+  color:#0a0614;border:none;font-size:1.4rem;cursor:pointer;
+  box-shadow:0 4px 20px rgba(0,0,0,0.4)}
+@media(max-width:700px){
+  .sidebar{position:fixed;left:-100%;z-index:100;transition:left .3s}
+  .sidebar.open{left:0}
+  .mob-menu-btn{display:flex;align-items:center;justify-content:center}
+  .don-sombra{grid-template-columns:1fr}
+  .content{padding:24px 16px 80px}
+}
+</style>
+</head>
+<body data-theme="dark">
+
+<!-- SIDEBAR -->
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-brand">
+    <h1>✦ Lectura Armónica<br>Espiritual</h1>
+    <p>El Libro Completo · PromptEstudio.com</p>
+  </div>
+  <div class="sidebar-search">
+    <input class="search-input" id="searchInput" placeholder="Buscar: signo, número, arcano…" oninput="buscar(this.value)">
+  </div>
+  <nav class="sidebar-nav">
+    <div class="nav-section">Contenido</div>
+    <ul>
+      <li><a href="#intro" onclick="setActive(this)">Introducción</a></li>
+      <li><a href="#cap1" onclick="setActive(this)">1. Los Doce Signos</a></li>
+      <li><a href="#cap2" onclick="setActive(this)">2. Numerología</a></li>
+      <li><a href="#cap2b" onclick="setActive(this)" style="padding-left:32px;font-size:.74rem">· Los Números CDV</a></li>
+      <li><a href="#cap3" onclick="setActive(this)">3. Tarot — 22 Arcanos</a></li>
+      <li><a href="#cap4" onclick="setActive(this)">4. Biorritmo</a></li>
+      <li><a href="#cap5a" onclick="setActive(this)">5. Chakras</a></li>
+      <li><a href="#cap5b" onclick="setActive(this)">6. Arquetipos de Jung</a></li>
+      <li><a href="#apendice" onclick="setActive(this)">Apéndice Rápido</a></li>
+    </ul>
+  </nav>
+  <div class="theme-bar">
+    <span>Tema:</span>
+    <div class="t-btn" data-t="dark"  title="Oscuro"  onclick="setTheme('dark')"></div>
+    <div class="t-btn" data-t="light" title="Claro"   onclick="setTheme('light')"></div>
+    <div class="t-btn" data-t="sepia" title="Sepia"   onclick="setTheme('sepia')"></div>
+  </div>
+</aside>
+
+<!-- MAIN -->
+<main class="main">
+<div class="content">
+
+<!-- INTRO -->
+<div id="intro" class="intro-page">
+  <span class="intro-sigil">🔯</span>
+  <div class="intro-eyebrow">Oswaldo Arredondo Cobo · PromptEstudio.com</div>
+  <h1 class="intro-h1">Lectura Armónica Espiritual</h1>
+  <p class="intro-autor">El mapa completo de tu alma — siete sistemas integrados</p>
+  <div class="intro-texto">
+    <p>Existe una tendencia muy humana a querer ser comprendidos. No solo por los demás — sino por uno mismo. ¿Por qué reacciono así? ¿Por qué me atraen ciertas personas y otras me agotan? ¿Por qué en algunos momentos siento que todo fluye y en otros nada encaja?</p><p>Este libro es una respuesta práctica a esas preguntas. No desde una sola tradición sino desde siete sistemas de conocimiento que la humanidad ha desarrollado a lo largo de milenios para leer los patrones de la existencia humana.</p><p>La Lectura Armónica Espiritual integra astrología, numerología, tarot kabbalístico, biorritmo, cristaloterapia, angelología kabbalística y psicología junguiana en un solo perfil personalizado. Cada sistema aporta una perspectiva diferente sobre el mismo sujeto: tú.</p><p>Una advertencia necesaria: ninguno de estos sistemas determina tu destino. Son mapas, no territorios. Un mapa de Bogotá no te dice qué calles vas a tomar — te muestra las calles que existen para que puedas elegir mejor. Así es como debes usar tu Lectura Armónica.</p><p>Lo que encontrarás en este libro es el conocimiento necesario para leer tu propio mapa con inteligencia. Para eso necesitas entender qué significa cada símbolo, cada número, cada figura. Ese es el propósito de estas páginas.</p><p>La app genera tu lectura. El libro te enseña a comprenderla.</p>
+  </div>
+</div>
+
+<!-- CAP 1: SIGNOS -->
+<div id="cap1" class="chapter">
+  <div class="chapter-eyebrow">Capítulo 1</div>
+  <h2>Capítulo 1: Los Doce Signos del Zodíaco</h2>
+  <div class="chapter-intro">La astrología parte de una premisa poética y filosófica: el momento de tu nacimiento imprime en tu carácter la energía que dominaba el cielo en ese instante. El Sol, en su recorrido anual por la eclíptica, pasa por doce constelaciones — los doce signos del zodíaco — y cada una de ellas confiere cualidades distintas a quienes nacen bajo su influencia.</p><p>Cada signo pertenece a un elemento (Fuego, Tierra, Aire, Agua), una modalidad (Cardinal, Fijo, Mutable) y tiene un planeta regente. Comprender estas tres coordenadas es comprender el carácter esencial de cualquier signo.</p><p>Los cuatro elementos describen el temperamento básico. El Fuego impulsa, inspira y actúa. La Tierra construye, materializa y persiste. El Aire conecta, comunica y conceptualiza. El Agua siente, intuye y transforma.</p><p>Las tres modalidades describen el estilo de acción. Los signos Cardinales inician — son los emprendedores del zodíaco. Los signos Fijos sostienen — son los que llevan las cosas a término. Los signos Mutables adaptan — son los navegantes del cambio.</div>
+  <div class="indice-rapido">
+    <div class="indice-label">Ir a signo →</div>
+    <a class="idx-item" href="#signo-aries">♈ Aries</a><a class="idx-item" href="#signo-tauro">♉ Tauro</a><a class="idx-item" href="#signo-géminis">♊ Géminis</a><a class="idx-item" href="#signo-cáncer">♋ Cáncer</a><a class="idx-item" href="#signo-leo">♌ Leo</a><a class="idx-item" href="#signo-virgo">♍ Virgo</a><a class="idx-item" href="#signo-libra">♎ Libra</a><a class="idx-item" href="#signo-escorpio">♏ Escorpio</a><a class="idx-item" href="#signo-sagitario">♐ Sagitario</a><a class="idx-item" href="#signo-capricornio">♑ Capricornio</a><a class="idx-item" href="#signo-acuario">♒ Acuario</a><a class="idx-item" href="#signo-piscis">♓ Piscis</a>
+  </div>
+  <article class="entrada" id="signo-aries">
+  <div class="entrada-header">
+    <span class="entrada-emoji">♈</span>
+    <div>
+      <h3 class="entrada-titulo">Aries</h3>
+      <div class="entrada-meta">21 de marzo – 19 de abril · Fuego · Cardinal · Marte</div>
+    </div>
+  </div>
+  <div class="entrada-body">
+    <div class="ficha-rapida">
+      <span class="ficha-item">💎 Rubí</span>
+      <span class="ficha-item">🎨 Rojo carmín</span>
+      <span class="ficha-item">⚙ Hierro</span>
+    </div>
+    <div class="texto-principal"><p>Aries es el primero del zodíaco y lo sabe. Hay en él una energía de comienzo absoluto — la misma que tiene el primer brote de primavera empujando a través del suelo helado. No le pregunta al suelo si puede pasar. Simplemente empuja.</p><p>La persona de Aries viene a este mundo con una misión: iniciar. Su naturaleza cardinal de fuego lo convierte en el pionero por excelencia. Donde otros dudan, Aries actúa. Donde otros analizan el riesgo, Aries ya está cruzando la puerta.</p><p>Marte, su planeta regente, le confiere una energía marcial — no necesariamente agresiva, aunque puede serlo. Es más una energía de propósito, de movimiento dirigido hacia un objetivo. El ariano que ha madurado no pelea por pelear: pelea por lo que le importa, y cuando le importa algo, va con todo.</p><p>La mayor fortaleza de Aries es su valentía sin pretensiones. No necesita prepararse durante meses para actuar. Confía en que el camino se revela mientras camina. Esta actitud, que puede parecer imprudente desde afuera, es en realidad una forma de fe profunda en la vida.</p><p>Su mayor desafío es la impaciencia. El fuego cardinal quiere resultados ahora. Cuando no llegan, Aries puede abandonar justo antes de que la semilla germine, dejando un rastro de proyectos brillantes a medias. La madurez del ariano llega cuando aprende que algunos fuegos hay que mantenerlos encendidos durante meses para que calienten de verdad.</p><p>En las relaciones, Aries ama con la misma intensidad con la que vive: todo o nada. Es apasionado, directo y sin rodeos emocionales. Dice lo que siente en el momento en que lo siente, lo cual puede ser un regalo o un desafío dependiendo de quién lo recibe.</p><p>Para usar tu energía ariana: actúa cuando sientas el impulso pero aprende a completar lo que empiezas. Tu fuego más poderoso no es el que arde más alto sino el que dura más tiempo.</p></div>
+    <div class="don-sombra">
+      <div class="don"><strong>✦ Don:</strong> Coraje, iniciativa, autenticidad sin filtro, capacidad de comenzar lo que otros no se atreven.</div>
+      <div class="sombra"><strong>⚡ Sombra:</strong> Impulsividad, egocentrismo, dificultad para escuchar y para sostener compromisos en el tiempo.</div>
+    </div>
+    <blockquote class="afirmacion">"Actúo con valentía y completo lo que inicio con la misma energía con la que comencé."</blockquote>
+  </div>
+</article>
+<article class="entrada" id="signo-tauro">
+  <div class="entrada-header">
+    <span class="entrada-emoji">♉</span>
+    <div>
+      <h3 class="entrada-titulo">Tauro</h3>
+      <div class="entrada-meta">20 de abril – 20 de mayo · Tierra · Fijo · Venus</div>
+    </div>
+  </div>
+  <div class="entrada-body">
+    <div class="ficha-rapida">
+      <span class="ficha-item">💎 Esmeralda</span>
+      <span class="ficha-item">🎨 Verde bosque</span>
+      <span class="ficha-item">⚙ Cobre</span>
+    </div>
+    <div class="texto-principal"><p>Tauro es la tierra misma hecha signo. Hay en él una calidad de permanencia, de raíz, de presencia que no se agita por el viento. Donde Aries corre hacia el horizonte, Tauro planta los pies en el suelo y construye.</p><p>La combinación de tierra fija bajo el gobierno de Venus produce uno de los temperamentos más ricos y sensuales del zodíaco. El taurino vive a través de sus sentidos — el tacto, el sabor, el sonido, el olfato, la textura de las cosas. Para él, la belleza no es un concepto abstracto: es algo que se puede tocar, saborear, habitar.</p><p>Venus le da un instinto natural para la estética y el valor. El taurino sabe reconocer lo que tiene calidad — en el arte, en las personas, en los materiales, en las experiencias. No le interesa lo descartable. Invierte tiempo y dinero en lo que dura.</p><p>La fijeza de su modalidad le otorga una persistencia legendaria. Cuando Tauro decide algo, puede mantener esa decisión durante años con una consistencia que asombra a los signos mutables. Esta misma cualidad puede convertirse en terquedad — la dificultad para cambiar de rumbo incluso cuando el rumbo necesita cambiarse.</p><p>Su relación con la abundancia es íntima y sin culpa. Tauro entiende que disfrutar de la vida material no es superficial — es una forma de gratitud por estar aquí. Sabe construir prosperidad con paciencia y la mantiene con instinto.</p><p>En el amor, Tauro es leal hasta la médula. No promete lo que no puede cumplir y cumple lo que promete. Sus demostraciones de afecto son físicas, concretas, prácticas — cocina para quien ama, lo abraza, construye un hogar hermoso. No espera fuegos artificiales: espera confiabilidad.</p><p>Para usar tu energía taurina: honra tu necesidad de estabilidad sin convertirla en resistencia al crecimiento. Tu fuerza más profunda es saber lo que vale la pena — incluido tú mismo.</p></div>
+    <div class="don-sombra">
+      <div class="don"><strong>✦ Don:</strong> Lealtad, persistencia, sentido estético, capacidad de materializar sueños en realidades concretas.</div>
+      <div class="sombra"><strong>⚡ Sombra:</strong> Terquedad, posesividad, resistencia al cambio, tendencia a estancarse en zonas de confort.</div>
+    </div>
+    <blockquote class="afirmacion">"Construyo con paciencia y disfruto el proceso tanto como el resultado."</blockquote>
+  </div>
+</article>
+<article class="entrada" id="signo-géminis">
+  <div class="entrada-header">
+    <span class="entrada-emoji">♊</span>
+    <div>
+      <h3 class="entrada-titulo">Géminis</h3>
+      <div class="entrada-meta">21 de mayo – 20 de junio · Aire · Mutable · Mercurio</div>
+    </div>
+  </div>
+  <div class="entrada-body">
+    <div class="ficha-rapida">
+      <span class="ficha-item">💎 Ágata</span>
+      <span class="ficha-item">🎨 Amarillo vivo</span>
+      <span class="ficha-item">⚙ Mercurio</span>
+    </div>
+    <div class="texto-principal"><p>Géminis es la mente en movimiento permanente. Dos columnas que lo sostienen, dos corrientes que lo atraviesan — la curiosidad y la comunicación. Si Aries es el fuego que arranca y Tauro la tierra que sostiene, Géminis es el aire que conecta todo con todo.</p><p>Mercurio, el mensajero de los dioses, rige este signo y lo dota de una agilidad mental que puede parecer desconcertante desde afuera. El geminiano salta de idea en idea no porque sea inconstante sino porque todo genuinamente le interesa. Su mente es una red de conexiones en permanente expansión.</p><p>La modalidad mutable le da flexibilidad radical. Géminis puede adaptarse a casi cualquier ambiente, hablar de casi cualquier tema, asumir casi cualquier perspectiva. Esta versatilidad es un superpoder en la comunicación y puede ser un desafío en la identidad: a veces Géminis pierde el hilo de quién es él cuando no está en relación con alguien.</p><p>Su don más profundo es la síntesis. Puede tomar información de campos aparentemente opuestos y encontrar el puente entre ellos. Los geminianos son a menudo escritores, periodistas, maestros, vendedores, negociadores — cualquier profesión donde la habilidad de transmitir ideas sea central.</p><p>El desafío del geminiano es la profundidad. La mente que todo lo toca tiende a no quedarse en ningún lugar el tiempo suficiente para conocerlo realmente. Aprender a quedarse — en una idea, en una relación, en un proyecto — es el trabajo espiritual de Géminis.</p><p>En el amor, Géminis necesita a alguien que lo estimule intelectualmente. El aburrimiento es su mayor enemigo en las relaciones. Cuando su pareja lo sorprende, cuando la conversación no se acaba, cuando hay algo nuevo que descubrir — el geminiano es el compañero más fascinante del zodíaco.</p><p>Para usar tu energía geminiana: elige conscientemente dónde poner tu atención. Tu mente es un instrumento extraordinario — afínala dirigiéndola hacia los temas que realmente te importan.</p></div>
+    <div class="don-sombra">
+      <div class="don"><strong>✦ Don:</strong> Inteligencia verbal, adaptabilidad, curiosidad insaciable, capacidad de ver múltiples perspectivas.</div>
+      <div class="sombra"><strong>⚡ Sombra:</strong> Dispersión, superficialidad, inconsistencia, dificultad para comprometerse a largo plazo.</div>
+    </div>
+    <blockquote class="afirmacion">"Dirijo mi mente brillante hacia lo que importa y completo lo que empiezo con curiosidad."</blockquote>
+  </div>
+</article>
+<article class="entrada" id="signo-cáncer">
+  <div class="entrada-header">
+    <span class="entrada-emoji">♋</span>
+    <div>
+      <h3 class="entrada-titulo">Cáncer</h3>
+      <div class="entrada-meta">21 de junio – 22 de julio · Agua · Cardinal · Luna</div>
+    </div>
+  </div>
+  <div class="entrada-body">
+    <div class="ficha-rapida">
+      <span class="ficha-item">💎 Piedra Luna</span>
+      <span class="ficha-item">🎨 Plateado</span>
+      <span class="ficha-item">⚙ Plata</span>
+    </div>
+    <div class="texto-principal"><p>Cáncer es el signo del alma. Gobernado por la Luna, el planeta de los ciclos, la memoria y las emociones, Cáncer vive en el mundo interior con la misma intensidad con la que otros viven en el exterior.</p><p>Hay una paradoja en Cáncer que lo define: es el signo del cangrejo — un ser de caparazón duro en la superficie y extremadamente blando en el interior. Esa dureza externa no es falsedad: es protección. Cáncer ha aprendido que su mundo emocional es tan rico y tan vulnerable que necesita cuidar quién tiene acceso.</p><p>Como signo cardinal de agua, Cáncer tiene una capacidad de iniciativa que a veces sorprende. No le cuesta comenzar proyectos cuando estos están conectados con lo que ama. Lo que le cuesta es comenzar desde la razón pura — necesita sentir el propósito de lo que hace.</p><p>La Luna le da una memoria extraordinaria, especialmente para las experiencias emocionales. El canceriano recuerda con precisión cómo lo hicieron sentir — hace años, en circunstancias que otros habrían olvidado. Esta memoria es un tesoro y también un peso: la dificultad para soltar el pasado es uno de sus mayores desafíos.</p><p>Su mayor don es la empatía. Cáncer siente lo que sienten los demás de manera casi física. Esta capacidad lo convierte en el protector, el nutricio, el que crea hogar donde sea que esté. Hay una calidad maternal en Cáncer — independientemente del género — que tiene que ver con crear ambientes donde otros puedan crecer y sentirse seguros.</p><p>En el amor, Cáncer ama profunda e incondicionalmente cuando confía. Pero llegar a ese punto de confianza requiere tiempo. Una vez que lo hace, su lealtad es de las más absolutas del zodíaco.</p><p>Para usar tu energía canceriana: aprende a cuidarte con la misma intensidad con la que cuidas a otros. Tu sensibilidad no es debilidad — es tu inteligencia emocional más sofisticada.</p></div>
+    <div class="don-sombra">
+      <div class="don"><strong>✦ Don:</strong> Empatía profunda, memoria emocional, capacidad de nutrir, instinto protector e intuitivo.</div>
+      <div class="sombra"><strong>⚡ Sombra:</strong> Dependencia emocional, manipulación pasiva, incapacidad para soltar el pasado, victimismo.</div>
+    </div>
+    <blockquote class="afirmacion">"Cuido mi mundo interior con amor y comparto mi profundidad con quienes lo merecen."</blockquote>
+  </div>
+</article>
+<article class="entrada" id="signo-leo">
+  <div class="entrada-header">
+    <span class="entrada-emoji">♌</span>
+    <div>
+      <h3 class="entrada-titulo">Leo</h3>
+      <div class="entrada-meta">23 de julio – 22 de agosto · Fuego · Fijo · Sol</div>
+    </div>
+  </div>
+  <div class="entrada-body">
+    <div class="ficha-rapida">
+      <span class="ficha-item">💎 Ojo de Tigre</span>
+      <span class="ficha-item">🎨 Naranja solar</span>
+      <span class="ficha-item">⚙ Oro</span>
+    </div>
+    <div class="texto-principal"><p>Leo es el rey del zodíaco no porque quiera gobernar sobre otros sino porque porta una luz interior que naturalmente atrae. El Sol, el centro de nuestro sistema solar, rige Leo — y eso lo dice todo. Donde el Sol está, todo gira.</p><p>La combinación de fuego fijo produce uno de los temperamentos más magnéticos y generosos del zodíaco. El leonino arde con una intensidad sostenida — no como el fuego impulsivo de Aries sino como el Sol mismo: constante, cálido, que no pide permiso para brillar.</p><p>Leo es el signo de la identidad creativa. Nació para expresarse, para crear, para dejar huella. Su mayor pregunta existencial no es "¿para qué soy bueno?" sino "¿cómo puedo ser más auténticamente yo mismo?" El bloqueo creativo en Leo no es falta de ideas — es miedo al juicio.</p><p>La generosidad de Leo es genuina y a menudo asombrosa. Comparte su tiempo, su dinero, su energía, su espacio con una amplitud que puede desconcertar. Esto viene de una seguridad interior que los leoninos maduros desarrollan: cuando sabes que eres abundante por dentro, dar no amenaza.</p><p>El desafío de Leo es la necesidad de reconocimiento. No el reconocimiento vanidoso del ego frágil, sino una necesidad más profunda de ser visto, de que lo que da tenga impacto. Cuando esa necesidad no se satisface, Leo puede volverse dramático, rígido o necesitado de atención de formas menos elegantes.</p><p>En el amor, Leo ama con extravagancia. Los gestos grandes, la presencia total, la lealtad inquebrantable. Necesita ser admirado por su pareja — no adulado ciegamente, sino genuinamente apreciado. Cuando se siente visto, Leo es el compañero más cálido del zodíaco.</p><p>Para usar tu energía leonina: lidera desde el servicio, no desde el ego. Tu luz más poderosa es la que ilumina a otros, no la que los encandila.</p></div>
+    <div class="don-sombra">
+      <div class="don"><strong>✦ Don:</strong> Creatividad, generosidad, liderazgo carismático, autenticidad y calor humano irresistibles.</div>
+      <div class="sombra"><strong>⚡ Sombra:</strong> Arrogancia, necesidad excesiva de atención, dificultad para delegar, dramatismo.</div>
+    </div>
+    <blockquote class="afirmacion">"Brilló con autenticidad y mi luz invita a otros a encontrar la suya propia."</blockquote>
+  </div>
+</article>
+<article class="entrada" id="signo-virgo">
+  <div class="entrada-header">
+    <span class="entrada-emoji">♍</span>
+    <div>
+      <h3 class="entrada-titulo">Virgo</h3>
+      <div class="entrada-meta">23 de agosto – 22 de septiembre · Tierra · Mutable · Mercurio</div>
+    </div>
+  </div>
+  <div class="entrada-body">
+    <div class="ficha-rapida">
+      <span class="ficha-item">💎 Jaspe Verde</span>
+      <span class="ficha-item">🎨 Verde salud</span>
+      <span class="ficha-item">⚙ Mercurio</span>
+    </div>
+    <div class="texto-principal"><p>Virgo es el signo del discernimiento. Si Leo brilló en el escenario, Virgo se ocupa de todo lo que hace posible que el espectáculo ocurra — los detalles, la logística, la calidad, el proceso. No busca el centro del escenario: busca que todo funcione perfectamente.</p><p>Tierra mutable regida por Mercurio — una combinación que produce la mente más analítica y práctica del zodíaco. El virginiano puede ver el error en un sistema donde nadie más lo ve. Puede sentir que algo está mal antes de que los datos lo confirmen. Esta habilidad, cuando se aplica al mundo exterior, es invaluable. Cuando se aplica sin freno al yo interior, puede ser paralizante.</p><p>El mayor desafío de Virgo es su relación con la perfección. Hay en él un ideal de cómo deberían ser las cosas — el trabajo, las personas, él mismo — que raramente se cumple en la realidad imperfecta del mundo. Aprender que "suficientemente bueno" puede ser extraordinario es una de sus lecciones espirituales más importantes.</p><p>Virgo tiene uno de los dones más subestimados del zodíaco: el servicio. No el servicio por miedo o por culpa, sino el servicio genuino que nace de querer que el mundo funcione mejor. El virginiano encuentra satisfacción profunda en ser útil de manera concreta y específica.</p><p>Su relación con la salud y el cuerpo es central. Virgo tiende a procesar el estrés físicamente — los nervios hablan a través del sistema digestivo, la tensión se instala en los hombros. Cuando Virgo cuida su cuerpo con la misma atención que pone en todo lo demás, florece.</p><p>En el amor, Virgo es discreto pero profundo. No declama su amor — lo demuestra en gestos pequeños y consistentes: recuerda lo que le gusta, ayuda cuando hay un problema, está presente en lo cotidiano. Su forma de amar es el servicio atento.</p><p>Para usar tu energía virginiana: aplica tu capacidad analítica para construir, no para destruir. Tu discernimiento es un don extraordinario cuando está al servicio de la mejora y no de la crítica.</p></div>
+    <div class="don-sombra">
+      <div class="don"><strong>✦ Don:</strong> Atención al detalle, capacidad de servicio genuino, análisis profundo, habilidad para mejorar sistemas.</div>
+      <div class="sombra"><strong>⚡ Sombra:</strong> Perfeccionismo paralizante, hipercrítica propia y ajena, ansiedad, exceso de análisis.</div>
+    </div>
+    <blockquote class="afirmacion">"Ofrezco lo mejor de mí y acepto que lo mejor de hoy es suficiente."</blockquote>
+  </div>
+</article>
+<article class="entrada" id="signo-libra">
+  <div class="entrada-header">
+    <span class="entrada-emoji">♎</span>
+    <div>
+      <h3 class="entrada-titulo">Libra</h3>
+      <div class="entrada-meta">23 de septiembre – 22 de octubre · Aire · Cardinal · Venus</div>
+    </div>
+  </div>
+  <div class="entrada-body">
+    <div class="ficha-rapida">
+      <span class="ficha-item">💎 Lapislázuli</span>
+      <span class="ficha-item">🎨 Azul cielo</span>
+      <span class="ficha-item">⚙ Cobre</span>
+    </div>
+    <div class="texto-principal"><p>Libra es el signo del equilibrio, la belleza y la justicia. Regido por Venus como Tauro pero desde el elemento Aire, Libra no busca la belleza en los objetos sino en las relaciones, las ideas y los espacios entre las personas.</p><p>Aire cardinal bajo Venus produce el diplomático nato del zodíaco. Libra puede ver claramente todos los lados de una situación — lo cual es su mayor virtud y también la fuente de su mayor frustración: la indecisión. Cuando todo tiene sentido, cuando todos los argumentos son válidos, elegir se vuelve una experiencia casi dolorosa.</p><p>La búsqueda de justicia en Libra es visceral. Las situaciones desequilibradas, las injusticias, los acuerdos desiguales, lo producen físicamente incómodo. No puede descansar en un contexto de injusticia evidente — necesita reestablecrer el equilibrio, aunque sea simbólicamente.</p><p>Libra es el signo de la asociación por excelencia. No está pensado para funcionar solo — necesita al otro para definirse, para contrastar, para crecer. Esto no es dependencia: es una forma de inteligencia relacional que reconoce que la realidad se construye en el diálogo.</p><p>Su don para crear ambientes hermosos es notable. Libra transforma los espacios — físicos, emocionales, conversacionales — en lugares donde otros quieren estar. Hay una elegancia natural en su presencia que no requiere esfuerzo.</p><p>En el amor, Libra es romántico, atento y profundamente comprometido con la armonía del vínculo. Puede sacrificar demasiado para mantener la paz — incluyendo sus propias necesidades. Aprender a decir lo que necesita con la misma claridad con la que escucha al otro es su trabajo espiritual más importante.</p><p>Para usar tu energía libriana: decide desde tu centro, no desde el miedo a decepcionar. Tu equilibrio más poderoso empieza por dentro.</p></div>
+    <div class="don-sombra">
+      <div class="don"><strong>✦ Don:</strong> Diplomacia, sentido de la justicia, elegancia relacional, capacidad de crear belleza y armonía.</div>
+      <div class="sombra"><strong>⚡ Sombra:</strong> Indecisión crónica, complacencia excesiva, evasión del conflicto necesario, superficialidad.</div>
+    </div>
+    <blockquote class="afirmacion">"Elijo desde mi centro y creo relaciones donde todos florecemos."</blockquote>
+  </div>
+</article>
+<article class="entrada" id="signo-escorpio">
+  <div class="entrada-header">
+    <span class="entrada-emoji">♏</span>
+    <div>
+      <h3 class="entrada-titulo">Escorpio</h3>
+      <div class="entrada-meta">23 de octubre – 21 de noviembre · Agua · Fijo · Plutón (Marte)</div>
+    </div>
+  </div>
+  <div class="entrada-body">
+    <div class="ficha-rapida">
+      <span class="ficha-item">💎 Obsidiana</span>
+      <span class="ficha-item">🎨 Púrpura oscuro</span>
+      <span class="ficha-item">⚙ Plutonio</span>
+    </div>
+    <div class="texto-principal"><p>Escorpio es el signo más intenso del zodíaco — no porque busque serlo sino porque no puede ser de otra manera. Agua fija bajo Plutón: profundidad sin movimiento superficial, intensidad que no se disipa, transformación que va hasta el hueso.</p><p>No hay zonas grises en Escorpio. Ama u odia, confía o desconfía, se entrega completamente o no se entrega en absoluto. Esta polaridad no es inmadurez — es la naturaleza del agua fija: cuando toma una forma, la mantiene con una solidez que los signos más flexibles no pueden imaginar.</p><p>Plutón, el planeta de la muerte y la regeneración, le da a Escorpio una relación única con la transformación. El escorpiano no teme los finales porque comprende instintivamente que todo final es el inicio de algo más profundo. Ha muerto y renacido varias veces en sentido metafórico — cada vez que algo que amaba se terminó, cada vez que una creencia que lo definía colapsó.</p><p>Su poder de percepción es sobrenatural. Escorpio lee las motivaciones de las personas con una precisión que puede resultar incómoda. Ve lo que hay detrás de lo que se dice, lo que se oculta detrás de lo que se muestra. Esta capacidad le da una ventaja estratégica pero también una carga: saber demasiado puede ser solitario.</p><p>El desafío de Escorpio es aprender a soltar. Plutón rige también el control — y Escorpio puede aferrarse a personas, situaciones y rencores con una tenacidad que se convierte en veneno propio. El escorpiano que aprende a soltar lo que ya murió es el más libre de todos los signos.</p><p>En el amor, Escorpio es el amante más intenso del zodíaco. Entregado completamente, sin medias tintas, con una lealtad que bordea lo absoluto. Pero exige lo mismo — y puede volverse posesivo cuando siente que la entrega del otro no iguala la suya.</p><p>Para usar tu energía escorpiana: usa tu poder de transformación para construir, no para destruir. Eres el ave fénix del zodíaco — tu mayor habilidad es renacer.</p></div>
+    <div class="don-sombra">
+      <div class="don"><strong>✦ Don:</strong> Profundidad, lealtad absoluta, poder de transformación, percepción de lo oculto.</div>
+      <div class="sombra"><strong>⚡ Sombra:</strong> Celos, venganza, manipulación, control obsesivo, dificultad para confiar y para perdonar.</div>
+    </div>
+    <blockquote class="afirmacion">"Transformo lo que ya no sirve y renazco más poderoso en cada ciclo de mi vida."</blockquote>
+  </div>
+</article>
+<article class="entrada" id="signo-sagitario">
+  <div class="entrada-header">
+    <span class="entrada-emoji">♐</span>
+    <div>
+      <h3 class="entrada-titulo">Sagitario</h3>
+      <div class="entrada-meta">22 de noviembre – 21 de diciembre · Fuego · Mutable · Júpiter</div>
+    </div>
+  </div>
+  <div class="entrada-body">
+    <div class="ficha-rapida">
+      <span class="ficha-item">💎 Turquesa</span>
+      <span class="ficha-item">🎨 Violeta viajero</span>
+      <span class="ficha-item">⚙ Estaño</span>
+    </div>
+    <div class="texto-principal"><p>Sagitario es el filósofo aventurero del zodíaco. Fuego mutable bajo Júpiter — una combinación que produce el espíritu más libre, más optimista y más expansivo del zodíaco. Donde Aries sale por la puerta sin pensarlo y Leo ilumina el escenario, Sagitario dispara su flecha hacia el horizonte y luego va a buscarla.</p><p>J�piter, el planeta de la expansión, la filosofía y la fortuna, le da a Sagitario una visión de la vida a gran escala. El sagitariano no piensa en términos de lo que puede lograr esta semana — piensa en lo que significa su vida, en qué le dice el universo, en cuál es el propósito más amplio de todo esto. Es el signo del sentido.</p><p>Su relación con la libertad es constitutiva. No puede sentirse encadenado — geográficamente, intelectualmente o emocionalmente. Necesita espacio para explorar, para cambiar de opinión, para crecer en direcciones inesperadas. Un sagitariano enjaulado es un sagitariano marchito.</p><p>La modalidad mutable le da una adaptabilidad extraordinaria. Sagitario puede sentirse en casa en culturas distintas, en filosofías opuestas, en compañía de personas muy diferentes. Esta apertura es genuina — el sagitariano raramente juzga desde el prejuicio porque su experiencia del mundo le ha demostrado que la realidad es más rica y extraña de lo que cualquier sistema de creencias puede contener.</p><p>Su mayor desafío es la falta de tacto. Sagitario dice la verdad — su verdad — con una franqueza que puede herir involuntariamente. No es crueldad: es que valora tanto la honestidad que no considera plenamente el impacto de sus palabras en quien las recibe.</p><p>En el amor, Sagitario es apasionado, divertido y filosófico. Necesita una pareja que sea también su compañera de aventura intelectual. La rutina amorosa sin crecimiento lo asfixia. Cuando encuentra a alguien que lo inspira a seguir creciendo, su lealtad es genuina.</p><p>Para usar tu energía sagitariana: aterriza tus visiones en acciones concretas. Tu flecha es extraordinaria — aprende también a construir el arco con paciencia.</p></div>
+    <div class="don-sombra">
+      <div class="don"><strong>✦ Don:</strong> Optimismo genuino, amor por la verdad, visión filosófica, capacidad de inspirar a otros.</div>
+      <div class="sombra"><strong>⚡ Sombra:</strong> Irresponsabilidad, falta de tacto, exceso de idealismo, inconstancia, promesas que no cumple.</div>
+    </div>
+    <blockquote class="afirmacion">"Expando mis horizontes con sabiduría y completo mis aventuras con responsabilidad."</blockquote>
+  </div>
+</article>
+<article class="entrada" id="signo-capricornio">
+  <div class="entrada-header">
+    <span class="entrada-emoji">♑</span>
+    <div>
+      <h3 class="entrada-titulo">Capricornio</h3>
+      <div class="entrada-meta">22 de diciembre – 19 de enero · Tierra · Cardinal · Saturno</div>
+    </div>
+  </div>
+  <div class="entrada-body">
+    <div class="ficha-rapida">
+      <span class="ficha-item">💎 Ónix</span>
+      <span class="ficha-item">🎨 Azul marino</span>
+      <span class="ficha-item">⚙ Plomo</span>
+    </div>
+    <div class="texto-principal"><p>Capricornio es la montaña hecha signo. Tierra cardinal bajo Saturno: la ambición que construye, la disciplina que sostiene, la paciencia que no se dobla ante el tiempo. Si hay un signo que comprende instintivamente que lo mejor se logra lentamente, ese es Capricornio.</p><p>Saturno, el padre del tiempo, le da a Capricornio una relación especial con la realidad. El capricorniano no se hace ilusiones — ve las cosas como son, evalúa los obstáculos con realismo y traza un plan para superarlos. Esta sobriedad puede parecer pesimismo desde afuera pero es en realidad una forma de respeto por la complejidad de la vida.</p><p>Hay algo paradójico en Capricornio: madura al revés. De joven puede parecer serio, rígido, demasiado adulto para su edad. Con el tiempo — especialmente después de los 30 — se abre, se suaviza, aprende a jugar. Los capricornianos mayores suelen tener una ligereza y un humor que sorprenden a quienes solo los conocieron de jóvenes.</p><p>Su relación con la responsabilidad es profunda. Capricornio asume obligaciones que otros esquivan. Cumple lo que promete. Se hace cargo — de sí mismo, de su familia, de sus proyectos. Esta fortaleza puede convertirse en una carga si no aprende a pedir ayuda y a reconocer sus límites.</p><p>El desafío de Capricornio es integrar el éxito exterior con el bienestar interior. Puede escalar la montaña de los logros materiales y profesionales y llegar a la cima sintiendo que algo esencial faltó en el camino. La lección es que la montaña vale la pena solo si el viaje fue vivido completamente.</p><p>En el amor, Capricornio es discreto pero sólido como una roca. No hace grandes declaraciones pero está ahí, consistentemente, año tras año. Su lealtad se mide en décadas, no en meses.</p><p>Para usar tu energía capricorniana: construye hacia afuera pero también hacia adentro. Tu estructura más importante es la que te sostiene a ti mismo.</p></div>
+    <div class="don-sombra">
+      <div class="don"><strong>✦ Don:</strong> Disciplina, ambición con propósito, responsabilidad, capacidad de construir algo duradero.</div>
+      <div class="sombra"><strong>⚡ Sombra:</strong> Rigidez, frialdad emocional, obsesión con el estatus, dificultad para pedir ayuda.</div>
+    </div>
+    <blockquote class="afirmacion">"Construyo con paciencia y me permito celebrar cada paso del camino."</blockquote>
+  </div>
+</article>
+<article class="entrada" id="signo-acuario">
+  <div class="entrada-header">
+    <span class="entrada-emoji">♒</span>
+    <div>
+      <h3 class="entrada-titulo">Acuario</h3>
+      <div class="entrada-meta">20 de enero – 18 de febrero · Aire · Fijo · Urano</div>
+    </div>
+  </div>
+  <div class="entrada-body">
+    <div class="ficha-rapida">
+      <span class="ficha-item">💎 Amatista</span>
+      <span class="ficha-item">🎨 Aguamarina eléctrico</span>
+      <span class="ficha-item">⚙ Uranio</span>
+    </div>
+    <div class="texto-principal"><p>Acuario es el visionario del zodíaco — el que llega al futuro antes que nadie y luego espera, con una paciencia a veces impaciente, a que el resto de la humanidad lo alcance. Aire fijo bajo Urano: ideas que se sostienen, revolución que no se rinde.</p><p>Urano, el planeta de los cambios súbitos, la originalidad y la ruptura de paradigmas, le da a Acuario una mente que funciona en frecuencias que no todos pueden sintonizar. El acuariano no piensa en línea recta — piensa en red, en paradoja, en saltos que para él son obvios pero que para otros parecen absurdos hasta que resultan ser el futuro.</p><p>Hay una tensión constitutiva en Acuario: el signo más comprometido con la humanidad en abstracto puede ser también el más distante con las personas en concreto. Ama a la humanidad profundamente y puede tener dificultades para amar profundamente a los humanos que tiene al lado. Esta paradoja es su trabajo espiritual más importante.</p><p>La fijeza del aire le da una tenacidad ideológica notable. Cuando Acuario cree en algo, no lo suelta fácilmente. Esta consistencia en sus valores es admirable — y puede convertirse en dogmatismo cuando se rigidifica. La paradoja es que el signo más abierto al cambio puede ser también el más resistente a cambiar él mismo.</p><p>Su rebeldía no es adolescente — es filosófica. Acuario cuestiona las estructuras porque genuinamente quiere que el mundo funcione mejor para todos. Su visión es igualitaria por naturaleza: detesta el privilegio arbitrario, la discriminación y cualquier sistema que use el poder para oprimir.</p><p>En el amor, Acuario necesita a un compañero que sea también su amigo. La amistad es para él la base del amor más sólido. Necesita libertad — no para escapar sino para sentirse respetado en su singularidad.</p><p>Para usar tu energía acuariana: aterriza tu visión del mundo en relaciones humanas reales. Tu revolución más poderosa empieza en cómo tratas a las personas que tienes cerca.</p></div>
+    <div class="don-sombra">
+      <div class="don"><strong>✦ Don:</strong> Originalidad, visión del futuro, compromiso con la justicia, inteligencia sistémica y humanitaria.</div>
+      <div class="sombra"><strong>⚡ Sombra:</strong> Frialdad emocional, dogmatismo disfrazado de apertura, distancia con las emociones propias.</div>
+    </div>
+    <blockquote class="afirmacion">"Sirvo a la humanidad comenzando por las personas que tengo cerca, con amor concreto."</blockquote>
+  </div>
+</article>
+<article class="entrada" id="signo-piscis">
+  <div class="entrada-header">
+    <span class="entrada-emoji">♓</span>
+    <div>
+      <h3 class="entrada-titulo">Piscis</h3>
+      <div class="entrada-meta">19 de febrero – 20 de marzo · Agua · Mutable · Neptuno</div>
+    </div>
+  </div>
+  <div class="entrada-body">
+    <div class="ficha-rapida">
+      <span class="ficha-item">💎 Aguamarina</span>
+      <span class="ficha-item">🎨 Azul profundo</span>
+      <span class="ficha-item">⚙ Neptunio</span>
+    </div>
+    <div class="texto-principal"><p>Piscis es el último signo del zodíaco y contiene en sí la memoria de todos los anteriores. Agua mutable bajo Neptuno: el signo más permeable, más intuitivo, más conectado con lo invisible — y también el más susceptible de perderse a sí mismo en esa conexión.</p><p>Neptuno, el planeta de los sueños, la espiritualidad y la ilusión, le da a Piscis acceso a dimensiones de la realidad que otros signos no pueden percibir de la misma manera. El pisciano siente las corrientes emocionales de una habitación antes de que nadie las haya articulado. Siente el dolor ajeno como propio. Percibe lo que no se dice con una claridad que puede ser un don o una carga según qué tan bien haya aprendido a gestionarlo.</p><p>La modalidad mutable le da una fluidez que puede parecer inconstancia pero que en realidad es adaptación. Piscis se amolda a su entorno de manera casi automática — lo cual es extraordinario para la empatía y peligroso para la identidad. El trabajo espiritual de Piscis es aprender a fluir sin disolverse.</p><p>Su relación con el arte, la música, la espiritualidad y la imaginación es visceral. Piscis no solo aprecia la belleza — la necesita para sobrevivir. Los entornos feos, las conversaciones meramente utilitarias, los ambientes sin alma lo agotan. Los entornos hermosos y las conversaciones profundas lo restauran.</p><p>El mayor desafío de Piscis es el límite. Sin límites claros, absorbe lo que hay a su alrededor — el mal humor de otros, las energías pesadas de los espacios, la tristeza colectiva. Aprender a decir no, a proteger su espacio energético, a distinguir sus emociones de las ajenas es su tarea más urgente.</p><p>En el amor, Piscis es el amante más romántico y más entregado del zodíaco. Ama sin calcular, sin medir. Su vulnerabilidad es también su mayor atractivo — hay algo en su apertura que invita a la intimidad verdadera.</p><p>Para usar tu energía pisciana: desarrolla límites claros sin perder tu apertura. Tu profundidad espiritual es un regalo — protégela.</p></div>
+    <div class="don-sombra">
+      <div class="don"><strong>✦ Don:</strong> Empatía profunda, creatividad visionaria, conexión espiritual, amor sin condiciones.</div>
+      <div class="sombra"><strong>⚡ Sombra:</strong> Evasión de la realidad, victimismo, falta de límites, tendencia a la adicción como escape.</div>
+    </div>
+    <blockquote class="afirmacion">"Fluyo con la vida desde un centro claro que protege mi mundo interior."</blockquote>
+  </div>
+</article>
+</div>
+
+<!-- CAP 2: NUMEROLOGÍA -->
+<div id="cap2" class="chapter">
+  <div class="chapter-eyebrow">Capítulo 2</div>
+  <h2>Capítulo 2: Los Números del Alma</h2>
+  <div class="chapter-intro">La numerología pitagórica parte de una premisa simple y profunda: todo en el universo vibra, y los números son la expresión más pura de esa vibración. Tu nombre y tu fecha de nacimiento no son aleatorios — son la firma vibracional de tu alma en esta encarnación.</p><p>El sistema pitagórico asigna valores numéricos del 1 al 9 a las letras del alfabeto y reduce cualquier número mayor a uno de estos nueve valores fundamentales (excepto los Números Maestros 11, 22 y 33, que se mantienen sin reducir porque portan una misión específica de alta frecuencia).</p><p>Cada posición en tu mapa numerológico revela una dimensión diferente: quién eres en esencia, cómo te manifiestas, qué anhela tu alma, cómo te perciben los demás. Juntos, estos números forman un retrato de una coherencia sorprendente.</div>
+</div>
+
+<div id="cap2b" class="chapter">
+  <div class="chapter-eyebrow">Capítulo 2 · Sección A</div>
+  <h2>El Camino de Vida — Tu Misión Central</h2>
+  <div class="chapter-intro">El Camino de Vida es el número más importante de tu perfil numerológico. Se calcula reduciendo tu fecha de nacimiento completa a un solo dígito (o número maestro).</p><p>Este número revela el propósito central de tu encarnación — no lo que eres capaz de hacer sino para qué viniste. Es la frecuencia fundamental de tu alma, el tema recurrente que aparece en todas las áreas de tu vida.</p><p>Cálculo: suma el día + mes + año de nacimiento, reduciendo cada componente primero. Ejemplo: nacido el 15 de agosto de 1988 Día: 1+5 = 6 Mes: 8 Año: 1+9+8+8 = 26 → 2+6 = 8 Suma: 6+8+8 = 22 (Número Maestro — no se reduce)</div>
+  <div class="indice-rapido">
+    <div class="indice-label">Ir a número →</div>
+    <a class="idx-item" href="#cdv-1">1 — El Pionero</a><a class="idx-item" href="#cdv-2">2 — El Mediador</a><a class="idx-item" href="#cdv-3">3 — El Creador</a><a class="idx-item" href="#cdv-4">4 — El Constructor</a><a class="idx-item" href="#cdv-5">5 — El Libertador</a><a class="idx-item" href="#cdv-6">6 — El Sanador</a><a class="idx-item" href="#cdv-7">7 — El Buscador</a><a class="idx-item" href="#cdv-8">8 — El Empoderado</a><a class="idx-item" href="#cdv-9">9 — El Humanista</a><a class="idx-item maestro" href="#cdv-11">11 — El Visionario</a><a class="idx-item maestro" href="#cdv-22">22 — El Constructor del Mundo</a><a class="idx-item maestro" href="#cdv-33">33 — El Maestro Sanador</a>
+  </div>
+  <article class="entrada" id="cdv-1">
+  <div class="entrada-header">
+    <span class="num-grande">1</span>
+    <div>
+      <h3 class="entrada-titulo">El Pionero — Misión de Liderazgo</h3>
+    </div>
+  </div>
+  <div class="entrada-body">
+    <div class="texto-principal"><p>El número 1 es el primero porque todo empieza con él. Tu alma vino a aprender y enseñar la lección del individuo consciente: que es posible actuar desde la originalidad, crear desde la visión propia y liderar sin necesitar el permiso o la aprobación de nadie.</p><p>No es casualidad que la mayor tentación del 1 sea precisamente la dependencia — esperar que alguien le diga qué hacer, buscar validación antes de actuar, subordinar su visión a la de una autoridad externa. Tu camino espiritual consiste en descubrir que la autoridad más real que existe es la que nace de conocerse profundamente a uno mismo.</p><p>Los grandes líderes, inventores y emprendedores suelen tener fuertes influencias del número 1 en su carta. Pero no todos los 1 son líderes visibles — muchos son líderes del pensamiento, innovadores silenciosos, personas que simplemente se negaron a vivir una vida prestada.</p><p>Tu trabajo espiritual este año si estás en año 1: iniciar. No esperar el momento perfecto. El momento perfecto es ahora, con lo que tienes.</p></div>
+    <div class="don-sombra">
+      <div class="don"><strong>✦ Fortalezas:</strong> Iniciativa · Originalidad · Coraje · Independencia · Liderazgo natural</div>
+      <div class="sombra"><strong>⚡ Desafíos:</strong> Egocentrismo · Dificultad para delegar · Impaciencia · Soledad autoimpuesta</div>
+    </div>
+    <div class="consejo-box">💡 <strong>Consejo:</strong> La colaboración no debilita tu liderazgo — lo amplifica. Los mejores líderes saben cuándo seguir.</div>
+    <blockquote class="afirmacion">"Soy el origen de mis propias decisiones y actúo desde mi visión con coraje."</blockquote>
+  </div>
+</article>
+<article class="entrada" id="cdv-2">
+  <div class="entrada-header">
+    <span class="num-grande">2</span>
+    <div>
+      <h3 class="entrada-titulo">El Mediador — Misión de Armonía</h3>
+    </div>
+  </div>
+  <div class="entrada-body">
+    <div class="texto-principal"><p>El número 2 porta la misión de la unión. Donde el 1 es la chispa solitaria, el 2 es el puente — el espacio donde dos orillas se encuentran. Tu alma vino a aprender y enseñar que la cooperación, la sensibilidad y la escucha profunda son formas de inteligencia supremas.</p><p>En una cultura que glorifica la acción individual y el liderazgo visible, la misión del 2 puede parecer secundaria. No lo es. El 2 es el que hace que los equipos funcionen, el que convierte la tensión en diálogo, el que percibe lo que los demás necesitan antes de que lo articulen.</p><p>Tu sensibilidad es un superpoder, no una debilidad. El mundo tiene suficientes personas que actúan sin sentir. Necesita más personas que sientan profundamente y actúen desde esa sensibilidad.</p><p>El mayor desafío del 2 es la codependencia — la tendencia a perderse en el otro, a sacrificar sus propias necesidades para mantener la armonía, a definir su valor por cuánto ayuda a los demás. Tu trabajo espiritual es aprender que también mereces el amor y el cuidado que tan generosamente das.</p></div>
+    <div class="don-sombra">
+      <div class="don"><strong>✦ Fortalezas:</strong> Empatía · Diplomacia · Intuición · Cooperación · Sensibilidad artística</div>
+      <div class="sombra"><strong>⚡ Desafíos:</strong> Codependencia · Dificultad para decir no · Hipersensibilidad · Miedo al conflicto</div>
+    </div>
+    <div class="consejo-box">💡 <strong>Consejo:</strong> Tus necesidades son tan válidas como las de quienes cuidas. Expresarlas no es egoísmo.</div>
+    <blockquote class="afirmacion">"Creo armonía desde un centro propio que nunca sacrifico por el bienestar ajeno."</blockquote>
+  </div>
+</article>
+<article class="entrada" id="cdv-3">
+  <div class="entrada-header">
+    <span class="num-grande">3</span>
+    <div>
+      <h3 class="entrada-titulo">El Creador — Misión de Expresión</h3>
+    </div>
+  </div>
+  <div class="entrada-body">
+    <div class="texto-principal"><p>El número 3 porta la misión de la expresión creativa. Tu alma vino a manifestar — a través de palabras, arte, música, humor, movimiento — algo que no existía antes. El 3 es la síntesis creativa del 1 (acción) y el 2 (relación): cuando la energía individual se expresa en relación con el mundo.</p><p>La alegría es tu frecuencia natural. No la alegría superficial que evita el dolor sino la alegría que coexiste con él — la capacidad de encontrar belleza y humor incluso en las situaciones difíciles. Esta habilidad, cuando está desarrollada, es contagiosa. Elevas el nivel de energía de cualquier ambiente donde estás.</p><p>Tu mayor tentación es la dispersión: demasiadas ideas, demasiados proyectos, demasiadas conversaciones fascinantes que consumen el tiempo que necesitarías para terminar lo que empezaste. El 3 maduro aprende que completar una obra es tan creativo como comenzarla.</p><p>La autocrítica es tu sombra más profunda. Tienes estándares tan altos para lo que creas que a veces prefieres no intentarlo — así no hay posibilidad de decepcionar. Pero el mundo necesita tu expresión imperfecta más de lo que necesita tu silencio perfecto.</p></div>
+    <div class="don-sombra">
+      <div class="don"><strong>✦ Fortalezas:</strong> Creatividad · Comunicación · Optimismo · Sentido del humor · Carisma</div>
+      <div class="sombra"><strong>⚡ Desafíos:</strong> Dispersión · Superficialidad · Autocrítica paralizante · Inconstancia</div>
+    </div>
+    <div class="consejo-box">💡 <strong>Consejo:</strong> Elige un proyecto importante y termínalo antes de comenzar el siguiente. La profundidad es también creatividad.</div>
+    <blockquote class="afirmacion">"Expreso mi creatividad con alegría y completo mis obras con orgullo."</blockquote>
+  </div>
+</article>
+<article class="entrada" id="cdv-4">
+  <div class="entrada-header">
+    <span class="num-grande">4</span>
+    <div>
+      <h3 class="entrada-titulo">El Constructor — Misión de Fundamentos</h3>
+    </div>
+  </div>
+  <div class="entrada-body">
+    <div class="texto-principal"><p>El número 4 porta la misión de la construcción sólida. Tu alma vino a aprender y enseñar que los grandes logros se construyen ladrillo por ladrillo, con disciplina, método y una paciencia que trasciende el deseo de resultados inmediatos.</p><p>En un mundo que glamouriza las soluciones instantáneas y los atajos, el 4 representa algo contracultural y profundamente necesario: el valor del trabajo real, de las estructuras bien diseñadas, de las bases que permiten que otros construyan sobre ellas.</p><p>No eres el tipo de persona que busca el reconocimiento fácil. Prefieres hacer las cosas bien a hacerlas rápido. Esta preferencia te separa de muchos pero te conecta profundamente con aquellos que también comprenden el valor del artesanado.</p><p>Tu desafío más importante es la rigidez. El 4 puede construir estructuras tan sólidas que se vuelven jaulas — para él mismo y para quienes están a su alrededor. Aprender que los mejores edificios tienen espacio para la luz, para el movimiento, para lo inesperado, es tu lección más importante.</p></div>
+    <div class="don-sombra">
+      <div class="don"><strong>✦ Fortalezas:</strong> Disciplina · Confiabilidad · Organización · Persistencia · Sentido práctico</div>
+      <div class="sombra"><strong>⚡ Desafíos:</strong> Rigidez · Terquedad · Dificultad con el cambio · Tendencia al perfeccionismo</div>
+    </div>
+    <div class="consejo-box">💡 <strong>Consejo:</strong> La flexibilidad no es debilidad — es lo que hace que las estructuras sobrevivan al tiempo.</div>
+    <blockquote class="afirmacion">"Construyo con integridad y permito que lo que construyo tenga espacio para respirar."</blockquote>
+  </div>
+</article>
+<article class="entrada" id="cdv-5">
+  <div class="entrada-header">
+    <span class="num-grande">5</span>
+    <div>
+      <h3 class="entrada-titulo">El Libertador — Misión de Expansión</h3>
+    </div>
+  </div>
+  <div class="entrada-body">
+    <div class="texto-principal"><p>El número 5 porta la misión de la libertad consciente. Tu alma vino a experimentar la vida en toda su amplitud — múltiples culturas, ideas, profesiones, relaciones, perspectivas — y a enseñar a otros que el cambio no es el enemigo sino el maestro.</p><p>Eres el explorador del zodíaco numerológico. Tu curiosidad es genuina y tu adaptabilidad, legendaria. Puedes sentirte en casa en ambientes muy diferentes porque llevas tu hogar adentro — no en la geografía sino en la capacidad de encontrar lo interesante en cualquier lugar.</p><p>La tentación del 5 es el exceso. Demasiado de cualquier cosa — comida, viajes, relaciones, estimulación — puede convertirse en un mecanismo de escape de la incomodidad de quedarse quieto y sentir. La madurez espiritual del 5 llega cuando puede elegir la experiencia desde la libertad y no desde el miedo al aburrimiento.</p><p>Tu relación con el compromiso puede ser compleja. No porque no seas capaz de él sino porque el compromiso que no crece contigo se siente como una trampa. El 5 puede comprometerse profunda y largamente — cuando el compromiso sigue siendo una aventura.</p></div>
+    <div class="don-sombra">
+      <div class="don"><strong>✦ Fortalezas:</strong> Adaptabilidad · Versatilidad · Comunicación magnética · Apertura mental · Valentía</div>
+      <div class="sombra"><strong>⚡ Desafíos:</strong> Inconstancia · Impulsividad · Dificultad para comprometerse · Excesos</div>
+    </div>
+    <div class="consejo-box">💡 <strong>Consejo:</strong> La libertad más profunda no es hacer lo que quieras — es elegir conscientemente lo que vale la pena.</div>
+    <blockquote class="afirmacion">"Exploro la vida con consciencia y me comprometo con lo que genuinamente importa."</blockquote>
+  </div>
+</article>
+<article class="entrada" id="cdv-6">
+  <div class="entrada-header">
+    <span class="num-grande">6</span>
+    <div>
+      <h3 class="entrada-titulo">El Sanador — Misión de Servicio Amoroso</h3>
+    </div>
+  </div>
+  <div class="entrada-body">
+    <div class="texto-principal"><p>El número 6 porta la misión del amor en acción. Tu alma vino a crear armonía — en el hogar, en las relaciones, en las comunidades — y a demostrar que el cuidado genuino y la belleza son formas de espiritualidad cotidiana.</p><p>El 6 es el número de la responsabilidad amorosa. No el deber frío sino el cuidado que brota naturalmente de comprender que los demás necesitan apoyo y que tú tienes la capacidad de ofrecerlo. Esta orientación hacia el otro es tan natural en el 6 que a veces no reconoce cuándo se ha convertido en autosacrificio.</p><p>Tienes un sentido estético muy desarrollado. La fealdad — en el entorno, en las relaciones, en las situaciones — te produce una incomodidad física real. Tu instinto de embellecer, ordenar y armonizar lo que está desalineado es una de tus contribuciones más valiosas al mundo.</p><p>El mayor desafío del 6 es el perfeccionismo relacional. Tienes una imagen clara de cómo deberían ser las relaciones — cuánto deberían darse, cómo deberían comunicarse, qué nivel de armonía debería existir — y la realidad imperfecta de las relaciones reales puede decepcionarte. Tu trabajo espiritual es aprender a amar a las personas como son, no como deberían ser.</p></div>
+    <div class="don-sombra">
+      <div class="don"><strong>✦ Fortalezas:</strong> Amor incondicional · Sentido de la belleza · Responsabilidad · Capacidad de sanar</div>
+      <div class="sombra"><strong>⚡ Desafíos:</strong> Perfeccionismo en relaciones · Autosacrificio · Dificultad para recibir · Interferencia</div>
+    </div>
+    <div class="consejo-box">💡 <strong>Consejo:</strong> Cuidarte no es egoísmo — es la condición para poder cuidar a otros de manera sostenible.</div>
+    <blockquote class="afirmacion">"Amo con generosidad y me incluyo en ese amor sin culpa."</blockquote>
+  </div>
+</article>
+<article class="entrada" id="cdv-7">
+  <div class="entrada-header">
+    <span class="num-grande">7</span>
+    <div>
+      <h3 class="entrada-titulo">El Buscador — Misión de Sabiduría</h3>
+    </div>
+  </div>
+  <div class="entrada-body">
+    <div class="texto-principal"><p>El número 7 porta la misión de la búsqueda profunda. Tu alma vino a comprender — no superficialmente, no de segunda mano, sino con una comprensión que va hasta las raíces de las cosas. La pregunta "¿por qué?" ha sido tu compañera constante desde la infancia.</p><p>El 7 es el número más espiritual del sistema pitagórico — no porque los 7 sean religiosos necesariamente sino porque tienen una relación natural con las preguntas que la religión intenta responder: ¿Quiénes somos? ¿Por qué estamos aquí? ¿Qué hay más allá de lo visible?</p><p>Tu soledad es sagrada. Necesitas tiempo solo para procesar, para integrar, para acceder a esa voz interior que solo habla en el silencio. Esta necesidad puede ser mal entendida por quienes te quieren — no es rechazo, es la condición necesaria para que puedas ser genuinamente presente cuando estás con otros.</p><p>El desafío del 7 es la desconfianza. Habiendo visto tan claramente la complejidad de las cosas, el 7 puede volverse cínico — convencido de que nada es lo que parece y nadie es completamente honesto. Esta desconfianza, aunque a veces justificada, puede convertirse en un muro que lo aísla de las conexiones que más necesita.</p></div>
+    <div class="don-sombra">
+      <div class="don"><strong>✦ Fortalezas:</strong> Análisis profundo · Intuición espiritual · Búsqueda de la verdad · Introspección</div>
+      <div class="sombra"><strong>⚡ Desafíos:</strong> Aislamiento · Desconfianza · Dificultad para compartir emociones · Perfeccionismo intelectual</div>
+    </div>
+    <div class="consejo-box">💡 <strong>Consejo:</strong> La sabiduría que no se comparte es sabiduría a medias. Confía en algunos — no en todos, pero en algunos.</div>
+    <blockquote class="afirmacion">"Profundizo en el misterio de la vida y comparto lo que descubro con generosidad."</blockquote>
+  </div>
+</article>
+<article class="entrada" id="cdv-8">
+  <div class="entrada-header">
+    <span class="num-grande">8</span>
+    <div>
+      <h3 class="entrada-titulo">El Empoderado — Misión de Manifestación</h3>
+    </div>
+  </div>
+  <div class="entrada-body">
+    <div class="texto-principal"><p>El número 8 porta la misión del poder consciente. Tu alma vino a aprender a usar el poder — personal, financiero, social — de manera que sirva a algo más grande que el ego. El 8 es el número de la abundancia material y espiritual, dos fuerzas que en este número no se contradicen: se amplifican mutuamente.</p><p>Tienes una capacidad natural para los negocios, las finanzas y la organización de recursos. Puedes ver las estructuras de poder en cualquier situación y entender cómo navegarlas. Esta habilidad estratégica, cuando está al servicio de propósitos nobles, puede producir resultados extraordinarios.</p><p>El símbolo del 8 es el infinito — dos círculos perfectos conectados. Esto señala la naturaleza del flujo: lo que sale siempre vuelve. El 8 que comprende este principio sabe que la abundancia que comparte regresa multiplicada. El 8 que lo olvida puede volverse acumulador, controlador y nunca satisfecho.</p><p>Tu mayor desafío es la confusión entre poder y valor. El 8 puede caer en la trampa de medir su valía por sus logros materiales — cuánto gana, qué posición ocupa, qué nivel de reconocimiento tiene. Tu valor es intrínseco, no se mide ni se gana.</p></div>
+    <div class="don-sombra">
+      <div class="don"><strong>✦ Fortalezas:</strong> Liderazgo ejecutivo · Manifestación material · Visión estratégica · Determinación</div>
+      <div class="sombra"><strong>⚡ Desafíos:</strong> Obsesión con el control · Materialismo · Autoritarismo · Dificultad con la vulnerabilidad</div>
+    </div>
+    <div class="consejo-box">💡 <strong>Consejo:</strong> El poder más duradero no se toma — se gana por la integridad de lo que construyes.</div>
+    <blockquote class="afirmacion">"Manifiesto abundancia con consciencia y la uso al servicio de algo más grande."</blockquote>
+  </div>
+</article>
+<article class="entrada" id="cdv-9">
+  <div class="entrada-header">
+    <span class="num-grande">9</span>
+    <div>
+      <h3 class="entrada-titulo">El Humanista — Misión de Servicio Universal</h3>
+    </div>
+  </div>
+  <div class="entrada-body">
+    <div class="texto-principal"><p>El número 9 es el último de los números simples y contiene la resonancia de todos los anteriores. Tu alma viene de muchas experiencias, muchos ciclos, mucha acumulación de comprensión — y en esta encarnación, ha llegado el momento de compartir lo que ha aprendido.</p><p>Tu misión es el servicio a la humanidad. No necesariamente de forma grandiosa — puede ser en tu comunidad, en tu familia, en tu trabajo creativo. Pero hay en ti una orientación natural hacia el bien común que trasciende el interés personal. Cuando actúas solo por tu propio beneficio sin considerar el impacto en otros, te sientes vacío incluso si tienes éxito.</p><p>La compasión del 9 es extraordinaria. Has pasado por suficiente en esta vida y en las anteriores para comprender el sufrimiento humano sin juzgarlo. Esta comprensión te convierte en un sanador natural — no porque tengas soluciones sino porque tu presencia le dice a quien sufre que no está solo.</p><p>Tu mayor desafío es soltar. El 9 tiende a aferrarse — a personas, a lugares, a identidades que ya cumplieron su función. El universo constantemente te pide que sueltes lo que ya completó su ciclo para que algo más grande pueda entrar. Tu resistencia a los finales es directamente proporcional a tu dificultad para recibir los comienzos.</p></div>
+    <div class="don-sombra">
+      <div class="don"><strong>✦ Fortalezas:</strong> Compasión universal · Sabiduría integrada · Capacidad de servicio · Creatividad</div>
+      <div class="sombra"><strong>⚡ Desafíos:</strong> Dificultad para soltar · Martirio emocional · Idealismo excesivo · Fronteras difusas</div>
+    </div>
+    <div class="consejo-box">💡 <strong>Consejo:</strong> Servir no significa sacrificarse. El 9 más efectivo es el que cuida su propia energía.</div>
+    <blockquote class="afirmacion">"Sirvo a la humanidad desde la plenitud y suelto con amor lo que ya completó su ciclo."</blockquote>
+  </div>
+</article>
+<article class="entrada maestro" id="cdv-11">
+  <div class="entrada-header">
+    <span class="num-grande maestro">11</span>
+    <div>
+      <h3 class="entrada-titulo">El Visionario — Número Maestro de la Inspiración <span class="maestro-tag">MAESTRO</span></h3>
+    </div>
+  </div>
+  <div class="entrada-body">
+    <div class="texto-principal"><p>El 11 es el primer Número Maestro del sistema pitagórico — y uno de los más poderosos. No se reduce porque porta una vibración de doble frecuencia: la sensibilidad y cooperación del 2 elevadas a una capacidad de percepción espiritual excepcional.</p><p>Si tienes el 11 como Camino de Vida, viniste con una misión de inspirar. No necesariamente desde un escenario — aunque muchos 11 son artistas, escritores o maestros — sino desde la autenticidad de vivir tu vida como una demostración de que existe algo más que lo que vemos con los ojos ordinarios.</p><p>Tu intuición opera en frecuencias que la razón no puede validar. A menudo sabes cosas sin poder explicar cómo las sabes. Esta capacidad puede ser extraordinariamente útil o profundamente desconcertante, dependiendo de si has aprendido a confiar en ella.</p><p>El precio del 11 es la ansiedad. La brecha entre la visión que percibes y la realidad que ves puede ser paralizante. El 11 que no ha aprendido a manejar su sensibilidad puede colapsar bajo el peso de lo que percibe. El 11 que ha aprendido a canalizarla es uno de los seres más luminosos del zodíaco numerológico.</p><p>Tu misión no es pequeña. Tampoco tu responsabilidad. El mundo necesita lo que ves — aprende a mostrarlo sin que te consuma.</p></div>
+    <div class="don-sombra">
+      <div class="don"><strong>✦ Fortalezas:</strong> Intuición visionaria · Capacidad de inspirar · Sensibilidad espiritual excepcional</div>
+      <div class="sombra"><strong>⚡ Desafíos:</strong> Ansiedad crónica · Perfeccionismo espiritual · Dificultad para aterrizar · Nerviosismo</div>
+    </div>
+    <div class="consejo-box">💡 <strong>Consejo:</strong> Tu visión más poderosa es la que puedes comunicar con claridad, no la que guardas para ti.</div>
+    <blockquote class="afirmacion">"Canalizo la luz que percibo y la comparto con valentía y claridad."</blockquote>
+  </div>
+</article>
+<article class="entrada maestro" id="cdv-22">
+  <div class="entrada-header">
+    <span class="num-grande maestro">22</span>
+    <div>
+      <h3 class="entrada-titulo">El Constructor del Mundo — Número Maestro de la Manifestación <span class="maestro-tag">MAESTRO</span></h3>
+    </div>
+  </div>
+  <div class="entrada-body">
+    <div class="texto-principal"><p>El 22 es el Número Maestro más poderoso en términos de capacidad de manifestación en el plano material. Combina la visión visionaria del 11 con la disciplina constructora del 4 — y el resultado es uno de los potenciales más extraordinarios del sistema numerológico.</p><p>Los portadores del 22 no solo sueñan en grande — tienen la capacidad concreta de construir en grande. Sus proyectos no son para ellos solos: están diseñados para servir a muchos, para durar más allá de su propia vida, para dejar una huella que trascienda su nombre.</p><p>El mayor desafío del 22 es la magnitud de su propia misión. Puede paralizarse ante la enormidad de lo que intuye que puede lograr — y esa parálisis es la mayor traición a su potencial. El 22 que no actúa por miedo a no estar a la altura de su visión vive en la sombra de sí mismo.</p><p>Los 22 suelen reconocerse por la intensidad de su impacto en cualquier sistema del que forman parte. No son fácilmente ignorables — o los sigues o los confrontas, pero raramente los ignoras.</p><p>Tu misión requiere tanto coraje espiritual como disciplina práctica. No puedes elegir solo uno.</p></div>
+    <div class="don-sombra">
+      <div class="don"><strong>✦ Fortalezas:</strong> Manifestación en gran escala · Liderazgo transformador · Visión + ejecución · Disciplina espiritual</div>
+      <div class="sombra"><strong>⚡ Desafíos:</strong> Parálisis ante la grandeza propia · Autoexigencia aplastante · Dificultad para descansar</div>
+    </div>
+    <div class="consejo-box">💡 <strong>Consejo:</strong> Empieza donde estás, con lo que tienes. La grandeza se construye un ladrillo a la vez.</div>
+    <blockquote class="afirmacion">"Construyo en grande comenzando en pequeño y mantengo la visión sin perder los pasos."</blockquote>
+  </div>
+</article>
+<article class="entrada maestro" id="cdv-33">
+  <div class="entrada-header">
+    <span class="num-grande maestro">33</span>
+    <div>
+      <h3 class="entrada-titulo">El Maestro Sanador — Número Maestro del Amor Compasivo <span class="maestro-tag">MAESTRO</span></h3>
+    </div>
+  </div>
+  <div class="entrada-body">
+    <div class="texto-principal"><p>El 33 es el más raro y el más elevado de los Números Maestros. Solo aparece como Camino de Vida genuino cuando la suma completa da exactamente 33 — lo cual ocurre en muy pocas fechas de nacimiento. Su aparición señala una misión de amor compasivo en su expresión más pura.</p><p>Los portadores del 33 como Camino de Vida verdadero vienen a demostrar con su vida que el amor incondicional no es un ideal abstracto sino una práctica concreta. Su compasión no discrimina — abraza lo roto, lo imperfecto, lo que otros rechazan.</p><p>El desafío del 33 es el autosacrificio extremo. Puede dar tanto, tan profundamente, durante tanto tiempo, que se olvida de sí mismo. La lección más importante del 33 es que el amor compasivo que no se aplica también a uno mismo no es genuinamente universal.</p><p>Los 33 suelen ser recordados no por lo que lograron sino por cómo hicieron sentir a las personas. Su presencia sana — no porque tengan técnicas o conocimientos específicos sino porque su amor es real y la gente lo siente.</p></div>
+    <div class="don-sombra">
+      <div class="don"><strong>✦ Fortalezas:</strong> Amor universal · Sanación por presencia · Compasión sin límites · Enseñanza por ejemplo</div>
+      <div class="sombra"><strong>⚡ Desafíos:</strong> Autosacrificio extremo · Dificultad para recibir · Carga emocional intensa</div>
+    </div>
+    <div class="consejo-box">💡 <strong>Consejo:</strong> El amor más completo es el que te incluye a ti mismo en la ecuación.</div>
+    <blockquote class="afirmacion">"Amo sin condiciones y me incluyo en ese amor como parte sagrada del todo."</blockquote>
+  </div>
+</article>
+</div>
+
+<!-- CAP 3: TAROT -->
+<div id="cap3" class="chapter">
+  <div class="chapter-eyebrow">Capítulo 3</div>
+  <h2>Los 22 Arcanos Mayores</h2>
+  <div class="chapter-intro">El Tarot kabbalístico no es adivinación — es un sistema de 22 arquetipos universales que representan las grandes fuerzas que operan en la experiencia humana. En la Lectura Armónica, tres arcanos se calculan directamente de tu numerología: el Arcano del Alma (Camino de Vida), el Arcano de Personalidad (Expresión) y el Arcano del Año (Año Personal). Cada entrada a continuación describe la esencia del arcano, sus fortalezas, su sombra y el consejo que ofrece.</div>
+  <div class="indice-rapido">
+    <div class="indice-label">Ir a arcano →</div>
+    <a class="idx-item" href="#arcano-0">0 El Loco</a><a class="idx-item" href="#arcano-1">I El Mago</a><a class="idx-item" href="#arcano-2">II La Sacerdotisa</a><a class="idx-item" href="#arcano-3">III La Emperatriz</a><a class="idx-item" href="#arcano-4">IV El Emperador</a><a class="idx-item" href="#arcano-5">V El Hierofante</a><a class="idx-item" href="#arcano-6">VI Los Amantes</a><a class="idx-item" href="#arcano-7">VII El Carro</a><a class="idx-item" href="#arcano-8">VIII La Fuerza</a><a class="idx-item" href="#arcano-9">IX El Ermitaño</a><a class="idx-item" href="#arcano-10">X La Rueda de la Fortuna</a><a class="idx-item" href="#arcano-11">XI La Justicia</a><a class="idx-item" href="#arcano-12">XII El Colgado</a><a class="idx-item" href="#arcano-13">XIII La Muerte</a><a class="idx-item" href="#arcano-14">XIV La Templanza</a><a class="idx-item" href="#arcano-15">XV El Diablo</a><a class="idx-item" href="#arcano-16">XVI La Torre</a><a class="idx-item" href="#arcano-17">XVII La Estrella</a><a class="idx-item" href="#arcano-18">XVIII La Luna</a><a class="idx-item" href="#arcano-19">XIX El Sol</a><a class="idx-item" href="#arcano-20">XX El Juicio</a><a class="idx-item" href="#arcano-21">XXI El Mundo</a>
+  </div>
+  <article class="entrada arcano-entrada" id="arcano-0">
+  <div class="entrada-header">
+    <span class="arcano-romano">0</span>
+    <div>
+      <h3 class="entrada-titulo">El Loco</h3>
+      <div class="entrada-meta">Libertad · Aire · Urano</div>
+    </div>
+  </div>
+  <div class="entrada-body">
+    <div class="texto-principal"><p>El Loco es el principio y el final. El número 0 contiene todos los números y ninguno — es el vacío fértil del que emerge la creación. En el Tarot kabbalístico, El Loco representa el alma antes de su encarnación: pura potencialidad, sin historia, sin condicionamientos, sin miedo.</p><p>Quien porta El Loco como arcano dominante tiene una relación especial con la inocencia. No la ingenuidad que ignora el peligro sino la apertura que elige confiar en el universo a pesar de conocer sus riesgos. Es el salto de fe — el paso al vacío con la certeza de que algo, no se sabe qué, sostendrá la caída.</p><p>El Loco es el viajero eterno. No porque huya de algo sino porque su naturaleza es el movimiento, la exploración, el comienzo perpetuo. Hay en él una incapacidad constitutiva para instalarse definitivamente — siempre hay otro horizonte, otra pregunta, otra aventura que lo llama.</p><p>En su sombra, El Loco puede ser irresponsabilidad disfrazada de libertad, inconsistencia llamada espontaneidad, incapacidad de comprometerse defendida como filosofía. El Loco maduro sabe cuándo quedarse.</p></div>
+    <div class="don-sombra">
+      <div class="don"><strong>✦ Fortaleza:</strong> Apertura total, coraje para comenzar, confianza en el proceso</div>
+      <div class="sombra"><strong>⚡ Sombra:</strong> Irresponsabilidad, falta de compromiso, negación de las consecuencias</div>
+    </div>
+    <div class="consejo-box">💡 El salto más valiente no es el que ignora el abismo — es el que lo ve y salta de todas formas.</div>
+  </div>
+</article>
+<article class="entrada arcano-entrada" id="arcano-1">
+  <div class="entrada-header">
+    <span class="arcano-romano">I</span>
+    <div>
+      <h3 class="entrada-titulo">El Mago</h3>
+      <div class="entrada-meta">Voluntad · Aire · Mercurio</div>
+    </div>
+  </div>
+  <div class="entrada-body">
+    <div class="texto-principal"><p>El Mago es la voluntad consciente en acción. Ante él reposan los cuatro elementos — la copa (agua/emociones), la espada (aire/mente), el báculo (fuego/voluntad) y el pentáculo (tierra/materia) — señalando que tiene acceso a todos los recursos que necesita. Solo necesita elegir y actuar.</p><p>Quien porta El Mago como arcano dominante tiene una capacidad innata de manifestación. No en el sentido mágico-pensamiento-positivo sino en el sentido real: cuando se propone algo con genuina voluntad, encuentra la manera de hacerlo ocurrir. La brecha entre idea y acción en el Mago es extraordinariamente corta.</p><p>Mercurio lo rige — el mensajero, el comunicador, el que conecta mundos. El Mago entiende que la realidad se construye a través del lenguaje: las palabras que usas crean la realidad en la que vives. Por eso cuida lo que declara, lo que afirma, lo que niega.</p><p>En su sombra, El Mago puede usar sus habilidades para manipular — para hacer que otros vean lo que él quiere que vean, para crear ilusiones convenientes. El Mago integrado sabe que su poder es un privilegio que requiere integridad.</p></div>
+    <div class="don-sombra">
+      <div class="don"><strong>✦ Fortaleza:</strong> Capacidad de manifestación, comunicación poderosa, acceso a todos los recursos internos</div>
+      <div class="sombra"><strong>⚡ Sombra:</strong> Manipulación, uso del poder sin ética, ilusión consciente</div>
+    </div>
+    <div class="consejo-box">💡 Tu mayor magia es la que creas al servicio de algo más grande que tu propio beneficio.</div>
+  </div>
+</article>
+<article class="entrada arcano-entrada" id="arcano-2">
+  <div class="entrada-header">
+    <span class="arcano-romano">II</span>
+    <div>
+      <h3 class="entrada-titulo">La Sacerdotisa</h3>
+      <div class="entrada-meta">Intuición · Agua · Luna</div>
+    </div>
+  </div>
+  <div class="entrada-body">
+    <div class="texto-principal"><p>La Sacerdotisa guarda el umbral entre lo visible y lo invisible. Sentada entre dos columnas — Boaz y Jachin, la dualidad de toda existencia — sostiene el rollo de la ley que no se ha escrito todavía, porque la verdad que ella custodia no puede ser completamente codificada.</p><p>Quien porta La Sacerdotisa como arcano dominante tiene acceso a un conocimiento que va más allá del intelecto. Su intuición es una inteligencia real — no sustituto del pensamiento sino su complemento más sofisticado. Sabe cosas que no puede explicar cómo sabe. Esta capacidad, cuando se honra, es un superpoder. Cuando se descarta por "no ser racional", se convierte en ansiedad sin fuente aparente.</p><p>La Luna la rige — el planeta de los ciclos, la memoria y el inconsciente. La Sacerdotisa tiene una relación profunda con los ritmos — los ritmos del cuerpo, de las emociones, de los ciclos naturales. Aprende a confiar en esos ritmos es parte de su desarrollo.</p><p>En su sombra, La Sacerdotisa puede volverse hermética, inaccesible, guardando su sabiduría de forma tan celosa que deja de ser útil. El conocimiento que no se comparte en el momento adecuado pierde su poder transformador.</p></div>
+    <div class="don-sombra">
+      <div class="don"><strong>✦ Fortaleza:</strong> Intuición profunda, acceso al inconsciente, sabiduría no intelectual, misterio fértil</div>
+      <div class="sombra"><strong>⚡ Sombra:</strong> Secretismo, pasividad, incapacidad de actuar sobre lo que percibe</div>
+    </div>
+    <div class="consejo-box">💡 Tu sabiduría interior es real. Dale el mismo crédito que le das a la razón.</div>
+  </div>
+</article>
+<article class="entrada arcano-entrada" id="arcano-3">
+  <div class="entrada-header">
+    <span class="arcano-romano">III</span>
+    <div>
+      <h3 class="entrada-titulo">La Emperatriz</h3>
+      <div class="entrada-meta">Abundancia · Tierra · Venus</div>
+    </div>
+  </div>
+  <div class="entrada-body">
+    <div class="texto-principal"><p>La Emperatriz es la fuerza creadora de la naturaleza personificada. Sentada en un campo de trigo dorado, coronada de doce estrellas, con el símbolo de Venus en su corazón — ella es la madre cósmica, la que da vida, la que nutre, la que hace crecer.</p><p>Quien porta La Emperatriz como arcano dominante tiene una relación especial con la abundancia y la creatividad. No como conceptos abstractos sino como experiencias físicas, sensuales, concretas. La Emperatriz entiende que la abundancia no se persigue — se cultiva, se nutre, se deja crecer en el tiempo correcto.</p><p>Venus la rige — la diosa del amor, la belleza y el valor. La Emperatriz sabe instintivamente lo que vale la pena — en las personas, en las experiencias, en los materiales. Tiene gusto desarrollado no porque haya estudiado estética sino porque siente la calidad en su cuerpo.</p><p>Su don más profundo es la fertilidad en el sentido más amplio: es fértil en ideas, en proyectos, en relaciones, en amor. Lo que toca tiende a crecer. Esta energía puede aplicarse a cualquier área de la vida — desde criar hijos hasta lanzar empresas.</p><p>En su sombra, La Emperatriz puede volverse posesiva de lo que ha creado, resistente a dejar crecer lo que ya es suficientemente grande, sobreprotectora hasta el punto de asfixiar.</p></div>
+    <div class="don-sombra">
+      <div class="don"><strong>✦ Fortaleza:</strong> Creatividad generosa, conexión con la naturaleza, abundancia material y emocional</div>
+      <div class="sombra"><strong>⚡ Sombra:</strong> Sobreprotección, posesividad, dependencia de la validación de otros</div>
+    </div>
+    <div class="consejo-box">💡 Lo que creas con amor tiene vida propia — suéltalo cuando esté listo para crecer sin ti.</div>
+  </div>
+</article>
+<article class="entrada arcano-entrada" id="arcano-4">
+  <div class="entrada-header">
+    <span class="arcano-romano">IV</span>
+    <div>
+      <h3 class="entrada-titulo">El Emperador</h3>
+      <div class="entrada-meta">Autoridad · Fuego · Aries/Marte</div>
+    </div>
+  </div>
+  <div class="entrada-body">
+    <div class="texto-principal"><p>El Emperador es la autoridad que nace del autodominio. Sentado en su trono de piedra, su postura es inamovible — no por rigidez sino por una claridad interna tan profunda que el caos externo no lo mueve. Ha construido su mundo con disciplina y lo sostiene con visión.</p><p>Quien porta El Emperador como arcano dominante tiene una capacidad natural para estructurar, organizar y liderar. No el liderazgo carismático que cautiva — el liderazgo sólido que sostiene. El Emperador es el que está ahí cuando todo lo demás falla, el que mantiene la estructura cuando otros la pierden.</p><p>Marte lo rige en su expresión más madura — no el guerrero impulsivo sino el estratega que sabe cuándo actuar y cuándo esperar. El Emperador ha aprendido a usar su energía marcial al servicio de algo que construye, no de algo que destruye.</p><p>Su relación con las reglas y las estructuras es compleja. Las respeta cuando sirven a un propósito genuino. Las desafía cuando son arbitrarias. Crea las suyas cuando las existentes no alcanzan.</p><p>En su sombra, El Emperador puede volverse autoritario — convencido de que su manera es la única manera, resistente a perspectivas que desafíen su estructura establecida.</p></div>
+    <div class="don-sombra">
+      <div class="don"><strong>✦ Fortaleza:</strong> Liderazgo estructural, disciplina, capacidad de construir sistemas duraderos</div>
+      <div class="sombra"><strong>⚡ Sombra:</strong> Autoritarismo, rigidez, dificultad para escuchar perspectivas alternativas</div>
+    </div>
+    <div class="consejo-box">💡 La autoridad más genuina invita al diálogo — no lo teme.</div>
+  </div>
+</article>
+<article class="entrada arcano-entrada" id="arcano-5">
+  <div class="entrada-header">
+    <span class="arcano-romano">V</span>
+    <div>
+      <h3 class="entrada-titulo">El Hierofante</h3>
+      <div class="entrada-meta">Tradición · Tierra · Tauro/Venus</div>
+    </div>
+  </div>
+  <div class="entrada-body">
+    <div class="texto-principal"><p>El Hierofante es el puente entre lo sagrado y lo humano. Su nombre griego significa "el que revela lo sagrado" — y esa es exactamente su función: hacer accesible lo que de otra manera permanecería hermético, demasiado elevado para el entendimiento cotidiano.</p><p>Quien porta El Hierofante como arcano dominante tiene una relación profunda con la transmisión del conocimiento. Ya sea como maestro, guía espiritual, mentor o simplemente como la persona en su grupo que sabe cómo se hacen las cosas — el Hierofante vive para conectar a otros con la sabiduría que ya existe.</p><p>Venus en Tauro lo rige — la combinación de belleza y tierra produce un amor por la tradición no como conservadurismo sino como reconocimiento de que la humanidad ha acumulado sabiduría durante milenios y sería arrogante ignorarla.</p><p>La institución — religiosa, educativa, familiar — es su territorio. Puede trabajar dentro de estructuras existentes con comodidad porque entiende el valor del contexto compartido.</p><p>En su sombra, El Hierofante puede volverse dogmático — convencido de que la única sabiduría válida es la que ha sido validada por la tradición, resistente a las revelaciones que llegan fuera de los canales establecidos.</p></div>
+    <div class="don-sombra">
+      <div class="don"><strong>✦ Fortaleza:</strong> Transmisión de conocimiento, conexión con la tradición, capacidad de guiar espiritualmente</div>
+      <div class="sombra"><strong>⚡ Sombra:</strong> Dogmatismo, conformismo, resistencia a la revelación personal directa</div>
+    </div>
+    <div class="consejo-box">💡 La tradición es el punto de partida, no el punto de llegada.</div>
+  </div>
+</article>
+<article class="entrada arcano-entrada" id="arcano-6">
+  <div class="entrada-header">
+    <span class="arcano-romano">VI</span>
+    <div>
+      <h3 class="entrada-titulo">Los Amantes</h3>
+      <div class="entrada-meta">Elección · Aire · Géminis/Mercurio</div>
+    </div>
+  </div>
+  <div class="entrada-body">
+    <div class="texto-principal"><p>Los Amantes no son principalmente una carta de amor romántico — son una carta de elección fundamental. La figura central de la carta no es el abrazo de dos personas sino el momento de decisión ante dos caminos que se excluyen mutuamente.</p><p>Quien porta Los Amantes como arcano dominante tiene una relación profunda con el tema de la elección y la integración de opuestos. Su vida está marcada por decisiones de gran peso — no las elecciones cotidianas sino las que definen quién uno es, con qué se alinea, qué se está dispuesto a sacrificar.</p><p>La unión de lo masculino y femenino, lo racional y lo emocional, lo social y lo individual — estas son las tensiones que Los Amantes invita a reconciliar. No eligiendo uno sobre el otro sino encontrando la síntesis que honra ambos.</p><p>El amor que este arcano representa no es la pasión que ciega sino la elección consciente que se renueva. El amor como práctica, como decisión que se toma cada día.</p><p>En su sombra, Los Amantes puede señalar una incapacidad para elegir — la permanencia en la ambigüedad como estrategia de evitación de la responsabilidad que viene con comprometerse.</p></div>
+    <div class="don-sombra">
+      <div class="don"><strong>✦ Fortaleza:</strong> Discernimiento en las elecciones, capacidad de integrar opuestos, amor consciente</div>
+      <div class="sombra"><strong>⚡ Sombra:</strong> Indecisión, promiscuidad sin propósito, evasión de compromisos reales</div>
+    </div>
+    <div class="consejo-box">💡 Cada elección real requiere renunciar a algo. La madurez está en elegir con los ojos abiertos.</div>
+  </div>
+</article>
+<article class="entrada arcano-entrada" id="arcano-7">
+  <div class="entrada-header">
+    <span class="arcano-romano">VII</span>
+    <div>
+      <h3 class="entrada-titulo">El Carro</h3>
+      <div class="entrada-meta">Victoria · Agua · Cáncer/Luna</div>
+    </div>
+  </div>
+  <div class="entrada-body">
+    <div class="texto-principal"><p>El Carro representa el triunfo que surge no de vencer a los demás sino de dominar las propias fuerzas internas. Las dos esfinges que tiran del carro — una blanca, una negra — son los opuestos que en lugar de desgarrarse se han alineado bajo la voluntad del conductor.</p><p>Quien porta El Carro como arcano dominante tiene una determinación que puede sorprender a quienes no lo conocen bien. No el tipo de persona que abandona cuando el camino se complica — el tipo que se vuelve más enfocado precisamente cuando la resistencia aumenta.</p><p>Cáncer con Luna lo rige — una combinación que parece contradictoria para una carta de victoria pero que señala algo profundo: la victoria del Carro no es marcial sino emocional. Ha aprendido a no ser gobernado por sus emociones sino a usarlas como combustible para el avance.</p><p>El movimiento es constitutivo del Carro. No puede estar quieto por mucho tiempo — no por inquietud sino por un propósito que lo impulsa hacia adelante. Cuando ese propósito no está claro, el Carro puede moverse en círculos o estancarse en la frustración.</p><p>En su sombra, El Carro puede convertirse en el que atropella — que avanza tan enfocado en su destino que no ve el impacto que tiene en quienes están en su camino.</p></div>
+    <div class="don-sombra">
+      <div class="don"><strong>✦ Fortaleza:</strong> Determinación, autodominio emocional, victoria a través de la disciplina</div>
+      <div class="sombra"><strong>⚡ Sombra:</strong> Arrogancia, indiferencia al impacto propio en otros, exceso de competitividad</div>
+    </div>
+    <div class="consejo-box">💡 La velocidad sin dirección es solo movimiento. Define tu destino antes de acelerar.</div>
+  </div>
+</article>
+<article class="entrada arcano-entrada" id="arcano-8">
+  <div class="entrada-header">
+    <span class="arcano-romano">VIII</span>
+    <div>
+      <h3 class="entrada-titulo">La Fuerza</h3>
+      <div class="entrada-meta">Coraje · Fuego · Leo/Sol</div>
+    </div>
+  </div>
+  <div class="entrada-body">
+    <div class="texto-principal"><p>La Fuerza no muestra músculo — muestra una figura femenina cerrando suavemente la boca de un león. La fuerza más poderosa no es la que vence por imposición sino la que transforma por amor. Esta es la lección central del arcano.</p><p>Quien porta La Fuerza como arcano dominante tiene una capacidad extraordinaria para sostener lo que otros no pueden. No porque sea invulnerable sino porque ha aprendido a relacionarse con sus propias fieras internas — miedos, impulsos, sombras — sin huir de ellas ni dejar que las controlen.</p><p>Leo con Sol lo rige — el fuego en su expresión más madura, la que ha aprendido que el verdadero poder no necesita demostrar nada. La fuerza del 8 es silenciosa precisamente porque es real.</p><p>Su compasión es práctica. No se queda en la lástima — actúa. Cuando ve sufrimiento, busca la manera de aliviar. Cuando ve injusticia, busca la manera de corregir. Con la misma gentileza con la que cierra la boca del león.</p><p>En su sombra, La Fuerza puede convertirse en martirio — el que aguanta demasiado durante demasiado tiempo, convencido de que eso es fortaleza cuando en realidad es incapacidad de pedir ayuda.</p></div>
+    <div class="don-sombra">
+      <div class="don"><strong>✦ Fortaleza:</strong> Coraje genuino, compasión práctica, dominio de la sombra propia</div>
+      <div class="sombra"><strong>⚡ Sombra:</strong> Represión emocional disfrazada de fortaleza, martirio, incapacidad de reconocer límites</div>
+    </div>
+    <div class="consejo-box">💡 La fuerza que no incluye la vulnerabilidad está incompleta.</div>
+  </div>
+</article>
+<article class="entrada arcano-entrada" id="arcano-9">
+  <div class="entrada-header">
+    <span class="arcano-romano">IX</span>
+    <div>
+      <h3 class="entrada-titulo">El Ermitaño</h3>
+      <div class="entrada-meta">Sabiduría · Tierra · Virgo/Mercurio</div>
+    </div>
+  </div>
+  <div class="entrada-body">
+    <div class="texto-principal"><p>El Ermitaño está solo en la montaña, iluminando su propio camino con su linterna. No huye del mundo — se ha retirado para encontrar algo que el ruido del mundo impedía escuchar. Y cuando regrese, si regresa, llevará esa luz para iluminar el camino de otros.</p><p>Quien porta El Ermitaño como arcano dominante tiene una relación íntima con la soledad fértil. No la soledad del aislamiento sino la del recogimiento — el espacio interior donde la sabiduría más profunda se revela. Necesita tiempo solo no como lujo sino como necesidad constitutiva.</p><p>Virgo con Mercurio lo rige — la mente analítica al servicio de la profundidad. El Ermitaño no es el sabio que lo sabe todo sino el buscador honesto que sabe exactamente cuánto ignora. Su sabiduría nace precisamente de esa honestidad.</p><p>La linterna que lleva no ilumina todo el camino — solo el siguiente paso. Esta es su filosofía de vida: no necesito ver el destino completo, solo necesito ver suficiente para dar el paso siguiente.</p><p>En su sombra, El Ermitaño puede convertirse en el que se esconde del mundo usando la sabiduría como excusa, en el que acumula comprensión sin nunca aplicarla, en el que espera indefinidamente las condiciones perfectas para actuar.</p></div>
+    <div class="don-sombra">
+      <div class="don"><strong>✦ Fortaleza:</strong> Sabiduría interior, capacidad de guiar, profundidad contemplativa</div>
+      <div class="sombra"><strong>⚡ Sombra:</strong> Aislamiento, parálisis filosófica, distancia que se convierte en desconexión</div>
+    </div>
+    <div class="consejo-box">💡 La luz que no se comparte ilumina solo al que la porta.</div>
+  </div>
+</article>
+<article class="entrada arcano-entrada" id="arcano-10">
+  <div class="entrada-header">
+    <span class="arcano-romano">X</span>
+    <div>
+      <h3 class="entrada-titulo">La Rueda de la Fortuna</h3>
+      <div class="entrada-meta">Ciclos · Fuego · Júpiter</div>
+    </div>
+  </div>
+  <div class="entrada-body">
+    <div class="texto-principal"><p>La Rueda gira. Siempre ha girado y siempre girará. Lo que está arriba bajará; lo que está abajo subirá. Esta no es una amenaza sino una promesa: ninguna situación, buena o mala, es permanente.</p><p>Quien porta La Rueda como arcano dominante tiene una comprensión visceral de los ciclos — en su propia vida, en los negocios, en las relaciones. No se desespera en los valles porque sabe que la rueda gira. No se encanta en las cimas porque sabe lo mismo.</p><p>J�piter la rige — el planeta de la expansión y la fortuna. La Rueda de la Fortuna señala que el universo es fundamentalmente generoso pero que esa generosidad requiere que uno esté alineado con el movimiento natural de las cosas.</p><p>El centro de la rueda no se mueve. Ese centro es tu conciencia. Mientras el mundo gira a tu alrededor, hay algo en ti que permanece quieto, que observa, que comprende. Desarrollar esa quietud interior es el trabajo espiritual de la Rueda.</p><p>En su sombra, La Rueda puede señalar una dependencia excesiva de la "suerte" — la creencia de que lo que te ocurre está fuera de tu control. El mensaje real es el opuesto: puedes elegir dónde situarte en la rueda.</p></div>
+    <div class="don-sombra">
+      <div class="don"><strong>✦ Fortaleza:</strong> Comprensión de los ciclos, adaptabilidad, confianza en el proceso</div>
+      <div class="sombra"><strong>⚡ Sombra:</strong> Fatalismo, dependencia de la suerte, incapacidad de influir conscientemente en el propio destino</div>
+    </div>
+    <div class="consejo-box">💡 El centro de la rueda no gira. Encuéntrate ahí.</div>
+  </div>
+</article>
+<article class="entrada arcano-entrada" id="arcano-11">
+  <div class="entrada-header">
+    <span class="arcano-romano">XI</span>
+    <div>
+      <h3 class="entrada-titulo">La Justicia</h3>
+      <div class="entrada-meta">Equilibrio · Aire · Libra/Venus</div>
+    </div>
+  </div>
+  <div class="entrada-body">
+    <div class="texto-principal"><p>La Justicia no tiene venda en los ojos — ve todo con perfecta claridad. Sostiene la espada de la verdad y la balanza del equilibrio, señalando que el universo opera según una ley de causa y efecto que ningún ser puede eludir indefinidamente.</p><p>Quien porta La Justicia como arcano dominante tiene una relación profunda con la verdad y la integridad. Le resulta físicamente incómodo actuar en desalineación con sus valores — no por moralismo sino porque su sistema interno detecta inmediatamente la disonancia.</p><p>Libra con Venus lo rige — la búsqueda de equilibrio y belleza en los acuerdos. La Justicia no busca el castigo sino la restauración del equilibrio. Cuando hay una deuda, se paga; cuando hay un desequilibrio, se corrige.</p><p>Su imparcialidad puede parecer frialdad pero no lo es. Es la capacidad de ver una situación desde todos sus ángulos antes de actuar — asegurándose de que la respuesta sea proporcional y justa.</p><p>En su sombra, La Justicia puede convertirse en rigidez moralista — en el juicio sin compasión, en la letra de la ley sin su espíritu.</p></div>
+    <div class="don-sombra">
+      <div class="don"><strong>✦ Fortaleza:</strong> Integridad, imparcialidad, capacidad de ver la verdad sin distorsión</div>
+      <div class="sombra"><strong>⚡ Sombra:</strong> Rigidez moralista, juicio sin compasión, frialdad emocional</div>
+    </div>
+    <div class="consejo-box">💡 La justicia más profunda incluye misericordia. La verdad más completa incluye la complejidad.</div>
+  </div>
+</article>
+<article class="entrada arcano-entrada" id="arcano-12">
+  <div class="entrada-header">
+    <span class="arcano-romano">XII</span>
+    <div>
+      <h3 class="entrada-titulo">El Colgado</h3>
+      <div class="entrada-meta">Rendición · Agua · Neptuno</div>
+    </div>
+  </div>
+  <div class="entrada-body">
+    <div class="texto-principal"><p>El Colgado está suspendido de cabeza pero su expresión es de paz, no de sufrimiento. Ha elegido esta posición — o la ha aceptado completamente — y desde ella ve el mundo de una manera que desde la postura normal era imposible.</p><p>Quien porta El Colgado como arcano dominante tiene una capacidad notable para encontrar sabiduría en la pausa, en la espera, en las situaciones donde la acción directa no es posible. Mientras otros se desesperan por la falta de movimiento, el Colgado usa ese tiempo para ver lo que de otra manera sería invisible.</p><p>Neptuno lo rige — el planeta de la disolución, los sueños y la espiritualidad. El Colgado ha aprendido que rendirse no es lo mismo que perder. Rendirse es soltar el control para permitir que algo más profundo emerja.</p><p>La inversión de perspectiva es su mayor don. Lo que desde arriba parece un fracaso, desde abajo puede verse como un reencuadre necesario. Lo que parece una derrota puede ser exactamente el tiempo de espera que la maduración requería.</p><p>En su sombra, El Colgado puede convertirse en el mártir que sufre innecesariamente, convencido de que la pasividad es virtud cuando en realidad es evitación.</p></div>
+    <div class="don-sombra">
+      <div class="don"><strong>✦ Fortaleza:</strong> Perspectiva invertida, capacidad de encontrar sabiduría en la pausa, rendición consciente</div>
+      <div class="sombra"><strong>⚡ Sombra:</strong> Martirio, pasividad, incapacidad de actuar cuando la acción es necesaria</div>
+    </div>
+    <div class="consejo-box">💡 Hay momentos para rendirse y momentos para actuar. La sabiduría está en distinguirlos.</div>
+  </div>
+</article>
+<article class="entrada arcano-entrada" id="arcano-13">
+  <div class="entrada-header">
+    <span class="arcano-romano">XIII</span>
+    <div>
+      <h3 class="entrada-titulo">La Muerte</h3>
+      <div class="entrada-meta">Transformación · Agua · Escorpio/Plutón</div>
+    </div>
+  </div>
+  <div class="entrada-body">
+    <div class="texto-principal"><p>La Muerte raramente significa muerte física en el Tarot. Significa el fin de un ciclo, la caída de lo que ya cumplió su función, la transformación radical que no tiene vuelta atrás. Es el invierno necesario antes de la primavera, el suelo que se prepara para la nueva semilla.</p><p>Quien porta La Muerte como arcano dominante tiene una relación íntima con la transformación. No como concepto sino como experiencia — ha atravesado suficientes finales en su vida para saber que del otro lado siempre hay algo nuevo, aunque en el momento del paso sea imposible verlo.</p><p>Plutón con Escorpio lo rige — la profundidad y la regeneración. La Muerte no destruye sin crear — siempre que algo termina, libera la energía necesaria para que algo nuevo comience. Esta alquimia es el don del arcano.</p><p>Su presencia en la vida de alguien no señala tragedia sino umbral. Algo importante está terminando y algo igualmente importante está a punto de comenzar. La pregunta es si la persona puede soltar lo que se va con la misma gracia con la que recibió lo que llegó.</p><p>En su sombra, La Muerte puede señalar resistencia al cambio necesario — el aferramiento a lo que ya murió porque el miedo a lo desconocido es más grande que el amor por lo nuevo.</p></div>
+    <div class="don-sombra">
+      <div class="don"><strong>✦ Fortaleza:</strong> Capacidad de transformación radical, soltar sin aferrarse, alquimia de lo que termina</div>
+      <div class="sombra"><strong>⚡ Sombra:</strong> Resistencia al cambio necesario, destrucción sin creación, nihilismo</div>
+    </div>
+    <div class="consejo-box">💡 Lo que se va hace espacio para lo que viene. Confía en el espacio vacío.</div>
+  </div>
+</article>
+<article class="entrada arcano-entrada" id="arcano-14">
+  <div class="entrada-header">
+    <span class="arcano-romano">XIV</span>
+    <div>
+      <h3 class="entrada-titulo">La Templanza</h3>
+      <div class="entrada-meta">Alquimia · Fuego · Sagitario/Júpiter</div>
+    </div>
+  </div>
+  <div class="entrada-body">
+    <div class="texto-principal"><p>La Templanza muestra un ángel transfiriendo líquido entre dos copas — sin derramar ni una gota. Este movimiento perpetuo y preciso es la alquimia en acción: la combinación de opuestos en la proporción exacta para producir algo que ninguno de los ingredientes podría crear por sí solo.</p><p>Quien porta La Templanza como arcano dominante tiene un don natural para la integración. Puede tomar elementos aparentemente incompatibles — razón e intuición, acción y pausa, lo personal y lo universal — y encontrar la síntesis que los honra a ambos.</p><p>Sagitario con Júpiter la rige — el optimismo filosófico aplicado a la práctica cotidiana. La Templanza no es solo teoría de la integración sino práctica viva: cada día, en cada decisión, encontrar el equilibrio dinámico que permite moverse hacia el propósito sin perderse en los extremos.</p><p>La paciencia es su cualidad central. No la paciencia pasiva que espera a que algo ocurra sino la paciencia activa que trabaja conscientemente en la dirección correcta, sin forzar los tiempos del proceso.</p><p>En su sombra, La Templanza puede convertirse en mediocridad — en el término medio que evita la excelencia por miedo a los extremos, en la moderación que nunca se atreve completamente con nada.</p></div>
+    <div class="don-sombra">
+      <div class="don"><strong>✦ Fortaleza:</strong> Integración de opuestos, paciencia alquímica, equilibrio dinámico</div>
+      <div class="sombra"><strong>⚡ Sombra:</strong> Mediocridad disfrazada de moderación, miedo a los extremos necesarios</div>
+    </div>
+    <div class="consejo-box">💡 La templanza no es timidez — es precisión. Sabe exactamente cuánto de cada ingrediente.</div>
+  </div>
+</article>
+<article class="entrada arcano-entrada" id="arcano-15">
+  <div class="entrada-header">
+    <span class="arcano-romano">XV</span>
+    <div>
+      <h3 class="entrada-titulo">El Diablo</h3>
+      <div class="entrada-meta">Liberación · Tierra · Capricornio/Saturno</div>
+    </div>
+  </div>
+  <div class="entrada-body">
+    <div class="texto-principal"><p>El Diablo es uno de los arcanos más malentendidos del Tarot. Las cadenas que atan a las figuras encadenadas a sus pies son tan flojas que podrían quitárselas ellas mismas. La prisión es interior — y el primer paso de la liberación es reconocer que las cadenas son propias.</p><p>Quien porta El Diablo como arcano dominante tiene una relación especial con el tema de los condicionamientos. Sus programas inconscientes — las creencias heredadas, los patrones repetidos, las adicciones de todo tipo — son visibles para él de una manera que no lo son para todos. Esta visibilidad es el primer paso hacia la libertad.</p><p>Saturno con Capricornio lo rige — la estructura que puede servir o encarcelar. El Diablo señala las estructuras que en algún momento fueron útiles y ahora son jaulas. El trabajo espiritual es identificarlas con honestidad y comenzar el proceso de liberación.</p><p>No hay juicio moral en El Diablo. Señala la naturaleza humana — los instintos, los deseos, las necesidades que se avergüenzan y por eso se niegan y por eso tienen más poder. La integración, no la supresión, es la respuesta.</p><p>En su sombra, El Diablo puede señalar una entrega inconsciente a los patrones más destructivos — la adicción sin reconocerla, el condicionamiento sin cuestionarlo.</p></div>
+    <div class="don-sombra">
+      <div class="don"><strong>✦ Fortaleza:</strong> Consciencia de los propios condicionamientos, honestidad sobre la sombra propia</div>
+      <div class="sombra"><strong>⚡ Sombra:</strong> Entrega a los instintos sin consciencia, negación de los propios patrones destructivos</div>
+    </div>
+    <div class="consejo-box">💡 Lo que reconoces ya no tiene el mismo poder sobre ti. El primer paso es mirar.</div>
+  </div>
+</article>
+<article class="entrada arcano-entrada" id="arcano-16">
+  <div class="entrada-header">
+    <span class="arcano-romano">XVI</span>
+    <div>
+      <h3 class="entrada-titulo">La Torre</h3>
+      <div class="entrada-meta">Revelación · Fuego · Marte</div>
+    </div>
+  </div>
+  <div class="entrada-body">
+    <div class="texto-principal"><p>La Torre es el rayo que golpea la cima del orgullo humano y lo derrumba. Lo que cae no era tan sólido como parecía — la ilusión de seguridad colapsa para que aparezca la estructura real que siempre estuvo ahí, debajo de la construcción del ego.</p><p>Quien porta La Torre como arcano dominante conoce las crisis como maestras. Ha vivido suficientes derrumbes para saber que del otro lado de la destrucción hay siempre una claridad que no habría llegado de otra manera. Esta comprensión no hace las crisis más fáciles — las hace más navegables.</p><p>Marte la rige — la energía que destruye para crear, que corta para liberar, que confronta la ilusión con la realidad sin consideración por el confort. La Torre no llega a destruir — llega a revelar. Lo que cae no era real; lo que queda sí lo es.</p><p>La revelación puede ser dolorosa cuando lo que se revela contradice la imagen que uno tenía de sí mismo, de una relación, de una situación. Pero esa verdad, aunque incómoda, es siempre preferible a la ilusión confortable.</p><p>En su sombra, La Torre puede señalar la tendencia a construir sobre bases falsas — la resistencia a examinar los fundamentos de las propias creencias y estructuras.</p></div>
+    <div class="don-sombra">
+      <div class="don"><strong>✦ Fortaleza:</strong> Capacidad de reconstruir desde la verdad, apertura a las revelaciones difíciles</div>
+      <div class="sombra"><strong>⚡ Sombra:</strong> Construcción sobre bases falsas, resistencia a la verdad que derrumba</div>
+    </div>
+    <div class="consejo-box">💡 Lo que el rayo no puede derribar es lo único que vale la pena conservar.</div>
+  </div>
+</article>
+<article class="entrada arcano-entrada" id="arcano-17">
+  <div class="entrada-header">
+    <span class="arcano-romano">XVII</span>
+    <div>
+      <h3 class="entrada-titulo">La Estrella</h3>
+      <div class="entrada-meta">Esperanza · Aire · Acuario/Urano</div>
+    </div>
+  </div>
+  <div class="entrada-body">
+    <div class="texto-principal"><p>La Estrella aparece después de La Torre — y esta secuencia no es accidental. Cuando la ilusión colapsa y la oscuridad parece total, La Estrella es el primer punto de luz que se ve en el cielo. No prometiendo que todo será fácil sino señalando que hay dirección.</p><p>Quien porta La Estrella como arcano dominante tiene una capacidad natural para mantener la esperanza en situaciones donde otros la han perdido. Esta esperanza no es ingenuidad — es la certeza, basada en la experiencia de haber atravesado suficientes oscuridades, de que la luz siempre vuelve.</p><p>Acuario con Urano la rige — la visión del futuro que se mantiene viva incluso cuando el presente es difícil. La Estrella es el arquetipo del visionario genuino: el que ve lo que podría ser con tanta claridad que es capaz de seguir moviéndose hacia ello incluso cuando el camino no está visible.</p><p>La vulnerabilidad de La Estrella es real y necesaria. La figura que vierte el agua está completamente expuesta — sin armadura, sin defensa. Esta apertura es la condición de la renovación.</p><p>En su sombra, La Estrella puede convertirse en wishful thinking — en la esperanza que no se traduce en acción, en el optimismo que evita la responsabilidad de construir concretamente el futuro que desea.</p></div>
+    <div class="don-sombra">
+      <div class="don"><strong>✦ Fortaleza:</strong> Esperanza genuina, visión del futuro, capacidad de renovarse después de las crisis</div>
+      <div class="sombra"><strong>⚡ Sombra:</strong> Ingenuidad, esperanza sin acción, evasión de la responsabilidad concreta</div>
+    </div>
+    <div class="consejo-box">💡 La estrella señala la dirección — pero tú tienes que caminar.</div>
+  </div>
+</article>
+<article class="entrada arcano-entrada" id="arcano-18">
+  <div class="entrada-header">
+    <span class="arcano-romano">XVIII</span>
+    <div>
+      <h3 class="entrada-titulo">La Luna</h3>
+      <div class="entrada-meta">Misterio · Agua · Piscis/Neptuno</div>
+    </div>
+  </div>
+  <div class="entrada-body">
+    <div class="texto-principal"><p>La Luna ilumina sin claridad — su luz es hermosa pero ambigua, revelando formas pero no contornos precisos. En su territorio nada es exactamente lo que parece. Las sombras tienen vida, los sueños son mensajes, y los miedos que emergen desde las profundidades son partes del alma que piden integración.</p><p>Quien porta La Luna como arcano dominante tiene una relación profunda con el inconsciente — el propio y, a menudo, el colectivo. Sus sueños son vívidos y significativos. Sus intuiciones son precisas aunque a veces difíciles de articular. Sus estados emocionales son profundos y cíclicos.</p><p>Neptuno con Piscis la rige — la dimensión de lo que no puede ser completamente racionalizado pero que sin embargo es real. La Luna señala el territorio donde la razón no alcanza y la intuición es la única guía disponible.</p><p>El miedo es el tema central de La Luna — específicamente, el miedo a los propios miedos. El mayor trabajo espiritual de quien la porta es aprender a atravesar la oscuridad sin huir de las criaturas que emergen desde las profundidades. Esas criaturas no son enemigas — son partes del alma que esperan ser reconocidas.</p><p>En su sombra, La Luna puede señalar ilusión, autoengaño, confusión que se convierte en desorientación permanente.</p></div>
+    <div class="don-sombra">
+      <div class="don"><strong>✦ Fortaleza:</strong> Profundidad inconsciente, intuición poderosa, capacidad de navegar el misterio</div>
+      <div class="sombra"><strong>⚡ Sombra:</strong> Ilusión, autoengaño, confusión, miedo a la propia profundidad</div>
+    </div>
+    <div class="consejo-box">💡 Las criaturas que emergen en la noche no son tus enemigos — son partes tuyas que piden ser vistas.</div>
+  </div>
+</article>
+<article class="entrada arcano-entrada" id="arcano-19">
+  <div class="entrada-header">
+    <span class="arcano-romano">XIX</span>
+    <div>
+      <h3 class="entrada-titulo">El Sol</h3>
+      <div class="entrada-meta">Vitalidad · Fuego · Sol/Leo</div>
+    </div>
+  </div>
+  <div class="entrada-body">
+    <div class="texto-principal"><p>El Sol es el arcano de la alegría sin sombra — no porque no exista sombra sino porque en la plena luz del sol las sombras son cortas y definidas. Hay una claridad, una calidez, una certeza en El Sol que contrasta con la ambigüedad de La Luna que lo precede.</p><p>Quien porta El Sol como arcano dominante tiene acceso a una fuente de vitalidad y optimismo que regenera no solo a quienes la porta sino a quienes están cerca. Hay una cualidad solar en su presencia — cálida, luminosa, que hace que otros se sientan mejor simplemente estando cerca.</p><p>Leo con el Sol lo rige — la identidad en su expresión más radiante. El Sol no pide permiso para brillar ni se disculpa por iluminar. Simplemente es — y esa autenticidad sin pretensiones es lo que lo hace tan magnético.</p><p>La infancia, el juego, la alegría sin propósito — estos son los territorios de El Sol. No como evasión de la madurez sino como la capacidad de mantener viva la dimensión lúdica de la existencia a lo largo de toda la vida.</p><p>En su sombra, El Sol puede señalar arrogancia — la certeza de que la propia luz es la única que importa, la incapacidad de sentarse cómodamente en la oscuridad.</p></div>
+    <div class="don-sombra">
+      <div class="don"><strong>✦ Fortaleza:</strong> Vitalidad, alegría genuina, autenticidad radiante, capacidad de iluminar a otros</div>
+      <div class="sombra"><strong>⚡ Sombra:</strong> Arrogancia, incapacidad de tolerar la oscuridad, proyección del propio brillo</div>
+    </div>
+    <div class="consejo-box">💡 Tu luz es real. No necesitas apagarla para que otros brillen — al contrario.</div>
+  </div>
+</article>
+<article class="entrada arcano-entrada" id="arcano-20">
+  <div class="entrada-header">
+    <span class="arcano-romano">XX</span>
+    <div>
+      <h3 class="entrada-titulo">El Juicio</h3>
+      <div class="entrada-meta">Despertar · Fuego · Plutón</div>
+    </div>
+  </div>
+  <div class="entrada-body">
+    <div class="texto-principal"><p>El Juicio es el arcano del gran despertar — no el despertar gradual del Ermitaño sino el despertar súbito y total que cambia todo de golpe. El ángel toca la trompeta y los muertos se levantan — metáfora de aquellas partes de nosotros que habíamos enterrado y que ahora son convocadas a regresar.</p><p>Quien porta El Juicio como arcano dominante está en un momento de síntesis — en el que las diferentes versiones de sí mismo, las diferentes vidas vividas, los diferentes aprendizajes acumulados, están siendo llamados a integrarse en una comprensión más completa.</p><p>Plutón lo rige — la regeneración que sigue a la destrucción. El Juicio señala que hay suficiente acumulación de experiencia para que ocurra un salto cualitativo — un momento en que la cantidad de lo vivido se convierte en calidad de consciencia.</p><p>La llamada del Juicio no puede ser ignorada indefinidamente. La trompeta suena y la pregunta es si uno está dispuesto a levantarse — a abrazar la versión más completa y más responsable de sí mismo que ese despertar implica.</p><p>En su sombra, El Juicio puede señalar la resistencia al propio llamado — el miedo a asumir la responsabilidad de quién uno genuinamente es.</p></div>
+    <div class="don-sombra">
+      <div class="don"><strong>✦ Fortaleza:</strong> Capacidad de síntesis, apertura al despertar, disposición a integrar todas las versiones del yo</div>
+      <div class="sombra"><strong>⚡ Sombra:</strong> Resistencia al propio llamado, juicio duro de sí mismo y de otros, parálisis ante la verdad</div>
+    </div>
+    <div class="consejo-box">💡 La trompeta ya sonó. La pregunta es si estás dispuesto a levantarte.</div>
+  </div>
+</article>
+<article class="entrada arcano-entrada" id="arcano-21">
+  <div class="entrada-header">
+    <span class="arcano-romano">XXI</span>
+    <div>
+      <h3 class="entrada-titulo">El Mundo</h3>
+      <div class="entrada-meta">Completitud · Tierra · Saturno</div>
+    </div>
+  </div>
+  <div class="entrada-body">
+    <div class="texto-principal"><p>El Mundo es la carta de la completitud — el fin de un gran ciclo y, simultáneamente, el umbral del siguiente. La figura central danza libremente dentro de una corona de laurel, sosteniendo dos bastones — ha alcanzado algo, lo ha integrado completamente, y está lista para comenzar de nuevo.</p><p>Quien porta El Mundo como arcano dominante tiene una comprensión profunda de los ciclos completos. No la completitud como destino final sino como momento de integración — el punto donde todo lo aprendido en el ciclo se sintetiza en sabiduría que puede llevarse al siguiente.</p><p>Saturno lo rige — la estructura que hace posible la realización, el tiempo que permite la maduración. El Mundo es lo que ocurre cuando la disciplina de Saturno se ha aplicado con suficiente constancia: el logro que trasciende el esfuerzo individual para convertirse en algo universal.</p><p>Los cuatro elementos en las esquinas de la carta — el ángel, el águila, el toro y el león — representan la totalidad de la experiencia humana integrada. El Mundo dice que nada ha sido en vano — incluso las pérdidas, los errores y las crisis formaron parte del proceso que lleva a este momento de plenitud.</p><p>En su sombra, El Mundo puede señalar la resistencia a completar — a llegar hasta el final de algo, a reconocer que un ciclo ha terminado y soltar.</p></div>
+    <div class="don-sombra">
+      <div class="don"><strong>✦ Fortaleza:</strong> Completitud, integración de la totalidad de la experiencia, plenitud ganada</div>
+      <div class="sombra"><strong>⚡ Sombra:</strong> Resistencia a completar ciclos, estancamiento en lo ya logrado</div>
+    </div>
+    <div class="consejo-box">💡 La completitud no es el final del camino — es la puerta hacia el siguiente nivel.</div>
+  </div>
+</article>
+</div>
+
+<!-- CAP 4: BIORRITMO -->
+<div id="cap4" class="chapter">
+  <div class="chapter-eyebrow">Capítulo 4</div>
+  <h2>El Biorritmo — Los 5 Ciclos Vitales</h2>
+  <div class="chapter-intro">El biorritmo es uno de los pocos sistemas de este libro que no proviene de tradición esotérica sino de investigación científica. Fue desarrollado a finales del siglo XIX por el fisiólogo Wilhelm Fliess y el psicólogo Hermann Swoboda, y ampliado en el siglo XX por el ingeniero Alfred Teltscher.</p><p>La premisa es matemática: ciertos procesos fisiológicos y psicológicos oscilan de manera sinusoidal desde el día del nacimiento, con períodos fijos que se repiten durante toda la vida. El valor de cada ciclo en cualquier fecha se calcula con una fórmula de seno simple.</p><p>Los valores van de +100% (pico máximo positivo) a -100% (pico máximo negativo). Los valores positivos indican momentos de mayor rendimiento y recursos; los negativos, momentos que favorecen la recuperación y la precaución. Los días críticos, cuando el ciclo cruza el cero, son momentos de transición que requieren mayor atención.</p><p>Importante: el biorritmo no predice lo que va a ocurrir — señala los recursos disponibles. Un día de pico físico bajo no significa que algo malo pasará; significa que ese día conviene no exigirle al cuerpo más de lo que puede dar. Un día de pico intelectual alto es el momento ideal para los desafíos mentales exigentes.</div>
+  <div class="indice-rapido">
+    <div class="indice-label">Ir a ciclo →</div>
+    <a class="idx-item" href="#bio-ciclo-físico">💪 Ciclo Físico</a><a class="idx-item" href="#bio-ciclo-emocional">💛 Ciclo Emocional</a><a class="idx-item" href="#bio-ciclo-intelectual">🧠 Ciclo Intelectual</a><a class="idx-item" href="#bio-ciclo-intuitivo">🔮 Ciclo Intuitivo</a><a class="idx-item" href="#bio-ciclo-espiritual">✨ Ciclo Espiritual</a>
+  </div>
+  <article class="entrada" id="bio-ciclo-físico">
+  <div class="entrada-header">
+    <span class="entrada-emoji">💪</span>
+    <div>
+      <h3 class="entrada-titulo">Ciclo Físico</h3>
+      <div class="entrada-meta">Período: 23 días</div>
+    </div>
+  </div>
+  <div class="entrada-body">
+    <div class="texto-principal"><p>El ciclo físico de 23 días regula la energía corporal, la vitalidad, la fuerza muscular, la resistencia física y la coordinación motriz. También influye en la capacidad de recuperación después del esfuerzo y en la respuesta inmunológica básica.</p><p>En su fase positiva (días 1-11 del ciclo): el cuerpo responde mejor al ejercicio físico intenso, la resistencia es mayor, la recuperación es más rápida. Es el momento ideal para los deportistas, para iniciar rutinas de entrenamiento exigentes o para cualquier actividad que requiera rendimiento físico sostenido.</p><p>En su fase negativa (días 12-23): el cuerpo necesita más tiempo de recuperación, la resistencia al esfuerzo es menor y la susceptibilidad a las lesiones puede aumentar. No es un período para reposo total sino para ejercicio moderado, recuperación activa y mayor atención a las señales del cuerpo.</p><p>Los días críticos (el cruce por cero, aproximadamente días 11-12): son los momentos de mayor variabilidad. El cuerpo está en transición entre fases y puede responder de manera impredecible. Especial precaución en actividades de alto riesgo físico.</p><p>Uso práctico: programa las sesiones de entrenamiento más exigentes en la fase positiva. Usa la fase negativa para el descanso activo, la flexibilidad y la recuperación. Evita los deportes de alto riesgo en los días críticos.</p></div>
+    <div class="fases-grid">
+      <div class="fase-card">
+        <div class="fase-nombre">Pico positivo (+80 a +100%)</div>
+        <div class="fase-texto">Energía excepcional. El cuerpo está en su mejor momento. Ideal para competencias, entrenamientos máximos o cualquier demanda física elevada.</div>
+      </div><div class="fase-card">
+        <div class="fase-nombre">Positivo alto (+40 a +80%)</div>
+        <div class="fase-texto">Por encima del promedio. Buen momento para el ejercicio intenso. El cuerpo responde bien y se recupera rápido.</div>
+      </div><div class="fase-card">
+        <div class="fase-nombre">Día crítico (-10 a +10%)</div>
+        <div class="fase-texto">Transición de fase. Mayor variabilidad e impredecibilidad. Precaución en actividades de riesgo.</div>
+      </div><div class="fase-card">
+        <div class="fase-nombre">Negativo moderado (-40 a -10%)</div>
+        <div class="fase-texto">Rendimiento algo por debajo del promedio. Ejercicio moderado, mayor tiempo de recuperación.</div>
+      </div><div class="fase-card">
+        <div class="fase-nombre">Pico negativo (-100 a -80%)</div>
+        <div class="fase-texto">Momento de máxima necesidad de recuperación. Priorizar el descanso. Evitar el sobreesfuerzo.</div>
+      </div>
+    </div>
+  </div>
+</article>
+<article class="entrada" id="bio-ciclo-emocional">
+  <div class="entrada-header">
+    <span class="entrada-emoji">💛</span>
+    <div>
+      <h3 class="entrada-titulo">Ciclo Emocional</h3>
+      <div class="entrada-meta">Período: 28 días</div>
+    </div>
+  </div>
+  <div class="entrada-body">
+    <div class="texto-principal"><p>El ciclo emocional de 28 días regula los estados de ánimo, la creatividad, la sensibilidad interpersonal, la intuición emocional y la percepción de las situaciones desde un ángulo afectivo. Es el ciclo más relacionado con las relaciones humanas y con la expresión artística.</p><p>En su fase positiva: la sociabilidad es natural, la creatividad fluye sin esfuerzo, las relaciones se sienten cálidas y los problemas interpersonales encuentran resolución más fácilmente. Los artistas suelen notar una mayor inspiración en esta fase. La empatía está más disponible — tanto para sentir lo propio como para percibir lo que los demás necesitan.</p><p>En su fase negativa: los estados de ánimo pueden ser más variables o tender hacia la introspección. No necesariamente tristeza — puede ser simplemente una menor disponibilidad para la socialización intensa. Las situaciones que en la fase positiva parecen manejables pueden parecer más pesadas. Es un período favorable para la reflexión interior, el arte procesual y el trabajo en soledad.</p><p>Los días críticos: especial atención a las reacciones emocionales en conflictos interpersonales. Las respuestas pueden ser más intensas o menos controladas que lo habitual.</p><p>Uso práctico: programa conversaciones difíciles y negociaciones emocionales en la fase positiva. Usa la fase negativa para el trabajo interior — journaling, meditación, arte procesual. En los días críticos, aplica el principio de "duérmelo antes de responder".</p></div>
+    <div class="fases-grid">
+      <div class="fase-card">
+        <div class="fase-nombre">Pico positivo</div>
+        <div class="fase-texto">Estado óptimo para relaciones, creatividad y comunicación afectiva. Tu empatía y tu apertura están en máximos.</div>
+      </div><div class="fase-card">
+        <div class="fase-nombre">Positivo</div>
+        <div class="fase-texto">Por encima del promedio emocional. Buenas condiciones para la interacción social y la expresión creativa.</div>
+      </div><div class="fase-card">
+        <div class="fase-nombre">Día crítico</div>
+        <div class="fase-texto">Transición emocional. Las reacciones pueden ser impredecibles. Pausa antes de responder en conflictos.</div>
+      </div><div class="fase-card">
+        <div class="fase-nombre">Negativo</div>
+        <div class="fase-texto">Mayor introversión natural. Favorece el trabajo en soledad y la reflexión personal.</div>
+      </div><div class="fase-card">
+        <div class="fase-nombre">Pico negativo</div>
+        <div class="fase-texto">Momento de mayor necesidad de espacio interior. Priorizar el autocuidado emocional.</div>
+      </div>
+    </div>
+  </div>
+</article>
+<article class="entrada" id="bio-ciclo-intelectual">
+  <div class="entrada-header">
+    <span class="entrada-emoji">🧠</span>
+    <div>
+      <h3 class="entrada-titulo">Ciclo Intelectual</h3>
+      <div class="entrada-meta">Período: 33 días</div>
+    </div>
+  </div>
+  <div class="entrada-body">
+    <div class="texto-principal"><p>El ciclo intelectual de 33 días regula la claridad mental, la memoria a corto y largo plazo, la capacidad de análisis, la concentración sostenida, la velocidad de procesamiento de información y la toma de decisiones basada en la razón.</p><p>En su fase positiva: el pensamiento es más ágil y claro, la memoria funciona mejor, los problemas complejos encuentran soluciones más rápidamente y la capacidad de aprendizaje está aumentada. Es el momento ideal para los exámenes, las presentaciones importantes, las decisiones estratégicas y cualquier trabajo intelectual exigente.</p><p>En su fase negativa: el procesamiento de información puede ser algo más lento, la concentración puede requerir mayor esfuerzo y la memoria puede fallar en pequeños detalles. No incapacidad intelectual — simplemente mayor esfuerzo para el mismo resultado. Es un buen período para las tareas rutinarias bien conocidas, la revisión de material ya aprendido y el trabajo creativo que no requiere análisis riguroso.</p><p>Los días críticos: precaución especial en decisiones importantes bajo presión. La mente está en transición y puede cometer errores en cálculos o juicios que habitualmente no cometería.</p><p>Uso práctico: programa los exámenes y presentaciones importantes en la fase positiva cuando puedas. Usa la fase negativa para repasar material ya conocido. Evita tomar decisiones irreversibles en los días críticos si puedes esperar.</p></div>
+    <div class="fases-grid">
+      <div class="fase-card">
+        <div class="fase-nombre">Pico positivo</div>
+        <div class="fase-texto">Máxima agudeza mental. Ideal para aprender, analizar, presentar o decidir temas complejos.</div>
+      </div><div class="fase-card">
+        <div class="fase-nombre">Positivo</div>
+        <div class="fase-texto">Claridad mental por encima del promedio. Buenos resultados en tareas intelectuales exigentes.</div>
+      </div><div class="fase-card">
+        <div class="fase-nombre">Día crítico</div>
+        <div class="fase-texto">Transición mental. Mayor posibilidad de errores de juicio o memoria. Verificar decisiones importantes.</div>
+      </div><div class="fase-card">
+        <div class="fase-nombre">Negativo</div>
+        <div class="fase-texto">Procesamiento más lento. Preferir tareas rutinarias y conocidas sobre nuevos aprendizajes complejos.</div>
+      </div><div class="fase-card">
+        <div class="fase-nombre">Pico negativo</div>
+        <div class="fase-texto">Momento de mayor esfuerzo mental para resultados ordinarios. Descanso cerebral y tareas simples.</div>
+      </div>
+    </div>
+  </div>
+</article>
+<article class="entrada" id="bio-ciclo-intuitivo">
+  <div class="entrada-header">
+    <span class="entrada-emoji">🔮</span>
+    <div>
+      <h3 class="entrada-titulo">Ciclo Intuitivo</h3>
+      <div class="entrada-meta">Período: 38 días</div>
+    </div>
+  </div>
+  <div class="entrada-body">
+    <div class="texto-principal"><p>El ciclo intuitivo de 38 días es el menos reconocido por la ciencia convencional pero quizás el más interesante para quienes trabajan en el campo del desarrollo personal y espiritual. Regula la percepción no racional — la capacidad de captar información que no llega a través de los canales sensoriales ordinarios.</p><p>Esto incluye las corazonadas, la percepción de sincronías, la capacidad de leer entornos y personas más allá de lo explícito, la creatividad que viene de fuentes que no pueden explicarse completamente, y la conciencia de los propios sueños como fuente de información.</p><p>En su fase positiva: las corazonadas son más frecuentes y más confiables. La percepción de sincronías aumenta. Los sueños pueden ser especialmente significativos. Las decisiones tomadas desde el instinto tienen mayor tasa de acierto. Es un buen momento para la meditación profunda, el trabajo creativo no lineal y las prácticas espirituales.</p><p>En su fase negativa: el canal intuitivo está más silencioso. Las decisiones deben apoyarse más en el análisis racional durante este período. Es un buen momento para consolidar lo que la intuición reveló en la fase positiva.</p><p>Uso práctico: confía más en tus corazonadas durante la fase positiva. En la fase negativa, trabaja con los datos disponibles más que con las percepciones. Lleva un diario de sueños en la fase positiva.</p></div>
+    <div class="fases-grid">
+      <div class="fase-card">
+        <div class="fase-nombre">Pico positivo</div>
+        <div class="fase-texto">Canal intuitivo máximamente abierto. Las percepciones no racionales son especialmente confiables.</div>
+      </div><div class="fase-card">
+        <div class="fase-nombre">Positivo</div>
+        <div class="fase-texto">Mayor receptividad intuitiva. Buen momento para escuchar las corazonadas y las sincronías.</div>
+      </div><div class="fase-card">
+        <div class="fase-nombre">Día crítico</div>
+        <div class="fase-texto">Transición del canal intuitivo. Las percepciones pueden ser confusas o contradictorias.</div>
+      </div><div class="fase-card">
+        <div class="fase-nombre">Negativo</div>
+        <div class="fase-texto">Canal intuitivo más silencioso. Apoyarse más en el análisis que en la intuición.</div>
+      </div><div class="fase-card">
+        <div class="fase-nombre">Pico negativo</div>
+        <div class="fase-texto">Mínima actividad intuitiva. Período para consolidar y racionalizar lo percibido en fases anteriores.</div>
+      </div>
+    </div>
+  </div>
+</article>
+<article class="entrada" id="bio-ciclo-espiritual">
+  <div class="entrada-header">
+    <span class="entrada-emoji">✨</span>
+    <div>
+      <h3 class="entrada-titulo">Ciclo Espiritual</h3>
+      <div class="entrada-meta">Período: 53 días</div>
+    </div>
+  </div>
+  <div class="entrada-body">
+    <div class="texto-principal"><p>El ciclo espiritual de 53 días es el de mayor período y el que regula las dimensiones más profundas de la experiencia humana: el sentido de propósito, la coherencia entre los valores y las acciones, la conexión con algo más grande que el yo individual, y la paz interior que trasciende las circunstancias externas.</p><p>Este ciclo no es sobre las creencias religiosas específicas — es sobre la dimensión espiritual en el sentido más amplio: la capacidad de encontrar significado, de sentirse parte de algo más grande, de actuar desde los valores más profundos incluso cuando es difícil.</p><p>En su fase positiva: hay una mayor conciencia del propósito de vida. Las prácticas espirituales — meditación, oración, contemplación, servicio — fluyen con naturalidad. La coherencia entre los valores y las acciones es más fácil de mantener. El sentido de conexión con otros y con el universo está más vivo.</p><p>En su fase negativa: puede haber una sensación de mayor distancia del propio propósito, de sequedad espiritual, de rutina en las prácticas. No es una crisis de fe — es un ciclo. Como el invierno para la naturaleza, este período de aparente alejamiento es parte del proceso de maduración.</p><p>Uso práctico: intensifica las prácticas espirituales en la fase positiva — los frutos serán más evidentes. En la fase negativa, mantén las prácticas aunque los resultados sean menos visibles. La consistencia en los períodos difíciles es lo que construye una vida espiritual real.</p></div>
+    <div class="fases-grid">
+      <div class="fase-card">
+        <div class="fase-nombre">Pico positivo</div>
+        <div class="fase-texto">Máxima coherencia espiritual. Las prácticas espirituales producen sus mejores frutos. Fuerte sentido de propósito.</div>
+      </div><div class="fase-card">
+        <div class="fase-nombre">Positivo</div>
+        <div class="fase-texto">Conexión espiritual por encima del promedio. Buen momento para profundizar en las prácticas contemplativas.</div>
+      </div><div class="fase-card">
+        <div class="fase-nombre">Día crítico</div>
+        <div class="fase-texto">Transición espiritual. Preguntas existenciales pueden emerger. Honrarlas sin resistirlas.</div>
+      </div><div class="fase-card">
+        <div class="fase-nombre">Negativo</div>
+        <div class="fase-texto">Período de sequedad espiritual. Mantener las prácticas aunque los resultados sean menos evidentes.</div>
+      </div><div class="fase-card">
+        <div class="fase-nombre">Pico negativo</div>
+        <div class="fase-texto">Máxima distancia del propósito. Período para la constancia silenciosa. El invierno espiritual también es necesario.</div>
+      </div>
+    </div>
+  </div>
+</article>
+</div>
+
+<!-- CAP 5A: CHAKRAS -->
+<div id="cap5a" class="chapter">
+  <div class="chapter-eyebrow">Capítulo 5</div>
+  <h2>Los Chakras — Centros de Energía</h2>
+  <div class="chapter-intro">La palabra chakra proviene del sánscrito y significa "rueda" o "disco". En la tradición hindú y yóguica, los chakras son centros de energía sutil distribuidos a lo largo del eje vertical del cuerpo, desde la base de la columna hasta la coronilla. Cada chakra regula aspectos específicos de la experiencia humana — físicos, emocionales, mentales y espirituales.</p><p>En la Lectura Armónica, el chakra dominante se determina a partir del Número de Vida — la correspondencia más consistente entre las distintas tradiciones que integran numerología y sistema de chakras.</p><p>Comprender tu chakra dominante no significa que los otros seis no existan o no funcionen en ti. Significa que tu misión de vida activa principalmente esa frecuencia energética, que tus fortalezas naturales se expresan a través de ese centro y que tus desafíos de desarrollo personal suelen relacionarse con las sombras específicas de ese chakra.</div>
+  <article class="entrada" id="chakra-1">
+  <div class="entrada-header">
+    <span class="chakra-color-dot" style="background:Rojo"></span>
+    <div>
+      <h3 class="entrada-titulo">Chakra Raíz — Muladhara</h3>
+      <div class="entrada-meta">Color: Rojo · Nota: DO · Mantra: LAM · Número de Vida: 1</div>
+    </div>
+  </div>
+  <div class="entrada-body">
+    <div class="ficha-rapida">
+      <span class="ficha-item">📍 Base de la columna vertebral</span>
+      <span class="ficha-item">🌊 Tierra</span>
+    </div>
+    <div class="texto-principal"><p>Muladhara es el primer chakra y el más fundamental — sin una raíz sana, ninguno de los demás puede funcionar plenamente. Regula el sentido de seguridad básica en el mundo, la pertenencia, la supervivencia, la relación con el cuerpo físico y con la tierra.</p><p>Cuando Muladhara está activo y equilibrado: hay una sensación profunda de seguridad que no depende de las circunstancias externas. El cuerpo se siente como hogar. Hay abundancia material suficiente. Las necesidades básicas están cubiertas y hay confianza en que seguirán estándolo.</p><p>Cuando Muladhara está bloqueado o desequilibrado: pueden aparecer miedos existenciales sin causa aparente, problemas económicos crónicos, dificultades con el cuerpo (alimentación, sueño, enfermedades físicas recurrentes), sensación de no pertenecer a ningún lugar o familia, incapacidad de asentarse.</p><p>Como chakra dominante del Camino de Vida 1: tu misión de liderazgo está fundamentada en la tierra. Tienes una solidez básica que sostiene tu capacidad de iniciar — aunque a veces el miedo a perder esa seguridad puede frenar la acción pionera que es tu naturaleza.</p></div>
+    <div class="consejo-box">🧘 <strong>Práctica:</strong> Camina descalzo sobre tierra natural. Practica ejercicios de arraigo — sentir el peso del cuerpo, la solidez del suelo. Aliméntate conscientemente. Trabaja con el color rojo en meditación.</div>
+    <blockquote class="afirmacion">"Estoy seguro en el mundo. El universo provee todo lo que necesito. Pertenezco aquí."</blockquote>
+  </div>
+</article>
+<article class="entrada" id="chakra-2">
+  <div class="entrada-header">
+    <span class="chakra-color-dot" style="background:Naranja"></span>
+    <div>
+      <h3 class="entrada-titulo">Chakra Sacro — Svadhisthana</h3>
+      <div class="entrada-meta">Color: Naranja · Nota: RE · Mantra: VAM · Número de Vida: 2</div>
+    </div>
+  </div>
+  <div class="entrada-body">
+    <div class="ficha-rapida">
+      <span class="ficha-item">📍 Entre el pubis y el ombligo</span>
+      <span class="ficha-item">🌊 Agua</span>
+    </div>
+    <div class="texto-principal"><p>Svadhisthana es el centro de la creatividad, la sexualidad, el placer y las emociones fluidas. Mientras Muladhara es la tierra, Svadhisthana es el agua — fluye, cambia, se adapta, siente.</p><p>Cuando está equilibrado: la creatividad fluye naturalmente, la sexualidad es vivida con consciencia y placer, las emociones son reconocidas y expresadas apropiadamente, la capacidad de disfrutar la vida está intacta.</p><p>Cuando está bloqueado: pueden aparecer bloqueos creativos, disfunciones sexuales, represión o exaltación emocional, dificultades para sentir placer, relaciones que se estancan en la rutina sin emoción.</p><p>Como chakra dominante del Camino de Vida 2: tu misión de cooperación y mediación opera desde el agua emocional. Tu sensibilidad relacional extraordinaria viene de aquí. El desafío es no quedarte atascado en las emociones propias y ajenas sin movilizarlas hacia la creatividad.</p></div>
+    <div class="consejo-box">🧘 <strong>Práctica:</strong> Conecta con el agua: baños conscientes, nadar, beber agua lentamente. Practica cualquier forma de expresión creativa sin objetivo: bailar, dibujar, escribir sin propósito. Trabaja con el color naranja.</div>
+    <blockquote class="afirmacion">"Fluyo con la vida. Mi creatividad es una fuente que nunca se agota. Merezco placer."</blockquote>
+  </div>
+</article>
+<article class="entrada" id="chakra-3">
+  <div class="entrada-header">
+    <span class="chakra-color-dot" style="background:Amarillo"></span>
+    <div>
+      <h3 class="entrada-titulo">Plexo Solar — Manipura</h3>
+      <div class="entrada-meta">Color: Amarillo · Nota: MI · Mantra: RAM · Número de Vida: 3</div>
+    </div>
+  </div>
+  <div class="entrada-body">
+    <div class="ficha-rapida">
+      <span class="ficha-item">📍 Zona del estómago, entre el ombligo y el esternón</span>
+      <span class="ficha-item">🌊 Fuego</span>
+    </div>
+    <div class="texto-principal"><p>Manipura es el centro del poder personal, la voluntad, la autoestima y la identidad. Su nombre significa "ciudad de las joyas" — y en efecto, aquí reside el tesoro del yo: la capacidad de actuar en el mundo desde un sentido claro y estable de quién se es.</p><p>Cuando está equilibrado: hay una sana autoestima que no requiere validación externa, la voluntad es fuerte y dirigida, la capacidad de actuar en el mundo es efectiva, los límites personales son claros.</p><p>Cuando está bloqueado: pueden aparecer problemas de autoestima, dificultades para tomar decisiones, tendencia a la victimización, o en el extremo opuesto, comportamientos controladores y manipuladores.</p><p>Como chakra dominante del Camino de Vida 3: tu misión creativa y comunicativa se alimenta del fuego del plexo solar. Tu alegría y tu expresión son manifestaciones de un yo que confía en sí mismo. Cuando el plexo solar está abierto, tu creatividad es imparable; cuando está contraído por el miedo al juicio, se bloquea.</p></div>
+    <div class="consejo-box">🧘 <strong>Práctica:</strong> Practica actividades que construyan confianza y autodisciplina. Meditación en el fuego o en el sol. Trabajo con el color amarillo. Ejercicios de respiración en el área del abdomen.</div>
+    <blockquote class="afirmacion">"Soy poderoso, capaz y digno. Mi voluntad mueve montañas cuando está alineada con mi propósito."</blockquote>
+  </div>
+</article>
+<article class="entrada" id="chakra-4">
+  <div class="entrada-header">
+    <span class="chakra-color-dot" style="background:Verde"></span>
+    <div>
+      <h3 class="entrada-titulo">Chakra Corazón — Anahata</h3>
+      <div class="entrada-meta">Color: Verde · Nota: FA · Mantra: YAM · Número de Vida: 4</div>
+    </div>
+  </div>
+  <div class="entrada-body">
+    <div class="ficha-rapida">
+      <span class="ficha-item">📍 Centro del pecho</span>
+      <span class="ficha-item">🌊 Aire</span>
+    </div>
+    <div class="texto-principal"><p>Anahata es el puente entre los chakras inferiores (tierra, agua, fuego — lo personal) y los superiores (espacio, luz, pensamiento — lo universal). El corazón es literalmente el centro — el punto donde lo humano y lo divino se encuentran.</p><p>Cuando está equilibrado: el amor fluye libremente — dado y recibido, para uno mismo y para otros, con límites sanos que no se confunden con frialdad. Hay compasión sin autosacrificio, apertura sin ingenuidad.</p><p>Cuando está bloqueado: pueden aparecer dificultades para dar o recibir amor, miedo a la intimidad, relaciones codependientes o distantes, rencores que se acumulan, incapacidad de perdonar (a otros o a uno mismo).</p><p>Como chakra dominante del Camino de Vida 4: tu misión constructora opera desde el corazón. Construyes no por ambición sino por amor — amor al trabajo bien hecho, amor a quienes se beneficiarán de lo que construyes, amor como forma de responsabilidad. Tu disciplina es una expresión de amor.</p></div>
+    <div class="consejo-box">🧘 <strong>Práctica:</strong> Practica el perdón conscientemente — comenzando por ti mismo. Abraza personas que amas. Meditación en el color verde o rosa. Escribe cartas de amor a personas y situaciones (no necesitas enviarlas).</div>
+    <blockquote class="afirmacion">"Doy y recibo amor libremente. Mi corazón es el portal entre lo humano y lo divino."</blockquote>
+  </div>
+</article>
+<article class="entrada" id="chakra-5">
+  <div class="entrada-header">
+    <span class="chakra-color-dot" style="background:Azul celeste"></span>
+    <div>
+      <h3 class="entrada-titulo">Chakra Garganta — Vishuddha</h3>
+      <div class="entrada-meta">Color: Azul celeste · Nota: SOL · Mantra: HAM · Número de Vida: 5</div>
+    </div>
+  </div>
+  <div class="entrada-body">
+    <div class="ficha-rapida">
+      <span class="ficha-item">📍 Garganta</span>
+      <span class="ficha-item">🌊 Éter/Espacio</span>
+    </div>
+    <div class="texto-principal"><p>Vishuddha es el centro de la expresión, la comunicación y la verdad. Su nombre significa "pureza" — porque la comunicación verdadera requiere que lo que se dice sea coherente con lo que se siente y se piensa.</p><p>Cuando está equilibrado: la expresión es auténtica y fluida, hay capacidad de decir la verdad incluso cuando es difícil, la escucha es activa y genuina, la creatividad verbal es rica.</p><p>Cuando está bloqueado: pueden aparecer dificultades para expresarse (tartamudeo, voz débil, miedo a hablar en público), o en el extremo opuesto, verborrea sin sustancia real. También puede manifestarse en problemas físicos con la garganta, cuello o tiroides.</p><p>Como chakra dominante del Camino de Vida 5: tu misión de libertad y expansión se expresa a través de la palabra. Eres el comunicador nato del sistema numerológico. Cuando tu garganta está abierta y tu verdad fluye sin censura, tu impacto es magnético.</p></div>
+    <div class="consejo-box">🧘 <strong>Práctica:</strong> Canta — aunque sea en la ducha. Practica la comunicación consciente: di lo que piensas con claridad y amabilidad. Journaling de expresión libre. Trabaja con el color azul celeste.</div>
+    <blockquote class="afirmacion">"Mi verdad tiene valor. Me expreso con autenticidad y mi voz tiene el poder de transformar."</blockquote>
+  </div>
+</article>
+<article class="entrada" id="chakra-6">
+  <div class="entrada-header">
+    <span class="chakra-color-dot" style="background:Índigo"></span>
+    <div>
+      <h3 class="entrada-titulo">Tercer Ojo — Ajna</h3>
+      <div class="entrada-meta">Color: Índigo · Nota: LA · Mantra: OM · Número de Vida: 6</div>
+    </div>
+  </div>
+  <div class="entrada-body">
+    <div class="ficha-rapida">
+      <span class="ficha-item">📍 Entre las cejas, ligeramente por encima</span>
+      <span class="ficha-item">🌊 Luz</span>
+    </div>
+    <div class="texto-principal"><p>Ajna es el centro de la visión interior, la intuición, la percepción psíquica y la sabiduría que va más allá del pensamiento racional. Su nombre significa "percepción" o "mando" — porque es desde aquí desde donde la consciencia dirige.</p><p>Cuando está equilibrado: la intuición es aguda y confiable, hay visión clara de los patrones y las conexiones que otros no ven, los sueños son significativos y recordados, hay capacidad de visión tanto interna como externa.</p><p>Cuando está bloqueado: pueden aparecer confusión mental, dificultades para tomar decisiones, incapacidad de ver más allá de lo inmediato, rigidez de pensamiento, o en el extremo, excesiva credulidad sin discernimiento.</p><p>Como chakra dominante del Camino de Vida 6 y 7: para el 6, el tercer ojo te da la visión para crear armonía — ves lo que otros no ven en las relaciones y los espacios. Para el 7, es tu herramienta natural de investigación: tu capacidad de percibir lo que está detrás de lo evidente.</p></div>
+    <div class="consejo-box">🧘 <strong>Práctica:</strong> Meditación en el punto entre las cejas. Trabaja con el color índigo o añil. Diario de sueños. Prácticas de silencio y observación. Reduce los estímulos visuales excesivos.</div>
+    <blockquote class="afirmacion">"Veo con claridad más allá de lo visible. Mi intuición es una inteligencia real que honro y confío."</blockquote>
+  </div>
+</article>
+<article class="entrada" id="chakra-7">
+  <div class="entrada-header">
+    <span class="chakra-color-dot" style="background:Violeta/Blanco"></span>
+    <div>
+      <h3 class="entrada-titulo">Chakra Corona — Sahasrara</h3>
+      <div class="entrada-meta">Color: Violeta/Blanco · Nota: SI · Mantra: AUM · Número de Vida: 7</div>
+    </div>
+  </div>
+  <div class="entrada-body">
+    <div class="ficha-rapida">
+      <span class="ficha-item">📍 Coronilla, ligeramente por encima de la cabeza</span>
+      <span class="ficha-item">🌊 Conciencia pura</span>
+    </div>
+    <div class="texto-principal"><p>Sahasrara es el chakra de la conexión con la conciencia universal, con lo divino en cualquiera de sus formas, con la fuente de la que todo emerge y a la que todo regresa. Su nombre significa "mil pétalos" — la flor de loto que se abre a la luz.</p><p>Cuando está equilibrado: hay una experiencia de conexión con algo más grande que el yo individual, de sentido y propósito que trasciende lo personal, de paz que no depende de las circunstancias, de apertura a la gracia.</p><p>Cuando está bloqueado: pueden aparecer nihilismo, sensación de desconexión existencial, incapacidad de experimentar la dimensión espiritual de la vida, depresión sin causa aparente, o en el extremo, fanatismo espiritual que excluye lo material.</p><p>Como chakra dominante del Camino de Vida 8 y 9: para el 8, la corona equilibra el poder material con la consciencia espiritual — te recuerda que la abundancia que manifiestas sirve a algo más grande. Para el 9, es tu chakra natural: tu misión de servicio universal opera directamente desde la conexión con el todo.</p></div>
+    <div class="consejo-box">🧘 <strong>Práctica:</strong> Meditación de silencio profundo. Conexión con la naturaleza. Prácticas espirituales de cualquier tradición que resuene. Trabaja con el color violeta o blanco puro. Servicio desinteresado.</div>
+    <blockquote class="afirmacion">"Soy parte del todo. La sabiduría universal fluye a través de mí. Estoy conectado con lo sagrado."</blockquote>
+  </div>
+</article>
+</div>
+
+<!-- CAP 5B: JUNG -->
+<div id="cap5b" class="chapter">
+  <div class="chapter-eyebrow">Capítulo 6</div>
+  <h2>Los Arquetipos de Jung — Los Personajes de tu Psique</h2>
+  <div class="chapter-intro">Carl Gustav Jung identificó en la psique humana una dimensión compartida que llamó el inconsciente colectivo — el depósito de experiencias, imágenes y patrones que toda la humanidad ha acumulado a lo largo de su historia. Los arquetipos son los patrones fundamentales de ese inconsciente colectivo: personajes universales que aparecen en los mitos, los sueños, los cuentos y las religiones de todas las culturas.</p><p>En la Lectura Armónica usamos dos sistemas de correspondencia: el arquetipo de expresión (determinado por el signo solar — la manera en que manifiestas tu energía al mundo) y el arquetipo de misión (determinado por el Número de Vida — el patrón interno que orienta tu propósito).</p><p>La diferencia entre el signo solar y el número de vida es importante: el signo solar describe el personaje que encarnas en la relación con el mundo; el número de vida describe la misión que ese personaje vino a cumplir. Ambos son tú — pero iluminan dimensiones diferentes.</p><p>Conocer tus arquetipos no es un ejercicio de catalogación sino de reconocimiento: cuando ves claramente el personaje que operas, puedes elegir cuándo dejar que actúe y cuándo moderarlo. El arquetipo no consciente te maneja; el arquetipo consciente te sirve.</div>
+  <article class="entrada" id="arq-aries">
+  <div class="entrada-header">
+    <div>
+      <h3 class="entrada-titulo">Aries — El Héroe / El Guerrero</h3>
+    </div>
+  </div>
+  <div class="entrada-body">
+    <div class="texto-principal"><p>Aries encarna el arquetipo del Héroe — el que responde al llamado de la aventura, enfrenta los dragones (externos e internos) y regresa transformado. No porque busque el reconocimiento heroico sino porque no puede ignorar el llamado a actuar cuando hay algo que necesita ser hecho.</p><p>El Guerrero es la sombra del Héroe — el que pelea no desde el coraje sino desde el miedo, el que ataca porque no sabe escuchar, el que confunde la agresión con la fuerza. La integración del arquetipo ariano consiste en desarrollar la valentía del Héroe sin caer en los patrones destructivos del Guerrero inconsciente.</p></div>
+  </div>
+</article>
+<article class="entrada" id="arq-tauro">
+  <div class="entrada-header">
+    <div>
+      <h3 class="entrada-titulo">Tauro — El Creador / El Amante</h3>
+    </div>
+  </div>
+  <div class="entrada-body">
+    <div class="texto-principal"><p>Tauro encarna el doble arquetipo del Creador y el Amante. El Creador toma los materiales del mundo y los convierte en algo bello y duradero — no por vanidad sino porque la creación es su forma natural de relacionarse con la existencia. El Amante encuentra lo sagrado en lo sensorial — en el sabor del vino, en la textura del mármol, en el sonido de la música.</p><p>La sombra del Amante es el adicto — el que busca la experiencia sensorial para llenar el vacío en lugar de para celebrar la plenitud. La sombra del Creador es el materialista — el que confunde sus creaciones con su identidad.</p></div>
+  </div>
+</article>
+<article class="entrada" id="arq-géminis">
+  <div class="entrada-header">
+    <div>
+      <h3 class="entrada-titulo">Géminis — El Mensajero / El Explorador</h3>
+    </div>
+  </div>
+  <div class="entrada-body">
+    <div class="texto-principal"><p>Géminis encarna el arquetipo del Mensajero — el hermes griego, el que viaja entre mundos y lleva información de uno a otro. También el Explorador: el que no puede dejar de ir más allá del siguiente horizonte, de hacer la siguiente pregunta, de conocer la siguiente perspectiva.</p><p>La sombra del Mensajero es el embaucador — el que usa la información para engañar, el que cambia su historia según la audiencia. La sombra del Explorador es el disperso — el que va a todas partes y no llega a ninguna profundidad.</p></div>
+  </div>
+</article>
+<article class="entrada" id="arq-cáncer">
+  <div class="entrada-header">
+    <div>
+      <h3 class="entrada-titulo">Cáncer — El Cuidador / La Gran Madre</h3>
+    </div>
+  </div>
+  <div class="entrada-body">
+    <div class="texto-principal"><p>Cáncer encarna el arquetipo de la Gran Madre — no en el sentido exclusivamente femenino sino en el principio universal del cuidado, la nutrición y la protección. El Cuidador encuentra su propósito en hacer que otros florezcan, en crear los ambientes donde la vida puede crecer con seguridad.</p><p>La sombra de la Gran Madre es la madre devoradora — la que cuida de forma posesiva, que no puede soltar lo que ha criado, que confunde el amor con el control. La integración consiste en aprender a cuidar sin ahogar, a proteger sin enjaular.</p></div>
+  </div>
+</article>
+<article class="entrada" id="arq-leo">
+  <div class="entrada-header">
+    <div>
+      <h3 class="entrada-titulo">Leo — El Rey / El Artista</h3>
+    </div>
+  </div>
+  <div class="entrada-body">
+    <div class="texto-principal"><p>Leo encarna el doble arquetipo del Rey y el Artista. El Rey es el que gobierna desde la sabiduría del corazón — no el tirano que domina sino el soberano que sirve a su reino con su propia integridad como modelo. El Artista crea no para la fama sino porque la expresión auténtica es su forma de respirar.</p><p>La sombra del Rey es el tirano — el que usa el poder para servirse a sí mismo. La sombra del Artista es el exhibicionista — el que crea no para compartir sino para ser admirado. La integración leonina es la generosidad — el que brilla para que otros encuentren su propia luz.</p></div>
+  </div>
+</article>
+<article class="entrada" id="arq-virgo">
+  <div class="entrada-header">
+    <div>
+      <h3 class="entrada-titulo">Virgo — El Sanador / El Artesano</h3>
+    </div>
+  </div>
+  <div class="entrada-body">
+    <div class="texto-principal"><p>Virgo encarna el arquetipo del Sanador — el que ve lo que está roto y sabe cómo repararlo. También el Artesano: el que hace las cosas bien no por obligación sino por respeto al oficio, por amor a la excelencia en lo concreto.</p><p>La sombra del Sanador es el hipocondríaco o el que cura compulsivamente — el que proyecta sus propios dolores en los demás y trata de sanar lo que en realidad es suyo. La sombra del Artesano es el perfeccionista paralizante. La integración virginiana es aprender a aplicar el mismo cuidado compasivo a sí mismo que aplica a los demás.</p></div>
+  </div>
+</article>
+<article class="entrada" id="arq-libra">
+  <div class="entrada-header">
+    <div>
+      <h3 class="entrada-titulo">Libra — El Amante / El Diplomático</h3>
+    </div>
+  </div>
+  <div class="entrada-body">
+    <div class="texto-principal"><p>Libra encarna el arquetipo del Amante en su dimensión relacional — el que busca la unión, la belleza en el encuentro, la armonía entre diferencias. También el Diplomático: el que convierte la tensión en diálogo, que encuentra el punto de acuerdo donde otros solo ven la división.</p><p>La sombra del Amante es el que se disuelve en el otro, perdiendo su identidad. La sombra del Diplomático es el manipulador — el que crea armonía superficial escondiendo los conflictos reales. La integración libriana es aprender a estar en relación sin perderse.</p></div>
+  </div>
+</article>
+<article class="entrada" id="arq-escorpio">
+  <div class="entrada-header">
+    <div>
+      <h3 class="entrada-titulo">Escorpio — El Alquimista / El Detective</h3>
+    </div>
+  </div>
+  <div class="entrada-body">
+    <div class="texto-principal"><p>Escorpio encarna el arquetipo del Alquimista — el que transforma lo que toca, que convierte el plomo en oro no metafóricamente sino en el sentido real de tomar lo que está roto y encontrar en ello la semilla de algo más valioso. También el Detective: el que no descansa hasta llegar a la verdad, que lee entre líneas, que ve lo que se oculta.</p><p>La sombra del Alquimista es el que destruye sin crear — el que transforma destructivamente. La sombra del Detective es el paranoico — el que ve conspiraciones donde hay inocencia. La integración escorpiana es usar su poder de transformación para construir, no para vengarse.</p></div>
+  </div>
+</article>
+<article class="entrada" id="arq-sagitario">
+  <div class="entrada-header">
+    <div>
+      <h3 class="entrada-titulo">Sagitario — El Buscador / El Profeta</h3>
+    </div>
+  </div>
+  <div class="entrada-body">
+    <div class="texto-principal"><p>Sagitario encarna el arquetipo del Buscador — el que nunca está completamente satisfecho con las respuestas que tiene porque siempre hay más horizonte, más profundidad, más verdad por descubrir. También el Profeta: el que ve más allá del momento presente y señala el camino hacia algo mejor.</p><p>La sombra del Buscador es el que busca para no llegar — la búsqueda como evasión del compromiso de vivir lo que ya se sabe. La sombra del Profeta es el predicador — el que anuncia la verdad con tanto fervor que no puede escuchar las verdades de otros. La integración sagitariana es aterrizar la visión en acción concreta.</p></div>
+  </div>
+</article>
+<article class="entrada" id="arq-capricornio">
+  <div class="entrada-header">
+    <div>
+      <h3 class="entrada-titulo">Capricornio — El Gobernante / El Sabio</h3>
+    </div>
+  </div>
+  <div class="entrada-body">
+    <div class="texto-principal"><p>Capricornio encarna el arquetipo del Gobernante — no el que gobierna a otros sino el que se gobierna a sí mismo con una disciplina que produce resultados extraordinarios a largo plazo. También el Sabio: el que ha aprendido de la experiencia acumulada y puede ver los patrones donde otros solo ven eventos aislados.</p><p>La sombra del Gobernante es el déspota — el que aplica a otros la misma dureza implacable que se aplica a sí mismo. La sombra del Sabio es el cínico — el que ha visto demasiado para creer en la posibilidad de algo mejor. La integración capricorniana es aprender que la sabiduría incluye la compasión.</p></div>
+  </div>
+</article>
+<article class="entrada" id="arq-acuario">
+  <div class="entrada-header">
+    <div>
+      <h3 class="entrada-titulo">Acuario — El Rebelde / El Visionario</h3>
+    </div>
+  </div>
+  <div class="entrada-body">
+    <div class="texto-principal"><p>Acuario encarna el arquetipo del Rebelde — no el que se niega por negarse sino el que dice "no" a lo que no sirve porque tiene una visión clara de algo mejor. También el Visionario: el que llega al futuro antes que los demás y señala el camino hacia él.</p><p>La sombra del Rebelde es el revolucionario destructivo — el que derrumba sin saber qué construir. La sombra del Visionario es el utópico desconectado — el que vive tan en el futuro que ignora la realidad del presente. La integración acuariana es hacer el futuro accesible en el presente.</p></div>
+  </div>
+</article>
+<article class="entrada" id="arq-piscis">
+  <div class="entrada-header">
+    <div>
+      <h3 class="entrada-titulo">Piscis — El Místico / El Artista Universal</h3>
+    </div>
+  </div>
+  <div class="entrada-body">
+    <div class="texto-principal"><p>Piscis encarna el arquetipo del Místico — el que tiene acceso a dimensiones de la realidad que otros no pueden ver directamente, que habita en el espacio entre lo visible y lo invisible. También el Artista Universal: el que crea desde una conexión con algo más grande que su ego individual.</p><p>La sombra del Místico es el escapista — el que usa la espiritualidad para evadir la realidad concreta. La sombra del Artista es el sufridor romántico — el que confunde el dolor con la profundidad. La integración pisciana es mantener la conexión espiritual mientras se habita plenamente en el mundo.</p></div>
+  </div>
+</article>
+</div>
+
+<!-- APÉNDICE -->
+<div id="apendice" class="chapter">
+  <div class="chapter-eyebrow">Apéndice</div>
+  <h2>Referencia Rápida</h2>
+  <div class="chapter-intro">Tablas de consulta rápida para usar junto con tu reporte. Busca tu número, signo o arcano y ve directamente a su significado.</div>
+
+  <div class="indice-rapido" style="flex-direction:column;gap:16px">
+    <div>
+      <div class="indice-label">Signos Zodiacales</div>
+      <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:8px"><a class="idx-item" href="#signo-aries">♈ Aries</a><a class="idx-item" href="#signo-tauro">♉ Tauro</a><a class="idx-item" href="#signo-géminis">♊ Géminis</a><a class="idx-item" href="#signo-cáncer">♋ Cáncer</a><a class="idx-item" href="#signo-leo">♌ Leo</a><a class="idx-item" href="#signo-virgo">♍ Virgo</a><a class="idx-item" href="#signo-libra">♎ Libra</a><a class="idx-item" href="#signo-escorpio">♏ Escorpio</a><a class="idx-item" href="#signo-sagitario">♐ Sagitario</a><a class="idx-item" href="#signo-capricornio">♑ Capricornio</a><a class="idx-item" href="#signo-acuario">♒ Acuario</a><a class="idx-item" href="#signo-piscis">♓ Piscis</a></div>
+    </div>
+    <div>
+      <div class="indice-label">Camino de Vida (1–33)</div>
+      <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:8px"><a class="idx-item" href="#cdv-1">1 — El Pionero</a><a class="idx-item" href="#cdv-2">2 — El Mediador</a><a class="idx-item" href="#cdv-3">3 — El Creador</a><a class="idx-item" href="#cdv-4">4 — El Constructor</a><a class="idx-item" href="#cdv-5">5 — El Libertador</a><a class="idx-item" href="#cdv-6">6 — El Sanador</a><a class="idx-item" href="#cdv-7">7 — El Buscador</a><a class="idx-item" href="#cdv-8">8 — El Empoderado</a><a class="idx-item" href="#cdv-9">9 — El Humanista</a><a class="idx-item maestro" href="#cdv-11">11 — El Visionario</a><a class="idx-item maestro" href="#cdv-22">22 — El Constructor del Mundo</a><a class="idx-item maestro" href="#cdv-33">33 — El Maestro Sanador</a></div>
+    </div>
+    <div>
+      <div class="indice-label">22 Arcanos Mayores</div>
+      <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:8px"><a class="idx-item" href="#arcano-0">0 El Loco</a><a class="idx-item" href="#arcano-1">I El Mago</a><a class="idx-item" href="#arcano-2">II La Sacerdotisa</a><a class="idx-item" href="#arcano-3">III La Emperatriz</a><a class="idx-item" href="#arcano-4">IV El Emperador</a><a class="idx-item" href="#arcano-5">V El Hierofante</a><a class="idx-item" href="#arcano-6">VI Los Amantes</a><a class="idx-item" href="#arcano-7">VII El Carro</a><a class="idx-item" href="#arcano-8">VIII La Fuerza</a><a class="idx-item" href="#arcano-9">IX El Ermitaño</a><a class="idx-item" href="#arcano-10">X La Rueda de la Fortuna</a><a class="idx-item" href="#arcano-11">XI La Justicia</a><a class="idx-item" href="#arcano-12">XII El Colgado</a><a class="idx-item" href="#arcano-13">XIII La Muerte</a><a class="idx-item" href="#arcano-14">XIV La Templanza</a><a class="idx-item" href="#arcano-15">XV El Diablo</a><a class="idx-item" href="#arcano-16">XVI La Torre</a><a class="idx-item" href="#arcano-17">XVII La Estrella</a><a class="idx-item" href="#arcano-18">XVIII La Luna</a><a class="idx-item" href="#arcano-19">XIX El Sol</a><a class="idx-item" href="#arcano-20">XX El Juicio</a><a class="idx-item" href="#arcano-21">XXI El Mundo</a></div>
+    </div>
+    <div>
+      <div class="indice-label">5 Ciclos de Biorritmo</div>
+      <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:8px"><a class="idx-item" href="#bio-ciclo-físico">💪 Ciclo Físico</a><a class="idx-item" href="#bio-ciclo-emocional">💛 Ciclo Emocional</a><a class="idx-item" href="#bio-ciclo-intelectual">🧠 Ciclo Intelectual</a><a class="idx-item" href="#bio-ciclo-intuitivo">🔮 Ciclo Intuitivo</a><a class="idx-item" href="#bio-ciclo-espiritual">✨ Ciclo Espiritual</a></div>
+    </div>
+  </div>
+
+  <div style="text-align:center;padding:48px 0 24px;border-top:1px solid var(--border);margin-top:48px">
+    <p style="font-family:'Cinzel',serif;font-size:.65rem;letter-spacing:.4em;color:var(--text3)">LECTURA ARMÓNICA ESPIRITUAL · PROMPTESTUDIO.COM</p>
+    <p style="font-size:.75rem;color:var(--text3);margin-top:8px">© 2026 Oswaldo Arredondo Cobo · Colombia</p>
+    <p style="font-size:.75rem;color:var(--text3);margin-top:4px">
+      <a href="lectura_armonica_app.html" style="color:var(--accent);text-decoration:none">Ir a la App →</a>
+      &nbsp;·&nbsp;
+      <a href="landing_lectura_armonica.html" style="color:var(--accent);text-decoration:none">Página de inicio</a>
+    </p>
+  </div>
+</div>
+
+</div><!-- /content -->
+</main>
+
+<button class="mob-menu-btn" onclick="toggleSidebar()">☰</button>
+
+<script>
+// Theme
+function setTheme(t){
+  document.body.setAttribute('data-theme',t);
+  localStorage.setItem('lae_book_theme',t);
+}
+(function(){
+  const t = localStorage.getItem('lae_book_theme') || 'dark';
+  document.body.setAttribute('data-theme',t);
+})();
+
+// Active nav
+function setActive(el){
+  document.querySelectorAll('.sidebar-nav a').forEach(a=>a.classList.remove('active'));
+  el.classList.add('active');
+  if(window.innerWidth<=700) document.getElementById('sidebar').classList.remove('open');
+}
+
+// Toggle entries
+document.querySelectorAll('.entrada-header').forEach(h=>{
+  h.addEventListener('click',()=>{
+    const body = h.nextElementSibling;
+    body.classList.toggle('open');
+  });
+});
+
+// Open first entry of each chapter by default
+document.querySelectorAll('.chapter .entrada:first-of-type .entrada-body').forEach(b=>{
+  b.classList.add('open');
+});
+
+// Search
+function buscar(q){
+  const term = q.toLowerCase().trim();
+  if(!term){ document.querySelectorAll('.entrada').forEach(e=>e.style.display=''); return; }
+  document.querySelectorAll('.entrada').forEach(e=>{
+    const txt = e.textContent.toLowerCase();
+    e.style.display = txt.includes(term) ? '' : 'none';
+  });
+}
+
+// Scroll spy
+const main = document.querySelector('.main');
+const sections = document.querySelectorAll('[id]');
+main.addEventListener('scroll',()=>{
+  let current = '';
+  sections.forEach(s=>{
+    if(s.offsetTop - 80 <= main.scrollTop) current = s.id;
+  });
+  if(current){
+    document.querySelectorAll('.sidebar-nav a').forEach(a=>{
+      a.classList.toggle('active', a.getAttribute('href')==='#'+current);
+    });
+  }
+});
+
+// Mobile sidebar
+function toggleSidebar(){
+  document.getElementById('sidebar').classList.toggle('open');
+}
+</script>
+
+<style>
+.oaq-footer{position:fixed;left:0;right:0;bottom:0;z-index:9999;background:var(--card2);border-top:1px solid var(--border);padding:10px 16px;display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap;text-align:center;box-shadow:0 -4px 16px rgba(0,0,0,0.25);font-family:'Raleway',sans-serif;}
+.oaq-footer p{margin:0;font-size:.82rem;color:var(--text);}
+.oaq-footer .oaq-brand{font-weight:700;color:var(--accent);}
+.oaq-footer a{color:var(--accent);text-decoration:none;font-weight:600;white-space:nowrap;}
+.oaq-footer a:hover{text-decoration:underline;}
+@media(max-width:600px){.oaq-footer{font-size:.76rem;padding:8px 10px;}}
+</style>
+<footer class="oaq-footer">
+  <p><span class="oaq-brand">OA QUANT</span> — ¿Disfrutando la lectura? Recuerda que hay más contenido como este en el catálogo.</p>
+  <a href="#" onclick="alert('Aquí iría el link al catálogo OA QUANT.');return false;">Ver catálogo →</a>
+</footer>
+
+</body>
+</html>

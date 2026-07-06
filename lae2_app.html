@@ -1,0 +1,2116 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Compatibilidad Armónica — PromptEstudio.com</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Cinzel:wght@400;600;700&family=Raleway:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#080512;--bg2:#0d0820;--bg3:#130c28;
+  --card:#1c1438;--card2:#241a48;
+  --a:#e0b0ff;--a2:#c980ff;--gold:#f0d060;--gold2:#ffe090;
+  --teal:#70e8cc;--red:#e87878;--orange:#e8a060;--blue:#78c0f0;
+  --text:#f4eeff;--text2:#c0a8e0;--text3:#7060a0;
+  --border:rgba(200,128,255,0.12);--border2:rgba(200,128,255,0.28);
+  --persona-a:#c980ff;--persona-b:#70e8cc;
+}
+[data-theme=light]{
+  --bg:#faf6ff;--bg2:#f4eeff;--bg3:#ede0ff;--card:#fff;--card2:#f8f2ff;
+  --a:#7030b0;--a2:#5020a0;--gold:#8b6000;--gold2:#5a3e00;
+  --teal:#0a7060;--red:#c03030;--orange:#8b4500;--blue:#1050a0;
+  --text:#1a0f2e;--text2:#4a3570;--text3:#8070a0;
+  --border:rgba(100,40,180,0.12);--border2:rgba(100,40,180,0.28);
+  --persona-a:#7030b0;--persona-b:#0a7060;
+}
+[data-theme=sepia]{
+  --bg:#160e04;--bg2:#1e1408;--bg3:#28180c;--card:#221808;--card2:#2a2010;
+  --a:#f0c860;--a2:#e0a040;--gold:#f0c860;--text:#f5e8c0;--text2:#c8a870;--text3:#806840;
+  --border:rgba(240,200,80,0.15);--border2:rgba(240,200,80,0.35);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:'Raleway',sans-serif;min-height:100vh;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;
+  background:radial-gradient(ellipse at 20% 20%,rgba(140,60,255,0.07),transparent 50%),
+             radial-gradient(ellipse at 80% 80%,rgba(60,200,160,0.05),transparent 50%);
+  pointer-events:none;z-index:0}
+
+/* Stars */
+.stars{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+.star{position:absolute;border-radius:50%;animation:tw var(--d,3s) ease-in-out infinite;opacity:var(--o,.3)}
+@keyframes tw{0%,100%{opacity:var(--o)}50%{opacity:.04}}
+
+/* Theme */
+.theme-bar{position:fixed;top:16px;right:16px;z-index:100;display:flex;gap:6px;
+  background:var(--card);border:1px solid var(--border);border-radius:50px;padding:6px 10px}
+.t-btn{width:22px;height:22px;border-radius:50%;border:2px solid var(--border2);cursor:pointer;transition:transform .2s}
+.t-btn:hover{transform:scale(1.15)}
+.t-btn[data-t=dark]{background:#080512}
+.t-btn[data-t=light]{background:linear-gradient(135deg,#faf6ff,#c980ff)}
+.t-btn[data-t=sepia]{background:linear-gradient(135deg,#160e04,#f0c860)}
+
+/* Layout */
+.wrap{position:relative;z-index:1;max-width:880px;margin:0 auto;padding:32px 20px 80px}
+
+/* Header */
+.site-header{text-align:center;padding:56px 0 40px}
+.header-sigil{font-size:3.2rem;margin-bottom:20px;display:block;
+  animation:float 7s ease-in-out infinite;filter:drop-shadow(0 0 24px rgba(200,128,255,0.4))}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+.header-eyebrow{font-family:'Cinzel',serif;font-size:10px;letter-spacing:.55em;
+  color:var(--gold);text-transform:uppercase;margin-bottom:18px}
+.header-h1{font-family:'Cinzel',serif;font-size:clamp(1.8rem,5vw,3rem);
+  font-weight:700;line-height:1.18;margin-bottom:12px}
+.header-h1 .pa{color:var(--persona-a)}.header-h1 .pb{color:var(--persona-b)}
+.header-sub{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-style:italic;
+  color:var(--text2);margin-bottom:32px}
+.header-pills{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+.pill{font-size:.72rem;padding:4px 13px;border-radius:20px;letter-spacing:.08em;
+  background:rgba(200,128,255,0.08);border:1px solid var(--border2);color:var(--a)}
+
+/* Activation */
+.act-panel{background:var(--card);border:1px solid var(--border2);
+  border-radius:18px;padding:32px;margin-bottom:28px}
+.act-panel h2{font-family:'Cinzel',serif;font-size:.9rem;letter-spacing:.15em;
+  color:var(--a);margin-bottom:6px}
+.act-panel p{color:var(--text2);font-size:.85rem;margin-bottom:18px}
+.act-row{display:flex;gap:10px}
+.act-input{flex:1;background:var(--bg3);border:1px solid var(--border2);border-radius:8px;
+  padding:11px 14px;color:var(--text);font-family:'Raleway',sans-serif;font-size:.9rem;
+  letter-spacing:.08em;outline:none;transition:border-color .2s}
+.act-input:focus{border-color:var(--a)}
+.act-input::placeholder{color:var(--text3)}
+.btn-act{background:var(--a);color:#080512;border:none;border-radius:8px;
+  padding:11px 22px;font-family:'Cinzel',serif;font-size:.8rem;font-weight:600;
+  letter-spacing:.1em;cursor:pointer;transition:all .2s;white-space:nowrap}
+.btn-act:hover{filter:brightness(1.1)}
+.act-status{margin-top:10px;font-size:.82rem;padding:7px 12px;border-radius:6px}
+.act-ok{background:rgba(112,232,204,0.1);color:var(--teal)}
+.act-err{background:rgba(232,120,120,0.1);color:var(--red)}
+.act-demo{margin-top:8px;font-size:.78rem;color:var(--text3)}
+.act-demo a{color:var(--gold);cursor:pointer;text-decoration:underline}
+
+/* Form */
+.form-panel{display:none}
+.form-panel.visible{display:block;animation:fadeUp .5s ease}
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+
+/* Propósito selector */
+.proposito-bar{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:28px;justify-content:center}
+.prop-btn{background:var(--card);border:1px solid var(--border2);border-radius:50px;
+  padding:10px 22px;font-family:'Cinzel',serif;font-size:.78rem;letter-spacing:.1em;
+  cursor:pointer;color:var(--text2);transition:all .2s}
+.prop-btn:hover{border-color:var(--a);color:var(--a)}
+.prop-btn.active{background:var(--a);color:#080512;border-color:var(--a)}
+
+/* Personas grid */
+.personas-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:24px}
+.persona-panel{background:var(--card);border:2px solid var(--border);border-radius:14px;padding:24px}
+.persona-panel.pa{border-color:rgba(200,128,255,0.3)}
+.persona-panel.pb{border-color:rgba(112,232,204,0.3)}
+.persona-header{display:flex;align-items:center;gap:10px;margin-bottom:18px}
+.persona-dot{width:12px;height:12px;border-radius:50%}
+.dot-a{background:var(--persona-a)}.dot-b{background:var(--persona-b)}
+.persona-label{font-family:'Cinzel',serif;font-size:.78rem;letter-spacing:.15em;color:var(--text2)}
+.field{margin-bottom:14px}
+.field label{display:block;font-size:.68rem;letter-spacing:.2em;color:var(--text3);
+  text-transform:uppercase;margin-bottom:6px;font-weight:500}
+.field input,.field select{width:100%;background:var(--bg3);border:1px solid var(--border2);
+  border-radius:7px;padding:11px 13px;color:var(--text);font-family:'Raleway',sans-serif;
+  font-size:.92rem;outline:none;transition:border-color .2s;-webkit-appearance:none}
+.field input:focus,.field select:focus{border-color:var(--a)}
+.field-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
+.field-note{font-size:.7rem;color:var(--text3);margin-top:5px;font-style:italic}
+
+.btn-calcular{width:100%;background:linear-gradient(135deg,var(--a),#9040e0);
+  color:#fff;border:none;border-radius:12px;padding:17px;font-family:'Cinzel',serif;
+  font-size:.95rem;font-weight:600;letter-spacing:.15em;cursor:pointer;
+  transition:all .3s;margin-top:8px}
+.btn-calcular:hover{transform:translateY(-2px);filter:brightness(1.08)}
+
+/* Loading */
+.loading{text-align:center;padding:60px;display:none}
+.loading.visible{display:block}
+.loading-ring{width:48px;height:48px;border:2px solid var(--border2);
+  border-top-color:var(--a);border-radius:50%;animation:spin .8s linear infinite;margin:0 auto 18px}
+@keyframes spin{to{transform:rotate(360deg)}}
+.loading p{font-family:'Cormorant Garamond',serif;font-size:1rem;color:var(--text2);font-style:italic}
+
+/* Reporte */
+#reporte{display:none}
+#reporte.visible{display:block;animation:fadeUp .6s ease}
+
+/* Score principal */
+.score-hero{text-align:center;padding:52px 24px 40px;background:var(--card);
+  border:1px solid var(--border2);border-radius:18px;margin-bottom:4px;
+  position:relative;overflow:hidden}
+.score-hero::before{content:'';position:absolute;top:50%;left:50%;
+  transform:translate(-50%,-50%);width:400px;height:400px;border-radius:50%;
+  background:radial-gradient(circle,rgba(200,128,255,0.07),transparent 65%);pointer-events:none}
+.score-nombres{display:flex;align-items:center;justify-content:center;gap:18px;margin-bottom:24px;flex-wrap:wrap}
+.score-nombre-a{font-family:'Cinzel',serif;font-size:1.2rem;color:var(--persona-a)}
+.score-nombre-b{font-family:'Cinzel',serif;font-size:1.2rem;color:var(--persona-b)}
+.score-x{font-family:'Cinzel',serif;font-size:1.6rem;color:var(--text3)}
+.score-num{font-family:'Cinzel',serif;font-size:5rem;font-weight:700;
+  line-height:1;margin-bottom:6px}
+.score-label{font-family:'Cinzel',serif;font-size:.7rem;letter-spacing:.4em;
+  color:var(--text3);text-transform:uppercase;margin-bottom:16px}
+.score-titulo{font-family:'Cormorant Garamond',serif;font-size:1.5rem;
+  color:var(--text);margin-bottom:8px}
+.score-dinamica{font-family:'Cormorant Garamond',serif;font-size:.95rem;
+  color:var(--text2);font-style:italic}
+
+/* Score ring */
+.score-ring{position:relative;width:160px;height:160px;margin:0 auto 20px}
+.score-ring svg{transform:rotate(-90deg)}
+.score-ring-text{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  text-align:center}
+
+/* Barras de detalle */
+.detail-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px;margin-bottom:4px}
+.detail-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:18px}
+.dc-label{font-size:.65rem;letter-spacing:.2em;color:var(--text3);text-transform:uppercase;margin-bottom:10px}
+.dc-val{font-family:'Cinzel',serif;font-size:1.1rem;color:var(--a);margin-bottom:4px}
+.dc-bar{height:5px;background:var(--border);border-radius:3px;margin-bottom:8px}
+.dc-fill{height:100%;border-radius:3px;transition:width 1s ease}
+.dc-desc{font-family:'Cormorant Garamond',serif;font-size:.85rem;color:var(--text2);line-height:1.55}
+
+/* Compatibilidad detallada */
+.compat-section{background:var(--card);border:1px solid var(--border);
+  border-radius:14px;padding:26px;margin-bottom:4px}
+.cs-header{font-family:'Cinzel',serif;font-size:.75rem;letter-spacing:.2em;
+  color:var(--a);text-transform:uppercase;margin-bottom:18px}
+.cs-texto{font-family:'Cormorant Garamond',serif;font-size:1rem;
+  color:var(--text2);line-height:1.75;margin-bottom:14px}
+.cs-consejo{background:rgba(240,208,96,0.06);border:1px solid rgba(240,208,96,0.2);
+  border-radius:8px;padding:12px 15px;font-family:'Cormorant Garamond',serif;
+  font-size:.92rem;color:var(--gold2);line-height:1.6}
+.cs-consejo strong{color:var(--gold)}
+
+/* Perfiles comparados */
+.profiles-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:4px}
+.profile-card{background:var(--card);border:2px solid var(--border);border-radius:12px;padding:20px}
+.profile-card.pa{border-color:rgba(200,128,255,0.25)}
+.profile-card.pb{border-color:rgba(112,232,204,0.25)}
+.prof-nombre{font-family:'Cinzel',serif;font-size:.95rem;margin-bottom:12px}
+.prof-nombre.pa{color:var(--persona-a)}.prof-nombre.pb{color:var(--persona-b)}
+.prof-row{display:flex;justify-content:space-between;align-items:baseline;
+  padding:5px 0;border-bottom:1px solid var(--border);font-size:.8rem}
+.prof-key{color:var(--text3);letter-spacing:.08em}
+.prof-val{font-family:'Cinzel',serif;color:var(--text)}
+
+/* Calendario */
+.calendario-section{background:var(--card);border:1px solid var(--border);
+  border-radius:14px;overflow:hidden;margin-bottom:4px}
+.cal-header{padding:18px 24px;border-bottom:1px solid var(--border)}
+.cal-title{font-family:'Cinzel',serif;font-size:.78rem;letter-spacing:.2em;
+  color:var(--a);text-transform:uppercase;margin-bottom:4px}
+.cal-sub{font-size:.78rem;color:var(--text2)}
+.cal-propósito-tabs{display:flex;gap:0;padding:0 24px;border-bottom:1px solid var(--border)}
+.cal-tab{padding:10px 16px;font-family:'Cinzel',serif;font-size:.7rem;letter-spacing:.1em;
+  cursor:pointer;color:var(--text3);border-bottom:2px solid transparent;
+  transition:all .2s;text-transform:uppercase}
+.cal-tab.active{color:var(--a);border-bottom-color:var(--a)}
+.cal-table{width:100%;border-collapse:collapse}
+.cal-table th{padding:10px 14px;font-family:'Cinzel',serif;font-size:.65rem;
+  letter-spacing:.15em;color:var(--text3);text-align:left;
+  border-bottom:1px solid var(--border);background:var(--bg2)}
+.cal-table td{padding:11px 14px;border-bottom:1px solid var(--border);
+  font-size:.82rem;vertical-align:middle}
+.cal-table tr:last-child td{border-bottom:none}
+.cal-table tr:hover td{background:rgba(200,128,255,0.04)}
+.cal-row-optimo td{background:rgba(200,128,255,0.06)!important}
+.score-chip{display:inline-flex;align-items:center;gap:5px;
+  padding:3px 10px;border-radius:20px;font-family:'Cinzel',serif;font-size:.75rem;font-weight:600}
+.score-chip.alta{background:rgba(112,232,204,0.12);color:var(--teal);border:1px solid rgba(112,232,204,0.25)}
+.score-chip.media{background:rgba(240,208,96,0.12);color:var(--gold);border:1px solid rgba(240,208,96,0.25)}
+.score-chip.baja{background:rgba(232,120,120,0.1);color:var(--red);border:1px solid rgba(232,120,120,0.2)}
+.optimo-badge{background:var(--a);color:#080512;font-family:'Cinzel',serif;
+  font-size:.6rem;font-weight:700;padding:2px 8px;border-radius:20px;letter-spacing:.1em}
+.ciclo-dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:3px}
+.fecha-cell{font-family:'Cinzel',serif;font-size:.82rem;color:var(--text)}
+.mejor-para{font-size:.78rem;color:var(--text2)}
+.ciclos-cell{font-size:.72rem;color:var(--text3)}
+
+/* Bio chart */
+.bio-compare{background:var(--card);border:1px solid var(--border);
+  border-radius:14px;padding:26px;margin-bottom:4px}
+.bio-compare-title{font-family:'Cinzel',serif;font-size:.75rem;letter-spacing:.2em;
+  color:var(--a);text-transform:uppercase;margin-bottom:18px}
+.bio-compare-ciclos{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px}
+.bcc-card{background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:12px}
+.bcc-name{font-size:.68rem;letter-spacing:.12em;color:var(--text3);text-transform:uppercase;margin-bottom:8px}
+.bcc-bars{display:flex;flex-direction:column;gap:5px}
+.bcc-bar-row{display:flex;align-items:center;gap:8px;font-size:.72rem}
+.bcc-bar-label{color:var(--text3);min-width:12px;text-align:center}
+.bcc-bar-wrap{flex:1;height:5px;background:var(--border);border-radius:3px}
+.bcc-bar-fill{height:100%;border-radius:3px}
+.bcc-pct{min-width:38px;text-align:right;font-family:'Cinzel',serif;font-size:.75rem}
+
+/* Acciones */
+.acciones{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;padding:28px 0}
+.btn-accion{background:var(--card);border:1px solid var(--border2);color:var(--text);
+  border-radius:50px;padding:11px 22px;font-family:'Cinzel',serif;font-size:.75rem;
+  letter-spacing:.12em;cursor:pointer;transition:all .2s}
+.btn-accion:hover{border-color:var(--a);color:var(--a)}
+.btn-nueva{background:var(--a);color:#080512;border-color:var(--a)}
+.btn-nueva:hover{filter:brightness(1.1);color:#080512}
+#actStatus2{text-align:center;font-size:.8rem;color:var(--a2);height:20px;margin-top:-14px}
+
+/* Footer */
+.site-footer{text-align:center;padding:36px 0 20px;border-top:1px solid var(--border);margin-top:16px}
+.site-footer p{font-size:.72rem;color:var(--text3);margin-bottom:6px}
+.site-footer a{color:var(--a);text-decoration:none;font-size:.75rem}
+
+@media(max-width:620px){
+  .personas-grid,.profiles-grid{grid-template-columns:1fr}
+  .field-row{grid-template-columns:1fr 1fr}
+  .score-num{font-size:3.5rem}
+  .cal-table{font-size:.76rem}
+}
+@media print{
+  .theme-bar,.btn-accion,.act-panel,.form-panel,.site-header,.stars,
+  .acciones,#actStatus2{display:none!important}
+  body{background:white!important;color:#1a0f2e!important}
+  .score-hero,.compat-section,.profile-card,.detail-card{border:1px solid #ccc!important}
+}
+</style>
+</head>
+<body data-theme="dark">
+
+<div class="stars" id="starsC"></div>
+
+<div class="theme-bar">
+  <div class="t-btn" data-t="dark"  onclick="setTheme('dark')"></div>
+  <div class="t-btn" data-t="light" onclick="setTheme('light')"></div>
+  <div class="t-btn" data-t="sepia" onclick="setTheme('sepia')"></div>
+</div>
+
+<div class="wrap">
+
+  <header class="site-header">
+    <span class="header-sigil">☯</span>
+    <div class="header-eyebrow">Sistema de Compatibilidad Armónica</div>
+    <h1 class="header-h1"><span class="pa">Tú</span> + <span class="pb">Alguien</span><br>Lectura de Compatibilidad</h1>
+    <p class="header-sub">Astrología · Numerología · Biorritmo · Calendario de Alineación</p>
+    <div class="header-pills">
+      <span class="pill">💑 Pareja</span>
+      <span class="pill">🤝 Negocios</span>
+      <span class="pill">📅 15 días de calendario</span>
+      <span class="pill">📊 Score de alineación diaria</span>
+      <span class="pill">⭐ Día óptimo automático</span>
+    </div>
+  </header>
+
+  <!-- FORMULARIO -->
+  <div class="form-panel visible" id="formPanel2">
+
+    <!-- Propósito -->
+    <div style="text-align:center;margin-bottom:8px">
+      <p style="font-family:'Cinzel',serif;font-size:.72rem;letter-spacing:.25em;color:var(--text3);text-transform:uppercase;margin-bottom:14px">¿Para qué quieres analizar la compatibilidad?</p>
+    </div>
+    <div class="proposito-bar">
+      <button class="prop-btn active" data-prop="pareja"   onclick="setProp(this)">💑 Pareja</button>
+      <button class="prop-btn"        data-prop="negocios" onclick="setProp(this)">🤝 Negocios</button>
+      <button class="prop-btn"        data-prop="reunion"  onclick="setProp(this)">📅 Reunión puntual</button>
+      <button class="prop-btn"        data-prop="decision" onclick="setProp(this)">⚖ Decisión importante</button>
+    </div>
+
+    <!-- Personas -->
+    <div class="personas-grid">
+      <!-- Persona A -->
+      <div class="persona-panel pa">
+        <div class="persona-header">
+          <div class="persona-dot dot-a"></div>
+          <span class="persona-label">Persona A — Tú</span>
+        </div>
+        <div class="field">
+          <label>Nombre completo</label>
+          <input type="text" id="aNombre" placeholder="Tu nombre completo">
+        </div>
+        <div class="field-row">
+          <div class="field"><label>Día</label><input type="number" id="aDia" min="1" max="31" placeholder="DD"></div>
+          <div class="field">
+            <label>Mes</label>
+            <select id="aMes">
+              <option value="">Mes</option>
+              <option value="1">Enero</option><option value="2">Febrero</option>
+              <option value="3">Marzo</option><option value="4">Abril</option>
+              <option value="5">Mayo</option><option value="6">Junio</option>
+              <option value="7">Julio</option><option value="8">Agosto</option>
+              <option value="9">Septiembre</option><option value="10">Octubre</option>
+              <option value="11">Noviembre</option><option value="12">Diciembre</option>
+            </select>
+          </div>
+          <div class="field"><label>Año</label><input type="number" id="aAnio" min="1920" max="2007" placeholder="AAAA"></div>
+        </div>
+      </div>
+
+      <!-- Persona B -->
+      <div class="persona-panel pb">
+        <div class="persona-header">
+          <div class="persona-dot dot-b"></div>
+          <span class="persona-label">Persona B — La otra persona</span>
+        </div>
+        <div class="field">
+          <label>Nombre completo</label>
+          <input type="text" id="bNombre" placeholder="Nombre completo de la otra persona">
+        </div>
+        <div class="field-row">
+          <div class="field"><label>Día</label><input type="number" id="bDia" min="1" max="31" placeholder="DD"></div>
+          <div class="field">
+            <label>Mes</label>
+            <select id="bMes">
+              <option value="">Mes</option>
+              <option value="1">Enero</option><option value="2">Febrero</option>
+              <option value="3">Marzo</option><option value="4">Abril</option>
+              <option value="5">Mayo</option><option value="6">Junio</option>
+              <option value="7">Julio</option><option value="8">Agosto</option>
+              <option value="9">Septiembre</option><option value="10">Octubre</option>
+              <option value="11">Noviembre</option><option value="12">Diciembre</option>
+            </select>
+          </div>
+          <div class="field"><label>Año</label><input type="number" id="bAnio" min="1920" max="2007" placeholder="AAAA"></div>
+        </div>
+      </div>
+    </div>
+
+    <button class="btn-calcular" onclick="calcularCompatibilidad()">
+      ☯ Calcular Compatibilidad Armónica
+    </button>
+  </div>
+
+  <!-- LOADING -->
+  <div class="loading" id="loadingC">
+    <div class="loading-ring"></div>
+    <p id="loadMsgC">Analizando las frecuencias de ambas almas…</p>
+  </div>
+
+  <!-- REPORTE -->
+  <div id="reporte">
+
+    <!-- Score hero -->
+    <div class="score-hero">
+      <div class="score-nombres">
+        <span class="score-nombre-a" id="rptNombreA">—</span>
+        <span class="score-x">☯</span>
+        <span class="score-nombre-b" id="rptNombreB">—</span>
+      </div>
+      <div class="score-ring">
+        <svg width="160" height="160">
+          <circle cx="80" cy="80" r="68" fill="none" stroke="rgba(200,128,255,0.1)" stroke-width="10"/>
+          <circle id="scoreArc" cx="80" cy="80" r="68" fill="none" stroke="#c980ff" stroke-width="10"
+            stroke-dasharray="427" stroke-dashoffset="427" stroke-linecap="round"
+            style="transition:stroke-dashoffset 1.2s ease"/>
+        </svg>
+        <div class="score-ring-text">
+          <div class="score-num" id="rptScoreNum" style="color:var(--a)">—</div>
+          <div style="font-size:.6rem;letter-spacing:.15em;color:var(--text3);font-family:'Cinzel',serif">%</div>
+        </div>
+      </div>
+      <div class="score-label" id="rptPropLabel">COMPATIBILIDAD</div>
+      <div class="score-titulo" id="rptTitulo">—</div>
+      <div class="score-dinamica" id="rptDinamica">—</div>
+    </div>
+
+    <!-- Desglose de scores -->
+    <div class="detail-grid" id="rptDetails"></div>
+
+    <!-- Descripción de compatibilidad -->
+    <div class="compat-section">
+      <div class="cs-header" id="rptCompatHeader">Análisis de Compatibilidad</div>
+      <div class="cs-texto" id="rptCompatDesc">—</div>
+      <div class="cs-consejo" id="rptConsejo">—</div>
+    </div>
+
+    <!-- Perfiles comparados -->
+    <div class="profiles-grid">
+      <div class="profile-card pa" id="profileA"></div>
+      <div class="profile-card pb" id="profileB"></div>
+    </div>
+
+    <!-- Biorritmo comparado hoy -->
+    <div class="bio-compare">
+      <div class="bio-compare-title">Biorritmo Comparado — Hoy</div>
+      <div class="bio-compare-ciclos" id="bioCompareGrid"></div>
+    </div>
+
+    <!-- Calendario 15 días -->
+    <div class="calendario-section">
+      <div class="cal-header">
+        <div class="cal-title">📅 Calendario de Alineación — Próximos 15 Días</div>
+        <div class="cal-sub" id="calSub">Días ordenados por score de coincidencia de biorritmos</div>
+      </div>
+      <div class="cal-propósito-tabs" id="calTabs">
+        <div class="cal-tab active" data-filtro="todos" onclick="filtrarCal(this)">Todos</div>
+        <div class="cal-tab" data-filtro="pareja"   onclick="filtrarCal(this)">💑 Pareja</div>
+        <div class="cal-tab" data-filtro="negocios" onclick="filtrarCal(this)">🤝 Negocios</div>
+        <div class="cal-tab" data-filtro="decision" onclick="filtrarCal(this)">⚖ Decisión</div>
+      </div>
+      <div style="overflow-x:auto">
+        <table class="cal-table">
+          <thead>
+            <tr>
+              <th>Fecha</th>
+              <th>Score</th>
+              <th>Mejor para</th>
+              <th>Ciclos coincidentes</th>
+            </tr>
+          </thead>
+          <tbody id="calBody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Acciones -->
+    <div class="acciones">
+      <div id="actStatus2" style="width:100%;text-align:center;font-size:.8rem;color:var(--a2);margin-bottom:4px"></div>
+      <button class="btn-accion" onclick="descargarVisual()">⬇ Archivo Visual</button>
+      <button class="btn-accion" onclick="window.print()">🖨 Imprimir</button>
+      <button class="btn-accion" onclick="compartir()">↗ Compartir</button>
+      <button class="btn-accion btn-nueva" onclick="nuevaLectura()">☯ Nueva Lectura</button>
+    </div>
+
+  </div><!-- /reporte -->
+
+  <footer class="site-footer">
+    <p>Compatibilidad Armónica · PromptEstudio.com</p>
+    <a href="lae1_app.html">← Lectura Individual</a>
+    &nbsp;·&nbsp;
+    <a href="index.html">Página Principal</a>
+  </footer>
+
+</div><!-- /wrap -->
+
+<script>
+// ═══════════════════════════════════════════════════════════════════════════════
+// LECTURA ARMÓNICA ESPIRITUAL — MOTOR DE CÁLCULO v1.0
+// Fase 1: Todas las funciones de cálculo (vanilla JS, sin dependencias)
+// ═══════════════════════════════════════════════════════════════════════════════
+
+'use strict';
+
+// ───────────────────────────────────────────────────────────────────────────────
+// MÓDULO 1: ASTROLOGÍA
+// ───────────────────────────────────────────────────────────────────────────────
+
+const SIGNOS = [
+  { nombre: "Aries",       emoji: "♈", inicio: [3,21],  fin: [4,19],  elemento: "Fuego",  planeta: "Marte",    modalidad: "Cardinal" },
+  { nombre: "Tauro",       emoji: "♉", inicio: [4,20],  fin: [5,20],  elemento: "Tierra", planeta: "Venus",    modalidad: "Fijo"     },
+  { nombre: "Géminis",     emoji: "♊", inicio: [5,21],  fin: [6,20],  elemento: "Aire",   planeta: "Mercurio", modalidad: "Mutable"  },
+  { nombre: "Cáncer",      emoji: "♋", inicio: [6,21],  fin: [7,22],  elemento: "Agua",   planeta: "Luna",     modalidad: "Cardinal" },
+  { nombre: "Leo",         emoji: "♌", inicio: [7,23],  fin: [8,22],  elemento: "Fuego",  planeta: "Sol",      modalidad: "Fijo"     },
+  { nombre: "Virgo",       emoji: "♍", inicio: [8,23],  fin: [9,22],  elemento: "Tierra", planeta: "Mercurio", modalidad: "Mutable"  },
+  { nombre: "Libra",       emoji: "♎", inicio: [9,23],  fin: [10,22], elemento: "Aire",   planeta: "Venus",    modalidad: "Cardinal" },
+  { nombre: "Escorpio",    emoji: "♏", inicio: [10,23], fin: [11,21], elemento: "Agua",   planeta: "Plutón",   modalidad: "Fijo"     },
+  { nombre: "Sagitario",   emoji: "♐", inicio: [11,22], fin: [12,21], elemento: "Fuego",  planeta: "Júpiter",  modalidad: "Mutable"  },
+  { nombre: "Capricornio", emoji: "♑", inicio: [12,22], fin: [1,19],  elemento: "Tierra", planeta: "Saturno",  modalidad: "Cardinal" },
+  { nombre: "Acuario",     emoji: "♒", inicio: [1,20],  fin: [2,18],  elemento: "Aire",   planeta: "Urano",    modalidad: "Fijo"     },
+  { nombre: "Piscis",      emoji: "♓", inicio: [2,19],  fin: [3,20],  elemento: "Agua",   planeta: "Neptuno",  modalidad: "Mutable"  },
+];
+
+// Posiciones lunares aproximadas por ciclo sinódico (29.53 días)
+// Referencia: Luna Nueva en 6 enero 2000 = JD 2451549.5
+const LUNA_REF_JD = 2451549.5; // Luna Nueva de referencia
+const CICLO_LUNAR = 29.53058867;
+
+// Tabla de planetas con periodos de revolución (días) y posición de referencia (año 2000)
+// Posiciones en grados, época J2000.0 (1 enero 2000 12:00 TT)
+const PLANETAS_DATA = {
+  mercurio: { periodo: 87.969,  lon2000: 252.250, velDia: 4.0923 },
+  venus:    { periodo: 224.701, lon2000: 181.979, velDia: 1.6021 },
+  marte:    { periodo: 686.971, lon2000: 355.433, velDia: 0.5240 },
+  jupiter:  { periodo: 4332.59, lon2000: 34.351,  velDia: 0.0831 },
+  saturno:  { periodo: 10759.2, lon2000: 50.077,  velDia: 0.0335 },
+};
+
+function fechaAJD(dia, mes, anio) {
+  // Algoritmo de Jean Meeus para Julian Day Number
+  if (mes <= 2) { anio--; mes += 12; }
+  const A = Math.floor(anio / 100);
+  const B = 2 - A + Math.floor(A / 4);
+  return Math.floor(365.25 * (anio + 4716)) + Math.floor(30.6001 * (mes + 1)) + dia + B - 1524.5;
+}
+
+function calcularSignoSolar(dia, mes) {
+  // Busca el signo correcto según mes y día, considerando Capricornio que cruza el año
+  for (const s of SIGNOS) {
+    const [mesI, diaI] = s.inicio;
+    const [mesF, diaF] = s.fin;
+    if (mesI === mesF) {
+      if (mes === mesI && dia >= diaI && dia <= diaF) return s;
+    } else if (mesI > mesF) {
+      // Capricornio cruza diciembre-enero
+      if ((mes === mesI && dia >= diaI) || (mes === mesF && dia <= diaF)) return s;
+    } else {
+      if ((mes === mesI && dia >= diaI) || (mes === mesF && dia <= diaF) ||
+          (mes > mesI && mes < mesF)) return s;
+    }
+  }
+  return SIGNOS[0];
+}
+
+function calcularSignoLunar(dia, mes, anio) {
+  const jd = fechaAJD(dia, mes, anio);
+  const diasDesdeRef = jd - LUNA_REF_JD;
+  const faseEnCiclo = ((diasDesdeRef % CICLO_LUNAR) + CICLO_LUNAR) % CICLO_LUNAR;
+  // Posición lunar en grados (0-360)
+  // La luna recorre 360° en 29.53 días ≈ 12.19°/día
+  const lonLuna = (faseEnCiclo / CICLO_LUNAR * 360 + 
+                   // Ajuste por posición solar aproximada del mes
+                   (mes - 1) * 30 + dia) % 360;
+  const indiceSigno = Math.floor(lonLuna / 30);
+  const signoLunar = SIGNOS[indiceSigno] || SIGNOS[0];
+  
+  // Calcular fase lunar para mostrar
+  const fase = faseEnCiclo / CICLO_LUNAR;
+  let nombreFase, emojiLuna;
+  if      (fase < 0.03 || fase > 0.97) { nombreFase = "Luna Nueva";      emojiLuna = "🌑"; }
+  else if (fase < 0.22)                { nombreFase = "Luna Creciente";   emojiLuna = "🌒"; }
+  else if (fase < 0.28)                { nombreFase = "Cuarto Creciente"; emojiLuna = "🌓"; }
+  else if (fase < 0.47)                { nombreFase = "Luna Gibosa";      emojiLuna = "🌔"; }
+  else if (fase < 0.53)                { nombreFase = "Luna Llena";       emojiLuna = "🌕"; }
+  else if (fase < 0.72)                { nombreFase = "Luna Disminuye";   emojiLuna = "🌖"; }
+  else if (fase < 0.78)                { nombreFase = "Cuarto Menguante"; emojiLuna = "🌗"; }
+  else                                 { nombreFase = "Luna Balsámica";   emojiLuna = "🌘"; }
+
+  return {
+    signo: signoLunar,
+    fase: nombreFase,
+    emoji: emojiLuna,
+    porcentajeFase: Math.round(fase * 100),
+    advertencia: "La posición lunar es aproximada (±1 signo en días de cambio)"
+  };
+}
+
+function calcularPlaneta(nombre, dia, mes, anio) {
+  const jd = fechaAJD(dia, mes, anio);
+  const diasDesdeJ2000 = jd - 2451545.0; // J2000.0
+  const p = PLANETAS_DATA[nombre];
+  if (!p) return null;
+  const lon = ((p.lon2000 + p.velDia * diasDesdeJ2000) % 360 + 360) % 360;
+  const indiceSigno = Math.floor(lon / 30);
+  return {
+    nombre: nombre.charAt(0).toUpperCase() + nombre.slice(1),
+    signo: SIGNOS[indiceSigno],
+    grados: Math.round(lon % 30 * 10) / 10,
+    longitudTotal: Math.round(lon * 10) / 10
+  };
+}
+
+function calcularElementoDominante(planetas) {
+  const conteo = { Fuego: 0, Tierra: 0, Aire: 0, Agua: 0 };
+  for (const p of planetas) {
+    // p puede ser un objeto signo directamente, o un objeto con propiedad .signo, o null
+    const signo = p && p.elemento ? p : (p && p.signo ? p.signo : null);
+    if (signo && signo.elemento && conteo.hasOwnProperty(signo.elemento)) {
+      conteo[signo.elemento]++;
+    }
+  }
+  const max = Math.max(...Object.values(conteo));
+  const dominante = Object.keys(conteo).filter(k => conteo[k] === max);
+  return { conteo, dominante };
+}
+
+function modulo1_Astrologia(dia, mes, anio) {
+  const solar  = calcularSignoSolar(dia, mes);
+  const lunar  = calcularSignoLunar(dia, mes, anio);
+  const mercurio = calcularPlaneta('mercurio', dia, mes, anio);
+  const venus    = calcularPlaneta('venus',    dia, mes, anio);
+  const marte    = calcularPlaneta('marte',    dia, mes, anio);
+  const jupiter  = calcularPlaneta('jupiter',  dia, mes, anio);
+  const saturno  = calcularPlaneta('saturno',  dia, mes, anio);
+  const todos = [solar, lunar.signo, mercurio.signo, venus.signo, marte.signo, jupiter.signo, saturno.signo];
+  const elemento = calcularElementoDominante(todos);
+  
+  return {
+    solar, lunar, mercurio, venus, marte, jupiter, saturno,
+    elementoDominante: elemento,
+    modalidad: solar.modalidad,
+    planetaRegente: solar.planeta
+  };
+}
+
+// ───────────────────────────────────────────────────────────────────────────────
+// MÓDULO 2: NUMEROLOGÍA
+// ───────────────────────────────────────────────────────────────────────────────
+
+// Tabla pitagórica adaptada al español
+const TABLA_NUM = {
+  A:1, B:2, C:3, D:4, E:5, F:6, G:7, H:8, I:9,
+  J:1, K:2, L:3, M:4, N:5, O:6, P:7, Q:8, R:9,
+  S:1, T:2, U:3, V:4, W:5, X:6, Y:7, Z:8,
+  // Letras especiales del español
+  'Ñ':5, 'Á':1, 'É':5, 'Í':9, 'Ó':6, 'Ú':3, 'Ü':3,
+};
+
+const VOCALES = new Set(['A','E','I','O','U','Á','É','Í','Ó','Ú','Ü']);
+const NUMS_MAESTROS = new Set([11, 22, 33]);
+
+function reducir(n, mantenerMaestros = true) {
+  while (n > 9) {
+    if (mantenerMaestros && NUMS_MAESTROS.has(n)) break;
+    n = String(n).split('').reduce((s, d) => s + parseInt(d), 0);
+  }
+  return n;
+}
+
+function valorLetra(letra) {
+  return TABLA_NUM[letra.toUpperCase()] || 0;
+}
+
+function nombreANumero(nombre, soloVocales = false, soloConsonantes = false) {
+  const letras = nombre.toUpperCase().replace(/\s+/g, '').split('');
+  let suma = 0;
+  for (const l of letras) {
+    const esVocal = VOCALES.has(l);
+    if (soloVocales    && !esVocal) continue;
+    if (soloConsonantes && esVocal)  continue;
+    suma += valorLetra(l);
+  }
+  return reducir(suma);
+}
+
+function calcularCaminoDeVida(dia, mes, anio) {
+  // Método correcto: reducir cada componente por separado, luego sumar
+  const d = reducir(dia);
+  const m = reducir(mes);
+  // Para el año: reducir dígito por dígito
+  const a = reducir(String(anio).split('').reduce((s, n) => s + parseInt(n), 0));
+  const suma = d + m + a;
+  const cdv = reducir(suma);
+  return { valor: cdv, esMaestro: NUMS_MAESTROS.has(cdv), componentes: { dia: d, mes: m, anio: a, suma } };
+}
+
+function calcularAnioPersonal(dia, mes, anioActual) {
+  const d = reducir(dia);
+  const m = reducir(mes);
+  const a = reducir(String(anioActual).split('').reduce((s, n) => s + parseInt(n), 0));
+  return reducir(d + m + a);
+}
+
+function calcularMesPersonal(anioPersonal, mesActual) {
+  return reducir(anioPersonal + mesActual);
+}
+
+function modulo2_Numerologia(nombreCompleto, dia, mes, anio) {
+  const cdv        = calcularCaminoDeVida(dia, mes, anio);
+  const expresion  = nombreANumero(nombreCompleto);
+  const alma       = nombreANumero(nombreCompleto, true,  false);
+  const personalidad = nombreANumero(nombreCompleto, false, true);
+  const nacimiento = reducir(dia, false); // sin maestros para número de nacimiento
+  const anioActual = new Date().getFullYear();
+  const mesActual  = new Date().getMonth() + 1;
+  const anioP      = calcularAnioPersonal(dia, mes, anioActual);
+  const mesP       = calcularMesPersonal(anioP, mesActual);
+
+  return {
+    caminoDeVida:  cdv,
+    expresion:     { valor: expresion, esMaestro: NUMS_MAESTROS.has(expresion) },
+    alma:          { valor: alma,       esMaestro: NUMS_MAESTROS.has(alma) },
+    personalidad:  { valor: personalidad, esMaestro: NUMS_MAESTROS.has(personalidad) },
+    nacimiento:    { valor: nacimiento },
+    anioPersonal:  { valor: anioP, anio: anioActual },
+    mesPersonal:   { valor: mesP, mes: mesActual },
+    hayMaestro:    NUMS_MAESTROS.has(cdv.valor) || NUMS_MAESTROS.has(expresion) || NUMS_MAESTROS.has(alma)
+  };
+}
+
+// ───────────────────────────────────────────────────────────────────────────────
+// MÓDULO 3: TAROT (Arcanos Mayores — Determinístico)
+// ───────────────────────────────────────────────────────────────────────────────
+
+const ARCANOS = [
+  { num: 0,  nombre: "El Loco",          romano: "0",     palabra: "Libertad",    descripcion: "La inocencia pura, el comienzo de todo viaje. Tu alma elige la aventura sobre la certeza. Eres el eterno principiante que confía en el universo." },
+  { num: 1,  nombre: "El Mago",          romano: "I",     palabra: "Voluntad",    descripcion: "Tienes todos los recursos que necesitas. La voluntad consciente es tu herramienta más poderosa. Lo que visualizas, lo manifiestas." },
+  { num: 2,  nombre: "La Sacerdotisa",   romano: "II",    palabra: "Intuición",   descripcion: "Guardiana del conocimiento oculto. Tu sabiduría interior supera cualquier libro. Confía en lo que no se ve pero se siente con certeza." },
+  { num: 3,  nombre: "La Emperatriz",    romano: "III",   palabra: "Abundancia",  descripcion: "La fuerza creadora de la naturaleza vive en ti. Eres fértil en ideas, en amor y en manifestación material. La abundancia es tu estado natural." },
+  { num: 4,  nombre: "El Emperador",     romano: "IV",    palabra: "Estructura",  descripcion: "La autoridad que nace del autodominio. Construyes imperios con paciencia y disciplina. Tu voluntad organiza el caos en orden fecundo." },
+  { num: 5,  nombre: "El Hierofante",    romano: "V",     palabra: "Tradición",   descripcion: "Puente entre lo sagrado y lo humano. Buscas verdades eternas en la sabiduría acumulada. Eres maestro y aprendiz al mismo tiempo." },
+  { num: 6,  nombre: "Los Amantes",      romano: "VI",    palabra: "Elección",    descripcion: "Toda elección es sagrada. El amor consciente es tu camino de transformación. Donde hay armonía entre corazón y mente, florece lo mejor de ti." },
+  { num: 7,  nombre: "El Carro",         romano: "VII",   palabra: "Triunfo",     descripcion: "La victoria que surge del dominio de tus propias fuerzas internas. Avanzas con determinación. Ningún obstáculo externo puede más que tu voluntad." },
+  { num: 8,  nombre: "La Fuerza",        romano: "VIII",  palabra: "Coraje",      descripcion: "La fuerza más profunda no es muscular sino espiritual. Dominas tus impulsos con gentileza. Tu compasión es más poderosa que cualquier violencia." },
+  { num: 9,  nombre: "El Ermitaño",      romano: "IX",    palabra: "Sabiduría",   descripcion: "La luz que llevas dentro ilumina el camino de otros. El silencio y la introspección son tus maestros más fieles. Tu soledad es sagrada y fértil." },
+  { num: 10, nombre: "La Rueda",         romano: "X",     palabra: "Destino",     descripcion: "Los ciclos giran y siempre regresan al punto de partida, pero más elevados. Estás alineado con el ritmo del universo. Lo que se siembra, se cosecha." },
+  { num: 11, nombre: "La Justicia",      romano: "XI",    palabra: "Equilibrio",  descripcion: "El universo es perfectamente justo. Cada acción encuentra su eco exacto. Cuando actúas con integridad, las fuerzas cósmicas trabajan contigo." },
+  { num: 12, nombre: "El Colgado",       romano: "XII",   palabra: "Rendición",   descripcion: "La pausa sagrada donde todo se revela. Cuando sueltas el control, recibes comprensión. Tu perspectiva invertida ve lo que otros no pueden ver." },
+  { num: 13, nombre: "La Muerte",        romano: "XIII",  palabra: "Transformación", descripcion: "No el final, sino la metamorfosis más profunda. Lo que termina abre espacio para lo magnífico. Eres el ave fénix que renace de sus propias cenizas." },
+  { num: 14, nombre: "La Templanza",     romano: "XIV",   palabra: "Armonía",     descripcion: "El alquimista que mezcla opuestos en perfecta proporción. Tu vida es un arte de equilibrio dinámico. La paciencia y la moderación crean maravillas duraderas." },
+  { num: 15, nombre: "El Diablo",        romano: "XV",    palabra: "Liberación",  descripcion: "Reconoces las cadenas que tú mismo has forjado. La conciencia de tus condicionamientos es el primer paso de tu liberación definitiva." },
+  { num: 16, nombre: "La Torre",         romano: "XVI",   palabra: "Revelación",  descripcion: "Lo que colapsa no era digno de permanecer. Las crisis son relámpagos de verdad que iluminan el camino auténtico. Después de la tormenta, viene la claridad." },
+  { num: 17, nombre: "La Estrella",      romano: "XVII",  palabra: "Esperanza",   descripcion: "Eres guiado por una luz que nunca se apaga. La esperanza no es ilusión, es certeza espiritual. El universo conspira activamente a tu favor." },
+  { num: 18, nombre: "La Luna",          romano: "XVIII", palabra: "Misterio",    descripcion: "Navegas los océanos del inconsciente con maestría creciente. Tus sueños son mensajes del alma. Lo irracional en ti es fuente de creatividad infinita." },
+  { num: 19, nombre: "El Sol",           romano: "XIX",   palabra: "Vitalidad",   descripcion: "Tu esencia irradia luz que calienta todo lo que toca. La alegría es tu estado natural. Cuando eres auténticamente tú mismo, iluminas el mundo." },
+  { num: 20, nombre: "El Juicio",        romano: "XX",    palabra: "Renacimiento", descripcion: "El llamado a despertar resuena en lo más profundo de tu ser. Estás siendo convocado a tu versión más elevada. La transformación es ahora y es total." },
+  { num: 21, nombre: "El Mundo",         romano: "XXI",   palabra: "Completitud", descripcion: "Has llegado a la cima de este ciclo de aprendizaje. La plenitud no es un destino sino un estado que cultivas. Danzan en ti todos los arquetipos del cosmos." },
+];
+
+function numeroArcano(numero) {
+  // Mapea cualquier número reducido a uno de los 22 arcanos
+  let n = numero;
+  // Números maestros tienen arcanos especiales
+  if (n === 11) n = 11; // La Justicia (o La Torre en algunos sistemas)
+  else if (n === 22) n = 0; // El Loco — el más alto, regresa al principio
+  else if (n === 33) n = 6; // Los Amantes — síntesis del 3+3
+  else n = n % 22; // Para números del 1-21
+  return ARCANOS[n] || ARCANOS[0];
+}
+
+function modulo3_Tarot(numerologia) {
+  const arcanoAlma         = numeroArcano(numerologia.caminoDeVida.valor);
+  const arcanoPersonalidad = numeroArcano(numerologia.expresion.valor);
+  const arcanoAnio         = numeroArcano(numerologia.anioPersonal.valor);
+  return { arcanoAlma, arcanoPersonalidad, arcanoAnio };
+}
+
+// ───────────────────────────────────────────────────────────────────────────────
+// MÓDULO 4: BIORRITMO (5 Ciclos)
+// ───────────────────────────────────────────────────────────────────────────────
+
+const CICLOS_BIORITMO = {
+  fisico:       { periodo: 23, nombre: "Físico",       color: "#E94B4B", emoji: "💪", descripcion: "Energía corporal, vitalidad, fuerza y coordinación motriz." },
+  emocional:    { periodo: 28, nombre: "Emocional",    color: "#E9A84B", emoji: "💛", descripcion: "Estados de ánimo, creatividad, sensibilidad y percepción afectiva." },
+  intelectual:  { periodo: 33, nombre: "Intelectual",  color: "#4B9BE9", emoji: "🧠", descripcion: "Memoria, concentración, razonamiento y claridad mental." },
+  intuitivo:    { periodo: 38, nombre: "Intuitivo",    color: "#A84BE9", emoji: "🔮", descripcion: "Percepción no racional, corazonadas, sexto sentido y sincronías." },
+  espiritual:   { periodo: 53, nombre: "Espiritual",   color: "#4BE9B9", emoji: "✨", descripcion: "Conexión con el propósito superior, coherencia de vida y paz interior." },
+};
+
+function calcularBioritmo(diasVividos, periodo) {
+  return Math.sin(2 * Math.PI * diasVividos / periodo);
+}
+
+function diasEntreFechas(dia1, mes1, anio1, dia2, mes2, anio2) {
+  const f1 = new Date(anio1, mes1 - 1, dia1);
+  const f2 = new Date(anio2, mes2 - 1, dia2);
+  return Math.floor((f2 - f1) / (1000 * 60 * 60 * 24));
+}
+
+function interpretarValor(valor) {
+  const pct = Math.round(valor * 100);
+  if      (pct > 80)   return { texto: "Pico máximo",     nivel: 5, descripcion: "Momento de mayor potencia. Aprovecha al máximo." };
+  else if (pct > 40)   return { texto: "Alto",            nivel: 4, descripcion: "Por encima del promedio. Buen momento para actuar." };
+  else if (pct > -10 && pct < 10) return { texto: "Día crítico", nivel: 2, descripcion: "Transición de fase. Precaución y conciencia." };
+  else if (pct > -40)  return { texto: "Moderado",        nivel: 3, descripcion: "Zona estable. Rendimiento normal." };
+  else if (pct > -80)  return { texto: "Bajo",            nivel: 2, descripcion: "Por debajo del promedio. Descansa y recarga." };
+  else                 return { texto: "Pico mínimo",     nivel: 1, descripcion: "Momento de mayor necesidad de recuperación." };
+}
+
+function modulo4_Bioritmo(diaNac, mesNac, anioNac) {
+  const hoy = new Date();
+  const diaH = hoy.getDate(), mesH = hoy.getMonth() + 1, anioH = hoy.getFullYear();
+  const diasVividos = diasEntreFechas(diaNac, mesNac, anioNac, diaH, mesH, anioH);
+
+  const resultado = { diasVividos, edad: Math.floor(diasVividos / 365.25), ciclos: {}, seriesMes: {} };
+
+  for (const [clave, ciclo] of Object.entries(CICLOS_BIORITMO)) {
+    const valor = calcularBioritmo(diasVividos, ciclo.periodo);
+    resultado.ciclos[clave] = {
+      ...ciclo, valor, porcentaje: Math.round(valor * 100),
+      interpretacion: interpretarValor(valor)
+    };
+
+    // Generar serie para el mes completo (30 días antes y 30 días después)
+    const serie = [];
+    for (let offset = -15; offset <= 15; offset++) {
+      const d = diasVividos + offset;
+      serie.push({ offset, valor: calcularBioritmo(d, ciclo.periodo), diasVividos: d });
+    }
+    resultado.seriesMes[clave] = serie;
+  }
+
+  return resultado;
+}
+
+// ───────────────────────────────────────────────────────────────────────────────
+// MÓDULO 5: ARMONÍAS ESPIRITUALES
+// ───────────────────────────────────────────────────────────────────────────────
+
+// ── 5A: Cristales ──
+const CRISTALES_SIGNO = {
+  "Aries":       { principal: "Diamante / Rubí",    color: "#E84747", descripcion: "El rubí potencia tu liderazgo innato y tu fuego interior. Enciende la pasión y protege de la ira impulsiva." },
+  "Tauro":       { principal: "Esmeralda / Cuarzo Rosa", color: "#47C9A2", descripcion: "La esmeralda sintoniza con tu amor por la belleza y la abundancia. Atrae prosperidad y amor duradero." },
+  "Géminis":     { principal: "Ágata / Citrino",    color: "#F5D76E", descripcion: "El ágata calma tu mente dual y agiliza la comunicación. El citrino ilumina tus ideas más brillantes." },
+  "Cáncer":      { principal: "Perla / Piedra Luna", color: "#C8D8E8", descripcion: "La piedra luna amplifica tu intuición profunda y protege tu mundo emocional de influencias ajenas." },
+  "Leo":         { principal: "Ojo de Tigre / Topacio", color: "#F5A623", descripcion: "El ojo de tigre potencia tu confianza y magnetismo. Te ayuda a brillar sin perder la humildad del corazón." },
+  "Virgo":       { principal: "Jaspe Verde / Zafiro", color: "#6DB33F", descripcion: "El jaspe verde ayuda a tu mente analítica a conectar con la intuición. Purifica y ordena la energía." },
+  "Libra":       { principal: "Lapislázuli / Cuarzo Rosa", color: "#6B8EC6", descripcion: "El lapislázuli equilibra tu búsqueda de armonía y agudiza tu sentido de la justicia y la verdad." },
+  "Escorpio":    { principal: "Obsidiana / Granate", color: "#4A1A4A", descripcion: "La obsidiana protege tu energía y transforma lo que ya no sirve. El granate activa tu poder regenerador." },
+  "Sagitario":   { principal: "Turquesa / Amatista", color: "#3AAFA9", descripcion: "La turquesa expande tu visión y protege en los viajes del alma. Conecta el mundo terrenal con el superior." },
+  "Capricornio": { principal: "Ónix / Granate Negro", color: "#2C2C2C", descripcion: "El ónix fortalece tu disciplina y te da raíces profundas. Convierte el trabajo arduo en logros duraderos." },
+  "Acuario":     { principal: "Amatista / Aguamarina", color: "#7B4FBF", descripcion: "La amatista sintoniza con tu frecuencia única y potencia tu clarividencia y originalidad revolucionaria." },
+  "Piscis":      { principal: "Aguamarina / Amatista", color: "#5B8DB8", descripcion: "La aguamarina amplifica tu conexión con los mundos sutiles y purifica tu sensibilidad de cargas ajenas." },
+};
+
+const CRISTALES_NUMERO = {
+  1:  { nombre: "Rubí",         emoji: "🔴", descripcion: "Potencia tu liderazgo y voluntad creadora. Activa el primer chakra." },
+  2:  { nombre: "Perla",        emoji: "⚪", descripcion: "Nutre tu sensibilidad y capacidad de mediación. Armoniza las relaciones." },
+  3:  { nombre: "Citrino",      emoji: "🟡", descripcion: "Amplifica tu creatividad y alegría expresiva. Atrae abundancia y optimismo." },
+  4:  { nombre: "Jaspe Rojo",   emoji: "🟤", descripcion: "Construye bases sólidas y potencia tu disciplina. Da estabilidad y resistencia." },
+  5:  { nombre: "Turquesa",     emoji: "🩵", descripcion: "Libera y expande. Acompaña los cambios y la comunicación auténtica." },
+  6:  { nombre: "Esmeralda",    emoji: "💚", descripcion: "Abre el corazón a dar y recibir amor. Armoniza el hogar y los vínculos." },
+  7:  { nombre: "Amatista",     emoji: "💜", descripcion: "Profundiza la búsqueda espiritual e intelectual. Agudiza la percepción interior." },
+  8:  { nombre: "Ojo de Tigre", emoji: "🟠", descripcion: "Potencia el poder personal y el éxito material. Atrae prosperidad con sabiduría." },
+  9:  { nombre: "Lapislázuli",  emoji: "🔵", descripcion: "Conecta con la sabiduría universal y el servicio altruista. Expande la conciencia." },
+  11: { nombre: "Selenita",     emoji: "🤍", descripcion: "Número maestro: eleva la vibración espiritual y activa la canalización de luz." },
+  22: { nombre: "Cuarzo Claro", emoji: "💎", descripcion: "Número maestro: amplifica todos los poderes. El constructor del templo interior." },
+  33: { nombre: "Kunzita",      emoji: "🩷", descripcion: "Número maestro: amor universal y sanación compasiva. La joya del maestro sanador." },
+};
+
+// ── 5B: Colores ──
+const COLORES_NUMERO = {
+  1:  { nombre: "Rojo Carmín",    hex: "#C0392B", descripcion: "Color de la voluntad y el liderazgo. Activa la energía vital y la confianza." },
+  2:  { nombre: "Naranja Suave",  hex: "#E67E22", descripcion: "Color de la cooperación y la creatividad emocional. Nutre los lazos afectivos." },
+  3:  { nombre: "Amarillo Solar", hex: "#F1C40F", descripcion: "Color de la alegría y la expresión. Irradia optimismo y atrae la abundancia." },
+  4:  { nombre: "Verde Bosque",   hex: "#27AE60", descripcion: "Color de la estabilidad y el crecimiento paciente. Conecta con la tierra." },
+  5:  { nombre: "Azul Turquesa",  hex: "#1ABC9C", descripcion: "Color del cambio y la libertad. Expande la comunicación y la aventura." },
+  6:  { nombre: "Índigo",         hex: "#2980B9", descripcion: "Color del amor y la responsabilidad. Armoniza el hogar y los vínculos." },
+  7:  { nombre: "Violeta",        hex: "#8E44AD", descripcion: "Color de la espiritualidad y la sabiduría. Abre el tercer ojo." },
+  8:  { nombre: "Dorado",         hex: "#D4AC0D", descripcion: "Color del poder y el éxito. Atrae la prosperidad y el reconocimiento." },
+  9:  { nombre: "Blanco Puro",    hex: "#ECF0F1", descripcion: "Color de la universalidad y la entrega. La luz que contiene todos los colores." },
+  11: { nombre: "Plata Lunar",    hex: "#BDC3C7", descripcion: "Color maestro de la intuición y la canalización espiritual." },
+  22: { nombre: "Dorado Antiguo", hex: "#B7950B", descripcion: "Color maestro del constructor de mundos. Solidez y grandeza." },
+  33: { nombre: "Rosa Cristal",   hex: "#F1948A", descripcion: "Color maestro del amor compasivo y la sanación universal." },
+};
+
+const COLORES_SIGNO = {
+  "Aries":       { hex: "#E74C3C", nombre: "Rojo Fuego"      },
+  "Tauro":       { hex: "#27AE60", nombre: "Verde Tierra"    },
+  "Géminis":     { hex: "#F39C12", nombre: "Amarillo Vivo"   },
+  "Cáncer":      { hex: "#AEB6BF", nombre: "Gris Plateado"   },
+  "Leo":         { hex: "#E67E22", nombre: "Naranja Solar"   },
+  "Virgo":       { hex: "#2ECC71", nombre: "Verde Salud"     },
+  "Libra":       { hex: "#5DADE2", nombre: "Azul Cielo"      },
+  "Escorpio":    { hex: "#1A0033", nombre: "Púrpura Oscuro"  },
+  "Sagitario":   { hex: "#8E44AD", nombre: "Violeta Viajero" },
+  "Capricornio": { hex: "#283747", nombre: "Azul Marino"     },
+  "Acuario":     { hex: "#00BCD4", nombre: "Aguamarina"      },
+  "Piscis":      { hex: "#7FB3D3", nombre: "Azul Profundo"   },
+};
+
+// ── 5C: Flores de Bach ──
+const BACH_SIGNO = {
+  "Aries":       { flor: "Impatiens",  descripcion: "Para la impaciencia y el deseo de hacerlo todo ya. Enseña la acción con calma.", disclaimer: true },
+  "Tauro":       { flor: "Gentian",    descripcion: "Para superar el desaliento y la resistencia al cambio. Cultiva la fe en el proceso.", disclaimer: true },
+  "Géminis":     { flor: "Cerato",     descripcion: "Para confiar en la propia intuición sin buscar validación externa constantemente.", disclaimer: true },
+  "Cáncer":      { flor: "Clematis",   descripcion: "Para los que se pierden en ensoñaciones y recuerdos. Ancla en el presente con amor.", disclaimer: true },
+  "Leo":         { flor: "Vine",       descripcion: "Para suavizar la tendencia al dominio y aprender a liderar desde el servicio.", disclaimer: true },
+  "Virgo":       { flor: "Crab Apple", descripcion: "Para la autocrítica excesiva y el perfeccionismo que paraliza. Limpieza del alma.", disclaimer: true },
+  "Libra":       { flor: "Scleranthus", descripcion: "Para la indecisión y los vaivenes emocionales. Encuentra el centro propio.", disclaimer: true },
+  "Escorpio":    { flor: "Holly",      descripcion: "Para transformar los celos, la desconfianza y la intensidad emocional en amor abierto.", disclaimer: true },
+  "Sagitario":   { flor: "Vervain",    descripcion: "Para el exceso de entusiasmo que agota. Enseña a fluir sin forzar.", disclaimer: true },
+  "Capricornio": { flor: "Oak",        descripcion: "Para quienes luchan estoicamente más allá de sus límites. Honra el descanso.", disclaimer: true },
+  "Acuario":     { flor: "Water Violet", descripcion: "Para la tendencia al aislamiento orgulloso. Abre los puentes con los demás.", disclaimer: true },
+  "Piscis":      { flor: "Rock Rose",  descripcion: "Para el miedo y la ansiedad que disuelven los límites del yo. Activa el coraje.", disclaimer: true },
+};
+
+// ── 5D: Chakras ──
+const CHAKRAS_NUMERO = {
+  1:  { nombre: "Muladhara",  titulo: "Chakra Raíz",        color: "#C0392B", emoji: "🔴", mantra: "LAM", descripcion: "Tu fuerza viene de la tierra. Eres fundamentalmente seguro, estable y perteneciente. Tu misión está anclada en lo real." },
+  2:  { nombre: "Svadhisthana", titulo: "Chakra Sacro",     color: "#E67E22", emoji: "🟠", mantra: "VAM", descripcion: "Tu poder fluye en la creatividad y las emociones. Eres intuitivamente creativo y profundamente conectado con el placer de vivir." },
+  3:  { nombre: "Manipura",   titulo: "Plexo Solar",        color: "#F1C40F", emoji: "🟡", mantra: "RAM", descripcion: "Tu voluntad personal irradia como el sol. Manifiestas con confianza lo que deseas. Tu fuego interior transforma el mundo." },
+  4:  { nombre: "Anahata",    titulo: "Chakra Corazón",     color: "#27AE60", emoji: "💚", mantra: "YAM", descripcion: "El amor incondicional es tu centro. Das y recibes con gracia. Tu corazón es el portal entre lo terrenal y lo espiritual." },
+  5:  { nombre: "Vishuddha",  titulo: "Chakra Garganta",    color: "#3498DB", emoji: "🔵", mantra: "HAM", descripcion: "Tu verdad más profunda se expresa con autenticidad. Eres portavoz del alma. Tus palabras tienen el poder de transformar realidades." },
+  6:  { nombre: "Ajna",       titulo: "Tercer Ojo",         color: "#8E44AD", emoji: "🟣", mantra: "OM",  descripcion: "Tu visión trasciende los sentidos físicos. Percibes patrones donde otros ven caos. Tu clarividencia es un don al servicio." },
+  7:  { nombre: "Sahasrara",  titulo: "Chakra Corona",      color: "#9B59B6", emoji: "✨", mantra: "AUM", descripcion: "Estás en contacto constante con la fuente de todo. La espiritualidad no es algo que practicas, es lo que eres en esencia." },
+  8:  { nombre: "Manipura",   titulo: "Plexo Solar Plus",   color: "#D4AC0D", emoji: "⭐", mantra: "RAM", descripcion: "Tu poder es doble: terrenal y espiritual. Manifiestas abundancia con sabiduría. Eres un canal de prosperidad consciente." },
+  9:  { nombre: "Sahasrara",  titulo: "Conciencia Cósmica", color: "#7F8C8D", emoji: "🌟", mantra: "AUM", descripcion: "Has completado el ciclo. Eres un servidor del todo. Tu chakra corona está abierto y tu misión es la humanidad misma." },
+  11: { nombre: "Ajna+",      titulo: "Tercer Ojo Maestro", color: "#F8F8FF", emoji: "💫", mantra: "OM",  descripcion: "Número maestro: tu intuición opera a nivel de canalización. Eres un faro espiritual con capacidad visionaria excepcional." },
+  22: { nombre: "Anahata+",   titulo: "Corazón Maestro",    color: "#B7950B", emoji: "🌈", mantra: "YAM", descripcion: "Número maestro: tu amor tiene escala universal. Construyes estructuras que sirven a la humanidad desde el corazón." },
+  33: { nombre: "Sahasrara+", titulo: "Corona Maestro",     color: "#F1948A", emoji: "👑", mantra: "AUM", descripcion: "Número maestro: el maestro sanador. Tu conciencia abraza el sufrimiento ajeno y lo transforma en amor y curación." },
+};
+
+// ── 5E: Ángeles Kabbalísticos (72 Ángeles del Shemhamphorash) ──
+// Cada ángel rige 5 días. El año se divide en 72 períodos de ~5 días.
+const ANGELES_72 = [
+  { num:1,  nombre:"Vehuiah",   virtud:"Voluntad y nuevo comienzo",       inicio:[3,21],  fin:[3,25],  hebreo:"Dios elevado sobre todas las cosas",       practica:"Medita al amanecer visualizando luz dorada en tu coronilla." },
+  { num:2,  nombre:"Ieliel",    virtud:"Amor y sabiduría",               inicio:[3,26],  fin:[3,30],  hebreo:"El Dios que ayuda",                         practica:"Escribe tres actos de amor que puedes hacer hoy y cúmplelos." },
+  { num:3,  nombre:"Sitael",    virtud:"Construcción del universo",       inicio:[3,31],  fin:[4,4],   hebreo:"El Dios esperanza de todas las criaturas",  practica:"Planta una semilla —literal o simbólica— hoy con intención consciente." },
+  { num:4,  nombre:"Elemiah",   virtud:"Poder divino",                   inicio:[4,5],   fin:[4,9],   hebreo:"El Dios oculto",                            practica:"Ayuna de quejas durante un día. Transforma cada crítica en gratitud." },
+  { num:5,  nombre:"Mahasiah",  virtud:"Vivir en paz",                   inicio:[4,10],  fin:[4,14],  hebreo:"El Dios Salvador",                          practica:"Practica 20 minutos de silencio consciente al mediodía." },
+  { num:6,  nombre:"Lelahel",   virtud:"Luz para comprender",            inicio:[4,15],  fin:[4,20],  hebreo:"El Dios loable",                            practica:"Escribe en un diario tres comprensiones nuevas que llegaron esta semana." },
+  { num:7,  nombre:"Achaiah",   virtud:"Paciencia",                      inicio:[4,21],  fin:[4,25],  hebreo:"El Dios bueno y paciente",                  practica:"Realiza una tarea lenta y tediosa con plena conciencia y sin prisas." },
+  { num:8,  nombre:"Cahetel",   virtud:"Bendición divina",               inicio:[4,26],  fin:[4,30],  hebreo:"El Dios adorable",                          practica:"Bendice tu comida, tu hogar y a tres personas con palabras en voz alta." },
+  { num:9,  nombre:"Haziel",    virtud:"Misericordia universal",         inicio:[5,1],   fin:[5,5],   hebreo:"El Dios misericordioso",                    practica:"Ofrece perdón genuino a alguien —incluido tú mismo— sin condiciones." },
+  { num:10, nombre:"Aladiah",   virtud:"Gracia divina",                  inicio:[5,6],   fin:[5,10],  hebreo:"El Dios propicio",                          practica:"Haz una obra de caridad anónima. Sin reconocimiento, solo amor." },
+  { num:11, nombre:"Lauviah",   virtud:"Victorias",                      inicio:[5,11],  fin:[5,15],  hebreo:"El Dios exaltado",                          practica:"Celebra una victoria pasada que nunca reconociste plenamente." },
+  { num:12, nombre:"Hahaiah",   virtud:"Refugio y protección",          inicio:[5,16],  fin:[5,20],  hebreo:"El Dios refugio",                           practica:"Crea un espacio sagrado en tu hogar. Aunque sea un rincón pequeño." },
+  { num:13, nombre:"Yezalel",   virtud:"Fidelidad, amor y armonía",     inicio:[5,21],  fin:[5,25],  hebreo:"El Dios glorificado sobre todas las cosas", practica:"Renueva un compromiso importante con palabras claras y escritas." },
+  { num:14, nombre:"Mebahel",   virtud:"Verdad, libertad y justicia",   inicio:[5,26],  fin:[5,31],  hebreo:"El Dios conservador",                       practica:"Di una verdad difícil hoy con amor y sin miedo a las consecuencias." },
+  { num:15, nombre:"Hariel",    virtud:"Purificación",                   inicio:[6,1],   fin:[6,5],   hebreo:"El Dios Creador",                           practica:"Limpia y ordena profundamente un espacio de tu vida —físico o mental." },
+  { num:16, nombre:"Hekamiah",  virtud:"Lealtad y liderazgo",           inicio:[6,6],   fin:[6,10],  hebreo:"El Dios que hace el universo",              practica:"Asume responsabilidad plena de algo en lo que hayas esquivado tu parte." },
+  { num:17, nombre:"Lauviah II",virtud:"Revelación y percepción",       inicio:[6,11],  fin:[6,15],  hebreo:"El Dios admirable",                         practica:"Escribe tus sueños cada mañana durante 5 días. Busca el hilo conductor." },
+  { num:18, nombre:"Caliel",    virtud:"Justicia absoluta",              inicio:[6,16],  fin:[6,21],  hebreo:"El Dios que responde con presteza",         practica:"Revisa si alguna situación en tu vida necesita que tú intervengas con justicia." },
+  { num:19, nombre:"Leuviah",   virtud:"Memoria expandida",             inicio:[6,22],  fin:[6,26],  hebreo:"El Dios amoroso que escucha",               practica:"Escribe la historia de tu linaje familiar. Honra a tus ancestros." },
+  { num:20, nombre:"Pahaliah",  virtud:"Redención y espiritualidad",    inicio:[6,27],  fin:[7,1],   hebreo:"El Dios Redentor",                          practica:"Dedica un día a prácticas que nutran exclusivamente tu vida espiritual." },
+  { num:21, nombre:"Nelchael",  virtud:"Comprensión profunda",          inicio:[7,2],   fin:[7,6],   hebreo:"El único Dios",                             practica:"Estudia algo que siempre quisiste comprender. Dedícale al menos 2 horas." },
+  { num:22, nombre:"Yeiayel",   virtud:"Fama y prosperidad",            inicio:[7,7],   fin:[7,11],  hebreo:"La mano derecha de Dios",                   practica:"Comparte un logro o conocimiento tuyo con alguien que pueda beneficiarse." },
+  { num:23, nombre:"Melahel",   virtud:"Sanación y naturaleza",         inicio:[7,12],  fin:[7,16],  hebreo:"El Dios que libera del mal",                practica:"Pasa tiempo en la naturaleza. Camina descalzo sobre la tierra si es posible." },
+  { num:24, nombre:"Haheuiah",  virtud:"Protección divina",             inicio:[7,17],  fin:[7,22],  hebreo:"El Dios bueno en sí mismo",                 practica:"Invoca protección para tu hogar y familia. Visualiza una esfera de luz blanca." },
+  { num:25, nombre:"Nith-Haiah",virtud:"Sabiduría espiritual",          inicio:[7,23],  fin:[7,27],  hebreo:"El Dios que da sabiduría",                  practica:"Medita 30 minutos en silencio total. Solo observa sin guiar los pensamientos." },
+  { num:26, nombre:"Haaiah",    virtud:"Contemplación y política",      inicio:[7,28],  fin:[8,1],   hebreo:"El Dios oculto en el misterio",             practica:"Escribe tu visión de un mundo mejor. Sé concreto, no abstracto." },
+  { num:27, nombre:"Yeratel",   virtud:"Civilización y luz",            inicio:[8,2],   fin:[8,6],   hebreo:"El Dios que prueba a sus criaturas",        practica:"Enseña algo valioso a alguien hoy. El conocimiento que se comparte se multiplica." },
+  { num:28, nombre:"Seheiah",   virtud:"Longevidad y protección",       inicio:[8,7],   fin:[8,12],  hebreo:"El Dios que cura las enfermedades",         practica:"Realiza un chequeo de tus hábitos de salud. Elige mejorar uno hoy." },
+  { num:29, nombre:"Reiyel",    virtud:"Liberación y misticismo",       inicio:[8,13],  fin:[8,17],  hebreo:"El Dios pronto para socorrer",              practica:"Identifica una creencia limitante y escribe la versión liberada de ella." },
+  { num:30, nombre:"Omael",     virtud:"Paciencia y fecundidad",        inicio:[8,18],  fin:[8,22],  hebreo:"El Dios paciente",                          practica:"Cuida una planta con dedicación o cocina algo nutritivo para alguien." },
+  { num:31, nombre:"Lecabel",   virtud:"Inteligencia y talento",        inicio:[8,23],  fin:[8,28],  hebreo:"El Dios que inspira",                       practica:"Dedica 2 horas a desarrollar un talento propio sin esperar resultado inmediato." },
+  { num:32, nombre:"Vasariah",  virtud:"Justicia y clemencia",          inicio:[8,29],  fin:[9,2],   hebreo:"El Dios justo",                             practica:"Revisa si guardas algún rencor. Practica la clemencia como acto de poder." },
+  { num:33, nombre:"Yehuiah",   virtud:"Conocimiento de los superiores",inicio:[9,3],   fin:[9,7],   hebreo:"El Dios que conoce todas las cosas",        practica:"Consulta a alguien de mayor experiencia sobre un tema que te preocupa." },
+  { num:34, nombre:"Lehahiah",  virtud:"Obediencia sagrada",            inicio:[9,8],   fin:[9,12],  hebreo:"El Dios clemente",                          practica:"Sigue las instrucciones de un proceso sin modificarlas. Confía en la estructura." },
+  { num:35, nombre:"Chavakhiah", virtud:"Reconciliación",              inicio:[9,13],  fin:[9,17],  hebreo:"El Dios que da alegría",                    practica:"Busca reconciliarte con alguien de quien te hayas alejado sin razón de peso." },
+  { num:36, nombre:"Menadel",   virtud:"Trabajo y vocación",            inicio:[9,18],  fin:[9,23],  hebreo:"El Dios adorable",                          practica:"Identifica qué aspecto de tu trabajo más amas. Hazlo hoy con plena conciencia." },
+  { num:37, nombre:"Aniel",     virtud:"Ruptura de rutinas negativas",  inicio:[9,24],  fin:[9,28],  hebreo:"El Dios de las virtudes",                   practica:"Rompe un hábito pequeño pero negativo. Reemplázalo con algo que te nutra." },
+  { num:38, nombre:"Haamiah",   virtud:"Ritual y ceremonial",           inicio:[9,29],  fin:[10,3],  hebreo:"El Dios esperanza de todos los hijos",      practica:"Crea un ritual matutino consciente. Cinco minutos de intención antes de empezar el día." },
+  { num:39, nombre:"Rehael",    virtud:"Sumisión y paternidad",         inicio:[10,4],  fin:[10,8],  hebreo:"El Dios que recibe a los pecadores",        practica:"Honra a tus padres o figuras parentales —presentes o en memoria— con un gesto real." },
+  { num:40, nombre:"Ieiazel",   virtud:"Libertad y consolación",        inicio:[10,9],  fin:[10,13], hebreo:"El Dios que alegra",                        practica:"Haz algo creativo hoy sin ningún propósito utilitario. Solo por el gozo de crear." },
+  { num:41, nombre:"Hahahel",   virtud:"Misión espiritual",             inicio:[10,14], fin:[10,18], hebreo:"El Dios triple",                            practica:"Escribe tu misión de vida en una sola frase. Revisítala cada mañana esta semana." },
+  { num:42, nombre:"Mikael",    virtud:"Orden político y viajes",       inicio:[10,19], fin:[10,23], hebreo:"El Dios semejante a Dios",                  practica:"Organiza un viaje o proyecto que tengas postergado. Da el primer paso concreto hoy." },
+  { num:43, nombre:"Veuliah",   virtud:"Prosperidad y liberación",      inicio:[10,24], fin:[10,28], hebreo:"El Dios rey dominante",                     practica:"Identifica qué te tiene encadenado en lo económico y escribe tres acciones de libertad." },
+  { num:44, nombre:"Yelahiah",  virtud:"Karma marcial",                 inicio:[10,29], fin:[11,2],  hebreo:"El Dios eterno",                            practica:"Repara una injusticia que hayas cometido, aunque sea pequeña y antigua." },
+  { num:45, nombre:"Sealiah",   virtud:"Voluntad y motor de la existencia", inicio:[11,3],fin:[11,7],hebreo:"El Dios motivador de todas las cosas",     practica:"Medita en tu propósito profundo. ¿Qué te da fuerzas cuando todo lo demás falla?" },
+  { num:46, nombre:"Ariel",     virtud:"Percepciones sutiles",          inicio:[11,8],  fin:[11,12], hebreo:"El Dios revelador",                         practica:"Presta atención a las coincidencias de hoy. Anótalas. Busca el mensaje." },
+  { num:47, nombre:"Asaliah",   virtud:"Contemplación de lo divino",    inicio:[11,13], fin:[11,17], hebreo:"El Dios justo que señala la verdad",        practica:"Pasa tiempo en contemplación de la naturaleza. Sin teléfono, sin agenda." },
+  { num:48, nombre:"Mihael",    virtud:"Fertilidad y amor",             inicio:[11,18], fin:[11,22], hebreo:"El Dios Padre auxiliador",                  practica:"Nutre una relación importante con un acto de amor desinteresado y concreto." },
+  { num:49, nombre:"Vehuel",    virtud:"Elevación y grandeza",          inicio:[11,23], fin:[11,27], hebreo:"El Dios grande y elevado",                  practica:"Lee sobre alguien que admires profundamente. Integra una enseñanza suya hoy." },
+  { num:50, nombre:"Daniel",    virtud:"Elocuencia divina",             inicio:[11,28], fin:[12,2],  hebreo:"El Dios del signo de la misericordia",      practica:"Escribe o habla sobre algo que te apasione con total autenticidad." },
+  { num:51, nombre:"Hahasiah",  virtud:"Medicina universal",            inicio:[12,3],  fin:[12,7],  hebreo:"El Dios oculto",                            practica:"Cuida tu cuerpo con especial atención hoy: alimentación, movimiento, descanso." },
+  { num:52, nombre:"Imamiah",   virtud:"Expiación y viajes",            inicio:[12,8],  fin:[12,12], hebreo:"El Dios elevado sobre todas las cosas",     practica:"Exprésate con libertad hoy. Comparte algo que normalmente guardas para ti." },
+  { num:53, nombre:"Nanael",    virtud:"Conocimiento de lo divino",     inicio:[12,13], fin:[12,17], hebreo:"El Dios que derriba a los grandes",         practica:"Estudia un texto sagrado o filosófico durante al menos una hora con atención total." },
+  { num:54, nombre:"Nithael",   virtud:"Legitimidad eterna",            inicio:[12,18], fin:[12,22], hebreo:"El Dios rey de los cielos",                 practica:"Actúa hoy como si todo lo que haces quedara registrado para la eternidad. ¿Cambiaría algo?" },
+  { num:55, nombre:"Mebahiah",  virtud:"Claridad intelectual y moral",  inicio:[12,23], fin:[12,27], hebreo:"El Dios eterno",                            practica:"Establece con claridad tus valores. Escribe los cinco más importantes y por qué." },
+  { num:56, nombre:"Poyel",     virtud:"Fortuna y esperanza",           inicio:[12,28], fin:[1,1],   hebreo:"El Dios que sustenta el universo",          practica:"Da algo que valoras a alguien que lo necesita más. La generosidad abre puertas." },
+  { num:57, nombre:"Nemamiah",  virtud:"Discernimiento",                inicio:[1,2],   fin:[1,6],   hebreo:"El Dios loable y amable",                   practica:"Antes de tomar una decisión hoy, consulta tu intuición en silencio durante 5 minutos." },
+  { num:58, nombre:"Yeialel",   virtud:"Vigor mental",                  inicio:[1,7],   fin:[1,11],  hebreo:"El Dios que escucha a las generaciones",    practica:"Haz ejercicio mental exigente: aprende algo nuevo, resuelve un problema complejo." },
+  { num:59, nombre:"Harahel",   virtud:"Riqueza intelectual",           inicio:[1,12],  fin:[1,16],  hebreo:"El Dios que lo conoce todo",                practica:"Comparte conocimiento de manera gratuita con alguien que no pueda pagarlo." },
+  { num:60, nombre:"Mitzrael",  virtud:"Reparación interna",            inicio:[1,17],  fin:[1,21],  hebreo:"El Dios que ayuda a los oprimidos",         practica:"Identifica algo que necesitas reparar en ti mismo. Escribe el primer paso." },
+  { num:61, nombre:"Umabel",    virtud:"Amistad y afinidad",            inicio:[1,22],  fin:[1,26],  hebreo:"El Dios por encima de todas las cosas",     practica:"Contacta a un amigo querido con quien hayas perdido contacto. Solo para decirle que lo recuerdas." },
+  { num:62, nombre:"Iah-Hel",   virtud:"Deseo de conocer",             inicio:[1,27],  fin:[1,31],  hebreo:"El Ser supremo",                            practica:"Dedica el día a aprender algo que siempre quisiste saber. Sin objetivo, solo curiosidad." },
+  { num:63, nombre:"Anauel",    virtud:"Unidad y percepción",           inicio:[2,1],   fin:[2,5],   hebreo:"El Dios infinitamente bueno",               practica:"Busca la unidad en las diferencias. Encuentra algo en común con alguien opuesto a ti." },
+  { num:64, nombre:"Mehiel",    virtud:"Vivificación y prensa",         inicio:[2,6],   fin:[2,10],  hebreo:"El Dios que vivifica todas las cosas",      practica:"Crea algo hoy: escribe, dibuja, cocina, construye. El acto creativo vivifica el alma." },
+  { num:65, nombre:"Damabiah",  virtud:"Fuente de sabiduría",           inicio:[2,11],  fin:[2,15],  hebreo:"El Dios fuente de sabiduría",               practica:"Busca consejo en la naturaleza o en la contemplación. La sabiduría viene del silencio." },
+  { num:66, nombre:"Manakel",   virtud:"Conocimiento del bien y el mal",inicio:[2,16],  fin:[2,20],  hebreo:"El Dios que soporta todas las cosas",       practica:"Reflexiona sobre una elección pasada. ¿Qué aprendiste sobre ti mismo de ella?" },
+  { num:67, nombre:"Eyael",     virtud:"Transformación hacia lo sublime",inicio:[2,21], fin:[2,25],  hebreo:"El Dios delicia de los hijos de los hombres",practica:"Dedica tiempo al arte o la belleza. Visita una galería, escucha música con plena atención." },
+  { num:68, nombre:"Habuhiah",  virtud:"Sanación y agricultura",        inicio:[2,26],  fin:[3,2],   hebreo:"El Dios que da liberalmente",               practica:"Cuida algo vivo hoy: una planta, un animal, un ser querido. El cuidado sana al que cuida." },
+  { num:69, nombre:"Rochel",    virtud:"Restitución",                   inicio:[3,3],   fin:[3,7],   hebreo:"El Dios que todo lo ve",                    practica:"Devuelve algo —física, emocional o energéticamente— que hayas tomado sin permiso." },
+  { num:70, nombre:"Jabamiah",  virtud:"Alquimia y regeneración",      inicio:[3,8],   fin:[3,12],  hebreo:"El Verbo que produce todas las cosas",      practica:"Transforma un hábito o situación negativa en su opuesto positivo. La alquimia es tuya." },
+  { num:71, nombre:"Haiaiel",   virtud:"Universo divino",               inicio:[3,13],  fin:[3,17],  hebreo:"El Dios maestro del universo",              practica:"Trabaja por el bien común hoy, aunque sea en un gesto pequeño. Lo universal vive en lo local." },
+  { num:72, nombre:"Mumiah",    virtud:"Renacimiento y fin de ciclos",  inicio:[3,18],  fin:[3,20],  hebreo:"El Dios fin de todas las cosas",            practica:"Cierra conscientemente algo que ya completó su ciclo. El cierre honrado libera energía nueva." },
+];
+
+function calcularAngel(dia, mes) {
+  for (const angel of ANGELES_72) {
+    const [mesI, diaI] = angel.inicio;
+    const [mesF, diaF] = angel.fin;
+    // Ángel puede cruzar año (ej. Poyel: 28 dic - 1 ene)
+    if (mesI === mesF) {
+      if (mes === mesI && dia >= diaI && dia <= diaF) return angel;
+    } else if (mesI > mesF) {
+      if ((mes === mesI && dia >= diaI) || (mes === mesF && dia <= diaF)) return angel;
+    } else {
+      if ((mes === mesI && dia >= diaI) || (mes === mesF && dia <= diaF) || (mes > mesI && mes < mesF)) return angel;
+    }
+  }
+  // Fallback: encontrar más cercano
+  return ANGELES_72.find(a => a.inicio[0] === mes) || ANGELES_72[0];
+}
+
+// ── 5F: Arquetipos de Jung ──
+const ARQUETIPOS_SIGNO = {
+  "Aries":       { nombre: "El Héroe / El Guerrero",      descripcion: "Naciste para iniciar lo que otros no se atreven. Tu arquetipo te llama a la acción valiente, a la conquista del yo antes que del mundo." },
+  "Tauro":       { nombre: "El Creador / El Amante",      descripcion: "Construyes belleza con tus manos y tu presencia. Eres el guardián de lo precioso. Tu amor es fiel, profundo y transformador." },
+  "Géminis":     { nombre: "El Mensajero / El Mago",      descripcion: "Eres el puente entre mundos. Tu mente conecta lo inconectado. La palabra es tu varita mágica y el conocimiento tu territorio infinito." },
+  "Cáncer":      { nombre: "El Cuidador / La Gran Madre", descripcion: "Nutres lo que otros plantan. Tu amor crea hogares donde el alma descansa. Eres el arquetipo del cobijo y la memoria emocional." },
+  "Leo":         { nombre: "El Rey / El Artista",         descripcion: "Naciste para irradiar. Tu arquetipo te llama al escenario de la vida —no para ser visto, sino para iluminar con tu presencia auténtica." },
+  "Virgo":       { nombre: "El Sanador / El Analista",    descripcion: "Tu mente es un instrumento de precisión al servicio de la mejora. Ves lo que está roto y sabes cómo repararlo. Eres el artesano del detalle." },
+  "Libra":       { nombre: "El Amante / El Diplomático",  descripcion: "Vives para crear armonía donde hay discordia. Tu arquetipo busca la belleza en las relaciones y la justicia en los acuerdos." },
+  "Escorpio":    { nombre: "El Alquimista / El Mago",     descripcion: "Transformas la oscuridad en luz con poder sobrenatural. Tu arquetipo sumerge en las profundidades para traer de vuelta el tesoro oculto." },
+  "Sagitario":   { nombre: "El Explorador / El Sabio",    descripcion: "Tu alma no tiene fronteras. El horizonte siempre te llama. Eres el arquetipo de la búsqueda de sentido y la aventura del espíritu." },
+  "Capricornio": { nombre: "El Gobernante / El Sabio",    descripcion: "Construyes imperios con paciencia y visión de largo plazo. Tu arquetipo te llama a liderar con sabiduría lo que fue construido con esfuerzo." },
+  "Acuario":     { nombre: "El Rebelde / El Visionario",  descripcion: "Eres el arquetipo del futuro. Llegas antes que el mundo a las ideas que luego son obvias. Tu originalidad es un servicio a la humanidad." },
+  "Piscis":      { nombre: "El Místico / El Inocente",    descripcion: "Tu alma vive en los límites de lo visible e invisible. Eres el arquetipo de la compasión sin límites y la fe que trasciende la razón." },
+};
+
+const ARQUETIPOS_NUMERO = {
+  1:  { nombre: "El Líder / El Pionero",       descripcion: "Tu misión es abrir caminos. Eres el primero en cruzar la puerta que otros temen. Tu número te llama a la independencia y la creación desde cero." },
+  2:  { nombre: "El Diplomático / El Mediador",descripcion: "Tu misión es crear puentes. Eres quien convierte la división en diálogo. Tu número te llama a la cooperación como forma suprema de inteligencia." },
+  3:  { nombre: "El Artista / El Comunicador", descripcion: "Tu misión es expresar. Cada palabra, forma o idea que compartes eleva el nivel del mundo. Tu número te llama a la creatividad como vocación sagrada." },
+  4:  { nombre: "El Arquitecto / El Maestro",  descripcion: "Tu misión es construir. Lo que haces dura porque lo construyes bien. Tu número te llama a la disciplina como forma de amor hacia el futuro." },
+  5:  { nombre: "El Libertador / El Aventurero",descripcion: "Tu misión es expandir. Donde otros ven muros, tú ves puertas. Tu número te llama a vivir múltiples vidas dentro de esta vida." },
+  6:  { nombre: "El Sanador / El Nutricio",    descripcion: "Tu misión es cuidar. La armonía que creas en tu entorno es tu obra maestra. Tu número te llama al amor como práctica cotidiana y transformadora." },
+  7:  { nombre: "El Buscador / El Filósofo",   descripcion: "Tu misión es comprender. Las preguntas que haces cambian la forma en que otros ven el mundo. Tu número te llama a la profundidad como modo de vida." },
+  8:  { nombre: "El Ejecutivo / El Empoderado",descripcion: "Tu misión es manifestar poder con consciencia. El éxito que logras sirve a algo mayor. Tu número te llama a la abundancia como herramienta espiritual." },
+  9:  { nombre: "El Humanista / El Sabio",     descripcion: "Tu misión es servir a la humanidad. Todo lo que has aprendido en esta vida existe para ser regalado. Tu número te llama a la entrega como camino de plenitud." },
+  11: { nombre: "El Visionario / El Canal",    descripcion: "Número maestro. Tu misión es inspirar. Eres un canal de la conciencia superior. Tu vida entera es un mensaje que otros necesitan recibir." },
+  22: { nombre: "El Constructor del Mundo",    descripcion: "Número maestro. Tu misión es crear estructuras que sirvan a la humanidad. Eres el más poderoso en términos de manifestación en el plano material." },
+  33: { nombre: "El Maestro Sanador",          descripcion: "Número maestro. Tu misión es amar sin límites. Eres el arquetipo del compasión universal. Tu vida es una demostración del amor que sana." },
+};
+
+// ── 5G: Animales Tótem ──
+const ZODIACO_CHINO = {
+  rata:    { anios: [1900,1912,1924,1936,1948,1960,1972,1984,1996,2008,2020], descripcion: "Inteligente, adaptable y con gran instinto de supervivencia. La Rata es pionera silenciosa que siempre encuentra el camino.", virtud: "Ingenio y adaptabilidad" },
+  buey:    { anios: [1901,1913,1925,1937,1949,1961,1973,1985,1997,2009,2021], descripcion: "Confiable, fuerte y paciente. El Buey construye su destino ladrillo a ladrillo con fe inquebrantable en el esfuerzo.", virtud: "Perseverancia y lealtad" },
+  tigre:   { anios: [1902,1914,1926,1938,1950,1962,1974,1986,1998,2010,2022], descripcion: "Valiente, impulsivo y magnético. El Tigre nació para liderar con pasión y proteger a los más vulnerables.", virtud: "Coraje y liderazgo" },
+  conejo:  { anios: [1903,1915,1927,1939,1951,1963,1975,1987,1999,2011,2023], descripcion: "Elegante, intuitivo y amante de la belleza. El Conejo navega el mundo con delicadeza y una inteligencia suave pero poderosa.", virtud: "Gracia e intuición" },
+  dragon:  { anios: [1904,1916,1928,1940,1952,1964,1976,1988,2000,2012,2024], descripcion: "Carismático, visionario y poderoso. El Dragón no conoce lo imposible. Su fuego interior puede cambiar el mundo.", virtud: "Visión y poder creador" },
+  serpiente:{ anios: [1905,1917,1929,1941,1953,1965,1977,1989,2001,2013,2025], descripcion: "Sabia, misteriosa y profunda. La Serpiente ve más allá de las apariencias y guarda secretos que solo comparte en el momento exacto.", virtud: "Sabiduría y misterio" },
+  caballo: { anios: [1906,1918,1930,1942,1954,1966,1978,1990,2002,2014,2026], descripcion: "Libre, enérgico y aventurero. El Caballo galopa hacia el horizonte con alegría sin pedir permiso a nadie.", virtud: "Libertad y vitalidad" },
+  cabra:   { anios: [1907,1919,1931,1943,1955,1967,1979,1991,2003,2015,2027], descripcion: "Creativa, empática y artística. La Cabra encuentra belleza donde otros no la ven y construye mundos interiores de gran riqueza.", virtud: "Creatividad y sensibilidad" },
+  mono:    { anios: [1908,1920,1932,1944,1956,1968,1980,1992,2004,2016,2028], descripcion: "Brillante, ingenioso y versátil. El Mono domina todos los juegos del mundo con una mezcla de inteligencia y humor irresistible.", virtud: "Ingenio y versatilidad" },
+  gallo:   { anios: [1909,1921,1933,1945,1957,1969,1981,1993,2005,2017,2029], descripcion: "Preciso, valiente y honesto. El Gallo dice la verdad aunque incomode y trabaja con una dedicación que inspira a quienes lo rodean.", virtud: "Precisión y valentía" },
+  perro:   { anios: [1910,1922,1934,1946,1958,1970,1982,1994,2006,2018,2030], descripcion: "Leal, justo y protector. El Perro es el guardián del corazón. Su amor es incondicional y su justicia, inquebrantable.", virtud: "Lealtad y justicia" },
+  cerdo:   { anios: [1911,1923,1935,1947,1959,1971,1983,1995,2007,2019,2031], descripcion: "Generoso, honesto y con gran capacidad de goce. El Cerdo vive plenamente y contagia su abundancia interior a cuantos le rodean.", virtud: "Generosidad y plenitud" },
+};
+
+const ANIMALES_NATIVOS = {
+  1:  { nombre: "Ganso del Nieve",    mes: "Diciembre 22 – Enero 19",   descripcion: "Tenaz, visionario y ambicioso. El Ganso de Nieve no conoce el abandono. Su sabiduría viene del camino recorrido con persistencia.", virtud: "Ambición y constancia" },
+  2:  { nombre: "Nutria",             mes: "Enero 20 – Febrero 18",     descripcion: "Inusual, imaginativa e independiente. La Nutria ve el mundo desde ángulos que nadie más considera. Su originalidad es su mayor regalo.", virtud: "Originalidad e intuición" },
+  3:  { nombre: "Lobo",               mes: "Febrero 19 – Marzo 20",     descripcion: "Apasionado, generoso e intuitivo. El Lobo ama profundamente y siente los ritmos invisibles del universo con claridad sobrenatural.", virtud: "Pasión e intuición" },
+  4:  { nombre: "Halcón de la Caza",  mes: "Marzo 21 – Abril 19",      descripcion: "Líder natural, enérgico y decisivo. El Halcón actúa donde otros dudan. Su visión de largo alcance y su velocidad son incomparables.", virtud: "Liderazgo y visión" },
+  5:  { nombre: "Castor",             mes: "Abril 20 – Mayo 20",        descripcion: "Estratégico, práctico e ingenioso. El Castor construye realidades donde otros solo ven materiales. Su trabajo es siempre maestría.", virtud: "Estrategia y maestría" },
+  6:  { nombre: "Ciervo",             mes: "Mayo 21 – Junio 20",        descripcion: "Vivaz, inspirador y naturalmente gracioso. El Ciervo lleva alegría a donde llega y conecta los corazones con su energía radiante.", virtud: "Vitalidad y conexión" },
+  7:  { nombre: "Pájaro Carpintero",  mes: "Junio 21 – Julio 21",      descripcion: "Empático, organizado y romántico. El Pájaro Carpintero construye los nidos más seguros para los que ama. Su perseverancia crea hogar.", virtud: "Empatía y perseverancia" },
+  8:  { nombre: "Salmón",             mes: "Julio 22 – Agosto 21",      descripcion: "Apasionado, intuitivo y eléctrico. El Salmón sabe exactamente adónde va aunque el camino sea contra la corriente. Su fe lo lleva.", virtud: "Intuición y determinación" },
+  9:  { nombre: "Oso",                mes: "Agosto 22 – Septiembre 21", descripcion: "Práctico, metódico y generoso. El Oso es el sanador paciente de la tribu. Su fuerza está al servicio de los que necesitan apoyo.", virtud: "Sabiduría y sanación" },
+  10: { nombre: "Cuervo",             mes: "Septiembre 22 – Octubre 22",descripcion: "Equilibrado, romántico y astuto. El Cuervo es el diplomático de la naturaleza. Su encanto es genuino y su sentido de la justicia, profundo.", virtud: "Equilibrio y astucia" },
+  11: { nombre: "Serpiente de Cascabel",mes:"Octubre 23 – Noviembre 22", descripcion: "Intuitivo, sensible y shamánico. La Serpiente de Cascabel guarda los misterios más profundos de la transformación y la regeneración.", virtud: "Transformación y misterio" },
+  12: { nombre: "Búho",               mes: "Noviembre 23 – Diciembre 21",descripcion: "Aventurero, adaptable y amoroso. El Búho ve claramente en la oscuridad y su sabiduría ilumina los caminos más difíciles.", virtud: "Visión y sabiduría nocturna" },
+};
+
+function calcularAnimalChino(anio) {
+  const secuencia = ['rata','buey','tigre','conejo','dragon','serpiente','caballo','cabra','mono','gallo','perro','cerdo'];
+  const idx = ((anio - 1900) % 12 + 12) % 12;
+  const nombreAnimal = secuencia[idx];
+  return { nombre: nombreAnimal.charAt(0).toUpperCase() + nombreAnimal.slice(1), ...ZODIACO_CHINO[nombreAnimal], anio };
+}
+
+function calcularAnimalNativo(mes) {
+  return { ...ANIMALES_NATIVOS[mes], mesNum: mes };
+}
+
+// ── 5H: Mantras ──
+const MANTRAS_10 = {
+  1: { afirmacion: "Soy el origen de mis propios comienzos. Cada mañana que despierto es una oportunidad única de crear desde la nada algo que el mundo aún no conoce. Mi voluntad es un fuego limpio que no destruye sino que ilumina. Cuando actúo desde mi centro, el universo entero colabora con mis propósitos.", mantra: "Soy voluntad. Soy creación. Soy luz." },
+  2: { afirmacion: "En mi sensibilidad reside una fortaleza que pocos comprenden. Soy el puente que une lo que estaba separado. Cada vez que escucho con el corazón abierto, transformo realidades. La cooperación que ofrezco al mundo regresa multiplicada en amor y comprensión.", mantra: "Fluyo. Me uno. Amo sin condición." },
+  3: { afirmacion: "Mi voz y mi creatividad son regalos que el universo me confió para ser compartidos. Cuando me expreso con autenticidad, algo en el mundo se ilumina. La alegría que cultivo en mí misma es un servicio a todos los que me rodean. Mi arte es mi oración.", mantra: "Expreso. Creo. Celebro la vida." },
+  4: { afirmacion: "Lo que construyo con mis manos y mi mente dura porque lo hago con integridad. La disciplina no es una carga sino la forma más elevada de amor hacia mi yo futuro. Cada paso firme que doy hoy es la base sobre la que mis sueños más grandes se sostendrán mañana.", mantra: "Construyo con amor. Perduro. Sirvo." },
+  5: { afirmacion: "Soy expansión en movimiento. La vida me ha dado el don de la adaptación y la curiosidad que no tiene límites. Cada cambio que abrazo es una iniciación. Cada camino que exploro me revela una versión más libre y poderosa de lo que soy capaz de ser.", mantra: "Me muevo libre. Crezco. Me renuevo." },
+  6: { afirmacion: "El amor que habita en mí no se agota porque no es mío, es cósmico. Soy un canal de armonía y sanación para todos los que tocan mi vida. El hogar que creo —interior y exterior— es sagrado. Cuando cuido, me cuido. Cuando amo, me completo.", mantra: "Amo. Sano. Creo armonía y hogar." },
+  7: { afirmacion: "En el silencio encuentro las respuestas que el ruido del mundo no puede darme. Mi mente es un instrumento fino que, cuando lo afino con la meditación y el estudio, revela los patrones ocultos del universo. La soledad que elijo es la más fértil de las compañías.", mantra: "Profundizo. Comprendo. Soy sabiduría." },
+  8: { afirmacion: "El poder que ejerzo nace de mi integridad, no del miedo. Manifiesto abundancia porque comprendo que la prosperidad es una energía que fluye, no un tesoro que se acumula. Cada éxito que alcanzo está al servicio de algo mayor que yo mismo.", mantra: "Prospero. Lidero. Sirvo con poder." },
+  9: { afirmacion: "He completado muchos ciclos y en cada uno he ganado algo que ahora puedo regalar. Mi compasión no es debilidad sino la fuerza más alta que existe. Sirvo a la humanidad no porque deba sino porque es la expresión más natural de quien verdaderamente soy.", mantra: "Sirvo con amor. Completo. Trasciend." },
+  11: { afirmacion: "Soy un canal de luz en un mundo que necesita faros. Mi intuición es una conexión directa con la inteligencia superior del universo. No necesito entenderlo todo con la mente —mi alma ya lo sabe. Confío en las revelaciones que llegan cuando me permito estar en silencio.", mantra: "Canal de luz. Intuyo. Elevo el mundo." },
+  22: { afirmacion: "Fui diseñado para construir en grande. Los sueños que cargo no son solo míos —son de todos los que serán tocados por lo que creo. Mi disciplina y mi visión son herramientas al servicio de algo que trasciende mi nombre y mi tiempo. Construyo el futuro hoy.", mantra: "Visionario. Constructor. Eterno." },
+  33: { afirmacion: "Mi amor no tiene fronteras porque comprende que todos somos uno. Sano con mi presencia, con mis palabras y con la compasión que no juzga. He aprendido que el verdadero maestro no enseña con palabras sino con la forma en que vive cada momento de su existencia.", mantra: "Amor total. Sano. Soy el maestro." },
+};
+
+function seleccionarMantra(cdv) {
+  return MANTRAS_10[cdv] || MANTRAS_10[1];
+}
+
+// ── 5I: Horóscopo ──
+// Texto actualizable mensualmente — actualmente: Mayo 2026
+const HOROSCOPO_MES = {
+  mes: "Mayo 2026",
+  signos: {
+    "Aries":       { amor: "Venus ilumina tu vida amorosa. Es momento de dejar ir viejas heridas y abrirte con valentía a una nueva forma de relacionarte. Si estás en pareja, un viaje o proyecto compartido renovará el vínculo.", trabajo: "La energía marciana te da impulso irresistible. Un proyecto que lanzaste semanas atrás muestra sus primeros frutos. No frenes el momentum — actúa mientras el fuego está vivo.", salud: "Tu energía física está en su punto alto. Es el momento perfecto para establecer una rutina de ejercicio que se sostenga en el tiempo. El descanso nocturno es tan importante como el movimiento.", consejo: "No gastes toda tu energía en el inicio. La consistencia es lo que convierte una chispa en llama duradera." },
+    "Tauro":       { amor: "Con el Sol en tu signo, irradias un magnetismo especial. Las relaciones que comiencen este mes tendrán profundidad y potencial real. Si estás en pareja, es tiempo de celebrar lo construido.", trabajo: "Mercurio favorece tus negocios y comunicaciones. Una propuesta que presentas con claridad y solidez encontrará terreno fértil. Confía en tu talento para valorizar lo que creas.", salud: "Cuida tu garganta y tu cuello — zonas sensibles de Tauro. Una práctica vocal, canto o meditación sonora puede aportarte bienestar inesperado.", consejo: "La belleza que creas con tus manos y tu mente es tu mejor carta de presentación al mundo." },
+    "Géminis":     { amor: "La comunicación es tu superpoder este mes. Una conversación honesta puede transformar una relación estancada. Nuevos contactos románticos surgen en contextos intelectuales.", trabajo: "Júpiter expande tus horizontes profesionales. Una oportunidad relacionada con la escritura, la enseñanza o la divulgación merece toda tu atención. Tu mente conecta puntos que otros no ven.", salud: "La sobrecarga mental puede manifestarse en tensión. Practica el silencio digital al menos una hora al día. Tu sistema nervioso lo necesita y lo agradecerá.", consejo: "No disperses tu energía en veinte proyectos. Elige uno y llévalo a la excelencia." },
+    "Cáncer":      { amor: "El mundo emocional está más rico que nunca. Alguien de tu pasado puede reasoparse con intenciones genuinas. Tu intuición sobre las intenciones ajenas está especialmente afinada.", trabajo: "Los proyectos colaborativos son favorecidos. Tu capacidad de crear ambientes donde los otros se sienten seguros es tu mayor ventaja profesional este mes.", salud: "El sistema digestivo es tu barómetro emocional. Come con consciencia, mastica despacio y elige alimentos que nutran desde adentro. El intestino refleja tu estado interior.", consejo: "Tu hogar es tu templo. Invertir en tu espacio personal es invertir en tu bienestar integral." },
+    "Leo":         { amor: "El amor que das regresa amplificado. Un gesto generoso puede abrir una puerta que creías cerrada. Si estás buscando pareja, los espacios creativos y culturales son tus mejores aliados.", trabajo: "Tu carisma natural está en su punto más alto. Presentaciones, entrevistas o cualquier espacio donde debas brillar individualmente son terreno ideal. Lidera desde el corazón.", salud: "El corazón —físico y emocional— merece atención especial. Una práctica de gratitud diaria tiene efectos mesurables sobre tu bienestar cardiovascular.", consejo: "Liderar es servir. Los que te siguen necesitan tu luz, no tu sombra." },
+    "Virgo":       { amor: "La perfección que buscas en los demás es un espejo de la exigencia que aplicas sobre ti mismo. Este mes el universo te invita a amar lo imperfecto — y encontrar ahí la belleza más real.", trabajo: "Tu atención al detalle resuelve un problema que otros ni siquiera han notado. Ese talento analítico tiene un valor que mereces reconocer y hacer reconocer a tu entorno.", salud: "El sistema nervioso y el aparato digestivo piden cuidado. Introduce rituales de relajación consciente — baños, masajes, tiempo en la naturaleza. El cuerpo habla en somatizaciones.", consejo: "La crítica más costosa es la que te diriges a ti mismo. Cambia el filtro de crítico a testigo amable." },
+    "Libra":       { amor: "Venus, tu regente, favorece los lazos nuevos y la renovación de los existentes. La justicia y la reciprocidad son tus palabras clave. Una conversación pendiente trae equilibrio y alivio.", trabajo: "El trabajo en equipo brilla especialmente. Tu capacidad de mediar y encontrar el punto de acuerdo es invaluable. Un asociado o colaborador trae oportunidades que solo no podrías ver.", salud: "Los riñones y la zona lumbar piden atención. El ejercicio moderado y la hidratación consciente hacen una diferencia real este mes.", consejo: "Di lo que piensas con elegancia. La diplomacia no es silencio — es la verdad expresada con belleza." },
+    "Escorpio":    { amor: "La profundidad que buscas en el amor no está en otro sino en el encuentro honesto entre dos mundos interiores. Este mes trae transformación en vínculos establecidos. No temas la intensidad — es tu elemento.", trabajo: "Tu capacidad de investigar y descubrir lo que otros pasan por alto te da ventaja estratégica. Un proyecto de largo plazo muestra señales de que el esfuerzo acumulado empieza a dar frutos.", salud: "La energía sexual y creativa están íntimamente vinculadas. Cuando expresas tu creatividad, tu salud general mejora. El bloqueo creativo puede manifestarse físicamente.", consejo: "La transformación real no duele menos — pero tiene sentido. Encuentra el sentido." },
+    "Sagitario":   { amor: "El amor que buscas está en alguien que comparte tu visión del mundo, no solo tus actividades. Un encuentro en un contexto educativo o de viaje puede ser significativo.", trabajo: "Júpiter, tu regente, amplifica cualquier cosa en la que inviertes energía. Un proyecto de expansión —nuevo mercado, nueva audiencia, nuevo país— tiene timing perfecto.", salud: "Las caderas y los muslos son tu zona de movimiento. El ejercicio al aire libre, especialmente en la naturaleza, restaura tu energía mejor que cualquier rutina de gimnasio.", consejo: "La flecha siempre se dispara hacia adelante. Confía en tu puntería y suelta." },
+    "Capricornio": { amor: "El tiempo que das a una relación es tu forma más sincera de amor. Este mes te toca demostrar presencia real, no solo compromiso en palabras. La vulnerabilidad que muestras abre corazones.", trabajo: "Saturno, tu regente, recompensa el trabajo metódico. Una meta de largo plazo que persigues con constancia muestra un avance significativo. El reconocimiento externo llega, aunque sea en silencio.", salud: "Los huesos, rodillas y articulaciones piden mantenimiento consciente. El calcio, el colágeno y el movimiento suave son tus aliados. No esperes el dolor para actuar.", consejo: "La ambición sin descanso construye un castillo vacío. Habita lo que construyes." },
+    "Acuario":     { amor: "La amistad es la base del amor que necesitas. Este mes un vínculo de amistad puede transformarse en algo más profundo, o una relación existente encuentra una dimensión de complicidad nueva.", trabajo: "Tu pensamiento innovador resuelve un problema colectivo de forma elegante. Las plataformas digitales y las redes de contacto son tus aliados más potentes este mes.", salud: "La circulación y el sistema nervioso piden movimiento y variedad. Rutinas demasiado fijas te agotan. Introduce novedad: una clase nueva, un camino diferente, un ejercicio distinto.", consejo: "Tu visión del futuro es un regalo. Compártela sin esperar que todos la comprendan de inmediato." },
+    "Piscis":      { amor: "Tu sensibilidad es tu mayor atractivo y tu mayor vulnerabilidad. Este mes el amor se muestra en los detalles invisibles que solo tú percibes. Confía en lo que sientes sin necesitar que te lo expliquen.", trabajo: "La creatividad está en su punto más alto. Proyectos artísticos, terapéuticos o de servicio están especialmente favorecidos. Tu empatía como herramienta profesional no tiene precio.", salud: "Los pies y el sistema linfático piden cuidado. Los baños de sal, la reflexología y el contacto con el agua en cualquier forma te restauran profundamente.", consejo: "No todos los problemas de los demás son tuyos para resolver. La compasión tiene límites sabios." },
+  }
+};
+
+// ───────────────────────────────────────────────────────────────────────────────
+// FUNCIÓN PRINCIPAL: Generar Lectura Armónica Completa
+// ───────────────────────────────────────────────────────────────────────────────
+
+function generarLecturaArmonica(nombre, dia, mes, anio) {
+  // Validaciones básicas
+  if (!nombre || nombre.trim().length < 2) throw new Error("Nombre inválido");
+  if (dia < 1 || dia > 31 || mes < 1 || mes > 12 || anio < 1900 || anio > 2025)
+    throw new Error("Fecha de nacimiento inválida");
+
+  const astrologia    = modulo1_Astrologia(dia, mes, anio);
+  const numerologia   = modulo2_Numerologia(nombre, dia, mes, anio);
+  const tarot         = modulo3_Tarot(numerologia);
+  const bioritmo      = modulo4_Bioritmo(dia, mes, anio);
+
+  const cdv = numerologia.caminoDeVida.valor;
+  const signoNombre = astrologia.solar.nombre;
+
+  const harmonias = {
+    cristalPrincipal:  CRISTALES_SIGNO[signoNombre],
+    cristalCamino:     CRISTALES_NUMERO[cdv],
+    colorPrimario:     COLORES_NUMERO[cdv],
+    colorApoyo:        COLORES_SIGNO[signoNombre],
+    florBach:          BACH_SIGNO[signoNombre],
+    chakra:            CHAKRAS_NUMERO[cdv],
+    angel:             calcularAngel(dia, mes),
+    arquetipoSigno:    ARQUETIPOS_SIGNO[signoNombre],
+    arquetipoNumero:   ARQUETIPOS_NUMERO[cdv],
+    animalChino:       calcularAnimalChino(anio),
+    animalNativo:      calcularAnimalNativo(mes),
+    mantra:            seleccionarMantra(cdv),
+  };
+
+  const horoscopo = HOROSCOPO_MES.signos[signoNombre] 
+    ? { ...HOROSCOPO_MES.signos[signoNombre], mes: HOROSCOPO_MES.mes, signo: signoNombre }
+    : null;
+
+  return {
+    meta: {
+      nombre: nombre.trim(),
+      fechaNacimiento: { dia, mes, anio },
+      fechaLectura: new Date().toLocaleDateString('es-CO', { day: '2-digit', month: 'long', year: 'numeric' }),
+      version: "1.0"
+    },
+    astrologia,
+    numerologia,
+    tarot,
+    bioritmo,
+    harmonias,
+    horoscopo
+  };
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+// TABLA DE COMPATIBILIDAD CDV × CDV
+// 81 combinaciones (1-9 × 1-9) + maestros mapeados
+// Cada entrada tiene: score_pareja, score_negocios, titulo, descripcion_pareja,
+// descripcion_negocios, dinamica, consejo
+// ═══════════════════════════════════════════════════════════════════════════
+
+const COMPAT_CDV = {
+  '1-1': {
+    score_pareja: 62, score_negocios: 58,
+    titulo: 'Dos Líderes — Tensión Creativa',
+    descripcion_pareja: 'Dos número 1 juntos crean una relación de alta intensidad y gran pasión, pero también de frecuentes choques de ego. Ambos quieren liderar, ambos tienen visión propia y ambos tienen dificultad para ceder. Cuando aprenden a turnarse — uno lidera este proyecto, el otro el siguiente — la relación se vuelve una sociedad de pioneros imparable.',
+    descripcion_negocios: 'Como socios de negocios, dos 1 pueden construir algo extraordinario si definen territorios claros desde el inicio. El problema surge cuando ambos quieren la última palabra en todo. La solución es la especialización: cada uno manda en su área sin interferencia del otro.',
+    dinamica: 'Competitiva y estimulante. El riesgo es la lucha de poder constante.',
+    consejo: 'Definan reglas claras sobre quién decide qué. La admiración mutua es el pegamento — cultívenla conscientemente.',
+    elementos: 'Fuego + Fuego'
+  },
+  '1-2': {
+    score_pareja: 78, score_negocios: 82,
+    titulo: 'El Líder y el Mediador — Complemento Natural',
+    descripcion_pareja: 'Una de las combinaciones más equilibradas del sistema. El 1 aporta dirección y coraje; el 2 aporta sensibilidad y la capacidad de suavizar los bordes duros del 1. El 2 necesita sentirse escuchado y el 1 necesita ser admirado — cuando ambos se dan lo que el otro necesita, la relación florece con naturalidad.',
+    descripcion_negocios: 'Combinación clásica de emprendedor y socio estratégico. El 1 abre puertas, inicia y vende; el 2 cuida las relaciones, negocia con fineza y mantiene la cohesión del equipo. Los negocios construidos por este dúo suelen ser sólidos porque tienen tanto impulso como diplomacia.',
+    dinamica: 'El 1 lidera, el 2 apoya — pero el 2 necesita reconocimiento real, no solo un rol secundario.',
+    consejo: '1: escucha más de lo que hablas con tu 2. 2: expresa tus necesidades directamente, sin esperar que adivinen.',
+    elementos: 'Fuego + Agua'
+  },
+  '1-3': {
+    score_pareja: 85, score_negocios: 88,
+    titulo: 'El Iniciador y el Creador — Energía Expansiva',
+    descripcion_pareja: 'Combinación de alta vibración y mucha alegría. Ambos son enérgicos, optimistas y aman la vida. El 1 da dirección y el 3 da color, creatividad y humor. Juntos pueden construir una vida llena de aventuras, proyectos compartidos y una química que otros envidian.',
+    descripcion_negocios: 'Excelentes socios para negocios creativos, comunicación, marketing y entretenimiento. El 1 abre el camino y el 3 lo hace brillante. El riesgo es que ambos son mejores comenzando que terminando — necesitan a alguien (o un sistema) que los mantenga en los detalles.',
+    dinamica: 'Expansiva, divertida y llena de proyectos. El riesgo es la dispersión.',
+    consejo: 'Creen sistemas de seguimiento. Su mayor riesgo no es la falta de ideas sino la falta de terminación.',
+    elementos: 'Fuego + Fuego'
+  },
+  '1-4': {
+    score_pareja: 65, score_negocios: 88,
+    titulo: 'El Visionario y el Constructor — Sociedad Ideal',
+    descripcion_pareja: 'En pareja, la tensión es real: el 1 quiere velocidad y novedad; el 4 quiere estabilidad y método. Pueden ser muy complementarios si el 1 respeta el ritmo del 4 y el 4 aprende a moverse un poco más rápido. La admiración mutua es posible — el 1 admira la solidez del 4, el 4 admira el coraje del 1.',
+    descripcion_negocios: 'Una de las mejores combinaciones de negocios del sistema. El 1 tiene la visión y la audacia para abrir mercados; el 4 tiene la disciplina y el método para construir la estructura que sostiene esa visión. Juntos crean empresas que duran.',
+    dinamica: 'Tensión productiva. Mundos distintos que se necesitan mutuamente.',
+    consejo: '1: respeta los plazos y la metodología del 4. 4: confía en el instinto del 1 aunque no tenga toda la evidencia.',
+    elementos: 'Fuego + Tierra'
+  },
+  '1-5': {
+    score_pareja: 72, score_negocios: 75,
+    titulo: 'Dos Energías Libres — Aventura y Caos',
+    descripcion_pareja: 'Relación emocionante, impredecible y llena de vida. Ambos aman la libertad y detestan la rutina. Pueden tener una relación brillante si ambos han madurado lo suficiente para comprometerse sin sentirse encadenados. El riesgo: nadie ancla el barco.',
+    descripcion_negocios: 'Buenos para negocios de rápido movimiento, ventas, exploración de mercados nuevos. El problema: ninguno de los dos quiere los detalles. Necesitan un tercer elemento — una persona o un sistema — que lleve la administración.',
+    dinamica: 'Libertad y movimiento constante. Estimulante pero inestable si no hay anclaje.',
+    consejo: 'Contraten a alguien metódico para lo que ninguno de los dos quiere hacer. Esa persona es el pegamento de su sociedad.',
+    elementos: 'Fuego + Aire'
+  },
+  '1-6': {
+    score_pareja: 80, score_negocios: 72,
+    titulo: 'El Líder y el Cuidador — Calor y Dirección',
+    descripcion_pareja: 'El 6 da al 1 lo que más necesita: un hogar cálido, apoyo genuino y alguien que cuide los detalles relacionales. El 1 da al 6 dirección, protección y la seguridad de que alguien tiene el timón. Funciona muy bien cuando el 1 aprende a cuidar también.',
+    descripcion_negocios: 'El 1 lidera externamente; el 6 cuida el equipo y las relaciones. Buenos para negocios de servicios, salud, educación o cualquier empresa donde la cultura organizacional sea clave. El 6 es el que hace que la gente quiera quedarse.',
+    dinamica: 'El 1 lleva la visión, el 6 cuida a las personas. Complemento real.',
+    consejo: '1: muestra gratitud concreta, no solo en palabras. 6: expresa tus necesidades antes de agotarte.',
+    elementos: 'Fuego + Tierra'
+  },
+  '1-7': {
+    score_pareja: 60, score_negocios: 70,
+    titulo: 'El Extrovertido y el Filósofo — Mundos Distintos',
+    descripcion_pareja: 'Combinación desafiante pero profundamente enriquecedora para los que la atraviesan. El 1 quiere acción y reconocimiento; el 7 quiere profundidad y silencio. Cuando el 1 aprende a valorar la sabiduría del 7 y el 7 aprende a salir de su cueva para el 1, crean algo inusualmente rico.',
+    descripcion_negocios: 'El 1 es la cara del negocio; el 7 es el cerebro que diseña la estrategia desde atrás. Buenos para consultoría, investigación, tecnología o cualquier campo donde la profundidad de análisis y la capacidad de venta coexistan.',
+    dinamica: 'Polos opuestos que se atraen. La tensión es intelectual y enriquecedora.',
+    consejo: '1: dale espacio al 7 — no lo interpretes como rechazo. 7: comunica lo que piensas antes de que el 1 actúe sin tu input.',
+    elementos: 'Fuego + Tierra'
+  },
+  '1-8': {
+    score_pareja: 70, score_negocios: 92,
+    titulo: 'Poder al Cuadrado — Sociedad de Alto Impacto',
+    descripcion_pareja: 'Dos personas de gran fuerza que pueden construir una vida extraordinaria o destruirse mutuamente. El 1 quiere ser primero; el 8 quiere ser el más poderoso — la tensión de egos es real. Cuando canalizan esa energía hacia objetivos compartidos, son imparables.',
+    descripcion_negocios: 'Una de las mejores combinaciones de negocios del sistema. El 1 abre y lidera; el 8 estructura y multiplica los recursos. Juntos pueden construir imperios. El riesgo: conflictos de autoridad que hay que resolver con reglas claras desde el inicio.',
+    dinamica: 'Alta energía, alto impacto, alta tensión potencial. Se necesita madurez de ambos.',
+    consejo: 'En negocios: define quién es CEO y quién es CFO desde el día 1. En pareja: el respeto mutuo no es opcional — es la base.',
+    elementos: 'Fuego + Tierra'
+  },
+  '1-9': {
+    score_pareja: 75, score_negocios: 78,
+    titulo: 'El Pionero y el Humanista — Misión Compartida',
+    descripcion_pareja: 'Relación con potencial de gran profundidad. El 1 aporta dirección y el 9 aporta sabiduría y compasión. El 9 puede volverse el maestro silencioso del 1, enseñándole que la fuerza sin amor es solo poder. El 1 puede enseñarle al 9 a actuar en lugar de solo contemplar.',
+    descripcion_negocios: 'Excelentes para negocios con propósito social, educación, salud o cualquier empresa orientada a un bien mayor. El 1 ejecuta y el 9 aporta la visión de impacto. La combinación de acción y sabiduría es muy poderosa.',
+    dinamica: 'El iniciador y el completador. Se complementan en el ciclo completo de la acción.',
+    consejo: 'Construyan algo que importe más allá de ustedes. Su mejor versión aparece cuando tienen una misión compartida.',
+    elementos: 'Fuego + Agua'
+  },
+  '2-2': {
+    score_pareja: 80, score_negocios: 55,
+    titulo: 'Dos Corazones — Profundidad Emocional',
+    descripcion_pareja: 'Una relación de gran ternura, empatía mutua y comprensión profunda. Dos 2 se entienden sin necesitar explicar demasiado. El riesgo: ambos son tan sensibles que los conflictos pueden paralizarlos a los dos. Nadie quiere herir al otro y nadie quiere decir verdades difíciles.',
+    descripcion_negocios: 'Funcionan bien en entornos colaborativos y de servicio. El problema: ninguno quiere tomar decisiones duras. En un negocio necesitan alguien (interno o externo) que funcione como figura de autoridad cuando hay que elegir.',
+    dinamica: 'Armoniosa y empática. El exceso de sensibilidad puede paralizar la toma de decisiones.',
+    consejo: 'Practiquen la honestidad radical con amabilidad. Las verdades no dichas se convierten en resentimientos acumulados.',
+    elementos: 'Agua + Agua'
+  },
+  '2-3': {
+    score_pareja: 82, score_negocios: 78,
+    titulo: 'El Corazón y el Artista — Alegría Nutrida',
+    descripcion_pareja: 'El 3 ilumina la vida del 2 y el 2 nutre el mundo emocional del 3. El 3 da alegría, creatividad y entusiasmo; el 2 da profundidad, cuidado y el espacio para que el 3 se exprese completamente. Una de las combinaciones más felices para la vida cotidiana.',
+    descripcion_negocios: 'Perfectos para negocios creativos, comunicación, entretenimiento o cualquier industria donde la expresión y las relaciones sean centrales. El 2 cuida a los clientes; el 3 los encanta.',
+    dinamica: 'Cálida, creativa y mutuamente nutritiva.',
+    consejo: '3: muestra gratitud explícita al 2 — necesita saber que lo que da importa. 2: dale libertad creativa al 3 sin controlarlo.',
+    elementos: 'Agua + Fuego'
+  },
+  '2-4': {
+    score_pareja: 85, score_negocios: 80,
+    titulo: 'El Cuidador y el Constructor — Hogar Sólido',
+    descripcion_pareja: 'Una de las combinaciones más estables y nutritivas. El 4 da la estructura y la seguridad que el 2 necesita; el 2 da el calor emocional que el 4 raramente se permite buscar. Juntos construyen hogares donde todos quieren estar.',
+    descripcion_negocios: 'El 2 cuida las relaciones y el 4 cuida los sistemas. Excelentes para negocios que requieren tanto solidez estructural como atención al cliente. Construyen despacio pero lo que construyen dura.',
+    dinamica: 'Sólida, cálida y duradera. Uno de los dúos más confiables del sistema.',
+    consejo: '4: expresa afecto en el lenguaje del 2, no solo con hechos. 2: respeta el ritmo metódico del 4 sin interpretarlo como frialdad.',
+    elementos: 'Agua + Tierra'
+  },
+  '2-5': {
+    score_pareja: 60, score_negocios: 65,
+    titulo: 'La Sensibilidad y la Libertad — Tensión de Ritmos',
+    descripcion_pareja: 'El 2 necesita estabilidad y cercanía; el 5 necesita libertad y movimiento. Esta tensión puede ser insalvable o el punto de mayor crecimiento de ambos. El 5 aprende a comprometerse; el 2 aprende a soltar el control sobre el otro.',
+    descripcion_negocios: 'El 5 trae los clientes y las oportunidades; el 2 mantiene las relaciones vivas. Si ambos respetan sus roles sin invadir el del otro, funcionan bien para negocios de ventas y servicio.',
+    dinamica: 'Tensión entre necesidad de cercanía y necesidad de libertad.',
+    consejo: '5: la libertad dentro del compromiso es más rica que la libertad sin él. 2: el otro no puede ser tu única fuente de seguridad.',
+    elementos: 'Agua + Aire'
+  },
+  '2-6': {
+    score_pareja: 88, score_negocios: 75,
+    titulo: 'Dos Corazones Abiertos — El Amor como Base',
+    descripcion_pareja: 'Una de las combinaciones más amorosas del sistema. Ambos valoran las relaciones, el hogar y el cuidado. El riesgo es que ambos puedan caer en dinámicas de codependencia o en el autosacrificio mutuo. Cuando están sanos, crean el hogar más cálido que existe.',
+    descripcion_negocios: 'Excelentes para el sector servicios, salud, educación o cualquier negocio orientado al bienestar. Ambos cuidan a los clientes con genuinidad. El riesgo: ninguno quiere tener las conversaciones difíciles de negocios.',
+    dinamica: 'Profundamente cariñosa y nutritiva. El riesgo es la codependencia.',
+    consejo: 'Asegúrense de que cada uno tiene vida propia además de la compartida. El amor que no incluye la autonomía puede asfixiar.',
+    elementos: 'Agua + Tierra'
+  },
+  '2-7': {
+    score_pareja: 72, score_negocios: 68,
+    titulo: 'El Corazón y el Filósofo — Profundidades Distintas',
+    descripcion_pareja: 'El 7 fascina al 2 con su profundidad; el 2 nutre al 7 con su cuidado. Pero el 7 necesita soledad y el 2 necesita cercanía — la negociación de este equilibrio es permanente. Cuando lo logran, tienen una de las relaciones más intelectualmente y emocionalmente ricas.',
+    descripcion_negocios: 'El 7 diseña la estrategia desde la profundidad del análisis; el 2 la ejecuta cuidando las relaciones. Buenos para consultoría, investigación y servicios especializados.',
+    dinamica: 'Profunda y un poco solitaria para el 2. El 7 necesita espacio que el 2 puede malinterpretar.',
+    consejo: '7: explica tu necesidad de soledad — no la des por obvia. 2: la distancia del 7 no es rechazo, es su forma de cargar energía.',
+    elementos: 'Agua + Tierra'
+  },
+  '2-8': {
+    score_pareja: 68, score_negocios: 80,
+    titulo: 'El Corazón y el Poder — Aprendizaje Mutuo',
+    descripcion_pareja: 'El 8 puede darle al 2 la seguridad material y la protección que necesita. El 2 puede enseñarle al 8 que el poder sin amor es solo dominación. Funcionan cuando el 8 aprende a suavizarse y el 2 aprende a reclamar su lugar sin ceder siempre.',
+    descripcion_negocios: 'El 8 pone el poder de manifestación; el 2 pone la inteligencia relacional. Combinación efectiva para negocios que necesitan tanto fortaleza financiera como habilidad diplomática.',
+    dinamica: 'El poderoso y el sensible. Se complementan cuando hay respeto mutuo.',
+    consejo: '8: el 2 no es débil por ser sensible — esa es su fuerza. 2: aprende a negociar desde tu valor, no desde el miedo a perder.',
+    elementos: 'Agua + Tierra'
+  },
+  '2-9': {
+    score_pareja: 86, score_negocios: 76,
+    titulo: 'El Mediador y el Humanista — Amor Universal',
+    descripcion_pareja: 'Combinación de gran compasión y entendimiento mutuo. Ambos ponen a los demás primero — el reto es aprender a ponerse también a sí mismos. Tienen una profundidad emocional compartida que les permite entenderse en silencio.',
+    descripcion_negocios: 'Extraordinarios para negocios con propósito social, ONG, salud, educación o consultoría de desarrollo humano. La combinación de empatía del 2 y sabiduría del 9 produce organizaciones que la gente quiere apoyar.',
+    dinamica: 'Profundamente empática y orientada al servicio. El riesgo es olvidarse de sí mismos.',
+    consejo: 'Pongan sus propias necesidades en la lista de prioridades — no al final sino al menos a la mitad.',
+    elementos: 'Agua + Agua'
+  },
+  '3-3': {
+    score_pareja: 78, score_negocios: 65,
+    titulo: 'Doble Creatividad — Fiesta y Caos',
+    descripcion_pareja: 'Una relación brillante, llena de alegría, creatividad y aventura. El riesgo es que ninguno ancla la realidad práctica. Si ambos están en modo fiesta, nadie paga las facturas. Cuando uno de los dos activa su lado más serio, el equilibrio es posible.',
+    descripcion_negocios: 'Extraordinarios para la creatividad, el marketing y la comunicación. El problema: ninguno quiere los detalles operativos. Necesitan apoyo administrativo externo o un sistema muy robusto.',
+    dinamica: 'Explosiva y festiva. El mundo los quiere cerca — pero alguien tiene que ocuparse de lo práctico.',
+    consejo: 'Contraten un contador y un gerente operativo desde el día 1. Su genialidad creativa necesita una estructura que la sostenga.',
+    elementos: 'Fuego + Fuego'
+  },
+  '3-4': {
+    score_pareja: 70, score_negocios: 85,
+    titulo: 'La Chispa y la Roca — Creatividad con Estructura',
+    descripcion_pareja: 'Tensión productiva: el 3 quiere aventura y espontaneidad; el 4 quiere estructura y predictibilidad. Cuando el 3 aprecia la solidez del 4 y el 4 se deja llevar un poco por el entusiasmo del 3, crean una vida que tiene tanto estabilidad como color.',
+    descripcion_negocios: 'Combinación poderosa para negocios creativos que necesitan estructura. El 3 genera las ideas y encanta a los clientes; el 4 construye los sistemas y entrega con consistencia. Juntos pueden escalar lo que solos no podrían.',
+    dinamica: 'El creativo y el metódico. La tensión es productiva si ambos la respetan.',
+    consejo: '3: respeta los sistemas que el 4 construye — no los ignores por aburridos. 4: deja que el 3 te sorprenda de vez en cuando.',
+    elementos: 'Fuego + Tierra'
+  },
+  '3-5': {
+    score_pareja: 82, score_negocios: 78,
+    titulo: 'Dos Espíritus Libres — Vibración Alta',
+    descripcion_pareja: 'Relación de alta energía, mucha diversión y expansión constante. Ambos aman la libertad, las ideas nuevas y la vida social activa. El riesgo es que la relación se quede en la superficie — se necesita esfuerzo consciente para bajar a las profundidades.',
+    descripcion_negocios: 'Perfectos para industrias creativas, comunicación, ventas y emprendimientos de rápido movimiento. Ambos tienen el carisma para abrir puertas. El reto es la consistencia en la entrega.',
+    dinamica: 'Expansiva, creativa y social. Necesita anclaje para no quedarse solo en ideas.',
+    consejo: 'Creen rituales de seguimiento para sus proyectos. La energía sin sistematización es solo entusiasmo.',
+    elementos: 'Fuego + Aire'
+  },
+  '3-6': {
+    score_pareja: 86, score_negocios: 80,
+    titulo: 'La Alegría y el Amor — Hogar Feliz',
+    descripcion_pareja: 'Una de las combinaciones más armoniosas para la vida cotidiana. El 3 trae alegría y color; el 6 trae calidez y cuidado. El hogar que construyen juntos es el lugar donde todos quieren estar. El 3 se siente nutrido; el 6 se siente apreciado.',
+    descripcion_negocios: 'Excelentes para negocios orientados al bienestar, la creatividad y el servicio. El 3 comunica y encanta; el 6 cuida y retiene. Una combinación que construye comunidades de clientes fieles.',
+    dinamica: 'Cálida, colorida y generosa. Pocas combinaciones más agradables de habitar.',
+    consejo: '6: también merece alegría, no solo dar. 3: muestra tu gratitud con constancia, no solo cuando te acuerdas.',
+    elementos: 'Fuego + Tierra'
+  },
+  '3-7': {
+    score_pareja: 65, score_negocios: 72,
+    titulo: 'El Comunicador y el Filósofo — Mundos Distintos',
+    descripcion_pareja: 'El 3 vive en la superficie brillante del mundo; el 7 vive en las profundidades. El 3 puede sacar al 7 de su cueva; el 7 puede enseñarle al 3 que hay más allá del brillo superficial. Requiere esfuerzo mutuo y curiosidad genuina por el mundo del otro.',
+    descripcion_negocios: 'El 3 es la cara visible y el comunicador; el 7 es el estratega profundo. Buenos para consultoría, educación o cualquier negocio donde el contenido profundo necesita ser comunicado de manera atractiva.',
+    dinamica: 'Polos opuestos con potencial de síntesis extraordinaria.',
+    consejo: '3: pregunta más, habla menos con el 7. 7: comparte tu mundo interior — el 3 genuinamente quiere entender.',
+    elementos: 'Fuego + Tierra'
+  },
+  '3-8': {
+    score_pareja: 72, score_negocios: 88,
+    titulo: 'El Creador y el Ejecutor — Impacto Visible',
+    descripcion_pareja: 'El 8 puede sentir que el 3 no es suficientemente serio; el 3 puede sentir que el 8 es demasiado rígido. Cuando aprenden a respetar los lenguajes del otro, el 3 da color a la vida del 8 y el 8 da estructura y seguridad al 3.',
+    descripcion_negocios: 'Potencia comercial alta. El 3 crea y comunica; el 8 monetiza y escala. Una de las mejores combinaciones para negocios creativos que quieren llegar a audiencias masivas y ser rentables al mismo tiempo.',
+    dinamica: 'El creativo y el empresario. Tensión productiva con gran potencial.',
+    consejo: 'En negocios: el 3 crea, el 8 decide sobre recursos. En pareja: aprecien lo que el otro aporta que ustedes no tienen.',
+    elementos: 'Fuego + Tierra'
+  },
+  '3-9': {
+    score_pareja: 84, score_negocios: 82,
+    titulo: 'El Artista y el Sabio — Creatividad con Propósito',
+    descripcion_pareja: 'El 3 trae alegría y el 9 trae profundidad. Juntos tienen el rango completo — de la fiesta a la meditación, del humor a la compasión. Se enriquecen mutuamente sin amenazarse.',
+    descripcion_negocios: 'Perfectos para negocios de impacto social con cara creativa. El 3 comunica la misión con alegría; el 9 la encarna con sabiduría. Combinación que construye marcas con alma.',
+    dinamica: 'Rica, equilibrada y con propósito. Una de las combinaciones más completas.',
+    consejo: 'Construyan algo que el mundo necesite y que ustedes amen. Su mejor versión aparece cuando hay una causa compartida.',
+    elementos: 'Fuego + Agua'
+  },
+  '4-4': {
+    score_pareja: 72, score_negocios: 80,
+    titulo: 'Dos Constructores — Solidez Extrema',
+    descripcion_pareja: 'Una relación de gran estabilidad y confianza mutua. Dos 4 se entienden en el valor del trabajo, la responsabilidad y el compromiso. El riesgo: pueden construir una vida tan estructurada que se vuelve rígida y sin espontaneidad. Necesitan inyectarse alegría conscientemente.',
+    descripcion_negocios: 'Sociedad muy sólida y confiable. Todo lo que construyen juntos dura. El riesgo es la excesiva cautela — pueden perder oportunidades por querer tener todo perfectamente analizado antes de actuar.',
+    dinamica: 'Estable, confiable y metódica. Necesita dosis de espontaneidad.',
+    consejo: 'Una vez al mes, hagan algo completamente impulsivo. Su mayor riesgo no es el caos — es la parálisis por análisis.',
+    elementos: 'Tierra + Tierra'
+  },
+  '4-5': {
+    score_pareja: 58, score_negocios: 68,
+    titulo: 'La Roca y el Viento — Tensión de Ritmos',
+    descripcion_pareja: 'El 4 necesita estructura y predictibilidad; el 5 necesita libertad y cambio. Esta es una de las tensiones más difíciles del sistema pero también una de las más transformadoras. El 4 aprende a soltar; el 5 aprende a comprometerse. Requiere mucha madurez de ambos.',
+    descripcion_negocios: 'El 4 construye los sistemas; el 5 explora nuevos mercados. Si respetan sus territorios, pueden ser complementarios. Si invaden el espacio del otro, el conflicto es inevitable.',
+    dinamica: 'Tensión fundamental entre necesidad de estabilidad y necesidad de libertad.',
+    consejo: '4: no puedes controlar al 5 — solo puedes crear un contexto tan valioso que él elija quedarse. 5: el compromiso no mata la libertad, la amplía.',
+    elementos: 'Tierra + Aire'
+  },
+  '4-6': {
+    score_pareja: 88, score_negocios: 82,
+    titulo: 'El Constructor y el Cuidador — Hogar Perfecto',
+    descripcion_pareja: 'Una de las combinaciones más armoniosas para construir familia y hogar. El 4 aporta la estructura y la seguridad material; el 6 aporta el calor, la belleza y el cuidado de las relaciones. Se complementan de manera natural y profunda.',
+    descripcion_negocios: 'El 4 construye los sistemas; el 6 cuida a los clientes y al equipo. Excelentes para negocios de servicios, salud, educación o cualquier empresa que requiera tanto operaciones sólidas como cultura organizacional excepcional.',
+    dinamica: 'Complemento natural. Uno construye el contenedor; el otro lo llena de vida.',
+    consejo: 'Su mayor riesgo no es la incompatibilidad sino el aburrimiento. Inyecten aventura conscientemente.',
+    elementos: 'Tierra + Tierra'
+  },
+  '4-7': {
+    score_pareja: 78, score_negocios: 82,
+    titulo: 'El Constructor y el Filósofo — Profundidad Práctica',
+    descripcion_pareja: 'Ambos valoran la profundidad, la calidad sobre la cantidad y el trabajo bien hecho. El 4 lo hace en el plano material; el 7 en el plano intelectual. Se respetan mutuamente aunque no siempre se entienden. Una relación de gran dignidad y poco ruido.',
+    descripcion_negocios: 'El 7 diseña la estrategia profunda; el 4 la ejecuta con disciplina. Una de las mejores combinaciones para negocios que requieren tanto análisis como implementación meticulosa: consultoría, tecnología, investigación aplicada.',
+    dinamica: 'Seria, profunda y respetuosa. Poca efusividad, mucha sustancia.',
+    consejo: '4: el 7 no necesita que hagas más — necesita que escuches mejor. 7: el 4 necesita ver el plan en papel, no solo en tu cabeza.',
+    elementos: 'Tierra + Tierra'
+  },
+  '4-8': {
+    score_pareja: 74, score_negocios: 90,
+    titulo: 'El Maestro Artesano y el CEO — Empresa Imparable',
+    descripcion_pareja: 'Dos personas de gran determinación que pueden chocar por el control o complementarse en la construcción de una vida extraordinaria. El 8 quiere poder; el 4 quiere perfección. Cuando uno cede el territorio del otro, la relación funciona con solidez.',
+    descripcion_negocios: 'La mejor combinación pura de negocios del sistema. El 4 construye los sistemas y procesos impecables; el 8 los monetiza y escala con agresividad estratégica. Juntos construyen empresas que compiten en ligas mayores.',
+    dinamica: 'Potente, disciplinada y orientada a resultados. El mejor dúo empresarial del sistema.',
+    consejo: 'En negocios: dejen los egos afuera y se vuelven invencibles. En pareja: recuerden que están del mismo lado.',
+    elementos: 'Tierra + Tierra'
+  },
+  '4-9': {
+    score_pareja: 76, score_negocios: 78,
+    titulo: 'El Constructor y el Humanista — Obra con Sentido',
+    descripcion_pareja: 'El 4 da estructura y seguridad; el 9 da sabiduría y compasión. El 4 puede volverse demasiado rígido y el 9 puede volverse demasiado idealista — juntos se balancean. El 4 aprende que construir también tiene un propósito mayor; el 9 aprende que las buenas intenciones necesitan estructura para materializarse.',
+    descripcion_negocios: 'El 4 construye la empresa con método; el 9 le da propósito y misión. Excelentes para empresas sociales, educación o negocios con impacto comunitario que también necesitan ser sostenibles.',
+    dinamica: 'Complemento de método y propósito. Lo que construyen tiene tanto solidez como sentido.',
+    consejo: 'Construyan algo que dure y que importe. Su combinación es rara — personas que pueden hacer las dos cosas a la vez.',
+    elementos: 'Tierra + Agua'
+  },
+  '5-5': {
+    score_pareja: 68, score_negocios: 62,
+    titulo: 'Doble Libertad — Brillante e Inestable',
+    descripcion_pareja: 'Dos 5 juntos son una explosión de vida, aventura y experiencias. El riesgo es que nadie ancla nada — ni el hogar, ni la relación, ni los proyectos. Si ambos han madurado y uno de los dos activa su lado más estable, pueden tener una vida extraordinariamente rica.',
+    descripcion_negocios: 'Capaces de generar negocios de manera espontánea y brillante. El problema es la consistencia — ambos se aburren de lo mismo al mismo tiempo. Necesitan estructura externa o socios más metódicos.',
+    dinamica: 'Aventurera y estimulante. Peligro de inestabilidad crónica.',
+    consejo: 'Elijan un ancla — una misión, un lugar, un proyecto — y comprométanse con ella aunque sea difícil. Sin ancla, su energía se dispersa.',
+    elementos: 'Aire + Aire'
+  },
+  '5-6': {
+    score_pareja: 65, score_negocios: 70,
+    titulo: 'La Libertad y el Hogar — Tensión Fundamental',
+    descripcion_pareja: 'El 6 quiere hogar, estabilidad y cuidado mutuo; el 5 quiere libertad, movimiento y aventura. Esta tensión puede ser insalvable o el punto de mayor crecimiento. El 5 aprende que el amor es también el mejor tipo de libertad; el 6 aprende que el amor no puede ser una jaula.',
+    descripcion_negocios: 'El 5 encuentra las oportunidades y los clientes; el 6 los cuida y retiene. Buenos para negocios de servicios si ambos respetan sus roles.',
+    dinamica: 'Tensión entre libertad y apego. Requiere mucha madurez y comunicación.',
+    consejo: '6: el amor que retiene no es amor. 5: el compromiso que no mata la libertad es el más poderoso que existe.',
+    elementos: 'Aire + Tierra'
+  },
+  '5-7': {
+    score_pareja: 70, score_negocios: 72,
+    titulo: 'El Explorador y el Buscador — Curiosidad Compartida',
+    descripcion_pareja: 'Ambos tienen una mente inquieta y una necesidad de ir más allá de lo superficial. El 5 explora en el mundo exterior; el 7 explora en el mundo interior. Pueden ser compañeros de viaje extraordinarios si aprenden a moverse juntos sin que el ritmo del uno agobie al otro.',
+    descripcion_negocios: 'Buenos para negocios de investigación, consultoría o innovación. El 5 explora el mercado y las tendencias; el 7 analiza en profundidad y desarrolla la estrategia.',
+    dinamica: 'Intelectualmente estimulante. Dos buscadores que se reconocen mutuamente.',
+    consejo: 'Construyan algo juntos que explore territorio nuevo. Su mayor activo compartido es la curiosidad.',
+    elementos: 'Aire + Tierra'
+  },
+  '5-8': {
+    score_pareja: 68, score_negocios: 82,
+    titulo: 'El Aventurero y el Ejecutivo — Expansión y Resultados',
+    descripcion_pareja: 'El 8 puede sentir que el 5 es demasiado inconstante; el 5 puede sentir que el 8 es demasiado controlador. Cuando el 8 aprende a dar libertad y el 5 aprende a comprometerse, crean una relación de gran dinamismo.',
+    descripcion_negocios: 'El 5 explora nuevos mercados y el 8 los monetiza. Excelentes para negocios de expansión, ventas y desarrollo de nuevos territorios. El 8 da la estructura financiera que el 5 necesita para que sus ideas despeguen.',
+    dinamica: 'Energía de expansión y manifestación. Potente en negocios cuando hay reglas claras.',
+    consejo: '8: suelta el control sobre el proceso del 5 — solo exige resultados. 5: entrega resultados y tendrás toda la libertad que necesitas.',
+    elementos: 'Aire + Tierra'
+  },
+  '5-9': {
+    score_pareja: 76, score_negocios: 74,
+    titulo: 'El Libertador y el Humanista — Expansión con Propósito',
+    descripcion_pareja: 'El 5 da movimiento y aventura; el 9 da profundidad y propósito. El 9 puede anclar al 5 en algo que valga la pena; el 5 puede enseñarle al 9 que el servicio también puede ser divertido y expansivo.',
+    descripcion_negocios: 'Buenos para organizaciones con misión social que necesitan tanto adaptabilidad como profundidad. El 5 abre nuevos caminos; el 9 mantiene la coherencia con el propósito original.',
+    dinamica: 'Expansiva y con propósito. El movimiento del 5 encuentra sentido en la sabiduría del 9.',
+    consejo: 'Encuentren una misión que los mueva a ambos. El 5 necesita moverse y el 9 necesita que ese movimiento importe.',
+    elementos: 'Aire + Agua'
+  },
+  '6-6': {
+    score_pareja: 82, score_negocios: 70,
+    titulo: 'Doble Amor — Cuidado Mutuo Total',
+    descripcion_pareja: 'Una relación de gran calidez, cuidado y armonía. Dos 6 crean el hogar más acogedor del sistema. El riesgo es la codependencia y el autosacrificio mutuo — ambos dan tanto que ninguno sabe recibir. También pueden caer en el perfeccionismo relacional.',
+    descripcion_negocios: 'Extraordinarios para negocios de bienestar, salud, educación y servicio. El riesgo es que ninguno quiere tener las conversaciones difíciles de negocios. Necesitan alguien con números duros que les ayude a tomar decisiones basadas en datos.',
+    dinamica: 'Profundamente amorosa y cuidadora. El riesgo es perderse en el otro.',
+    consejo: 'Mantengan individualidad dentro de la unión. El amor que no incluye el yo propio puede convertirse en dependencia.',
+    elementos: 'Tierra + Tierra'
+  },
+  '6-7': {
+    score_pareja: 72, score_negocios: 70,
+    titulo: 'El Cuidador y el Filósofo — Amor Profundo',
+    descripcion_pareja: 'El 6 necesita cercanía; el 7 necesita soledad. Esta tensión es real pero manejable. El 6 puede ser el hogar seguro desde el que el 7 se atreve a explorar; el 7 puede enseñarle al 6 que la profundidad de la relación importa más que su frecuencia.',
+    descripcion_negocios: 'El 6 cuida las relaciones y el equipo; el 7 diseña la estrategia en profundidad. Buenos para organizaciones de alto contenido que también necesitan cultura organizacional cálida.',
+    dinamica: 'El cuidado del 6 crea el espacio de seguridad desde el que el 7 puede pensar en profundidad.',
+    consejo: '6: dale al 7 el espacio que necesita sin interpretarlo como abandono. 7: el 6 necesita saber que importa — díselo explícitamente.',
+    elementos: 'Tierra + Tierra'
+  },
+  '6-8': {
+    score_pareja: 75, score_negocios: 84,
+    titulo: 'El Cuidador y el Poder — Abundancia con Corazón',
+    descripcion_pareja: 'El 8 puede darle al 6 la seguridad material que valora; el 6 puede enseñarle al 8 que el poder sin amor es vacío. Cuando el 8 aprende a cuidar y el 6 aprende a recibir poder, crean una relación de gran riqueza en todos los sentidos.',
+    descripcion_negocios: 'El 8 pone el poder de manifestación; el 6 asegura que la empresa tenga alma. Buenos para empresas que quieren ser tanto rentables como admiradas por su cultura y valores.',
+    dinamica: 'El poder del 8 con el corazón del 6. Abundancia y cuidado simultáneos.',
+    consejo: '8: tu empresa más rentable a largo plazo es la que la gente quiere apoyar. El 6 te enseña cómo lograrlo. 6: no tienes que elegir entre amor y éxito.',
+    elementos: 'Tierra + Tierra'
+  },
+  '6-9': {
+    score_pareja: 90, score_negocios: 78,
+    titulo: 'Amor Universal — La Pareja del Servicio',
+    descripcion_pareja: 'Una de las combinaciones más hermosas del sistema. Ambos tienen el corazón abierto, aman servir y encuentran sentido en el cuidado de otros. El 6 cuida el hogar y las personas cercanas; el 9 cuida la humanidad. Juntos crean un amor que trasciende.',
+    descripcion_negocios: 'Extraordinarios para empresas con propósito social, ONG, salud o educación. La combinación del cuidado del 6 y la sabiduría del 9 produce organizaciones que la gente quiere apoyar porque se siente que vienen del corazón.',
+    dinamica: 'Profundamente amorosa, compasiva y orientada al servicio. Una de las más bellas.',
+    consejo: 'Su mayor riesgo es dar tanto que se agotan. Pongan límites no como defensa sino como condición para poder seguir dando.',
+    elementos: 'Tierra + Agua'
+  },
+  '7-7': {
+    score_pareja: 75, score_negocios: 72,
+    titulo: 'Dos Filósofos — Profundidad Abismal',
+    descripcion_pareja: 'Una relación de gran profundidad intelectual y espiritual. Dos 7 se entienden sin necesitar explicar demasiado. El riesgo: ambos necesitan soledad y pueden terminar en una relación de gran respeto mutuo pero poca intimidad emocional.',
+    descripcion_negocios: 'Extraordinarios para investigación, consultoría estratégica y análisis. El problema: ninguno quiere vender ni relacionarse con clientes. Necesitan alguien que sea la cara del negocio.',
+    dinamica: 'Profunda, silenciosa y respetuosa. Necesitan recordar que la intimidad también requiere presencia.',
+    consejo: 'Salgan de sus cabezas de vez en cuando. El cuerpo, el corazón y la presencia también son parte de una relación.',
+    elementos: 'Tierra + Tierra'
+  },
+  '7-8': {
+    score_pareja: 68, score_negocios: 85,
+    titulo: 'El Estratega y el CEO — Inteligencia Ejecutiva',
+    descripcion_pareja: 'El 8 puede sentir que el 7 es demasiado lento o teórico; el 7 puede sentir que el 8 actúa sin suficiente reflexión. Cuando se respetan, el 7 da la profundidad que el 8 necesita para tomar decisiones correctas y el 8 da la acción que el 7 necesita para que su sabiduría se materialice.',
+    descripcion_negocios: 'Una de las mejores combinaciones para consultoría, tecnología o cualquier negocio que requiera tanto análisis profundo como capacidad de ejecución en grandes ligas. El 7 piensa; el 8 actúa — y los resultados son poderosos.',
+    dinamica: 'El cerebro y el músculo. Potente en negocios cuando hay respeto mutuo.',
+    consejo: '7: confía en el instinto del 8 aunque no tenga toda la evidencia. 8: escucha el análisis del 7 antes de actuar — te evitará errores costosos.',
+    elementos: 'Tierra + Tierra'
+  },
+  '7-9': {
+    score_pareja: 80, score_negocios: 76,
+    titulo: 'La Sabiduría y la Compasión — Profundidad Total',
+    descripcion_pareja: 'Dos almas viejas que se reconocen. El 7 busca la verdad; el 9 sirve a la humanidad — ambos operan en las capas más profundas de la experiencia humana. Se respetan, se comprenden y comparten un lenguaje de profundidad que pocos pueden alcanzar.',
+    descripcion_negocios: 'Excelentes para organizaciones de conocimiento, filosofía aplicada, educación profunda o consultoría estratégica con propósito. La combinación de análisis y sabiduría es difícilmente igualable.',
+    dinamica: 'Profunda, sabia y compasiva. Dos almas que operan en la misma frecuencia.',
+    consejo: 'No se olviden de bajar al mundo práctico de vez en cuando. Su mayor riesgo es la desconexión de lo cotidiano.',
+    elementos: 'Tierra + Agua'
+  },
+  '8-8': {
+    score_pareja: 65, score_negocios: 78,
+    titulo: 'Doble Poder — Choque o Imperio',
+    descripcion_pareja: 'Dos de los seres más poderosos del sistema juntos. O construyen un imperio o se destruyen mutuamente. La batalla de egos entre dos 8 puede ser legendaria. Cuando ambos maduran y deciden cooperar, son literalmente imparables.',
+    descripcion_negocios: 'Alto potencial y alto riesgo. Pueden construir empresas extraordinarias si definen territorios claros. El problema es el conflicto de autoridad — dos 8 no pueden ser CEOs del mismo negocio sin reglas muy claras.',
+    dinamica: 'Explosiva. O el dúo más poderoso del sistema o el más destructivo. No hay término medio.',
+    consejo: 'Definan territorios claros y no los invadan. El respeto mutuo no se asume — se construye conscientemente cada día.',
+    elementos: 'Tierra + Tierra'
+  },
+  '8-9': {
+    score_pareja: 72, score_negocios: 80,
+    titulo: 'El Poder y la Sabiduría — Legado',
+    descripcion_pareja: 'El 8 aporta poder de manifestación; el 9 aporta sabiduría y propósito. El 9 puede enseñarle al 8 que el poder al servicio de algo mayor es más satisfactorio que el poder por el poder. El 8 puede enseñarle al 9 que las buenas intenciones necesitan poder real para materializarse.',
+    descripcion_negocios: 'Combinación poderosa para empresas con propósito. El 8 asegura que la empresa sea financieramente sólida; el 9 asegura que la empresa tenga misión y legado. Construyen organizaciones que trascienden a sus fundadores.',
+    dinamica: 'El poder al servicio de la sabiduría. Una de las combinaciones más maduras.',
+    consejo: 'Construyan algo que trascienda a los dos. Su legado compartido es más valioso que cualquier logro individual.',
+    elementos: 'Tierra + Agua'
+  },
+  '9-9': {
+    score_pareja: 82, score_negocios: 68,
+    titulo: 'Dos Humanistas — Amor Universal',
+    descripcion_pareja: 'Una relación de gran compasión, sabiduría compartida y servicio mutuo. Dos 9 se entienden en los niveles más profundos de la experiencia humana. El riesgo: ambos pueden ser tan desapegados que la relación se vuelve más filosófica que íntima.',
+    descripcion_negocios: 'Extraordinarios para organizaciones sociales y educativas. El problema en negocios convencionales: ambos son mejores dando que recibiendo, lo que puede hacer difícil la rentabilidad. Necesitan apoyo en la parte financiera y comercial.',
+    dinamica: 'Profunda, sabia y orientada al servicio. Necesita recordar que también merecen recibir.',
+    consejo: 'El mundo necesita vuestra sabiduría — pero necesitan que sean sostenibles para poder darlela. Aprendan a recibir con la misma gracia con que dan.',
+    elementos: 'Agua + Agua'
+  }
+};
+
+// Compatibilidad de elementos
+const COMPAT_ELEMENTOS = {
+  'Fuego-Fuego':   { score: 82, desc: 'Gran química y energía compartida. El riesgo es que se consuman mutuamente.' },
+  'Fuego-Tierra':  { score: 72, desc: 'El fuego da calor a la tierra; la tierra da estructura al fuego. Complemento con tensión.' },
+  'Fuego-Aire':    { score: 80, desc: 'El aire aviva el fuego. Gran estimulación mutua y expansión compartida.' },
+  'Fuego-Agua':    { score: 62, desc: 'Tensión fundamental pero transformadora. El agua puede apagar el fuego o crear vapor.' },
+  'Tierra-Tierra': { score: 78, desc: 'Gran estabilidad y valores compartidos. El riesgo es la rigidez y la falta de cambio.' },
+  'Tierra-Aire':   { score: 65, desc: 'Mundos distintos. El aire puede frustrar a la tierra con su inconstancia.' },
+  'Tierra-Agua':   { score: 84, desc: 'El agua nutre a la tierra. Gran complementariedad emocional y práctica.' },
+  'Aire-Aire':     { score: 76, desc: 'Gran estimulación intelectual. El riesgo es la falta de anclaje en lo práctico.' },
+  'Aire-Agua':     { score: 70, desc: 'Complemento de mente y corazón. El agua puede profundizar al aire; el aire puede dar perspectiva al agua.' },
+  'Agua-Agua':     { score: 80, desc: 'Gran profundidad emocional e intuición compartida. El riesgo es la codependencia.' },
+};
+
+// Score de años personales (qué tan alineados están sus ciclos)
+const COMPAT_ANIOS = {
+  0: { score: 92, desc: 'En el mismo ciclo exacto — sintonía perfecta de ritmos vitales.' },
+  1: { score: 80, desc: 'Ciclos muy cercanos — se entienden en la energía del momento.' },
+  2: { score: 68, desc: 'Ritmos diferentes pero no opuestos — se complementan.' },
+  3: { score: 55, desc: 'Ciclos bastante distintos — requiere más esfuerzo de comprensión mutua.' },
+  4: { score: 45, desc: 'Ciclos muy distintos — están en momentos de vida muy diferentes.' },
+};
+
+// ══════════════════════════════════════════════════════
+// MOTOR DE COMPATIBILIDAD
+// ══════════════════════════════════════════════════════
+
+function getCompatCDV(cdvA, cdvB) {
+  // Normalizar maestros a sus equivalentes base para lookup
+  const norm = n => { if (n === 11) return 2; if (n === 22) return 4; if (n === 33) return 6; return n; };
+  const a = norm(cdvA), b = norm(cdvB);
+  const key1 = Math.min(a,b) + '-' + Math.max(a,b);
+  return COMPAT_CDV[key1] || COMPAT_CDV['1-1'];
+}
+
+function getCompatElementos(elemA, elemB) {
+  const key1 = elemA + '-' + elemB;
+  const key2 = elemB + '-' + elemA;
+  return COMPAT_ELEMENTOS[key1] || COMPAT_ELEMENTOS[key2] || { score: 70, desc: 'Elementos distintos con potencial de complemento.' };
+}
+
+function getCompatAnios(apA, apB) {
+  const diff = Math.min(Math.abs(apA - apB), 9 - Math.abs(apA - apB));
+  const clamped = Math.min(diff, 4);
+  return COMPAT_ANIOS[clamped];
+}
+
+// Score biorritmo para UN DÍA — promedio de los 5 ciclos de AMBAS personas
+// Pesa positivo cuando ambos están en el mismo cuadrante
+function scoreDiaBio(diasA, diasB, proposito) {
+  const ciclos = [
+    { k: 'fisico',      p: 23, peso: { pareja:0.15, negocios:0.25, reunion:0.20, decision:0.10 } },
+    { k: 'emocional',   p: 28, peso: { pareja:0.35, negocios:0.15, reunion:0.20, decision:0.20 } },
+    { k: 'intelectual', p: 33, peso: { pareja:0.15, negocios:0.30, reunion:0.25, decision:0.35 } },
+    { k: 'intuitivo',   p: 38, peso: { pareja:0.20, negocios:0.15, reunion:0.15, decision:0.25 } },
+    { k: 'espiritual',  p: 53, peso: { pareja:0.15, negocios:0.15, reunion:0.20, decision:0.10 } },
+  ];
+
+  let scoreTotal = 0;
+  const coincidentes = [];
+
+  for (const c of ciclos) {
+    const valA = Math.sin(2 * Math.PI * diasA / c.p);
+    const valB = Math.sin(2 * Math.PI * diasB / c.p);
+    // Score de coincidencia: máximo cuando ambos en el mismo cuadrante y alto
+    const promedio = (valA + valB) / 2;
+    const sincronia = 1 - Math.abs(valA - valB) / 2; // 1 = perfecta sincronia, 0 = opuestos
+    const scoreC = (promedio + 1) / 2 * sincronia; // 0 a 1
+    const peso = c.peso[proposito] || 0.2;
+    scoreTotal += scoreC * peso;
+
+    // Marcar ciclos coincidentes altos
+    if (sincronia > 0.7 && promedio > 0.3) {
+      coincidentes.push({ k: c.k, val: Math.round(promedio * 100) });
+    }
+  }
+
+  return { score: Math.round(scoreTotal * 100), coincidentes };
+}
+
+// Etiqueta del score
+function etiquetaScore(s) {
+  if (s >= 85) return { label: 'Excepcional', color: '#70e8cc', clase: 'alta' };
+  if (s >= 72) return { label: 'Alta',         color: '#b0e870', clase: 'alta' };
+  if (s >= 58) return { label: 'Moderada',     color: '#f0d060', clase: 'media' };
+  if (s >= 44) return { label: 'Compleja',     color: '#e8a060', clase: 'media' };
+  return              { label: 'Desafiante',   color: '#e87878', clase: 'baja' };
+}
+
+// Mejor contexto para el día según scores por ciclo
+function mejorParaDia(coincidentes, scoreTotal) {
+  if (scoreTotal < 40) return '⚠ Cautela — evitar decisiones importantes';
+  const names = coincidentes.map(c => ({
+    fisico: 'Actividad física', emocional: 'Conversación profunda',
+    intelectual: 'Negociación', intuitivo: 'Decisión estratégica',
+    espiritual: 'Visión compartida'
+  })[c.k]).filter(Boolean);
+  if (names.length === 0) return 'Día neutro — interacción normal';
+  return names.slice(0, 2).join(' · ');
+}
+
+const BIO_COLORES = {
+  fisico:'#E94B4B', emocional:'#E9A84B', intelectual:'#5B9BD5',
+  intuitivo:'#A84BE9', espiritual:'#4BE9B9'
+};
+const BIO_NOMBRES = {
+  fisico:'Físico', emocional:'Emocional', intelectual:'Intelectual',
+  intuitivo:'Intuitivo', espiritual:'Espiritual'
+};
+
+// Generar calendario de los próximos N días
+function generarCalendario(perfilA, perfilB, dias, proposito) {
+  const hoy = new Date();
+  const resultado = [];
+  for (let offset = 0; offset < dias; offset++) {
+    const fecha = new Date(hoy);
+    fecha.setDate(hoy.getDate() + offset);
+    const diasVivA = diasEntreFechas(perfilA.meta.fechaNacimiento.dia, perfilA.meta.fechaNacimiento.mes, perfilA.meta.fechaNacimiento.anio,
+      fecha.getDate(), fecha.getMonth()+1, fecha.getFullYear());
+    const diasVivB = diasEntreFechas(perfilB.meta.fechaNacimiento.dia, perfilB.meta.fechaNacimiento.mes, perfilB.meta.fechaNacimiento.anio,
+      fecha.getDate(), fecha.getMonth()+1, fecha.getFullYear());
+    const bio = scoreDiaBio(diasVivA, diasVivB, proposito);
+    resultado.push({ fecha, offset, ...bio, mejor: mejorParaDia(bio.coincidentes, bio.score) });
+  }
+  return resultado;
+}
+
+// ══════════════════════════════════════════════════════
+// ESTADO GLOBAL
+// ══════════════════════════════════════════════════════
+let _perfilA = null, _perfilB = null, _calendario = null, _proposito = 'pareja', _compatData = null;
+
+// ══════════════════════════════════════════════════════
+// PROPÓSITO
+// ══════════════════════════════════════════════════════
+function setProp(btn) {
+  document.querySelectorAll('.prop-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  _proposito = btn.dataset.prop;
+}
+
+// ══════════════════════════════════════════════════════
+// CALCULAR
+// ══════════════════════════════════════════════════════
+function calcularCompatibilidad() {
+  const aNombre = document.getElementById('aNombre').value.trim();
+  const aDia = parseInt(document.getElementById('aDia').value);
+  const aMes = parseInt(document.getElementById('aMes').value);
+  const aAnio = parseInt(document.getElementById('aAnio').value);
+  const bNombre = document.getElementById('bNombre').value.trim();
+  const bDia = parseInt(document.getElementById('bDia').value);
+  const bMes = parseInt(document.getElementById('bMes').value);
+  const bAnio = parseInt(document.getElementById('bAnio').value);
+
+  if (!aNombre || !bNombre) { alert('Ingresa los nombres completos de ambas personas.'); return; }
+  if (!aDia||!aMes||!aAnio||!bDia||!bMes||!bAnio) { alert('Ingresa las fechas de nacimiento completas.'); return; }
+
+  document.getElementById('formPanel2').classList.remove('visible');
+  document.getElementById('loadingC').classList.add('visible');
+
+  const msgs = [
+    'Analizando las frecuencias de ambas almas…',
+    'Calculando los caminos de vida…',
+    'Cruzando los biorritmos de los próximos 15 días…',
+    'Evaluando la compatibilidad numerológica…',
+    'Preparando el calendario de alineación…',
+  ];
+  let mi = 0;
+  const iv = setInterval(() => {
+    const el = document.getElementById('loadMsgC');
+    if (el) el.textContent = msgs[++mi % msgs.length];
+  }, 500);
+
+  setTimeout(() => {
+    clearInterval(iv);
+    try {
+      _perfilA = generarLecturaArmonica(aNombre, aDia, aMes, aAnio);
+      _perfilB = generarLecturaArmonica(bNombre, bDia, bMes, bAnio);
+
+      const numA = _perfilA.numerologia.caminoDeVida.valor;
+      const numB = _perfilB.numerologia.caminoDeVida.valor;
+      const compatCDV = getCompatCDV(numA, numB);
+      const compatElem = getCompatElementos(_perfilA.astrologia.solar.elemento, _perfilB.astrologia.solar.elemento);
+      const compatAnio = getCompatAnios(_perfilA.numerologia.anioPersonal.valor, _perfilB.numerologia.anioPersonal.valor);
+
+      // Bio hoy
+      const bioHoyA = Object.values(_perfilA.bioritmo.ciclos);
+      const bioHoyB = Object.values(_perfilB.bioritmo.ciclos);
+      const scoreBioHoy = scoreDiaBio(_perfilA.bioritmo.diasVividos, _perfilB.bioritmo.diasVividos, _proposito);
+
+      // Score global ponderado
+      const scoreCDV = _proposito === 'pareja' ? compatCDV.score_pareja : compatCDV.score_negocios;
+      const scoreGlobal = Math.round(
+        scoreCDV      * 0.35 +
+        compatElem.score * 0.20 +
+        compatAnio.score * 0.15 +
+        scoreBioHoy.score * 0.30
+      );
+
+      _compatData = { compatCDV, compatElem, compatAnio, scoreCDV, scoreGlobal, scoreBioHoy };
+      _calendario = generarCalendario(_perfilA, _perfilB, 15, _proposito);
+
+      renderReporte();
+      document.getElementById('loadingC').classList.remove('visible');
+      document.getElementById('reporte').classList.add('visible');
+      document.getElementById('reporte').scrollIntoView({ behavior:'smooth', block:'start' });
+    } catch(e) {
+      clearInterval(iv);
+      document.getElementById('loadingC').classList.remove('visible');
+      document.getElementById('formPanel2').classList.add('visible');
+      alert('Error: ' + e.message);
+    }
+  }, 2000);
+}
+
+// ══════════════════════════════════════════════════════
+// RENDER REPORTE
+// ══════════════════════════════════════════════════════
+function renderReporte() {
+  const A = _perfilA, B = _perfilB;
+  const { compatCDV, compatElem, compatAnio, scoreCDV, scoreGlobal, scoreBioHoy } = _compatData;
+  const etq = etiquetaScore(scoreGlobal);
+
+  // Nombres
+  const nA = A.meta.nombre.split(' ')[0];
+  const nB = B.meta.nombre.split(' ')[0];
+  document.getElementById('rptNombreA').textContent = nA;
+  document.getElementById('rptNombreB').textContent = nB;
+
+  // Score ring
+  document.getElementById('rptScoreNum').textContent = scoreGlobal;
+  document.getElementById('rptScoreNum').style.color = etq.color;
+  const arc = document.getElementById('scoreArc');
+  arc.style.stroke = etq.color;
+  setTimeout(() => {
+    const offset = 427 * (1 - scoreGlobal / 100);
+    arc.style.strokeDashoffset = offset;
+  }, 100);
+
+  // Labels
+  const propLabels = { pareja:'Compatibilidad de Pareja', negocios:'Compatibilidad de Negocios',
+    reunion:'Alineación para Reunión', decision:'Alineación para Decisión' };
+  document.getElementById('rptPropLabel').textContent = propLabels[_proposito] || 'Compatibilidad';
+  document.getElementById('rptTitulo').textContent = compatCDV.titulo;
+  document.getElementById('rptDinamica').textContent = compatCDV.dinamica;
+
+  // Desglose
+  const desglose = [
+    { label: 'Números de Vida', sublabel: `CDV ${A.numerologia.caminoDeVida.valor} × ${B.numerologia.caminoDeVida.valor}`, score: scoreCDV, desc: '', color: '#c980ff' },
+    { label: 'Elementos Astrológicos', sublabel: `${A.astrologia.solar.elemento} × ${B.astrologia.solar.elemento}`, score: compatElem.score, desc: compatElem.desc, color: '#e9a84b' },
+    { label: 'Ciclos Anuales', sublabel: `Año Personal ${A.numerologia.anioPersonal.valor} × ${B.numerologia.anioPersonal.valor}`, score: compatAnio.score, desc: compatAnio.desc, color: '#78c0f0' },
+    { label: 'Biorritmo Hoy', sublabel: `Coincidencia de energías hoy`, score: scoreBioHoy.score, desc: '', color: '#70e8cc' },
+  ];
+  document.getElementById('rptDetails').innerHTML = desglose.map(d => `
+    <div class="detail-card">
+      <div class="dc-label">${d.label}</div>
+      <div class="dc-val" style="color:${d.color}">${d.sublabel}</div>
+      <div class="dc-bar"><div class="dc-fill" style="width:${d.score}%;background:${d.color}"></div></div>
+      <div style="font-family:'Cinzel',serif;font-size:1.1rem;color:${d.color};margin-bottom:4px">${d.score}%</div>
+      ${d.desc ? `<div class="dc-desc">${d.desc}</div>` : ''}
+    </div>`).join('');
+
+  // Descripción compatible
+  const desc = _proposito === 'pareja' ? compatCDV.descripcion_pareja : compatCDV.descripcion_negocios;
+  document.getElementById('rptCompatHeader').textContent =
+    `Análisis de Compatibilidad — ${compatCDV.titulo}`;
+  document.getElementById('rptCompatDesc').textContent = desc;
+  document.getElementById('rptConsejo').innerHTML =
+    `<strong>💡 Consejo:</strong> ${compatCDV.consejo}`;
+
+  // Perfiles
+  function renderProfile(el, p, cls, col) {
+    const N = p.numerologia, As = p.astrologia;
+    el.innerHTML = `<div class="prof-nombre ${cls}">${p.meta.nombre}</div>
+      ${[
+        ['Signo Solar', As.solar.emoji + ' ' + As.solar.nombre],
+        ['Camino de Vida', N.caminoDeVida.valor + (N.caminoDeVida.esMaestro?' ✨':'')],
+        ['Elemento', As.solar.elemento],
+        ['Año Personal', N.anioPersonal.valor],
+        ['Luna', As.lunar.signo.nombre],
+        ['Arcano del Alma', p.bioritmo ? '': ''],
+      ].map(([k,v]) => v ? `<div class="prof-row"><span class="prof-key">${k}</span><span class="prof-val">${v}</span></div>` : '').join('')}`;
+  }
+  renderProfile(document.getElementById('profileA'), A, 'pa', '#c980ff');
+  renderProfile(document.getElementById('profileB'), B, 'pb', '#70e8cc');
+
+  // Bio compare
+  const ciclosKeys = ['fisico','emocional','intelectual','intuitivo','espiritual'];
+  const bA = A.bioritmo.ciclos;
+  const bB = B.bioritmo.ciclos;
+  document.getElementById('bioCompareGrid').innerHTML = ciclosKeys.map(k => {
+    const ca = bA[k], cb = bB[k];
+    const col = BIO_COLORES[k];
+    const fillA = Math.round((ca.porcentaje + 100) / 2);
+    const fillB = Math.round((cb.porcentaje + 100) / 2);
+    return `<div class="bcc-card">
+      <div class="bcc-name">${BIO_NOMBRES[k]}</div>
+      <div class="bcc-bars">
+        <div class="bcc-bar-row">
+          <span class="bcc-bar-label" style="color:var(--persona-a)">A</span>
+          <div class="bcc-bar-wrap"><div class="bcc-bar-fill" style="width:${fillA}%;background:${col}"></div></div>
+          <span class="bcc-pct" style="color:${col}">${ca.porcentaje>0?'+':''}${ca.porcentaje}%</span>
+        </div>
+        <div class="bcc-bar-row">
+          <span class="bcc-bar-label" style="color:var(--persona-b)">B</span>
+          <div class="bcc-bar-wrap"><div class="bcc-bar-fill" style="width:${fillB}%;background:${col};opacity:.7"></div></div>
+          <span class="bcc-pct" style="color:${col};opacity:.8">${cb.porcentaje>0?'+':''}${cb.porcentaje}%</span>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+
+  // Calendario
+  renderCalendario('todos');
+}
+
+// ══════════════════════════════════════════════════════
+// CALENDARIO
+// ══════════════════════════════════════════════════════
+function filtrarCal(tab) {
+  document.querySelectorAll('.cal-tab').forEach(t => t.classList.remove('active'));
+  tab.classList.add('active');
+  renderCalendario(tab.dataset.filtro);
+}
+
+function renderCalendario(filtro) {
+  if (!_calendario) return;
+  const dias = ['Dom','Lun','Mar','Mié','Jue','Vie','Sáb'];
+  const meses = ['','Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'];
+
+  // Filtros por propósito
+  const filtrosMin = { todos: 0, pareja: 55, negocios: 55, decision: 60 };
+  const minScore = filtrosMin[filtro] || 0;
+
+  const ordenado = [..._calendario].sort((a,b) => b.score - a.score);
+  const optimo = ordenado[0];
+
+  const rows = _calendario.map(d => {
+    const etq = etiquetaScore(d.score);
+    const esOptimo = d.fecha.toDateString() === optimo.fecha.toDateString();
+    const ciclosStr = d.coincidentes.length > 0
+      ? d.coincidentes.map(c => `<span class="ciclo-dot" style="background:${BIO_COLORES[c.k]}"></span>${BIO_NOMBRES[c.k]}`).join(' ')
+      : '—';
+    const fechaStr = `${dias[d.fecha.getDay()]} ${d.fecha.getDate()} ${meses[d.fecha.getMonth()+1]}`;
+
+    return `<tr class="${esOptimo?'cal-row-optimo':''}" data-score="${d.score}" data-tipo="${d.mejor}">
+      <td class="fecha-cell">${fechaStr} ${d.offset===0?'<span style="font-size:.65rem;color:var(--a);letter-spacing:.1em">HOY</span>':''}</td>
+      <td><span class="score-chip ${etq.clase}">${d.score}%</span> ${esOptimo?'<span class="optimo-badge">ÓPTIMO</span>':''}</td>
+      <td class="mejor-para">${d.mejor}</td>
+      <td class="ciclos-cell">${ciclosStr}</td>
+    </tr>`;
+  }).join('');
+
+  document.getElementById('calBody').innerHTML = rows;
+}
+
+// ══════════════════════════════════════════════════════
+// DESCARGA VISUAL
+// ══════════════════════════════════════════════════════
+function descargarVisual() {
+  if (!_perfilA || !_perfilB || !_compatData) { return; }
+  const { compatCDV, scoreGlobal, scoreBioHoy } = _compatData;
+  const etq = etiquetaScore(scoreGlobal);
+  const A = _perfilA, B = _perfilB;
+  const nA = A.meta.nombre.split(' ')[0], nB = B.meta.nombre.split(' ')[0];
+  const dias = ['Dom','Lun','Mar','Mié','Jue','Vie','Sáb'];
+  const meses = ['','Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'];
+  const propLabels = { pareja:'Compatibilidad de Pareja', negocios:'Compatibilidad de Negocios',
+    reunion:'Alineación para Reunión', decision:'Alineación para Decisión' };
+
+  const calRows = _calendario.map(d => {
+    const etqD = etiquetaScore(d.score);
+    const ordenado = [..._calendario].sort((a,b)=>b.score-a.score);
+    const esOpt = d.fecha.toDateString() === ordenado[0].fecha.toDateString();
+    const ciclosStr = d.coincidentes.map(c => BIO_NOMBRES[c.k]).join(', ') || '—';
+    return `<tr style="background:${esOpt?'rgba(200,128,255,0.06)':''}">
+      <td style="padding:9px 14px;border-bottom:1px solid rgba(200,128,255,0.1);font-family:Cinzel,serif;font-size:.82rem;color:#f4eeff">
+        ${dias[d.fecha.getDay()]} ${d.fecha.getDate()} ${meses[d.fecha.getMonth()+1]}
+        ${d.offset===0?'<span style="font-size:.6rem;color:#c980ff;letter-spacing:.1em"> HOY</span>':''}
+      </td>
+      <td style="padding:9px 14px;border-bottom:1px solid rgba(200,128,255,0.1)">
+        <span style="background:${etqD.clase==='alta'?'rgba(112,232,204,0.15)':etqD.clase==='media'?'rgba(240,208,96,0.15)':'rgba(232,120,120,0.15)'};
+          color:${etqD.color};padding:3px 10px;border-radius:20px;font-family:Cinzel,serif;font-size:.75rem">
+          ${d.score}% ${esOpt?'⭐ ÓPTIMO':''}
+        </span>
+      </td>
+      <td style="padding:9px 14px;border-bottom:1px solid rgba(200,128,255,0.1);font-size:.8rem;color:#c0a8e0">${d.mejor}</td>
+      <td style="padding:9px 14px;border-bottom:1px solid rgba(200,128,255,0.1);font-size:.75rem;color:#7060a0">${ciclosStr}</td>
+    </tr>`;
+  }).join('');
+
+  const html = `<!DOCTYPE html><html lang="es"><head><meta charset="UTF-8">
+<title>Compatibilidad ${nA} & ${nB}</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Cinzel:wght@400;600;700&family=Raleway:wght@300;400;500&display=swap" rel="stylesheet">
+<style>*{box-sizing:border-box;margin:0;padding:0}body{background:#080512;color:#f4eeff;font-family:Raleway,sans-serif;max-width:820px;margin:0 auto;padding:32px 24px 60px}
+.cover{text-align:center;padding:60px 24px 48px;background:radial-gradient(ellipse at 50% 30%,rgba(140,60,255,0.12),transparent 60%);border-radius:16px;margin-bottom:4px}
+.yin-yang{font-size:3.5rem;margin-bottom:20px;filter:drop-shadow(0 0 20px rgba(200,128,255,0.5))}
+.cover-eye{font-family:Cinzel,serif;font-size:.65rem;letter-spacing:.5em;color:#f0d060;text-transform:uppercase;margin-bottom:16px}
+.nombres{font-family:Cinzel,serif;font-size:clamp(1.6rem,4vw,2.4rem);font-weight:700;margin-bottom:8px}
+.nombre-a{color:#c980ff}.nombre-b{color:#70e8cc}
+.score-big{font-family:Cinzel,serif;font-size:5rem;font-weight:700;line-height:1;color:${etq.color};margin:20px 0 4px}
+.etiqueta{font-family:Cinzel,serif;font-size:.7rem;letter-spacing:.4em;color:rgba(200,128,255,0.5);text-transform:uppercase;margin-bottom:10px}
+.titulo-compat{font-family:Cormorant Garamond,serif;font-size:1.4rem;color:#f4eeff;margin-bottom:6px}
+.dinamica{font-family:Cormorant Garamond,serif;font-size:.95rem;color:#c0a8e0;font-style:italic}
+.section{background:#1c1438;border:1px solid rgba(200,128,255,0.15);border-radius:14px;padding:22px;margin-bottom:4px}
+.section-title{font-family:Cinzel,serif;font-size:.7rem;letter-spacing:.2em;color:#c980ff;text-transform:uppercase;margin-bottom:14px}
+.desc-text{font-family:Cormorant Garamond,serif;font-size:1rem;color:#c0a8e0;line-height:1.75;margin-bottom:12px}
+.consejo-box{background:rgba(240,208,96,0.06);border:1px solid rgba(240,208,96,0.2);border-radius:8px;padding:12px 15px;font-family:Cormorant Garamond,serif;font-size:.9rem;color:#f0d060;line-height:1.6}
+.profiles{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:4px}
+.profile{background:#1c1438;border-radius:12px;padding:18px}
+.profile-a{border:1px solid rgba(200,128,255,0.25)}.profile-b{border:1px solid rgba(112,232,204,0.25)}
+.prof-name-a{font-family:Cinzel,serif;font-size:.95rem;color:#c980ff;margin-bottom:10px}
+.prof-name-b{font-family:Cinzel,serif;font-size:.95rem;color:#70e8cc;margin-bottom:10px}
+.prof-row{display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid rgba(200,128,255,0.08);font-size:.78rem}
+.prof-k{color:#7060a0}.prof-v{font-family:Cinzel,serif;color:#f4eeff}
+.cal-table{width:100%;border-collapse:collapse}
+.cal-table th{padding:9px 14px;font-family:Cinzel,serif;font-size:.62rem;letter-spacing:.15em;color:#7060a0;text-align:left;border-bottom:1px solid rgba(200,128,255,0.15);background:#130c28}
+.footer{text-align:center;padding:36px 0 16px;border-top:1px solid rgba(200,128,255,0.1);margin-top:16px}
+.footer p{font-family:Cinzel,serif;font-size:.62rem;letter-spacing:.35em;color:#7060a0}
+@media(max-width:540px){.profiles{grid-template-columns:1fr}}
+</style></head><body>
+<div class="cover">
+  <div class="yin-yang">☯</div>
+  <div class="cover-eye">Compatibilidad Armónica · PromptEstudio.com</div>
+  <div class="nombres"><span class="nombre-a">${A.meta.nombre}</span> <span style="color:#7060a0">×</span> <span class="nombre-b">${B.meta.nombre}</span></div>
+  <div class="score-big">${scoreGlobal}%</div>
+  <div class="etiqueta">${propLabels[_proposito]}</div>
+  <div class="titulo-compat">${compatCDV.titulo}</div>
+  <div class="dinamica">${compatCDV.dinamica}</div>
+</div>
+<div class="section">
+  <div class="section-title">Análisis de Compatibilidad</div>
+  <div class="desc-text">${_proposito==='pareja'?compatCDV.descripcion_pareja:compatCDV.descripcion_negocios}</div>
+  <div class="consejo-box"><strong>💡 Consejo:</strong> ${compatCDV.consejo}</div>
+</div>
+<div class="profiles">
+  <div class="profile profile-a">
+    <div class="prof-name-a">${A.meta.nombre}</div>
+    ${[['Signo Solar', A.astrologia.solar.emoji+' '+A.astrologia.solar.nombre],['CDV',A.numerologia.caminoDeVida.valor+(A.numerologia.caminoDeVida.esMaestro?' ✨':'')],['Elemento',A.astrologia.solar.elemento],['Año Personal',A.numerologia.anioPersonal.valor]].map(([k,v])=>`<div class="prof-row"><span class="prof-k">${k}</span><span class="prof-v">${v}</span></div>`).join('')}
+  </div>
+  <div class="profile profile-b">
+    <div class="prof-name-b">${B.meta.nombre}</div>
+    ${[['Signo Solar', B.astrologia.solar.emoji+' '+B.astrologia.solar.nombre],['CDV',B.numerologia.caminoDeVida.valor+(B.numerologia.caminoDeVida.esMaestro?' ✨':'')],['Elemento',B.astrologia.solar.elemento],['Año Personal',B.numerologia.anioPersonal.valor]].map(([k,v])=>`<div class="prof-row"><span class="prof-k">${k}</span><span class="prof-v">${v}</span></div>`).join('')}
+  </div>
+</div>
+<div class="section">
+  <div class="section-title">📅 Calendario de Alineación — Próximos 15 Días</div>
+  <table class="cal-table">
+    <thead><tr><th>Fecha</th><th>Score</th><th>Mejor Para</th><th>Ciclos Coincidentes</th></tr></thead>
+    <tbody>${calRows}</tbody>
+  </table>
+</div>
+<div class="footer"><p>COMPATIBILIDAD ARMÓNICA · PROMPTESTUDIO.COM · 2026</p></div>
+</body></html>`;
+
+  const fname = `Compatibilidad_${nA}_${nB}_${new Date().toISOString().slice(0,10)}.html`;
+  const blob = new Blob([html], { type: 'text/html;charset=utf-8' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = fname; a.click();
+  setTimeout(() => URL.revokeObjectURL(url), 2000);
+}
+
+// ══════════════════════════════════════════════════════
+// COMPARTIR
+// ══════════════════════════════════════════════════════
+function compartir() {
+  if (!_perfilA || !_perfilB || !_compatData) return;
+  const { scoreGlobal, compatCDV } = _compatData;
+  const txt = `☯ Compatibilidad Armónica\n${_perfilA.meta.nombre} × ${_perfilB.meta.nombre}\n${scoreGlobal}% — ${compatCDV.titulo}\nGenerado con PromptEstudio.com`;
+  if (navigator.share) { navigator.share({ title:'Compatibilidad Armónica', text:txt }); return; }
+  navigator.clipboard.writeText(txt + '\nhttps://promptestudio.com').then(() => {
+    const st = document.getElementById('actStatus2');
+    st.textContent = '✓ Texto copiado al portapapeles';
+    setTimeout(() => st.textContent = '', 3000);
+  }).catch(() => {});
+}
+
+// ══════════════════════════════════════════════════════
+// NUEVA LECTURA
+// ══════════════════════════════════════════════════════
+function nuevaLectura() {
+  document.getElementById('reporte').classList.remove('visible');
+  document.getElementById('formPanel2').classList.add('visible');
+  _perfilA = _perfilB = _calendario = _compatData = null;
+  document.getElementById('scoreArc').style.strokeDashoffset = 427;
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ══════════════════════════════════════════════════════
+// INIT
+// ══════════════════════════════════════════════════════
+(function init() {
+  // Stars
+  const c = document.getElementById('starsC');
+  for (let i = 0; i < 70; i++) {
+    const s = document.createElement('div');
+    s.className = 'star';
+    const sz = 1 + Math.random() * 2;
+    s.style.cssText = `left:${Math.random()*100}%;top:${Math.random()*100}%;
+      width:${sz}px;height:${sz}px;
+      background:${Math.random()>0.5?'#c980ff':'#70e8cc'};
+      --d:${2+Math.random()*6}s;--o:${.08+Math.random()*.3};
+      animation-delay:${Math.random()*6}s`;
+    c.appendChild(s);
+  }
+
+  // Theme
+  const t = localStorage.getItem('lae_compat_theme') || 'dark';
+  document.body.setAttribute('data-theme', t);
+})();
+
+function setTheme(t) {
+  document.body.setAttribute('data-theme', t);
+  localStorage.setItem('lae_compat_theme', t);
+}
+
+</script>
+</body>
+</html>
